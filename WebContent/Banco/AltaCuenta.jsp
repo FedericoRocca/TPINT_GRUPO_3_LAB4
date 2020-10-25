@@ -16,12 +16,6 @@
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-<script type="text/javascript">
-	function BuscarExistencia(){
-		alert("El DNI ya está registrado enla base de datos");
-	}
-</script>
-
 </head>
 <body id="page-top">
 	<div id="wrapper">
@@ -45,9 +39,7 @@
 
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
-
 						<div class="topbar-divider d-none d-sm-block"></div>
-
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
@@ -76,77 +68,47 @@
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
-
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Alta Cliente</h1>
+						<h1 class="h3 mb-0 text-gray-800">Asignar cuenta a cliente</h1>
 					</div>
-
+					
 					<form method="post" enctype="multipart/form-data">
 						<div class="form-row">
 							<div class="form-group col-md-4">
 								<label for="title">DNI</label> 
 								<input class="form-control" required="required" type="text" placeholder="Ingrese DNI">           				
 							</div>
-							<div class="form-group col-md-2 mt-1">
+							<div class="form-group col-md-1 mt-1">
 								<button type="button" onclick="BuscarExistencia()" class="btn btn-warning btn-circle mt-4">
                 					<i class="fas fa-search"></i>
             					</button>								
-							</div>
-							<div class="form-group col-md-4">
-								<label for="title">CUIL</label> 
-								<input class="form-control" required="required" type="text" placeholder="Ingrese CUIL">
-							</div>
+							</div>							
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="title">Nombre</label> 
-								<input class="form-control" required="required" type="text" placeholder="Ingrese Nombre">
-							</div>
-							<div class="form-group col-md-6">
-								<label for="title">Apellido</label> 
-								<input class="form-control" required="required" type="text" placeholder="Ingrese Apellido">
-							</div>
-						</div>
-						<div class="form-row">
-						<div class="form-group col-md-4">
-								<label for="title">Correo electrónico</label> 
-								<input type="email" class="form-control" id="email" placeholder="tu@correo.com">
-							</div>
-							<div class="form-group col-md-3">
-								<label for="title">Nacionalidad</label> 
-								<input class="form-control" required="required" type="text" placeholder="Ingrese Nacionalidad">
-							</div>
-							<div class="form-group col-md-3">
-								<label for="title">Fecha de Nacimiento</label>
-								<input class="form-control" required="required" type="date">
-							</div>
-							<div class="form-group col-md-2">
-							<label for="title">Sexo</label>
-								<select class="custom-select" id="inputGroupSelect02">
-									<option selected>Elija opción</option>
-									<option value="1">Femenino</option>
-									<option value="2">Masculino</option>
-									<option value="3">Otro</option>
-								</select>
+								<label for="title">CBU</label> 
+								<input class="form-control" required="required" type="text" placeholder="Nº identidad + NªSucursal + Dígito identificador + Numero de cuenta + Dígito verificador">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-3">
-								<label for="title">Teléfono 1</label> 
-								<input class="form-control" required="required" type="text" placeholder="Ingrese Teléfono">
+								<label for="title">Tipo de cuenta</label>
+									<select class="custom-select" id="inputGroupSelect02">
+										<option selected>Elija opción</option>
+										<option value="1">Caja de ahorro</option>
+										<option value="2">Cuenta corriente</option>
+										<option value="3">Otro</option>
+									</select>
 							</div>
 							<div class="form-group col-md-3">
-								<label for="title">Teléfono 2</label> 
-								<input class="form-control" required="required" type="text" placeholder="Ingrese Teléfono">
-							</div>
-							<div class="form-group col-md-3">
-								<label for="title">Teléfono 3</label> 
-								<input class="form-control" required="required" type="text" placeholder="Ingrese Teléfono">
+								<label for="title">Saldo inicial ($ - pesos argentinos)</label> 
+								<input class="form-control" type="number" value="1000"placeholder="Saldo inicial">
 							</div>
 						</div>
-						<button type="submit" class="btn btn-primary mt-2">Guardar cliente</button>
+
+						<button type="submit" class="btn btn-primary mt-2">Asignar cuenta</button>
 					</form>
 
 				</div>
