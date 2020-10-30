@@ -1,28 +1,38 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Banco UTN - Cuenta <%= request.getParameter("p") %></title>
+<title>Banco UTN - Lista de cuentas</title>
 
 <!-- Custom fonts for this template-->
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+<!-- Styles for the datatables-->
+<link href="vendor/datatables/dataTables.bootstrap4.min.css"
+	rel="stylesheet">
 
 </head>
 <body id="page-top">
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<!-- INCLUYO EL MENÚ ACÁ -->
-		<jsp:include page="Menu.html"></jsp:include> 
+		<!-- INCLUYO EL MEN  AC  -->
+		<jsp:include page="Menu.html"></jsp:include>
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
@@ -33,7 +43,8 @@
 				<nav
 					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 					<!-- Sidebar Toggle (Topbar) -->
-					<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+					<button id="sidebarToggleTop"
+						class="btn btn-link d-md-none rounded-circle mr-3">
 						<i class="fa fa-bars"></i>
 					</button>
 
@@ -41,27 +52,30 @@
 					<ul class="navbar-nav ml-auto">
 						<div class="topbar-divider d-none d-sm-block"></div>
 						<!-- Nav Item - User Information -->
-						<li class="nav-item dropdown no-arrow">
-							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">André Villalta</span> 
-								<img class="img-profile rounded-circle" src="https://pbs.twimg.com/profile_images/691065283486834688/3KDYFUfu_400x400.jpg">
-							</a> 
-							<!-- Dropdown - User Information -->
-							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="#"> 
-									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
-								</a> 
-								<a class="dropdown-item" href="#"> 
-									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+						<li class="nav-item dropdown no-arrow"><a
+							class="nav-link dropdown-toggle" href="#" id="userDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <span
+								class="mr-2 d-none d-lg-inline text-gray-600 small">Andr 
+									Villalta</span> <img class="img-profile rounded-circle"
+								src="https://pbs.twimg.com/profile_images/691065283486834688/3KDYFUfu_400x400.jpg">
+						</a> <!-- Dropdown - User Information -->
+							<div
+								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+								aria-labelledby="userDropdown">
+								<a class="dropdown-item" href="#"> <i
+									class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
+								</a> <a class="dropdown-item" href="#"> <i
+									class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
 									Settings
 								</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"> 
-									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+								<a class="dropdown-item" href="#" data-toggle="modal"
+									data-target="#logoutModal"> <i
+									class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 									Logout
 								</a>
-							</div>
-						</li>
+							</div></li>
 					</ul>
 				</nav>
 				<!-- End of Topbar -->
@@ -69,48 +83,61 @@
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 					<!-- Page Heading -->
-					<div
-						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800"><%= request.getParameter("p") %> Cuenta</h1>
+					<!-- 					<div -->
+					<!-- 						class="d-sm-flex align-items-center justify-content-between mb-4"> -->
+					<!-- 						<h1 class="h3 mb-0 text-gray-800"></h1> -->
+					<!-- 					</div> -->
+
+					<!-- DataTales Example -->
+					<div class="card shadow mb-4">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary">Listado de
+								cuentas</h6>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable" width="100%"
+									cellspacing="0">
+									<thead>
+										<tr>
+											<th>N  de cuenta</th>
+											<th>CBU</th>
+											<th>Tipo de cuenta</th>
+											<th>Fecha de alta</th>
+											<th class="text-info">DNI</th>
+											<th>Saldo</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1111111</td>
+											<td>61616515184</td>
+											<td>Caja de ahorro</td>
+											<td>01/01/2020</td>
+											<td class="text-info">99999999</td>
+											<td>$10000</td>
+										</tr>
+										<tr>
+											<td>2222222</td>
+											<td>94949595955</td>
+											<td>Cuenta corriente</td>
+											<td>02/02/2020</td>
+											<td class="text-info">99888888</td>
+											<td>$1500</td>
+										</tr>
+										<tr>
+											<td>3333333</td>
+											<td>94784215475</td>
+											<td>Caja de ahorro</td>
+											<td>03/03/2020</td>
+											<td class="text-info">99984444</td>
+											<td>$80000</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
-					
-					<form method="post" enctype="multipart/form-data">
-						<div class="form-row">
-							<div class="form-group col-md-4">
-								<label for="title">DNI</label> 
-								<input class="form-control" required="required" type="text" placeholder="Ingrese DNI">           				
-							</div>
-							<div class="form-group col-md-1 mt-1">
-								<button type="button" onclick="BuscarExistencia()" class="btn btn-warning btn-circle mt-4">
-                					<i class="fas fa-search"></i>
-            					</button>								
-							</div>							
-						</div>
-						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="title">CBU</label> 
-								<input class="form-control" required="required" type="text" placeholder="Nº identidad + NªSucursal + Dígito identificador + Numero de cuenta + Dígito verificador">
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="form-group col-md-3">
-								<label for="title">Tipo de cuenta</label>
-									<select class="custom-select" id="inputGroupSelect02">
-										<option selected>Elija opción</option>
-										<option value="1">Caja de ahorro</option>
-										<option value="2">Cuenta corriente</option>
-										<option value="3">Otro</option>
-									</select>
-							</div>
-							
-							<div class="form-group col-md-3">
-								<label for="title">Saldo inicial ($ - pesos argentinos)</label> 
-								<input class="form-control" type="number" value="10000"placeholder="Saldo inicial">
-							</div>
-						</div>
-		
-						<button type="submit" class="btn btn-primary mt-2">Dar de <%= request.getParameter("p") %></button>
-					</form>
 
 				</div>
 				<!-- /.container-fluid -->
@@ -142,5 +169,12 @@
 
 	<!-- Custom scripts for all pages-->
 	<script src="js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+	<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+	<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="js/demo/datatables-demo.js"></script>
 </body>
 </html>
