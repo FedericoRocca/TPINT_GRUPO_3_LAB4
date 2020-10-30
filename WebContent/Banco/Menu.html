@@ -22,7 +22,7 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Altas
+        Entidades
       </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
@@ -33,9 +33,10 @@
         </a>
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-          	<a class="collapse-item" href="#"><i class="fas fa-clipboard-list"></i> <span>Lista clientes</span> </a>
-            <a class="collapse-item" href="#"><i class="fas fa-user-plus"></i> <span>Registrar Cliente</span> </a>
-            <a class="collapse-item" href="#"><i class="fas fa-credit-card"></i> <span>Asignar Cuenta</span> </a>           
+            <a class="collapse-item" href="Cliente.jsp?p=Alta"><i class="fas fa-user-plus"></i> <span> Alta</span> </a>
+          	<a class="collapse-item" href="Cliente.jsp?p=Modificar"><i class="fas fa-user-edit"></i> <span> Modificar</span> </a>
+          	<a class="collapse-item" href="Cliente.jsp?p=Baja"><i class="fas fa-user-minus"></i> <span> Baja</span> </a>
+          	<a class="collapse-item" href="#"><i class="fas fa-clipboard-list"></i> <span> Listar</span> </a>    
           </div>
         </div>
     </li>
@@ -48,7 +49,7 @@
       </a>
       <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="utilities-color.html"><i class="fas fa-money-check-alt"></i><span> Préstamos</span></a>
+            <a class="collapse-item" href="AutorizacionPrestamo.jsp"><i class="fas fa-money-check-alt"></i><span> Préstamos</span></a>
           </div>
         </div>
     </li>
@@ -56,13 +57,15 @@
 	<!-- Nav Item - Cuentas Collapse Menu -->
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCuentas" aria-expanded="true" aria-controls="collapseCuentas">
-          <i class="fas fa-address-card"></i>
+          <i class="fas fa-credit-card"></i>
           <span>Cuentas</span>
         </a>
       <div id="collapseCuentas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-          	<a class="collapse-item" href="#"><i class="fas fa-clipboard-list"></i> <span>Lista cuentas</span> </a>
-            <a class="collapse-item" href="#"><i class="fas fa-user-plus"></i> <span>Detalles de una cuenta</span> </a>          
+            <a class="collapse-item" href="Cuenta.jsp?p=Alta"><i class="fas fa-plus"></i> <span> Alta</span> </a>
+          	<a class="collapse-item" href="Cuenta.jsp?p=Baja"><i class="fas fa-minus"></i> <span> Baja</span> </a>
+          	<a class="collapse-item" href="#"><i class="fas fa-clipboard-list"></i> <span> Listar</span> </a>
+            <a class="collapse-item" href="#"><i class="fas fa-clipboard-list"></i> <span> Detalles</span> </a>          
           </div>
         </div>
     </li>

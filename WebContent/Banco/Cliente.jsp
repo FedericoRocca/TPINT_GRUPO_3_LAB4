@@ -8,7 +8,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Banco UTN - Alta cliente</title>
+<title>Banco UTN - cliente <%= request.getParameter("p") %></title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -80,7 +80,7 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Alta Cliente</h1>
+						<h1 class="h3 mb-0 text-gray-800"><%= request.getParameter("p") %> Cliente</h1>
 					</div>
 
 					<form method="post" enctype="multipart/form-data">
