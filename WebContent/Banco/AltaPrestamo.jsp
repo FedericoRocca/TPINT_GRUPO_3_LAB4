@@ -22,7 +22,7 @@
 
 		<!-- Sidebar -->
 		<!-- INCLUYO EL MENÚ ACÁ -->
-		<jsp:include page="MenuAdmin.html"></jsp:include> 
+		<jsp:include page="MenuCliente.html"></jsp:include> 
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
