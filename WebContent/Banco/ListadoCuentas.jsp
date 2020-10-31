@@ -32,7 +32,7 @@
 
 		<!-- Sidebar -->
 		<!-- INCLUYO EL MEN  AC  -->
-		<jsp:include page="Menu.html"></jsp:include>
+		<jsp:include page="MenuAdmin.html"></jsp:include>
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->

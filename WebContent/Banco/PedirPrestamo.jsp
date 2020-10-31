@@ -8,7 +8,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Banco UTN - Cuenta <%= request.getParameter("p") %></title>
+<title>Banco UTN - Pedir préstamo</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -22,7 +22,7 @@
 
 		<!-- Sidebar -->
 		<!-- INCLUYO EL MENÚ ACÁ -->
-		<jsp:include page="MenuAdmin.html"></jsp:include> 
+		<jsp:include page="MenuCliente.html"></jsp:include> 
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
@@ -71,45 +71,37 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800"><%= request.getParameter("p") %> Cuenta</h1>
+						<h1 class="h3 mb-0 text-gray-800">Pedido de préstamo</h1>
 					</div>
 					
 					<form method="post" enctype="multipart/form-data">
 						<div class="form-row">
-							<div class="form-group col-md-4">
-								<label for="title">DNI</label> 
-								<input class="form-control" required="required" type="text" placeholder="Ingrese DNI">           				
-							</div>
-							<div class="form-group col-md-1 mt-1">
-								<button type="button" onclick="BuscarExistencia()" class="btn btn-warning btn-circle mt-4">
-                					<i class="fas fa-search"></i>
-            					</button>								
-							</div>							
-						</div>
-						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="title">CBU</label> 
-								<input class="form-control" required="required" type="text" placeholder="Nº identidad + NªSucursal + Dígito identificador + Numero de cuenta + Dígito verificador">
-							</div>
+							<div class="form-group col-md-3">
+								<label>Cuenta</label>
+								<select class="custom-select">
+									<option value="1">N° 45678</option>
+									<option value="2">N° 55555</option>
+									<option value="3">N° 11111</option>
+								</select>       				
+							</div>					
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-3">
-								<label for="title">Tipo de cuenta</label>
-									<select class="custom-select" id="inputGroupSelect02">
-										<option selected>Elija opción</option>
-										<option value="1">Caja de ahorro</option>
-										<option value="2">Cuenta corriente</option>
-										<option value="3">Otro</option>
-									</select>
-							</div>
-							
+								<label for="title">Cantidad</label>
+								<input class="form-control" required="required" type="text" placeholder="Ingrese cantidad">        				
+							</div>	
 							<div class="form-group col-md-3">
-								<label for="title">Saldo inicial ($ - pesos argentinos)</label> 
-								<input class="form-control" type="number" value="10000"placeholder="Saldo inicial">
-							</div>
+								<label>Cuotas</label>
+								<select class="custom-select">
+									<option value="1">1</option>
+									<option value="2">3</option>
+									<option value="3">6</option>
+									<option value="4">12</option>
+								</select>     
+							</div>		
 						</div>
-		
-						<button type="submit" class="btn btn-primary mt-2">Dar de <%= request.getParameter("p") %></button>
+
+						<button type="submit" class="btn btn-primary mt-2">Pedir</button>
 					</form>
 
 				</div>
