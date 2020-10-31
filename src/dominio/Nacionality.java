@@ -1,6 +1,6 @@
 package dominio;
 
-public class Nacionalidad
+public class Nacionality
 {
     String descripcion;
     boolean status;
@@ -28,7 +28,7 @@ public class Nacionalidad
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Nacionalidad other = (Nacionalidad) obj;
+        Nacionality other = (Nacionality) obj;
         if (descripcion == null)
         {
             if (other.descripcion != null)
@@ -40,11 +40,11 @@ public class Nacionalidad
             return false;
         return true;
     }
-    public Nacionalidad()
+    public Nacionality()
     {
         super();
     }
-    public Nacionalidad(String descripcion, boolean status)
+    public Nacionality(String descripcion, boolean status)
     {
         super();
         this.descripcion = descripcion;
