@@ -4,6 +4,9 @@ public class Phone
 {
     String descripcion;
     boolean status;
+    int number;
+    int userDNI;
+    
     public Phone()
     {
         super();
