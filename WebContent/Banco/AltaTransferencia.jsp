@@ -16,12 +16,19 @@
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+
+   <script>
+      function RemoveReadOnly(idInput) {
+         $("#"+idInput).removeAttr("readonly");       
+      };
+   </script>
+   
 </head>
 <body id="page-top">
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<!-- INCLUYO EL MENÚ ACÁ -->
+		<!-- INCLUYO EL MENÃš ACÃ -->
 		<jsp:include page="MenuAdmin.html"></jsp:include> 
 		<!-- End of Sidebar -->
 
@@ -43,7 +50,7 @@
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">André Villalta</span> 
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small">AndrÃ© Villalta</span> 
 								<img class="img-profile rounded-circle" src="https://pbs.twimg.com/profile_images/691065283486834688/3KDYFUfu_400x400.jpg">
 							</a> 
 							<!-- Dropdown - User Information -->
@@ -74,14 +81,14 @@
 						<h1 class="h3 mb-0 text-gray-800">Nueva transferencia</h1>
 					</div>
 					
-					<form method="post" enctype="multipart/form-data">
+					<form enctype="multipart/form-data">
 						<div class="form-row">
 							<div class="form-group col-md-3">
 								<label>Origen</label>
 								<select class="custom-select">
-									<option value="1">N° 45678</option>
-									<option value="2">N° 55555</option>
-									<option value="3">N° 11111</option>
+									<option value="1">NÂ° 45678</option>
+									<option value="2">NÂ° 55555</option>
+									<option value="3">NÂ° 11111</option>
 								</select>       				
 							</div>					
 						</div>
@@ -98,9 +105,61 @@
 							</div>		
 						</div>
 
-						<button type="submit" class="btn btn-primary mt-2">Enviar</button>
+						<button class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+					
+		
 					</form>
-
+						<!-- Modal -->
+								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								  <div class="modal-dialog" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h5 class="modal-title" id="exampleModalLabel">Datos de transferencia</h5>
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								      </div>
+								      <div class="modal-body">
+								      <div class="card"> 
+								      <div class="card-body">
+								      <h5 class="card-title">Cuenta de Origen</h5>
+								        
+								        Numero de cuenta
+								        <input class="form-control" type="text" value="NÂ° 45678" readonly> 
+								        CBU
+								        <input class="form-control" type="text" value="0043746238233" readonly> 
+								      
+								      </div>
+					            
+						            <div class="card-body">
+						             <h5 class="card-title">Cuenta de Destino</h5>
+							            Numero de cuenta
+							            <div class="input-group">		
+								        <input class="form-control" id="inputCta" type="text" value="NÂ° 66890" readonly>
+								        <button class="btn" onclick="RemoveReadOnly('inputCta')"><i class="fas fa-pencil-alt"></i></button>
+								        </div>
+								        Monto	
+								        <div class="input-group">			        						 
+								        <input class="form-control" id="inputMonto" type="text" value="1203,89" readonly> 
+								        <button class="btn" onclick="RemoveReadOnly('inputMonto')"><i class="fas fa-pencil-alt"></i></button>
+								        </div>
+								        CBU
+								        <div class="input-group">
+									        <input class="form-control" id="inputCBU" type="text" value="0023689237788" readonly>
+					        				<button class="btn" onclick="RemoveReadOnly('inputCBU')"><i class="fas fa-pencil-alt"></i></button>
+					        			</div>
+							        </div>
+								   
+								      
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+								        <button type="button" class="btn btn-primary">Transferir</button>
+								       </div>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+							</div>
 				</div>
 				<!-- /.container-fluid -->
 
