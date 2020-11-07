@@ -42,17 +42,16 @@
                     <h1 class="h5 text-gray-900">Bienvenido al </h1>
                     <h2 class="h3 text-gray-900 mb-4">Banco UTN</h2>
                   </div>
-                  <form class="user">
+                  <form class="user" method="post" action="../ServletLogin">
                     <div class="form-group">
                       <input type="text" class="form-control form-control-user" id="InputUser" placeholder="Ingresar su usuario">
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" id="InputPassword" placeholder="Contraseña">
                     </div>
+                    
+                    <input type="submit" name="btnLogin" value="Ingresar" class="btn btn-primary btn-user btn-block">
 
-                    <a href="DashboardCliente.html" class="btn btn-primary btn-user btn-block">
-                      <span class="mr-3">LOGIN</span> <i class="fas fa-sign-in-alt"></i>
-                    </a>
                   </form>
                   <hr>
                   <div class="text-center">
