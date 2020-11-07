@@ -44,10 +44,10 @@
                   </div>
                   <form class="user" method="post" action="../ServletLogin">
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="InputUser" placeholder="Ingresar su usuario">
+                      <input type="text" class="form-control form-control-user" id="InputUser" placeholder="Ingresar su usuario" required>
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="InputPassword" placeholder="Contraseña">
+                      <input type="password" class="form-control form-control-user" id="InputPassword" placeholder="Contraseña" required>
                     </div>
                     
                     <input type="submit" name="btnLogin" value="Ingresar" class="btn btn-primary btn-user btn-block">
