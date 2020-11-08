@@ -10,7 +10,7 @@ public class ConnectionDB {
 
 	private String host = "jdbc:mysql://localhost:3306/";
 	private String user = "root";
-	private String pass = "ROOT";
+	private String pass = "root";
 	private String dbName = "bdBanco??profileSQL=true&useSSL=false";
 
 	protected Connection connection;
@@ -32,11 +32,11 @@ public class ConnectionDB {
 	public ResultSet query(String query)
 	{
 		Statement st;
-		ResultSet rs=null;
+		ResultSet rs = null;
 		try
 		{
-			st= connection.createStatement();
-			rs= st.executeQuery(query);
+			st = connection.createStatement();
+			rs = st.executeQuery(query);
 		}
 		catch(SQLException e)
 		{
@@ -63,13 +63,13 @@ public class ConnectionDB {
 	
 	public boolean close()
 	{
-		boolean ok=true;
+		boolean ok = true;
 		try {
 			connection.close();
 		}
 		catch(Exception e)
 		{
-			ok= false;
+			ok = false;
 			e.printStackTrace();
 		}
 		return ok;

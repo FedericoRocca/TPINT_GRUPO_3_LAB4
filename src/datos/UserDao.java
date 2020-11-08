@@ -6,9 +6,9 @@ import entidades.User;
 public interface UserDao {
 	
 	public List<User> getAll();
-	public User getUser(int id);
+	public User getUser(int dni);
 	public boolean insert(User user);
 	public boolean update(User user);
-	public boolean delete(int id);
+	public boolean delete(int dni);
 	
 }

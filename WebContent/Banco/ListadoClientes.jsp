@@ -1,11 +1,13 @@
+<%@page import="entidades.User"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 
@@ -74,16 +76,23 @@
 					</ul>
 				</nav>
 				<!-- End of Topbar -->
-
+					<%
+						List<User> listu = new ArrayList<User>();
+						if (request.getAttribute("userList") != null)
+						{
+							listu = (List<User>) request.getAttribute("userList");
+						}
+					%>	
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<h6 class="m-0 font-weight-bold text-primary">Listado de clientes</h6>
-						</div>
+						</div>					
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table table-bordered" id="dataTable" cellspacing="0">
+								
 									<thead>
 										<tr>
 											<th>DNI</th>
@@ -93,18 +102,20 @@
                       						<th>Nacionalidad</th>
                       						<th>Fecha Nacimiento</th>
                       						<th>Sexo</th>
-                      						<th>Ver m s</th>
+                      						<th>Ver más</th>
 										</tr>
 									</thead>
 									<tbody>
+									
+									<% for (User u : listu ) { %>							
 										<tr>
-					                      <td>99999999</td>
-					                      <td>21-99999999-4</td>
-					                      <td>Andr  Villalta</td>
-					                      <td>andre@gmail.com</td>
-					                      <td>Peruana</td>
-					                      <td>05/11/1992</td>
-					                      <td>Masculino</td>
+					                      <td><%=u.getDni()%></td>
+					                      <td><%=u.getCuil()%></td>
+					                      <td><%=u.getFirstName()%> </td>
+					                      <td><%=u.getEmail()%></td>
+					                      <td><%=u.getNacionality()%></td>
+					                      <td><%=u.getBirthDate()%></td>
+					                      <td><%=u.getGender()%></td>
 					                      <td>
 					                      	<a class="text-decoration-none m-2" href="#">
 					                      		<i class="fas fa-phone" style="font-size: 25px;"></i>
@@ -114,40 +125,7 @@
 					                      	</a>
 					                      </td>
 					                    </tr>
-					                    <tr>
-					                      <td>99888888</td>
-					                      <td>22-99888888-5</td>
-					                      <td>Alan Benitez</td>
-					                      <td>alacran@gmail.com</td>
-					                      <td>Argentina</td>
-					                      <td>01/01/1980</td>
-					                      <td>Masculino</td>
-					                      <td>
-					                      	<a class="text-decoration-none m-2" href="#">
-					                      		<i class="fas fa-phone" style="font-size: 25px;"></i>
-					                      	</a>
-					                      	<a class="text-decoration-none m-2" href="#">
-					                      		<i class="fas fa-address-book" style="font-size: 25px;"></i>
-					                      	</a>
-					                      </td>
-					                    </tr>
-					                    <tr>
-					                      <td>99984444</td>
-					                      <td>23-99984444-6</td>
-					                      <td>Francisco blablabla</td>
-					                      <td>franco@gmail.com</td>
-					                      <td>Argentina</td>
-					                      <td>Desconocido</td>
-					                      <td>Masculino</td>
-					                      <td>
-					                      	<a class="text-decoration-none m-2" href="#">
-					                      		<i class="fas fa-phone" style="font-size: 25px;"></i>
-					                      	</a>
-					                      	<a class="text-decoration-none m-2" href="#">
-					                      		<i class="fas fa-address-book" style="font-size: 25px;"></i>
-					                      	</a>
-					                      </td>
-					                    </tr>
+					                <% } %>
 									</tbody>
 								</table>
 							</div>

@@ -55,7 +55,7 @@ public class UserDaolmpl implements UserDao{
 		User user = new User();
 		try 
 		{
-			ResultSet rs = cn.query("Select user.nombre, user.apellido, user.dni from users where user.estado=1 && user.dni="+dni);
+			ResultSet rs = cn.query("Select user.nombre, user.apellido, user.dni from users where user.estado=1 && user.dni=" + dni);
 			rs.next();
 
 			user.setDni(rs.getString("user.dni"));
@@ -102,10 +102,24 @@ public class UserDaolmpl implements UserDao{
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean delete(int dni) {
 		
-		boolean status=true;
-		
+		boolean status = true;
+		cn = new ConnectionDB();
+		cn.Open();		 
+		String query = "UPDATE Users SET status = 0 WHERE dni=" + dni;
+		try 
+		 {
+			status = cn.execute(query);
+		 }
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			cn.close();
+		}
 		return status;
 	}
 }

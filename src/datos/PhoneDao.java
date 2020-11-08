@@ -7,8 +7,8 @@ import entidades.Phone;
 public interface PhoneDao {
 	
 	public List<Phone> getAll(int id);
-	public boolean insertar(Phone phone, int id);
-	public boolean editar(Phone phone, int id);
-	public boolean borrar(int id);
+	public boolean insert(Phone phone, int dni);
+	public boolean update(Phone phone, int dni);
+	public boolean delete(int id);
 	
 }
