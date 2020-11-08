@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidades.User;
+
 /**
  * Servlet implementation class ServletLogin
  */
@@ -35,8 +37,14 @@ public class ServletLogin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	    //Acá ejecutamos el login del usuario, chequeando inputs y demas
+
+	    //Obtenemos los datos ingresados por el usuario 
+	    User user = new User();
+	    if(request.getParameter("btnLogin") != null)
+        {
+	        user.setUserName(request.getParameter("txbUser"));
+	        user.setPassword(request.getParameter("txbPassword"));
+        }
 		doGet(request, response);
 	}
 
