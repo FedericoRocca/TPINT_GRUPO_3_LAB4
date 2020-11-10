@@ -44,7 +44,7 @@ CREATE TABLE Phones
 (
 	numberPhone	INT 		NOT NULL,
     description VARCHAR(20) NOT NULL, 	/* teléfono, celular, fax */
-    userDni		INT 		NOT NULL,
+    userDni		INT 		    NULL,
     status		BIT			NOT NULL,
      
 	PRIMARY KEY (numberPhone),
@@ -77,3 +77,6 @@ CREATE TABLE Cities
     PRIMARY KEY (id),
     FOREIGN KEY (provinceId) REFERENCES Provinces (id)
 );
+SELECT * FROM Users
+Select articulos.idArticulo, articulos.nombre, articulos.precio, articulos.estado, categorias.idCategoria, categorias.nombre , categorias.estado from articulos inner join categorias on articulos.idCategoria = categorias.idCategoria
+SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.nationality, u.birthDate, u.gender FROM Users u

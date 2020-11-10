@@ -6,7 +6,7 @@ import java.util.List;
 
 import datos.UserDao;
 import entidades.User;
-import entidades.Phone;
+//import entidades.Phone;
 
 
 public class UserDaolmpl implements UserDao{
@@ -23,18 +23,24 @@ public class UserDaolmpl implements UserDao{
 		cn.Open();
 		List<User> list = new ArrayList<User>();
 		try {
-			ResultSet rs = cn.query("Select from users");
+			ResultSet rs = cn.query("SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.nationality, u.birthDate, u.gender FROM Users u");
 			while(rs.next()) 
 			{
 				User user = new User();
-				user.setDni(rs.getString("us.dni"));
-				user.setFirstName(rs.getString("us.nombre"));
+				user.setDni(rs.getString("u.dni"));
+				user.setFirstName(rs.getString("u.firstname"));
+				user.setLastName(rs.getString("u.lastname"));
+				user.setEmail(rs.getString("u.email"));
+				user.setNacionality(rs.getString("u.nationality"));		
+				user.setBirthDate(rs.getDate("u.birthDate")); 
+				user.setGender(rs.getString("u.gender"));
 				
-				Phone phone = new Phone();
-				phone.setNumber(rs.getInt("ph.number"));
-				phone.setDescription(rs.getString("ph.description"));
 				
-				phone.setUser(user);
+//				Phone phone = new Phone();
+//				phone.setNumber(rs.getInt("ph.number"));
+//				phone.setDescription(rs.getString("ph.description"));
+//				
+//				phone.setUser(user);
 				
 				list.add(user);				
 			}

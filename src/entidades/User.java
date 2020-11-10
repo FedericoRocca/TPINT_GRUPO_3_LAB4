@@ -9,7 +9,7 @@ public class User {
 	private String userName;
 	private String password;
 	private String cuil;
-	private Character gender;
+	private String gender; /*era de tipo Character*/
 	private String nacionality;
 	private Date birthDate;
 	private String address;
@@ -22,7 +22,7 @@ public class User {
 	}
 	
 	public User(String dni, String firstName, String lastName, String userName, String password, String cuil,
-			Character gender, String nacionality, Date birthDate, String address, String email, boolean status) {
+			String gender, String nacionality, Date birthDate, String address, String email, boolean status) {
 		super();
 		this.dni = dni;
 		this.firstName = firstName;
@@ -75,10 +75,10 @@ public class User {
 	public void setCuil(String cuil) {
 		this.cuil = cuil;
 	}
-	public Character getGender() {
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(Character gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	public String getNacionality() {
