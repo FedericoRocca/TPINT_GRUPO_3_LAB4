@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="dominio.Account" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +23,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<!-- INCLUYO EL MENÚ ACÁ -->
+		<!-- INCLUYO EL MENÃš ACÃ -->
 		<jsp:include page="MenuAdmin.html"></jsp:include> 
 		<!-- End of Sidebar -->
 
@@ -43,7 +45,7 @@
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">André Villalta</span> 
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small">AndrÃ© Villalta</span> 
 								<img class="img-profile rounded-circle" src="img/profile.png">
 							</a> 
 							<!-- Dropdown - User Information -->
@@ -74,11 +76,11 @@
 						<h1 class="h3 mb-0 text-gray-800"><%= request.getParameter("p") %> Cuenta</h1>
 					</div>
 					
-					<form method="post" enctype="multipart/form-data">
+					<form class="needs-validation" method="post" action="../ServletsCuentas" enctype="multipart/form-data">
 						<div class="form-row">
 							<div class="form-group col-md-4">
 								<label for="title">DNI</label> 
-								<input class="form-control" required="required" type="text" placeholder="Ingrese DNI">           				
+								<input class="form-control" name="txtDNI" required="required" type="number" placeholder="Ingrese DNI">           				
 							</div>
 							<div class="form-group col-md-1 mt-1">
 								<button type="button" onclick="BuscarExistencia()" class="btn btn-warning btn-circle mt-4">
@@ -89,14 +91,14 @@
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="title">CBU</label> 
-								<input class="form-control" required="required" type="text" placeholder="Nº identidad + NªSucursal + Dígito identificador + Numero de cuenta + Dígito verificador">
+								<input class="form-control"  name="txtCBU" required="required" type="text" placeholder="NÂº identidad + NÂªSucursal + DÃ­gito identificador + Numero de cuenta + DÃ­gito verificador">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-3">
 								<label for="title">Tipo de cuenta</label>
-									<select class="custom-select" id="inputGroupSelect02">
-										<option selected>Elija opción</option>
+									<select class="custom-select" name="tipoCta" id="inputGroupSelect02">
+										<option selected>Elija opciÃ³n</option>
 										<option value="1">Caja de ahorro</option>
 										<option value="2">Cuenta corriente</option>
 										<option value="3">Otro</option>
@@ -105,11 +107,11 @@
 							
 							<div class="form-group col-md-3">
 								<label for="title">Saldo inicial ($ - pesos argentinos)</label> 
-								<input class="form-control" type="number" value="10000"placeholder="Saldo inicial">
+								<input class="form-control" name="txtSaldo" type="number" value="10000"placeholder="Saldo inicial">
 							</div>
 						</div>
 		
-						<button type="submit" class="btn btn-primary mt-2">Dar de <%= request.getParameter("p") %></button>
+						<button type="submit" name="btnAgregarCuenta" class="btn btn-primary mt-2">Dar de <%= request.getParameter("p") %></button>
 					</form>
 
 				</div>
@@ -117,7 +119,22 @@
 
 			</div>
 			<!-- End of Main Content -->
-
+			<%
+		
+				if(request.getAttribute("estadoAgregar")!=null)
+				{
+					boolean estadoM = (Boolean)request.getAttribute("estadoAgregar");
+					
+					if (estadoM != false) 
+					{
+						%><script>swal("Agregado correctamente", "", "success");</script><%
+					}
+					else
+					{
+						%><script>swal("No se pudo agregar", "", "error");</script><%
+					}
+				}
+			%>
 			<!-- Footer -->
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
