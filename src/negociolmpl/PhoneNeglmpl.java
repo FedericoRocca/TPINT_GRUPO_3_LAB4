@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import datos.PhoneDao;
 import datoslmpl.PhoneDaolmpl;
-import entidades.Phone;
+import dominio.Phone;
 import negocio.PhoneNeg;
 
 public class PhoneNeglmpl implements PhoneNeg {

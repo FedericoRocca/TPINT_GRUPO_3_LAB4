@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidades.User;
+import dominio.User;
 import negocio.UserNeg;
 import negociolmpl.UserNeglmpl;
 

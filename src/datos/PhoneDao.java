@@ -2,7 +2,7 @@ package datos;
 
 import java.util.List;
 
-import entidades.Phone;
+import dominio.Phone;
 
 public interface PhoneDao {
 	

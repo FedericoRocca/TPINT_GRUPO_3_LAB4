@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import datos.UserDao;
 import datoslmpl.UserDaolmpl;
-import entidades.User;
+import dominio.User;
 import negocio.UserNeg;
 
 public class UserNeglmpl implements UserNeg {
@@ -27,7 +27,7 @@ public class UserNeglmpl implements UserNeg {
 	}
 
 	@Override
-	public User getUser(int dni) {
+	public User getUser(String dni) {
 		return userDao.getUser(dni);
 	}
 
@@ -42,7 +42,7 @@ public class UserNeglmpl implements UserNeg {
 	}
 
 	@Override
-	public boolean delete(int dni) {
+	public boolean delete(String dni) {
 		return userDao.delete(dni);
 	}
 

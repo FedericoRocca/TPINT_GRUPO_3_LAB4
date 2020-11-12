@@ -1,4 +1,4 @@
-package entidades;
+package dominio;
 
 public class Nacionality {
 	
@@ -10,6 +10,7 @@ public class Nacionality {
 		
 	}
 	
+
 	public Nacionality(int id, String description) {
 		super();
 		this.id = id;

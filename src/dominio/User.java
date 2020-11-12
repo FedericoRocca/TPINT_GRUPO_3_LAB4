@@ -1,4 +1,4 @@
-package entidades;
+package dominio;
 import java.util.Date;
 
 public class User {
@@ -13,16 +13,17 @@ public class User {
 	private String nacionality;
 	private Date birthDate;
 	private String address;
+	private String city;
 	private String email;
-	private boolean Status;
+	private boolean status;
 
 	//Constructors
 	public User() {
-	
+		super();
 	}
 	
 	public User(String dni, String firstName, String lastName, String userName, String password, String cuil,
-			String gender, String nacionality, Date birthDate, String address, String email, boolean status) {
+			String gender, String nacionality, Date birthDate, String address, String city, String email, boolean status) {
 		super();
 		this.dni = dni;
 		this.firstName = firstName;
@@ -34,8 +35,9 @@ public class User {
 		this.nacionality = nacionality;
 		this.birthDate = birthDate;
 		this.address = address;
+		this.city = city;
 		this.email = email;
-		Status = status;
+		this.status = status;
 	}
 
 	//Getters & Setters
@@ -99,6 +101,12 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -106,20 +114,19 @@ public class User {
 		this.email = email;
 	}
 	public boolean isStatus() {
-		return Status;
+		return status;
 	}
 	public void setStatus(boolean status) {
-		Status = status;
+		this.status = status;
 	}
 
 	
-	//To String
 	@Override
 	public String toString() {
 		return "User [dni=" + dni + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName
 				+ ", password=" + password + ", cuil=" + cuil + ", gender=" + gender + ", nacionality=" + nacionality
-				+ ", birthDate=" + birthDate + ", address=" + address + ", email=" + email + ", Status=" + Status + "]";
+				+ ", birthDate=" + birthDate + ", address=" + address + ", city=" + city + ", email=" + email
+				+ ", Status=" + status + "]";
 	}
-	
 		
 }

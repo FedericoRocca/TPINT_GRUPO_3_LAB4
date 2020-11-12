@@ -1,4 +1,4 @@
-package entidades;
+package dominio;
 
 public class Role {
 	private int id;

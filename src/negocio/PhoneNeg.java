@@ -2,7 +2,7 @@ package negocio;
 
 import java.util.ArrayList;
 
-import entidades.Phone;
+import dominio.Phone;
 
 public interface PhoneNeg {
 	public ArrayList<Phone> GetAll(int dni);

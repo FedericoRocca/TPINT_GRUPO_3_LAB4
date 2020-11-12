@@ -160,9 +160,6 @@ CREATE TABLE Cities
     FOREIGN KEY (provinceId) REFERENCES Provinces (id)
 );
 
-SELECT * FROM Users;
 
-SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.nationality, u.birthDate, u.gender FROM Users u;
-SELECT *FROM Users;
 
 

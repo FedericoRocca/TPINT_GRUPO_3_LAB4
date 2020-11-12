@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import datos.PhoneDao;
-import entidades.Phone;
-import entidades.User;
+import dominio.Phone;
+import dominio.User;
 
 public class PhoneDaolmpl implements PhoneDao {
 

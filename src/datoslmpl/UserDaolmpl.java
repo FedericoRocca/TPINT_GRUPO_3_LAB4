@@ -1,17 +1,20 @@
 package datoslmpl;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 import datos.UserDao;
-import entidades.User;
-//import entidades.Phone;
+import dominio.Phone;
+import dominio.User;
 
 
 public class UserDaolmpl implements UserDao{
 	
 	private ConnectionDB cn;
+	
+	private static final String readAll = "SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.nationality, u.birthDate, u.gender, p.description as Phone, p.numberPhone as number FROM Users u LEFT JOIN phones p ON p.userDni = u.dni WHERE u.dni = ";
 	
 	public UserDaolmpl() {
 		
@@ -21,9 +24,12 @@ public class UserDaolmpl implements UserDao{
 	public List<User> getAll() {
 		cn = new ConnectionDB();
 		cn.Open();
-		List<User> list = new ArrayList<User>();
+		ArrayList<User> list = new ArrayList<>();
+		ResultSet rs = null;
 		try {
-			ResultSet rs = cn.query("SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.nationality, u.birthDate, u.gender FROM Users u");
+			rs = cn.query("SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.nationality, u.birthDate, u.gender FROM Users as u");
+			//ResultSet rs = cn.query("SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.nationality, u.birthDate, u.gender FROM Users u INNER JOIN Roles_x_Users rxu ON rxu.dni = u.dni WHERE rxu.roleId = 2");
+			System.out.println(rs);
 			while(rs.next()) 
 			{
 				User user = new User();
@@ -55,17 +61,45 @@ public class UserDaolmpl implements UserDao{
 	}
 
 	@Override
-	public User getUser(int dni) { /* está incompleto */
-		cn = new ConnectionDB();
-		cn.Open();
-		User user = new User();
+	public User getUser(String dni) {
+		
+		ResultSet rs = null;
+		
+		User user = null;
+		Phone phone = null;
+		
+		String query = readAll +  dni;
+		System.out.println(query);
+		
 		try 
 		{
-			ResultSet rs = cn.query("Select user.nombre, user.apellido, user.dni from users where user.estado=1 && user.dni=" + dni);
+			cn = new ConnectionDB();
+			cn.Open();
+			rs = cn.query(query);
 			rs.next();
-
-			user.setDni(rs.getString("user.dni"));
-			user.setFirstName(rs.getString("user.nombre"));							
+				if(rs.getBoolean("status")) 
+				{
+					phone = new Phone(
+							rs.getInt("number"),
+							rs.getString("description"),
+							user = new User(
+									rs.getString("dni"),
+									rs.getString("firstName"),
+									rs.getString("lastName"),
+									rs.getString("userName"),
+									rs.getString("password"),
+									rs.getString("cuil"),
+									rs.getString("gender"),
+									rs.getString("nationality"),
+									rs.getDate("birthDate"),
+									rs.getString("address"),
+									rs.getString("city"),
+									rs.getString("email"),
+									rs.getBoolean("status")							
+							),			
+							rs.getBoolean("status")
+					);					
+				}						
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -80,15 +114,37 @@ public class UserDaolmpl implements UserDao{
 	@Override
 	public boolean insert(User user) {
 		
-		boolean status=true;
+		boolean status = false;
 		
 		cn = new ConnectionDB();
-		cn.Open();
 		
-		String query = "INSERT INTO users () VALUES ('"+ user.getDni() +"', '"+ user.getFirstName() +"')";
-		System.out.println(query);
-		try {
-			status = cn.execute(query);
+		try 
+		{
+			CallableStatement sp = (CallableStatement) cn.Open().prepareStatement("CALL SP_InsertCustomer(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			
+			sp.setString(1, user.getDni());
+			sp.setString(2, user.getFirstName());
+			sp.setString(3, user.getLastName());
+			sp.setString(4, user.getPassword());
+			sp.setString(5, user.getCuil());
+			sp.setString(6, user.getGender());
+			sp.setString(7, user.getNacionality());
+			sp.setString(8, user.getBirthDate().toString());
+			sp.setString(9, user.getAddress());
+			sp.setString(10, user.getCity());
+			sp.setString(11, user.getEmail());
+			sp.setBoolean(12, user.isStatus());
+			
+			Phone phone = new Phone();
+			
+			sp.setInt(13, phone.getNumber());
+			sp.setString(14, phone.getDescription());
+			sp.setString(15, phone.getUser().getDni());
+			sp.setBoolean(16, phone.isStatus());
+						
+			status = sp.execute();
+			
+			System.out.println("Status: " + status);
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -100,23 +156,60 @@ public class UserDaolmpl implements UserDao{
 	}
 
 	@Override
-	public boolean update(User user) {
+	public boolean update(User user) { 
 		
-		boolean status=true;
+		boolean status = false;
 		
+		cn = new ConnectionDB();
+		
+		try 
+		{
+			CallableStatement sp = (CallableStatement) cn.Open().prepareCall("CALL SP_UpdateCustomer(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			
+			sp.setString(1, user.getDni());
+			sp.setString(2, user.getFirstName());
+			sp.setString(3, user.getLastName());
+			sp.setString(4, user.getPassword());
+			sp.setString(5, user.getCuil());
+			sp.setString(6, user.getGender());
+			sp.setString(7, user.getNacionality());
+			sp.setString(8, user.getBirthDate().toString());
+			sp.setString(9, user.getAddress());
+			sp.setString(10, user.getCity());
+			sp.setString(11, user.getEmail());
+			sp.setBoolean(12, user.isStatus());
+			
+			Phone phone = new Phone();
+			
+			sp.setInt(13, phone.getNumber());
+			sp.setString(14, phone.getDescription());
+			sp.setString(15, phone.getUser().getDni());
+			sp.setBoolean(16, phone.isStatus());
+						
+			status = sp.execute();
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			cn.close();
+		}
 		return status;
 	}
 
 	@Override
-	public boolean delete(int dni) {
+	public boolean delete(String dni) {
 		
-		boolean status = true;
+		boolean status = false;
 		cn = new ConnectionDB();
-		cn.Open();		 
-		String query = "UPDATE Users SET status = 0 WHERE dni=" + dni;
+				 
 		try 
 		 {
-			status = cn.execute(query);
+			CallableStatement sp = (CallableStatement) cn.Open().prepareCall("CALL SP_DeleteCustomer");
+			
+			sp.setString(1, dni);
 		 }
 		catch(Exception e)
 		{
@@ -128,4 +221,5 @@ public class UserDaolmpl implements UserDao{
 		}
 		return status;
 	}
+
 }
