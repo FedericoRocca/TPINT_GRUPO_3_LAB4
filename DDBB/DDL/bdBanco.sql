@@ -4,72 +4,65 @@ USE bdBanco;
 
 CREATE TABLE Report1
 (
-	Id	INT 		NOT NULL,
-    LoanId	INT NOT NULL,
-    cuil	VARCHAR(20) NOT NULL,
-    amountReqByCustomer DECIMAL(10,2) NOT NULL,
-    approvedBy VARCHAR(20) NOT NULL,
-    approvalDate datetime NOT NULL,
+	id					INT 			NOT NULL,
+    LoanId				INT 			NOT NULL,
+    cuil				VARCHAR(20)		NOT NULL,
+    amountReqByCustomer DECIMAL(10,2) 	NOT NULL,
+    approvedBy 			VARCHAR(20) 	NOT NULL,
+    approvalDate 		DATETIME 		NOT NULL,
      
-	PRIMARY KEY (Id)
+	PRIMARY KEY (id)
 );
-
 
 CREATE TABLE Loan
 (
-	Id	INT 		NOT NULL,
-    cuil	VARCHAR(20) NOT NULL,
-    loandate datetime NOT NULL,
-    ammountInt DECIMAL(10,2) NOT NULL,
-    amountReqByCustomer DECIMAL(10,2) NOT NULL,
-    paymentDeadline datetime NOT NULL,
-    status		BIT			NOT NULL,
+	id					INT 			NOT NULL,
+    cuil				VARCHAR(20) 	NOT NULL,
+    loandate 			DATETIME 		NOT NULL,
+    ammountInt 			DECIMAL(10,2) 	NOT NULL,
+    amountReqByCustomer DECIMAL(10,2) 	NOT NULL,
+    paymentDeadline 	DATETIME 		NOT NULL,
+    status				BIT				NOT NULL,
      
-	PRIMARY KEY (Id)
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE Accounts_x_movement
 (
-	movementId	INT 		NOT NULL,
-    accountnumber	INT 		NOT NULL,
-    status		BIT			NOT NULL,
+	movementId		INT NOT NULL,
+    accountnumber	INT NOT NULL,
+    status			BIT	NOT NULL,
      
 	PRIMARY KEY (movementId,accountnumber),
-    FOREIGN KEY(movementId) REFERENCES Movement(Id),
+    FOREIGN KEY(movementId) REFERENCES Movement(id),
     FOREIGN KEY(accountnumber) REFERENCES Accounts(accountNumber)
 );
 
 CREATE TABLE MovementType
 (
-	Id	INT 		NOT NULL,
-    descriptions VARCHAR(20) NOT NULL,
-    status		BIT			NOT NULL,
+	id				INT 		NOT NULL,
+    descriptions 	VARCHAR(20) NOT NULL,
+    status			BIT			NOT NULL,
      
-	PRIMARY KEY (Id)
-
+	PRIMARY KEY (id)
 );
-
 
 CREATE TABLE Movement
 (
-	Id	INT 		NOT NULL,
-    movementDate datetime NOT NULL,
-    details VARCHAR(20) NOT NULL,
-    amount DECIMAL(10,2) NOT NULL,
-    MovementTypeId	INT 		NOT NULL,
-    status		BIT			NOT NULL,
+	id				INT 			NOT NULL,
+    movementDate 	DATETIME 		NOT NULL,
+    details 		VARCHAR(20) 	NOT NULL,
+    amount 			DECIMAL(10,2) 	NOT NULL,
+    MovementTypeId	INT 			NOT NULL,
+    status			BIT				NOT NULL,
      
-	PRIMARY KEY (Id),
-    FOREIGN KEY(MovementTypeId) REFERENCES MovementType(Id)
+	PRIMARY KEY (id),
+    FOREIGN KEY(MovementTypeId) REFERENCES MovementType(id)
 );
-
-
-
-
 
 CREATE TABLE AccountsType
 (
-	id	INT 		NOT NULL,
+	id	INT 				NOT NULL,
     description VARCHAR(20) NOT NULL,
     status		BIT			NOT NULL,
      
@@ -80,12 +73,12 @@ CREATE TABLE AccountsType
 CREATE TABLE Accounts
 (
 	accountNumber	INT 		NOT NULL,
-    accountDni		INT 		NOT NULL,
-    creationDate datetime NOT NULL,
-    accountypeid INT NOT NULL,
-    cbu INT NOT NULL,
-    balance DECIMAL(10,2) NOT NULL,
-    status		BIT			NOT NULL,
+    accountDni		VARCHAR(9) 	NOT NULL,
+    creationDate 	DATETIME 	NOT NULL,
+    accountypeid 	INT 		NOT NULL,
+    cbu 			INT 		NOT NULL,
+    balance 		DECIMAL(10,2) NOT NULL,
+    status			BIT			NOT NULL,
      
 	PRIMARY KEY (accountNumber),
     FOREIGN KEY(accountDni) REFERENCES Users(dni)
@@ -93,7 +86,7 @@ CREATE TABLE Accounts
 
 CREATE TABLE Users
 (
-	 dni 		INT 		NOT NULL,
+	 dni 		VARCHAR(9) 	NOT NULL,
      firstName 	VARCHAR(45) NOT NULL,
      lastName 	VARCHAR(45) NOT NULL,
      userName	VARCHAR(45) NOT NULL,
@@ -120,9 +113,9 @@ CREATE TABLE Roles
 
 CREATE TABLE Roles_x_Users
 (
-	dni		INT		NOT NULL,
-	roleId 	INT		NOT NULL, 
-    status	BIT		NOT NULL,
+	dni		VARCHAR(9)	NOT NULL,
+	roleId 	INT			NOT NULL, 
+    status	BIT			NOT NULL,
     
     PRIMARY KEY(dni, roleId),
     FOREIGN KEY(dni) REFERENCES Users(dni),
@@ -133,7 +126,7 @@ CREATE TABLE Phones
 (
 	numberPhone	INT 		NOT NULL,
     description VARCHAR(20) NOT NULL, 	/* teléfono, celular, fax */
-    userDni		INT 		    NULL,
+    userDni		VARCHAR(9) 		NULL,
     status		BIT			NOT NULL,
      
 	PRIMARY KEY (numberPhone),
@@ -165,11 +158,11 @@ CREATE TABLE Cities
     provinceId	INT						NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (provinceId) REFERENCES Provinces (id)
-<<<<<<< HEAD
 );
-=======
-);
-SELECT * FROM Users
-Select articulos.idArticulo, articulos.nombre, articulos.precio, articulos.estado, categorias.idCategoria, categorias.nombre , categorias.estado from articulos inner join categorias on articulos.idCategoria = categorias.idCategoria
-SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.nationality, u.birthDate, u.gender FROM Users u
->>>>>>> 8efc1274e3bbec4d227cc359870ec854009ba62d
+
+SELECT * FROM Users;
+
+SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.nationality, u.birthDate, u.gender FROM Users u;
+SELECT *FROM Users;
+
+
