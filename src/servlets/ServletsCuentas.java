@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dominio.Account;
+import negocio.AccountNeg;
 
 
 /**
@@ -42,7 +43,7 @@ public class ServletsCuentas extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if(request.getParameter("btnAgregarCuenta")!=null)
+		if(request.getParameter("btnGestionarCuenta")!=null)
 		{
 			Account x = new Account();
 			DecimalFormat df = new DecimalFormat("0.00");
@@ -52,40 +53,30 @@ public class ServletsCuentas extends HttpServlet {
 			x.setBalance(Float.parseFloat(df.format(request.getParameter("txtSaldo"))));
 			
 			boolean estado=true;
+			if(request.getParameter("p") == "Alta")
+			{
+				AccountNeg a = new AccountNeg();
+				estado=  a.InsertarCuenta(x);
+				a = null;
+				
 
-		    request.setAttribute("estadoAgregar", estado);
-
+			}
+			else if(request.getParameter("p") == "Baja")
+			{
+				AccountNeg a = new AccountNeg();
+				estado=  a.BajaCuenta(x);
+				a = null;
+			}
+			
+			request.setAttribute("estadoGestion", estado);
 		    RequestDispatcher dispatcher = request.getRequestDispatcher("Cuenta.jsp");
 			dispatcher.forward(request, response);
+
 		}
-
-		if(request.getParameter("btnEliminar")!=null)
-		{
-
-			boolean estado=true;
-
-		    request.setAttribute("estadoEliminar", estado);
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("Cuenta.jsp");
-			dispatcher.forward(request, response);
-		}
-		if(request.getParameter("btnModificarRegistro")!=null)
-		{
-			Account x = new Account();
-
-
-			
-		    
 		
-		    
-		    RequestDispatcher dispatcher = request.getRequestDispatcher("Cuenta.jsp");
-			dispatcher.forward(request, response);
-		}
-		if(request.getParameter("btnListarCuentas")!=null)
+		if(request.getParameter("BuscarExistencia")!=null)
 		{
-			Account x = new Account();
 			
-
 			RequestDispatcher dispatcher = request.getRequestDispatcher("Cuenta.jsp");
 			dispatcher.forward(request, response);
 		}

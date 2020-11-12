@@ -83,7 +83,7 @@
 								<input class="form-control" name="txtDNI" required="required" type="number" placeholder="Ingrese DNI">           				
 							</div>
 							<div class="form-group col-md-1 mt-1">
-								<button type="button" onclick="BuscarExistencia()" class="btn btn-warning btn-circle mt-4">
+								<button type="submit" name="BuscarExistencia" class="btn btn-warning btn-circle mt-4">
                 					<i class="fas fa-search"></i>
             					</button>								
 							</div>							
@@ -111,7 +111,7 @@
 							</div>
 						</div>
 		
-						<button type="submit" name="btnAgregarCuenta" class="btn btn-primary mt-2">Dar de <%= request.getParameter("p") %></button>
+						<button type="submit" name="btnGestionarCuenta" class="btn btn-primary mt-2">Dar de <%= request.getParameter("p") %></button>
 					</form>
 
 				</div>
@@ -121,17 +121,17 @@
 			<!-- End of Main Content -->
 			<%
 		
-				if(request.getAttribute("estadoAgregar")!=null)
+				if(request.getAttribute("estadoGestion")!=null)
 				{
-					boolean estadoM = (Boolean)request.getAttribute("estadoAgregar");
+					boolean estadoM = (Boolean)request.getAttribute("estadoGestion");
 					
 					if (estadoM != false) 
 					{
-						%><script>swal("Agregado correctamente", "", "success");</script><%
+						%><script>swal("La cuenta se ha dado de "+ request.getParameter("p") +" correctamente", "", "success");</script><%
 					}
 					else
 					{
-						%><script>swal("No se pudo agregar", "", "error");</script><%
+						%><script>swal("No se pudo dar de "+ request.getParameter("p") + " a la cuenta debido a un Error", "", "error");</script><%
 					}
 				}
 			%>
