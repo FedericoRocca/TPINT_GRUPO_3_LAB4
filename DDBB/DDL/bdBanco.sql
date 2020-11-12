@@ -27,17 +27,6 @@ CREATE TABLE Loan
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE Accounts_x_movement
-(
-	movementId		INT NOT NULL,
-    accountnumber	INT NOT NULL,
-    status			BIT	NOT NULL,
-     
-	PRIMARY KEY (movementId,accountnumber),
-    FOREIGN KEY(movementId) REFERENCES Movement(id),
-    FOREIGN KEY(accountnumber) REFERENCES Accounts(accountNumber)
-);
-
 CREATE TABLE MovementType
 (
 	id				INT 		NOT NULL,
@@ -60,30 +49,6 @@ CREATE TABLE Movement
     FOREIGN KEY(MovementTypeId) REFERENCES MovementType(id)
 );
 
-CREATE TABLE AccountsType
-(
-	id	INT 				NOT NULL,
-    description VARCHAR(20) NOT NULL,
-    status		BIT			NOT NULL,
-     
-	PRIMARY KEY (id),
-    FOREIGN KEY(id) REFERENCES Accounts(accountNumber)
-);
-
-CREATE TABLE Accounts
-(
-	accountNumber	INT 		NOT NULL,
-    accountDni		VARCHAR(9) 	NOT NULL,
-    creationDate 	DATETIME 	NOT NULL,
-    accountypeid 	INT 		NOT NULL,
-    cbu 			INT 		NOT NULL,
-    balance 		DECIMAL(10,2) NOT NULL,
-    status			BIT			NOT NULL,
-     
-	PRIMARY KEY (accountNumber),
-    FOREIGN KEY(accountDni) REFERENCES Users(dni)
-);
-
 CREATE TABLE Users
 (
 	 dni 		VARCHAR(9) 	NOT NULL,
@@ -103,10 +68,45 @@ CREATE TABLE Users
 	 PRIMARY KEY (dni)
 );
 
+CREATE TABLE Accounts
+(
+	accountNumber	INT 		NOT NULL,
+    accountDni		VARCHAR(9) 	NOT NULL,
+    creationDate 	DATETIME 	NOT NULL,
+    accountypeid 	INT 		NOT NULL,
+    cbu 			INT 		NOT NULL,
+    balance 		DECIMAL(10,2) NOT NULL,
+    status			BIT			NOT NULL,
+     
+	PRIMARY KEY (accountNumber),
+    FOREIGN KEY(accountDni) REFERENCES Users(dni)
+);
+
+CREATE TABLE AccountsType
+(
+	id	INT 				NOT NULL,
+    description VARCHAR(20) NOT NULL,
+    status		BIT			NOT NULL,
+     
+	PRIMARY KEY (id),
+    FOREIGN KEY(id) REFERENCES Accounts(accountNumber)
+);
+
+CREATE TABLE Accounts_x_movement
+(
+	movementId		INT NOT NULL,
+    accountnumber	INT NOT NULL,
+    status			BIT	NOT NULL,
+     
+	PRIMARY KEY (movementId,accountnumber),
+    FOREIGN KEY(movementId) REFERENCES Movement(id),
+    FOREIGN KEY(accountnumber) REFERENCES Accounts(accountNumber)
+);
+
 CREATE TABLE Roles
 (
 	id		INT			AUTO_INCREMENT NOT NULL,
-	name 	VARCHAR(20)					NOT NULL, /* Admin ó Cliente */
+	name 	VARCHAR(20)					NOT NULL, /* Admin o Cliente */
     status	BIT							NOT NULL,
     PRIMARY KEY (id)
 );
