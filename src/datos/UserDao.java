@@ -10,5 +10,6 @@ public interface UserDao {
 	public boolean insert(User user);
 	public boolean update(User user);
 	public boolean delete(String dni);
+	public boolean exists(String userName);
 	
 }
