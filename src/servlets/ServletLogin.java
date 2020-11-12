@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dominio.User;
+import negocio.UserNeg;
+import negociolmpl.UserNeglmpl;
 
 /**
  * Servlet implementation class ServletLogin
@@ -45,6 +47,16 @@ public class ServletLogin extends HttpServlet {
 	        user.setUserName(request.getParameter("txbUser"));
 	        user.setPassword(request.getParameter("txbPassword"));
         }
+	    // Chequeo contra la base de datos si el usuario existe, si no mensaje de error en el front
+	    UserNeglmpl userNeg = new UserNeglmpl();
+	    if( userNeg.exists(user.getUserName()) )
+	    {
+	        System.out.println("Usuario existe");
+	    }
+	    else
+	    {
+	        System.out.println("Usuario no existe");
+	    }
 		doGet(request, response);
 	}
 

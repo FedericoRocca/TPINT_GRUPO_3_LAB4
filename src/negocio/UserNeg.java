@@ -11,4 +11,5 @@ public interface UserNeg {
 	public boolean insert(User user);
 	public boolean edit(User user);
 	public boolean delete(String dni);
+	public boolean exists(String userName);
 }

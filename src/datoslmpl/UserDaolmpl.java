@@ -1,5 +1,6 @@
 package datoslmpl;
 
+import java.io.Console;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -215,5 +216,31 @@ public class UserDaolmpl implements UserDao{
 		}
 		return status;
 	}
+
+    @Override
+    public boolean exists(String userName)
+    {
+        System.out.println("Dni recibido para el select: " + userName);
+        cn = new ConnectionDB();
+        cn.Open();
+        ResultSet rs = null;
+        try {
+            rs = cn.query("SELECT count(*) FROM Users where Users.username = '" + userName +"';");
+            rs.next();
+            int coincidences = rs.getInt(1);
+            System.out.println("Coincidencias en la ddbb: " + coincidences);
+            if( coincidences >= 1 )
+            {
+                return true;
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            cn.close();
+        }
+        return false;
+    }
 
 }

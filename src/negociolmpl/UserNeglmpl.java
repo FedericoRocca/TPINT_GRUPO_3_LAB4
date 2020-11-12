@@ -46,4 +46,10 @@ public class UserNeglmpl implements UserNeg {
 		return userDao.delete(dni);
 	}
 
+    @Override
+    public boolean exists(String userName)
+    {
+        return userDao.exists(userName);
+    }
+
 }
