@@ -63,9 +63,11 @@ CREATE TABLE Users
      address 	VARCHAR(50) NOT NULL,
      city		VARCHAR(45) 	NULL,
      email		VARCHAR(50) NOT NULL,
+     nPhone		INT				NULL,
      status		BIT			NOT NULL,
      
-	 PRIMARY KEY (dni)
+	 PRIMARY KEY (dni),
+	 FOREIGN KEY(nPhone) REFERENCES Phones(numberPhone)
 );
 
 CREATE TABLE Accounts
@@ -126,11 +128,8 @@ CREATE TABLE Phones
 (
 	numberPhone	INT 		NOT NULL,
     description VARCHAR(20) NOT NULL, 	/* teléfono, celular, fax */
-    userDni		VARCHAR(9) 		NULL,
-    status		BIT			NOT NULL,
-     
-	PRIMARY KEY (numberPhone),
-    FOREIGN KEY(userDni) REFERENCES Users(dni)
+    
+	PRIMARY KEY (numberPhone)
 );
 
 CREATE TABLE Nationalities
