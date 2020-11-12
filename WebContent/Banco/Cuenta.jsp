@@ -134,6 +134,16 @@
 						%><script>swal("No se pudo dar de "+ request.getParameter("p") + " a la cuenta debido a un Error", "", "error");</script><%
 					}
 				}
+			
+			if(request.getAttribute("BuscarExistencia")!=null)
+			{
+				boolean estadoM = (Boolean)request.getAttribute("estadoExistencia");
+				
+				if (estadoM == false) 
+				{
+					%><script>swal("El Cliente no existe en la base de datos", "", "success");</script><%
+				}
+			}
 			%>
 			<!-- Footer -->
 			<footer class="sticky-footer bg-white">

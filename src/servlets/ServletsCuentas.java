@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dominio.Account;
+import dominio.User;
 import negocio.AccountNeg;
+import negociolmpl.UserNeglmpl;
 
 
 /**
@@ -76,8 +78,17 @@ public class ServletsCuentas extends HttpServlet {
 		
 		if(request.getParameter("BuscarExistencia")!=null)
 		{
+			boolean estado = false;
+			User u = null;
+			UserNeglmpl un = new UserNeglmpl();
+			u = un.getUser(Integer.parseInt(request.getParameter("txtDNI")));
+			if (u != null)
+			{
+				estado = true;
+			}
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("Cuenta.jsp");
+			request.setAttribute("estadoExistencia", estado);
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("Cuenta.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
