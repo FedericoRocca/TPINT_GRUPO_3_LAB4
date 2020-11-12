@@ -1,91 +1,58 @@
-package dominio;
+package entidades;
 
-public class City
-{
-    String descripcion;
-    int postalCode;
-    
-    public City()
-    {
-        super();
-    }
-    
-    public City(String descripcion, int postalCode)
-    {
-        super();
-        this.descripcion = descripcion;
-        this.postalCode = postalCode;
-    }
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString()
-    {
-        return "City [descripcion=" + descripcion + ", postalCode=" + postalCode + "]";
-    }
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
-        result = prime * result + postalCode;
-        return result;
-    }
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        City other = (City) obj;
-        if (descripcion == null)
-        {
-            if (other.descripcion != null)
-                return false;
-        }
-        else if (!descripcion.equals(other.descripcion))
-            return false;
-        if (postalCode != other.postalCode)
-            return false;
-        return true;
-    }
-    /**
-     * @return the descripcion
-     */
-    public String getDescripcion()
-    {
-        return descripcion;
-    }
-    /**
-     * @param descripcion the descripcion to set
-     */
-    public void setDescripcion(String descripcion)
-    {
-        this.descripcion = descripcion;
-    }
-    /**
-     * @return the postalCode
-     */
-    public int getPostalCode()
-    {
-        return postalCode;
-    }
-    /**
-     * @param postalCode the postalCode to set
-     */
-    public void setPostalCode(int postalCode)
-    {
-        this.postalCode = postalCode;
-    }
+public class City {
+	
+	private int id;
+	private String description;
+	private int postalCode;
+	private Province province;
+	
+	//Constructors
+	public City() {
+		
+	}
+
+	public City(int id, String description, int postalCode, Province province) {
+		super();
+		this.id = id;
+		this.description = description;
+		this.postalCode = postalCode;
+		this.province = province;
+	}
+
+	//Getters & Setters
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public int getPostalCode() {
+		return postalCode;
+	}
+	public void setPostalCode(int postalCode) {
+		this.postalCode = postalCode;
+	}
+	public Province getProvince() {
+		return province;
+	}
+	public void setProvince(Province province) {
+		this.province = province;
+	}
+
+	
+	//To String
+	@Override
+	public String toString() {
+		return "City [id=" + id + ", description=" + description + ", postalCode=" + postalCode + ", province="
+				+ province + "]";
+	}
+	
+
 }
