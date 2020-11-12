@@ -73,7 +73,7 @@ CREATE TABLE Accounts
 	accountNumber	INT 		NOT NULL,
     accountDni		VARCHAR(9) 	NOT NULL,
     creationDate 	DATETIME 	NOT NULL,
-    accountypeid 	INT 		NOT NULL,
+    accountTypeId 	INT 		NOT NULL,
     cbu 			INT 		NOT NULL,
     balance 		DECIMAL(10,2) NOT NULL,
     status			BIT			NOT NULL,
