@@ -81,7 +81,7 @@ public class ServletsCuentas extends HttpServlet {
 			boolean estado = false;
 			User u = null;
 			UserNeglmpl un = new UserNeglmpl();
-			u = un.getUser(Integer.parseInt(request.getParameter("txtDNI")));
+			u = un.getUser(request.getParameter("txtDNI"));
 			if (u != null)
 			{
 				estado = true;

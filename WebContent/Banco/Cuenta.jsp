@@ -45,7 +45,7 @@
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">AndrÃ© Villalta</span> 
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small">André Villalta</span> 
 								<img class="img-profile rounded-circle" src="img/profile.png">
 							</a> 
 							<!-- Dropdown - User Information -->
@@ -98,7 +98,7 @@
 							<div class="form-group col-md-3">
 								<label for="title">Tipo de cuenta</label>
 									<select class="custom-select" name="tipoCta" id="inputGroupSelect02">
-										<option selected>Elija opciÃ³n</option>
+										<option selected>Elija opción</option>
 										<option value="1">Caja de ahorro</option>
 										<option value="2">Cuenta corriente</option>
 										<option value="3">Otro</option>
