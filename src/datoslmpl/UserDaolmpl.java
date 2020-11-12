@@ -79,24 +79,23 @@ public class UserDaolmpl implements UserDao{
 			rs.next();
 				if(rs.getBoolean("status")) 
 				{
-					phone = new Phone(
-							rs.getInt("number"),
-							rs.getString("description"),
-							user = new User(
-									rs.getString("dni"),
-									rs.getString("firstName"),
-									rs.getString("lastName"),
-									rs.getString("userName"),
-									rs.getString("password"),
-									rs.getString("cuil"),
-									rs.getString("gender"),
-									rs.getString("nationality"),
-									rs.getDate("birthDate"),
-									rs.getString("address"),
-									rs.getString("city"),
-									rs.getString("email"),
-									rs.getBoolean("status")							
-							),			
+					user = new User(
+							rs.getString("dni"),
+							rs.getString("firstName"),
+							rs.getString("lastName"),
+							rs.getString("userName"),
+							rs.getString("password"),
+							rs.getString("cuil"),
+							rs.getString("gender"),
+							rs.getString("nationality"),
+							rs.getDate("birthDate"),
+							rs.getString("address"),
+							rs.getString("city"),
+							rs.getString("email"),
+							phone = new Phone(
+									rs.getInt("number"),
+									rs.getString("description")							
+									),			
 							rs.getBoolean("status")
 					);					
 				}						
@@ -139,8 +138,6 @@ public class UserDaolmpl implements UserDao{
 			
 			sp.setInt(13, phone.getNumber());
 			sp.setString(14, phone.getDescription());
-			sp.setString(15, phone.getUser().getDni());
-			sp.setBoolean(16, phone.isStatus());
 						
 			status = sp.execute();
 			
@@ -183,8 +180,6 @@ public class UserDaolmpl implements UserDao{
 			
 			sp.setInt(13, phone.getNumber());
 			sp.setString(14, phone.getDescription());
-			sp.setString(15, phone.getUser().getDni());
-			sp.setBoolean(16, phone.isStatus());
 						
 			status = sp.execute();
 		}

@@ -4,20 +4,16 @@ public class Phone {
 	
 	private int number;
 	private String description;
-	private User user;
-	private boolean status;
 	
 	//Constructors
 	public Phone(){
 		
 	}
 	
-	public Phone(int number, String description, User user, boolean status) {
+	public Phone(int number, String description) {
 		super();
 		this.number = number;
 		this.description = description;
-		this.user = user;
-		this.status = status;
 	}
 		
 	//Getters & Setters
@@ -35,24 +31,11 @@ public class Phone {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public boolean isStatus() {
-		return status;
-	}
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
 
 	//To String
 	@Override
 	public String toString() {
-		return "Phone [number=" + number + ", description=" + description + ", user=" + user + ", status=" + status
-				+ "]";
+		return "Phone [number=" + number + ", description=" + description + "]";
 	}
 	
 	

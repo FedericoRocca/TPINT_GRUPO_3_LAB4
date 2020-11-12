@@ -15,6 +15,7 @@ public class User {
 	private String address;
 	private String city;
 	private String email;
+	private Phone phone;
 	private boolean status;
 
 	//Constructors
@@ -23,7 +24,7 @@ public class User {
 	}
 	
 	public User(String dni, String firstName, String lastName, String userName, String password, String cuil,
-			String gender, String nacionality, Date birthDate, String address, String city, String email, boolean status) {
+			String gender, String nacionality, Date birthDate, String address, String city, String email, Phone phone, boolean status) {
 		super();
 		this.dni = dni;
 		this.firstName = firstName;
@@ -37,6 +38,7 @@ public class User {
 		this.address = address;
 		this.city = city;
 		this.email = email;
+		this.phone = phone;
 		this.status = status;
 	}
 
@@ -120,13 +122,20 @@ public class User {
 		this.status = status;
 	}
 
-	
+	public Phone getPhone() {
+		return phone;
+	}
+
+	public void setPhone(Phone phone) {
+		this.phone = phone;
+	}
+
 	@Override
 	public String toString() {
 		return "User [dni=" + dni + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName
 				+ ", password=" + password + ", cuil=" + cuil + ", gender=" + gender + ", nacionality=" + nacionality
 				+ ", birthDate=" + birthDate + ", address=" + address + ", city=" + city + ", email=" + email
-				+ ", Status=" + status + "]";
+				+ ", phone=" + phone + ", status=" + status + "]";
 	}
-		
+
 }

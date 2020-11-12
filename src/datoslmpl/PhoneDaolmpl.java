@@ -29,7 +29,6 @@ public class PhoneDaolmpl implements PhoneDao {
 				Phone phone = new Phone();
 				phone.setNumber(rs.getInt("phones.number"));
 				phone.setDescription(rs.getString("phones.description"));
-				phone.setStatus(rs.getBoolean("phones.status"));
 				
 				User user = new User();
 				user.setDni(rs.getString("users.dni"));
@@ -56,7 +55,7 @@ public class PhoneDaolmpl implements PhoneDao {
 		cn.Open();
 		
 		String query = "INSERT INTO Phones (number, description, userDni, status) VALUES "
-						+ "('"+phone.getNumber()+"', '"+phone.getDescription()+"', '"+dni+"', '"+phone.isStatus()+"')";
+						+ "('"+phone.getNumber()+"', '"+phone.getDescription()+"', '"+dni+"')";
 		System.out.println(query);
 		try
 		 {
