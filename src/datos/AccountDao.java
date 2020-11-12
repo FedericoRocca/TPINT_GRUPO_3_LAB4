@@ -12,7 +12,7 @@ public class AccountDao {
 		try {	
 			cn = new ConnectionDB();
 			cn.Open();
-			String query = "Insert INTO Account (AccountNumber,Dni,CreationDate,AccountTypeId,CBU,Balance,Status) VALUES (";
+			String query = "Insert INTO Accounts (AccountNumber,accountDni,CreationDate,AccountTypeId,CBU,Balance,Status) VALUES (";
 			query += a.getAccountNumber()+","+a.getAccountDni()+",NOW(),"+a.getAccountypeid()+","+a.getCbu()+","+a.getBalance()+",1)";
 			cn.execute(query);
 			cn.close();
