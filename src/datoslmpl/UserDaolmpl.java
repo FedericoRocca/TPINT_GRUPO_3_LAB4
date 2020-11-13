@@ -224,12 +224,10 @@ public class UserDaolmpl implements UserDao{
         cn = new ConnectionDB();
         cn.Open();
         ResultSet rs = null;
-        System.out.println("username: " + userName);
         try {
             rs = cn.query("SELECT count(*) FROM Users where Users.username = '" + userName +"';");
             rs.next();
             int coincidences = rs.getInt(1);
-            System.out.println("Coincidencias en la ddbb: " + coincidences);
             if( coincidences >= 1 )
             {
                 return true;
