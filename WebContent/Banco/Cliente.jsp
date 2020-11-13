@@ -36,8 +36,7 @@
 			<!-- Main Content -->
 			<div id="content">
 				<!-- Topbar -->
-				<nav
-					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 					<!-- Sidebar Toggle (Topbar) -->
 					<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
 						<i class="fa fa-bars"></i>
@@ -76,18 +75,16 @@
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
-
 					<!-- Page Heading -->
-					<div
-						class="d-sm-flex align-items-center justify-content-between mb-4">
+					<div class="d-sm-flex align-items-center justify-content-between mb-4">
 						<h1 class="h3 mb-0 text-gray-800"><%= request.getParameter("p") %> Cliente</h1>
 					</div>
 
-					<form method="post" enctype="multipart/form-data">
+					<form method="get" action="ServletClientes" enctype="multipart/form-data">
 						<div class="form-row">
 							<div class="form-group col-md-4">
 								<label for="title">DNI</label> 
-								<input class="form-control" name="textDni" required="required" type="text" placeholder="Ingrese DNI">           				
+								<input class="form-control" name = "textDni" required="required" type="text" placeholder="Ingrese DNI">           				
 							</div>
 							<div class="form-group col-md-2 mt-1">
 								<button type="button" onclick="BuscarExistencia()" class="btn btn-warning btn-circle mt-4">

@@ -1,20 +1,25 @@
 package dominio;
 
-public class Nacionality {
+public class Nationality {
 	
 	private int id;
 	private String description;
 	
 	//Constructors
-	public Nacionality() {
+	public Nationality() {
 		
 	}
 	
 
-	public Nacionality(int id, String description) {
+	public Nationality(int id, String description) {
 		super();
 		this.id = id;
 		this.description = description;
+	}
+	
+	public Nationality(int id) {
+		super();
+		this.id = id;
 	}
 	
 	//Getters & Setters

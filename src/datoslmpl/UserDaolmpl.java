@@ -17,7 +17,7 @@ public class UserDaolmpl implements UserDao{
 	
 	private ConnectionDB cn;
 	
-	private static final String readAll = "SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.nationality, u.birthDate, u.gender, p.description as Phone, p.numberPhone as number FROM Users u LEFT JOIN phones p ON p.userDni = u.dni WHERE u.dni = ";
+	private static final String longQuery = "SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.nationality, u.birthDate, u.gender, p.description as Phone, p.numberPhone as number FROM Users u LEFT JOIN phones p ON p.userDni = u.dni WHERE u.dni = ";
 	
 	public UserDaolmpl() {
 		
@@ -69,7 +69,7 @@ public class UserDaolmpl implements UserDao{
 		User user = null;
 		Phone phone = null;
 		
-		String query = readAll +  dni;
+		String query = longQuery +  dni;
 		System.out.println(query);
 		
 		try 
