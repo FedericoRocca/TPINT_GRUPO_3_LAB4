@@ -249,8 +249,7 @@ public class UserDaolmpl implements UserDao{
     {
         ResultSet rs = null;
         User user = null;
-        Phone phone = null;
-        Role rol = null;
+        Role rol;
         
         String query = "SELECT u.dni, u.firstname, u.lastname, u.username, u.password, u.cuil, u.gender, u.nationality, u.birthdate, u.address, u.city," + 
                 " u.email, u.status, p.description as Phone, p.numberPhone as number , rol.id as rolid, rol.name as rolname, rol.status as rolstatus" + 
@@ -259,7 +258,6 @@ public class UserDaolmpl implements UserDao{
                 " INNER JOIN roles_x_users rolx ON rolx.dni = u.dni" + 
                 " INNER JOIN roles rol on rol.id = rolx.roleid" + 
                 " WHERE u.username = '" + userName + "' and u.password = '" + password + "';";
-        System.out.println("query: " + query);
         
         try 
         {

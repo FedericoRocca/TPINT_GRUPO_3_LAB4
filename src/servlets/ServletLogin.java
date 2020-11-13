@@ -41,9 +41,10 @@ public class ServletLogin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 	    try
         {
+	        RequestDispatcher dispatcher;
+	        String loginError = "";
 	      //Obtenemos los datos ingresados por el usuario 
 	        User user = new User();
 	        if(request.getParameter("btnLogin") != null)
@@ -52,37 +53,47 @@ public class ServletLogin extends HttpServlet {
 	            user.setPassword(request.getParameter("txbPassword"));
 	        }
 	        // Chequeo contra la base de datos si el usuario existe, si no mensaje de error en el front
-	        System.out.println("Usuario: " + user.getUserName());
-	        System.out.println("password: " + user.getPassword());
 	        UserNeglmpl userNeg = new UserNeglmpl();
 	        if( userNeg.exists(user.getUserName()) )
 	        {
 	            // El usuario existe, traemos toda la info del usuario y chequeamos rol
 	            user = userNeg.getUserByUsername(user.getUserName(), user.getPassword());
-	            System.out.println("Rolname: " + user.getRol().getNameRole());
-	            switch (user.getRol().getNameRole())
-                {
-                    case "Administrador":
-                        System.out.println("Entro por admin");
-                        break;
-                        
-                    case "Cliente":
-                        System.out.println("Entro por cliente");
-                        break;
-                    
-                    default:
-                        break;
-                }
-
-	            //RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoClientes.jsp");
-	            //dispatcher.forward(request, response);
+	            
+	            if( user != null )
+	            {
+	                switch (user.getRol().getNameRole())
+	                {
+	                    case "Administrador":
+	                            dispatcher = request.getRequestDispatcher("/Banco/DashboardAdmin.jsp");
+	                            dispatcher.forward(request, response);
+	                        break;
+	                        
+	                    case "Cliente":
+	                            dispatcher = request.getRequestDispatcher("/Banco/DashboardCliente.jsp");
+	                            dispatcher.forward(request, response);
+	                        break;
+	                    
+	                    default:
+	                            System.out.println("Algo raro hubo, se entró con un rol que no existe en el código");
+	                        break;
+	                }
+	            }
+	            else
+	            {
+	                loginError = "El usuario y/o contraseña ingresados son incorrectos";
+	                request.setAttribute(loginError.toString(), loginError);
+	                dispatcher = request.getRequestDispatcher("/Banco/Login.jsp");
+	                dispatcher.forward(request, response);
+	            }
 	        }
 	        else
 	        {
-	            System.out.println("Usuario no existe");
+	            loginError = "El usuario y/o contraseña ingresados son incorrectos";
+	            request.setAttribute("loginError", loginError);
+	            dispatcher = request.getRequestDispatcher("/Banco/Login.jsp");
+                dispatcher.forward(request, response);
 	        }
 
-	        doGet(request, response);
         }
         catch (Exception e)
         {

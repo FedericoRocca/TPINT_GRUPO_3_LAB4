@@ -49,7 +49,7 @@
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" id="InputPassword" placeholder="Ingrese su contraseña" name="txbPassword" required>
                     </div>
-                    
+                    <div class="badge badge-warning">${loginError}</div>
                     <input type="submit" name="btnLogin" value="Ingresar" class="btn btn-primary btn-user btn-block">
 
                   </form>
