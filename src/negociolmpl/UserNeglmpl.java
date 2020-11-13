@@ -52,4 +52,10 @@ public class UserNeglmpl implements UserNeg {
         return userDao.exists(userName);
     }
 
+    @Override
+    public User getUserByUsername(String userName, String password)
+    {
+        return userDao.getUserByUsernameAndPassword(userName, password);
+    }
+
 }

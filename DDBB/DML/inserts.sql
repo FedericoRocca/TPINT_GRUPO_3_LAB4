@@ -14,3 +14,4 @@ INSERT INTO users (dni, firstName, lastName, userName, password, cuil, gender, n
 
 INSERT INTO users (dni, firstName, lastName, userName, password, cuil, gender, nationality, birthDate, address, city, email, status) 
 	VALUES ("36249161","Federico","Rocca", "usernameLoco", "Password","20362491615","Masculino","Argentina","1991-11-22", "Una calle random", "San Fernando", "frocca17@gmail.com", 1 );
+INSERT INTO `bdbanco`.`roles_x_users` (`dni`, `roleId`, `status`) VALUES ('36249161', '1', b'1');

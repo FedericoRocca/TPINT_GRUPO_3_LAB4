@@ -63,7 +63,6 @@ public class UserDaolmpl implements UserDao{
 
 	@Override
 	public User getUser(String dni) {
-		
 		ResultSet rs = null;
 		
 		User user = null;
@@ -221,10 +220,10 @@ public class UserDaolmpl implements UserDao{
     @Override
     public boolean exists(String userName)
     {
-        System.out.println("Dni recibido para el select: " + userName);
         cn = new ConnectionDB();
         cn.Open();
         ResultSet rs = null;
+        System.out.println("username: " + userName);
         try {
             rs = cn.query("SELECT count(*) FROM Users where Users.username = '" + userName +"';");
             rs.next();
@@ -242,6 +241,61 @@ public class UserDaolmpl implements UserDao{
             cn.close();
         }
         return false;
+    }
+
+    @Override
+    public User getUserByUsernameAndPassword(String userName, String password)
+    {
+        ResultSet rs = null;
+        User user = null;
+        Phone phone = null;
+        
+        String query = "SELECT u.dni, u.firstname, u.lastname, u.username, u.password, u.cuil, u.gender, u.nationality, u.birthdate, u.address, u.city," + 
+                " u.email, u.status, p.description as Phone, p.numberPhone as number " + 
+                " FROM Users u " + 
+                " LEFT JOIN phones p ON p.userDni = u.dni " + 
+                " INNER JOIN roles_x_users rolx ON rolx.dni = u.dni" + 
+                " INNER JOIN roles rol on rol.id = rolx.roleid" + 
+                " WHERE u.username = '" + userName + "' and u.password = '" + password + "';";
+        System.out.println("query: " + query);
+        
+        try 
+        {
+            cn = new ConnectionDB();
+            cn.Open();
+            rs = cn.query(query);
+            rs.next();
+                if(rs.getBoolean("status")) 
+                {
+                    user = new User(
+                            rs.getString("dni"),
+                            rs.getString("firstName"),
+                            rs.getString("lastName"),
+                            rs.getString("userName"),
+                            rs.getString("password"),
+                            rs.getString("cuil"),
+                            rs.getString("gender"),
+                            rs.getString("nationality"),
+                            rs.getDate("birthDate"),
+                            rs.getString("address"),
+                            rs.getString("city"),
+                            rs.getString("email"),
+                            phone = new Phone(
+                                    rs.getInt("number"),
+                                    rs.getString("description")                         
+                                    ),          
+                            rs.getBoolean("status")
+                    );                  
+                }                       
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            cn.close();
+        }
+        
+        return user;    
     }
 
 }

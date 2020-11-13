@@ -2,6 +2,8 @@ package servlets;
 
 import java.io.Console;
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,15 +50,21 @@ public class ServletLogin extends HttpServlet {
 	        user.setPassword(request.getParameter("txbPassword"));
         }
 	    // Chequeo contra la base de datos si el usuario existe, si no mensaje de error en el front
+	    System.out.println("Usuario: " + user.getUserName());
+	    System.out.println("password: " + user.getPassword());
 	    UserNeglmpl userNeg = new UserNeglmpl();
 	    if( userNeg.exists(user.getUserName()) )
 	    {
-	        System.out.println("Usuario existe");
+	        // El usuario existe, traemos toda la info del usuario y chequeamos rol
+	        user = userNeg.getUserByUsername(user.getUserName(), user.getPassword());
 	    }
 	    else
 	    {
 	        System.out.println("Usuario no existe");
 	    }
+	    //request.setAttribute("userList", users);
+        //RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoClientes.jsp");
+        //dispatcher.forward(request, response);
 		doGet(request, response);
 	}
 
