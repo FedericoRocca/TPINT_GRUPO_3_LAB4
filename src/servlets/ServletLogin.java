@@ -42,30 +42,52 @@ public class ServletLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	    //Obtenemos los datos ingresados por el usuario 
-	    User user = new User();
-	    if(request.getParameter("btnLogin") != null)
+	    try
         {
-	        user.setUserName(request.getParameter("txbUser"));
-	        user.setPassword(request.getParameter("txbPassword"));
+	      //Obtenemos los datos ingresados por el usuario 
+	        User user = new User();
+	        if(request.getParameter("btnLogin") != null)
+	        {
+	            user.setUserName(request.getParameter("txbUser"));
+	            user.setPassword(request.getParameter("txbPassword"));
+	        }
+	        // Chequeo contra la base de datos si el usuario existe, si no mensaje de error en el front
+	        System.out.println("Usuario: " + user.getUserName());
+	        System.out.println("password: " + user.getPassword());
+	        UserNeglmpl userNeg = new UserNeglmpl();
+	        if( userNeg.exists(user.getUserName()) )
+	        {
+	            // El usuario existe, traemos toda la info del usuario y chequeamos rol
+	            user = userNeg.getUserByUsername(user.getUserName(), user.getPassword());
+	            System.out.println("Rolname: " + user.getRol().getNameRole());
+	            switch (user.getRol().getNameRole())
+                {
+                    case "Administrador":
+                        System.out.println("Entro por admin");
+                        break;
+                        
+                    case "Cliente":
+                        System.out.println("Entro por cliente");
+                        break;
+                    
+                    default:
+                        break;
+                }
+
+	            //RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoClientes.jsp");
+	            //dispatcher.forward(request, response);
+	        }
+	        else
+	        {
+	            System.out.println("Usuario no existe");
+	        }
+
+	        doGet(request, response);
         }
-	    // Chequeo contra la base de datos si el usuario existe, si no mensaje de error en el front
-	    System.out.println("Usuario: " + user.getUserName());
-	    System.out.println("password: " + user.getPassword());
-	    UserNeglmpl userNeg = new UserNeglmpl();
-	    if( userNeg.exists(user.getUserName()) )
-	    {
-	        // El usuario existe, traemos toda la info del usuario y chequeamos rol
-	        user = userNeg.getUserByUsername(user.getUserName(), user.getPassword());
-	    }
-	    else
-	    {
-	        System.out.println("Usuario no existe");
-	    }
-	    //request.setAttribute("userList", users);
-        //RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoClientes.jsp");
-        //dispatcher.forward(request, response);
-		doGet(request, response);
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 	}
 
 }

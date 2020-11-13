@@ -16,6 +16,7 @@ public class User {
 	private String city;
 	private String email;
 	private Phone phone;
+	private Role rol;
 	private boolean status;
 
 	//Constructors
@@ -24,7 +25,7 @@ public class User {
 	}
 	
 	public User(String dni, String firstName, String lastName, String userName, String password, String cuil,
-			String gender, String nacionality, Date birthDate, String address, String city, String email, Phone phone, boolean status) {
+			String gender, String nacionality, Date birthDate, String address, String city, String email, Phone phone, boolean status, Role rol) {
 		super();
 		this.dni = dni;
 		this.firstName = firstName;
@@ -40,9 +41,82 @@ public class User {
 		this.email = email;
 		this.phone = phone;
 		this.status = status;
+		this.rol = rol;
 	}
+	
+	public User(String dni, String firstName, String lastName, String userName, String password, String cuil,
+            String gender, String nacionality, Date birthDate, String address, String city, String email, Phone phone, boolean status) {
+        super();
+        this.dni = dni;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+        this.cuil = cuil;
+        this.gender = gender;
+        this.nacionality = nacionality;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.city = city;
+        this.email = email;
+        this.phone = phone;
+        this.status = status;
+    }
 
-	//Getters & Setters
+	   public User(String dni, String firstName, String lastName, String userName, String password, String cuil,
+            String gender, String nacionality, Date birthDate, String address, String city, String email, boolean status) {
+        super();
+        this.dni = dni;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+        this.cuil = cuil;
+        this.gender = gender;
+        this.nacionality = nacionality;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.city = city;
+        this.email = email;
+        this.status = status;
+    }
+
+	    public User(String dni, String firstName, String lastName, String userName, String password, String cuil,
+	            String gender, String nacionality, Date birthDate, String address, String city, String email, boolean status, Role rol) {
+	        super();
+	        this.dni = dni;
+	        this.firstName = firstName;
+	        this.lastName = lastName;
+	        this.userName = userName;
+	        this.password = password;
+	        this.cuil = cuil;
+	        this.gender = gender;
+	        this.nacionality = nacionality;
+	        this.birthDate = birthDate;
+	        this.address = address;
+	        this.city = city;
+	        this.email = email;
+	        this.status = status;
+	        this.rol = rol;
+	    }
+
+    /**
+     * @return the rol
+     */
+    public Role getRol()
+    {
+        return rol;
+    }
+
+    /**
+     * @param rol the rol to set
+     */
+    public void setRol(Role rol)
+    {
+        this.rol = rol;
+    }
+
+    //Getters & Setters
 	public String getDni() {
 		return dni;
 	}

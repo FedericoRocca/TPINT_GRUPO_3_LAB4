@@ -3,11 +3,13 @@ package datoslmpl;
 import java.io.Console;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import datos.UserDao;
 import dominio.Phone;
+import dominio.Role;
 import dominio.User;
 
 
@@ -248,9 +250,10 @@ public class UserDaolmpl implements UserDao{
         ResultSet rs = null;
         User user = null;
         Phone phone = null;
+        Role rol = null;
         
         String query = "SELECT u.dni, u.firstname, u.lastname, u.username, u.password, u.cuil, u.gender, u.nationality, u.birthdate, u.address, u.city," + 
-                " u.email, u.status, p.description as Phone, p.numberPhone as number " + 
+                " u.email, u.status, p.description as Phone, p.numberPhone as number , rol.id as rolid, rol.name as rolname, rol.status as rolstatus" + 
                 " FROM Users u " + 
                 " LEFT JOIN phones p ON p.userDni = u.dni " + 
                 " INNER JOIN roles_x_users rolx ON rolx.dni = u.dni" + 
@@ -263,7 +266,8 @@ public class UserDaolmpl implements UserDao{
             cn = new ConnectionDB();
             cn.Open();
             rs = cn.query(query);
-            rs.next();
+            while(rs.next())
+            {
                 if(rs.getBoolean("status")) 
                 {
                     user = new User(
@@ -279,13 +283,15 @@ public class UserDaolmpl implements UserDao{
                             rs.getString("address"),
                             rs.getString("city"),
                             rs.getString("email"),
-                            phone = new Phone(
-                                    rs.getInt("number"),
-                                    rs.getString("description")                         
-                                    ),          
-                            rs.getBoolean("status")
-                    );                  
-                }                       
+                            rs.getBoolean("status"),
+                            rol = new Role(rs.getInt("rolid"),
+                                           rs.getString("rolname") ,
+                                           rs.getBoolean("rolstatus"))
+                            
+                    );
+                            
+                }  
+            }                     
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -293,8 +299,7 @@ public class UserDaolmpl implements UserDao{
         finally {
             cn.close();
         }
-        
-        return user;    
+        return user;
     }
 
 }
