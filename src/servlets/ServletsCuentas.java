@@ -47,48 +47,56 @@ public class ServletsCuentas extends HttpServlet {
 		// TODO Auto-generated method stub
 		if(request.getParameter("btnGestionarCuenta")!=null)
 		{
-			Account x = new Account();
-			DecimalFormat df = new DecimalFormat("0.00");
-			x.setAccountDni(Integer.parseInt(request.getParameter("txtDNI")));
-			x.setCbu(Integer.parseInt(request.getParameter("txtCBU")));
-			x.setAccountypeid(Integer.parseInt(request.getParameter("tipoCta")));
-			
-			
 			boolean estado=true;
-			if(request.getParameter("p") == "Alta")
+			try {
+				Account x = new Account();
+				DecimalFormat df = new DecimalFormat("0.00");
+				x.setAccountDni(Integer.parseInt(request.getParameter("txtDNI")));
+				x.setCbu(Integer.parseInt(request.getParameter("txtCBU")));
+				x.setAccountypeid(Integer.parseInt(request.getParameter("tipoCta")));
+				AccountNeg a = new AccountNeg();				
+				if(request.getParameter("p") == "Alta")
+				{					
+					estado=  a.InsertarCuenta(x);
+					a = null;
+				}
+				else if(request.getParameter("p") == "Baja")
+				{
+					estado=  a.BajaCuenta(x);
+					a = null;
+				}
+			}
+			catch(Exception e)
 			{
-				AccountNeg a = new AccountNeg();
-				estado=  a.InsertarCuenta(x);
-				a = null;
-				
+				estado = false;
+			}
 
-			}
-			else if(request.getParameter("p") == "Baja")
-			{
-				AccountNeg a = new AccountNeg();
-				estado=  a.BajaCuenta(x);
-				a = null;
-			}
 			
 			request.setAttribute("estadoGestion", estado);
-		    RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoCuentas.jsp");
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("ListadoCuentas.jsp");
 			dispatcher.forward(request, response);
 
 		}
 		
 		if(request.getParameter("BuscarExistencia")!=null)
 		{
-			boolean estado = false;
-			User u = null;
-			UserNeglmpl un = new UserNeglmpl();
-			u = un.getUser(request.getParameter("txtDNI"));
-			if (u != null)
-			{
-				estado = true;
+			boolean estado = true;
+			try {
+				User u = null;
+				UserNeglmpl un = new UserNeglmpl();
+				u = un.getUser(request.getParameter("txtDNI"));
+				if (u == null)
+				{
+					estado = false;
+				}
 			}
-			
+			catch(Exception e)
+			{
+				estado = false;
+			}
+		
 			request.setAttribute("estadoExistencia", estado);
-		    RequestDispatcher dispatcher = request.getRequestDispatcher("Cuenta.jsp");
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("Cuenta.jsp?p="+request.getParameter("p"));
 			dispatcher.forward(request, response);
 		}
 	}
