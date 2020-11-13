@@ -27,9 +27,8 @@ public class UserDaolmpl implements UserDao{
 		cn.Open();
 		ArrayList<User> list = new ArrayList<>();
 		ResultSet rs = null;
-		try {
-			rs = cn.query("SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.nationality, u.birthDate, u.gender FROM Users as u");
-			//ResultSet rs = cn.query("SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.nationality, u.birthDate, u.gender FROM Users u INNER JOIN Roles_x_Users rxu ON rxu.dni = u.dni WHERE rxu.roleId = 2");
+		try {			
+			rs = cn.query("SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.nationality, u.birthDate, u.gender FROM Users u INNER JOIN Roles_x_Users rxu ON rxu.dni = u.dni WHERE rxu.roleId = 2");
 			System.out.println(rs);
 			while(rs.next()) 
 			{
