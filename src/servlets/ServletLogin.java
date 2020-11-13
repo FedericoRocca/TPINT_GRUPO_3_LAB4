@@ -64,12 +64,12 @@ public class ServletLogin extends HttpServlet {
 	                switch (user.getRol().getNameRole())
 	                {
 	                    case "Administrador":
-	                            dispatcher = request.getRequestDispatcher("/Banco/DashboardAdmin.jsp");
+	                            dispatcher = request.getRequestDispatcher("/DashboardAdmin.jsp");
 	                            dispatcher.forward(request, response);
 	                        break;
 	                        
 	                    case "Cliente":
-	                            dispatcher = request.getRequestDispatcher("/Banco/DashboardCliente.jsp");
+	                            dispatcher = request.getRequestDispatcher("/DashboardCliente.jsp");
 	                            dispatcher.forward(request, response);
 	                        break;
 	                    
@@ -82,7 +82,7 @@ public class ServletLogin extends HttpServlet {
 	            {
 	                loginError = "El usuario y/o contraseña ingresados son incorrectos";
 	                request.setAttribute(loginError.toString(), loginError);
-	                dispatcher = request.getRequestDispatcher("/Banco/Login.jsp");
+	                dispatcher = request.getRequestDispatcher("/Login.jsp");
 	                dispatcher.forward(request, response);
 	            }
 	        }
@@ -90,7 +90,7 @@ public class ServletLogin extends HttpServlet {
 	        {
 	            loginError = "El usuario y/o contraseña ingresados son incorrectos";
 	            request.setAttribute("loginError", loginError);
-	            dispatcher = request.getRequestDispatcher("/Banco/Login.jsp");
+	            dispatcher = request.getRequestDispatcher("/Login.jsp");
                 dispatcher.forward(request, response);
 	        }
 

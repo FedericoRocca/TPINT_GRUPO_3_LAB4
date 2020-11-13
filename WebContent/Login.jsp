@@ -42,7 +42,7 @@
                     <h1 class="h5 text-gray-900">Bienvenido al </h1>
                     <h2 class="h3 text-gray-900 mb-4">Banco UTN</h2>
                   </div>
-                  <form class="user" method="post" action="../ServletLogin">
+                  <form class="user" method="post" action="ServletLogin">
                     <div class="form-group">
                       <input type="text" class="form-control form-control-user" id="InputUser" placeholder="Ingrese su usuario" name="txbUser" required>
                     </div>
