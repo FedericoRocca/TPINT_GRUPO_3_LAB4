@@ -29,7 +29,7 @@ public class AccountDao {
 		try {	
 			cn = new ConnectionDB();
 			cn.Open();
-			String query = "Update Account Set Status = 0 WHERE ";
+			String query = "Update Accounts Set Status = 0 WHERE ";
 			query += "AccountNumber= " + a.getAccountNumber()+" AND Dni= "+a.getAccountDni();
 			cn.execute(query);
 			cn.close();

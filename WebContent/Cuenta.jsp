@@ -76,7 +76,7 @@
 						<h1 class="h3 mb-0 text-gray-800"><%= request.getParameter("p") %> Cuenta</h1>
 					</div>
 					
-					<form class="needs-validation" method="post" action="../ServletsCuentas" enctype="multipart/form-data">
+					<form class="needs-validation" method="post" action="ServletsCuentas">
 						<div class="form-row">
 							<div class="form-group col-md-4">
 								<label for="title">DNI</label> 
@@ -107,7 +107,7 @@
 							
 							<div class="form-group col-md-3">
 								<label for="title">Saldo inicial ($ - pesos argentinos)</label> 
-								<input class="form-control" name="txtSaldo" type="number" value="10000"placeholder="Saldo inicial">
+								<input class="form-control" name="txtSaldo" type="text" value="10000"placeholder="Saldo inicial">
 							</div>
 						</div>
 		

@@ -52,7 +52,7 @@ public class ServletsCuentas extends HttpServlet {
 			x.setAccountDni(Integer.parseInt(request.getParameter("txtDNI")));
 			x.setCbu(Integer.parseInt(request.getParameter("txtCBU")));
 			x.setAccountypeid(Integer.parseInt(request.getParameter("tipoCta")));
-			x.setBalance(Float.parseFloat(df.format(request.getParameter("txtSaldo"))));
+			
 			
 			boolean estado=true;
 			if(request.getParameter("p") == "Alta")
@@ -71,7 +71,7 @@ public class ServletsCuentas extends HttpServlet {
 			}
 			
 			request.setAttribute("estadoGestion", estado);
-		    RequestDispatcher dispatcher = request.getRequestDispatcher("Cuenta.jsp");
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoCuentas.jsp");
 			dispatcher.forward(request, response);
 
 		}
