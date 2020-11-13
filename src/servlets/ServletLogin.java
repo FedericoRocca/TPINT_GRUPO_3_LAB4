@@ -81,7 +81,7 @@ public class ServletLogin extends HttpServlet {
 	            else
 	            {
 	                loginError = "El usuario y/o contraseña ingresados son incorrectos";
-	                request.setAttribute(loginError.toString(), loginError);
+	                request.setAttribute("loginError", loginError);
 	                dispatcher = request.getRequestDispatcher("/Login.jsp");
 	                dispatcher.forward(request, response);
 	            }
