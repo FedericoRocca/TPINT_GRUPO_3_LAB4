@@ -1,3 +1,6 @@
+<%@page import="dominio.Nationality"%>
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -79,8 +82,16 @@
 					<div class="d-sm-flex align-items-center justify-content-between mb-4">
 						<h1 class="h3 mb-0 text-gray-800"><%= request.getParameter("p") %> Cliente</h1>
 					</div>
-
-					<form method="get" action="ServletClientes" enctype="multipart/form-data">
+					
+					<%
+						List<Nationality> listNat = new ArrayList<Nationality>();
+						if(request.getAttribute("listNat") != null)
+						{
+							listNat = (List<Nationality>) request.getAttribute("listNat");
+						}
+					%>
+					
+					<form method="post" action="ServletClientes" enctype="multipart/form-data">
 						<div class="form-row">
 							<div class="form-group col-md-4">
 								<label for="title">Nombre de usuario</label> 
@@ -111,13 +122,28 @@
 							</div>
 						</div>
 						<div class="form-row">
-						<div class="form-group col-md-4">
+							<div class="form-group col-md-4">
 								<label for="title">Correo electrónico</label> 
 								<input type="email" class="form-control" name="textEmail" id="email" placeholder="tu@correo.com" required>
 							</div>
+<!--  							<div class="form-group col-md-3"> -->
+<!--  								<label for="title">Nacionalidad</label>  -->
+<!--  								<input class="form-control" required name = "textNacionalidad" type="text" placeholder="Ingrese Nacionalidad"> -->
+<!--  							</div> 
+							 -->
 							<div class="form-group col-md-3">
-								<label for="title">Nacionalidad</label> 
-								<input class="form-control" required name = "textNacionalidad" type="text" placeholder="Ingrese Nacionalidad">
+    							<label for="Nationality">Nacionalidad</label>
+    								<select class="form-control" name="textNacionalidad">
+    								<option selected>Seleccione...</option>
+    								<%
+    									for(Nationality n : listNat)	{
+									%>
+										
+								      	<option value="<%=n.getId()%>"><%=n.getDescription()%></option>
+								   	<%
+										} 
+									%>
+								    </select>
 							</div>
 							<div class="form-group col-md-3">
 								<label for="title">Fecha de Nacimiento</label>
@@ -153,7 +179,7 @@
 								<input class="form-control"  type="text" placeholder="Ingrese Teléfono adicional" name="textPhone3">
 							</div>
 						</div>
-						<button type="submit" name="btnGuardar" class="btn btn-primary mt-2">Guardar cliente</button>
+						<input type="submit" name="btnGuardar" class="btn btn-primary mt-2" value="Guardar cliente">
 					</form>
 
 				</div>

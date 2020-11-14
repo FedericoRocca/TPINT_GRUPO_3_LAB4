@@ -73,7 +73,7 @@ public class ServletsCuentas extends HttpServlet {
 
 			
 			request.setAttribute("estadoGestion", estado);
-		    RequestDispatcher dispatcher = request.getRequestDispatcher("ListadoCuentas.jsp");
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoCuentas.jsp");
 			dispatcher.forward(request, response);
 
 		}
@@ -96,7 +96,7 @@ public class ServletsCuentas extends HttpServlet {
 			}
 		
 			request.setAttribute("estadoExistencia", estado);
-		    RequestDispatcher dispatcher = request.getRequestDispatcher("Cuenta.jsp?p="+request.getParameter("p"));
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("/Cuenta.jsp?p="+request.getParameter("p"));
 			dispatcher.forward(request, response);
 		}
 	}

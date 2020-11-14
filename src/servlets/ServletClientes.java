@@ -56,14 +56,15 @@ public class ServletClientes extends HttpServlet {
 		}
 		
 		//carga nacionalidades
-		if(request.getParameter("loadNationalities") != null) 
+		if(request.getParameter("listNat") != null) 
 		{
 			nationalities = (ArrayList<Nationality>) negNatio.getAll();
 			
 			request.setAttribute("listNationalities", nationalities);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/Cuenta.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/Cliente.jsp?p="+request.getParameter("p"));
 			dispatcher.forward(request, response);
 		}
+		
 		
 		//carga ciudades y provincias (FALTA!!!!)
 		

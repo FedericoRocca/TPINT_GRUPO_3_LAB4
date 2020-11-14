@@ -106,22 +106,6 @@
 											<td class="text-info">99999999</td>
 											<td>$10000</td>
 										</tr>
-										<tr>
-											<td>2222222</td>
-											<td>94949595955</td>
-											<td>Cuenta corriente</td>
-											<td>02/02/2020</td>
-											<td class="text-info">99888888</td>
-											<td>$1500</td>
-										</tr>
-										<tr>
-											<td>3333333</td>
-											<td>94784215475</td>
-											<td>Caja de ahorro</td>
-											<td>03/03/2020</td>
-											<td class="text-info">99984444</td>
-											<td>$80000</td>
-										</tr>
 									</tbody>
 								</table>
 							</div>
