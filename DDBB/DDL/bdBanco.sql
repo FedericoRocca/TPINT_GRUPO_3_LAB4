@@ -49,6 +49,14 @@ CREATE TABLE Movement
     FOREIGN KEY(MovementTypeId) REFERENCES MovementType(id)
 );
 
+CREATE TABLE Phones
+(
+	numberPhone	INT 		NOT NULL,
+    description VARCHAR(20) NOT NULL, 	/* teléfono, celular, fax */
+    
+	PRIMARY KEY (numberPhone)
+);
+
 CREATE TABLE Users
 (
 	 dni 		VARCHAR(9) 	NOT NULL,
@@ -122,14 +130,6 @@ CREATE TABLE Roles_x_Users
     PRIMARY KEY(dni, roleId),
     FOREIGN KEY(dni) REFERENCES Users(dni),
     FOREIGN KEY(roleId) REFERENCES Roles (id)
-);
-
-CREATE TABLE Phones
-(
-	numberPhone	INT 		NOT NULL,
-    description VARCHAR(20) NOT NULL, 	/* teléfono, celular, fax */
-    
-	PRIMARY KEY (numberPhone)
 );
 
 CREATE TABLE Nationalities
