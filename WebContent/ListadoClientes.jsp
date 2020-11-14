@@ -93,8 +93,6 @@
                       						<th>Email</th>
                       						<th>Nacionalidad</th>
                       						<th>Fecha Nacimiento</th>
-                      						<th>Sexo</th>
-                      						<th>Ver más</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -105,19 +103,10 @@
 										<tr>
 					                      <td><%=u.getDni()%></td>
 					                      <td><%=u.getCuil()%></td>
-					                      <td><%=u.getFirstName()%> + <%=u.getLastName() %></td>
+					                      <td><%=u.getLastName() %> <%=u.getFirstName()%></td>
 					                      <td><%=u.getEmail()%></td>
 					                      <td><%=u.getNacionality()%></td>
 					                      <td><%=u.getBirthDate()%></td>
-					                      <td><%=u.getGender()%></td>
-					                      <td>
-					                      	<a class="text-decoration-none m-2" href="#">
-					                      		<i class="fas fa-phone" style="font-size: 25px;"></i>
-					                      	</a>
-					                      	<a class="text-decoration-none m-2" href="#">
-					                      		<i class="fas fa-address-book" style="font-size: 25px;"></i>
-					                      	</a>
-					                      </td>
 					                    </tr>
 					                <% } %>
 									</tbody>

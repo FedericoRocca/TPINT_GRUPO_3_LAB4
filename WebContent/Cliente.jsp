@@ -96,11 +96,11 @@
 						<div class="form-row">
 							<div class="form-group col-md-4">
 								<label for="title">Nombre de usuario</label> 
-								<input class="form-control" name = "textUser" required type="text" placeholder="Nombre de usuario">           				
+								<input class="form-control" name = "textUser" required type="text" placeholder="Nombre de usuario" maxlength="45">           				
 							</div>
 							<div class="form-group col-md-4">
 								<label for="title">DNI</label> 
-								<input class="form-control" name = "textDni" required type="text" placeholder="Ingrese DNI">           				
+								<input class="form-control" name = "textDni" required type="text" placeholder="Ingrese DNI" maxlength="9">           				
 							</div>
 							<div class="form-group col-md-2 mt-1">
 								<button type="button" onclick="BuscarExistencia()" class="btn btn-warning btn-circle mt-4">
@@ -109,23 +109,23 @@
 							</div>
 							<div class="form-group col-md-4">
 								<label for="title">CUIL</label> 
-								<input class="form-control" name = "textCuil" required type="text" placeholder="Ingrese CUIL">
+								<input class="form-control" name = "textCuil" required type="text" placeholder="Ingrese CUIL" maxlength="11">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="title">Nombre</label> 
-								<input class="form-control" name = "textNombre" required type="text" placeholder="Ingrese Nombre">
+								<input class="form-control" name = "textNombre" required type="text" placeholder="Ingrese Nombre" maxlength="45">
 							</div>
 							<div class="form-group col-md-6">
 								<label for="title">Apellido</label> 
-								<input class="form-control" name = "textApellido" required type="text" placeholder="Ingrese Apellido">
+								<input class="form-control" name = "textApellido" required type="text" placeholder="Ingrese Apellido" maxlength="45">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-4">
 								<label for="title">Correo electrónico</label> 
-								<input type="email" class="form-control" name="textEmail" id="email" placeholder="tu@correo.com" required>
+								<input type="email" class="form-control" name="textEmail" id="email" placeholder="tu@correo.com" required maxlength="50">
 							</div>
 <!--  							<div class="form-group col-md-3"> -->
 <!--  								<label for="title">Nacionalidad</label>  -->
@@ -163,21 +163,21 @@
 						<div class="form-row">
 							<div class="form-group col-md-3">
 								<label for="title">Dirección</label> 
-								<input class="form-control" required type="text" placeholder="Ingrese la dirección" name="textAddress">
+								<input class="form-control" required type="text" placeholder="Ingrese la dirección" name="textAddress" maxlength="50">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-3">
 								<label for="title">Teléfono 1</label> 
-								<input class="form-control" required type="text" placeholder="Ingrese teléfono preponderante" name="textPhone1">
+								<input class="form-control" required type="text" placeholder="Ingrese teléfono preponderante" name="textPhone1" maxlength="10">
 							</div>
 							<div class="form-group col-md-3">
 								<label for="title">Teléfono 2</label> 
-								<input class="form-control" type="text" placeholder="Ingrese Teléfono secundario" name="textPhone2">
+								<input class="form-control" type="text" placeholder="Ingrese Teléfono secundario" name="textPhone2" maxlength="10">
 							</div>
 							<div class="form-group col-md-3">
 								<label for="title">Teléfono 3</label> 
-								<input class="form-control"  type="text" placeholder="Ingrese Teléfono adicional" name="textPhone3">
+								<input class="form-control"  type="text" placeholder="Ingrese Teléfono adicional" name="textPhone3" maxlength="10">
 							</div>
 						</div>
 						<input type="submit" name="btnGuardar" class="btn btn-primary mt-2" value="Guardar cliente">

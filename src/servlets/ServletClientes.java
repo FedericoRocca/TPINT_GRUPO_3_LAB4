@@ -42,7 +42,6 @@ public class ServletClientes extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    ArrayList<User> users = new ArrayList<>();
 		ArrayList<Nationality> nationalities = new ArrayList<>();
-		
 		if(request.getParameter("alta") != null)
 		{
 		        nationalities = (ArrayList<Nationality>) negNatio.getAll();
@@ -50,6 +49,14 @@ public class ServletClientes extends HttpServlet {
 		        RequestDispatcher dispatcher = request.getRequestDispatcher("/Cliente.jsp?p=Alta");
 	            dispatcher.forward(request, response);
 		}
+		
+		if(request.getParameter("listar") != null)
+        {
+		        users = negCustomer.GetAll();
+		        request.setAttribute("userList", users);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoClientes.jsp");
+                dispatcher.forward(request, response);
+        }
 		
 		if(request.getParameter("list") != null) 
 		{		
@@ -113,13 +120,15 @@ public class ServletClientes extends HttpServlet {
                 newCliente.setStatus(true);
                 newCliente.setUserName( request.getParameter("textUser") );
                 newCliente.setPassword(newCliente.getDni().toString() );
-                
                 newCliente.setAddress( request.getParameter("textAddress") );
                 
                 //Recopilamos todos los datos del usuario, lo damos de alta...
                 UserDaolmpl udi = new UserDaolmpl();
                 udi.insert(newCliente);
-
+                
+                request.setAttribute("userList", users);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/DashboardAdmin.jsp");
+                dispatcher.forward(request, response);
 	        }
         }
         catch (Exception e)
