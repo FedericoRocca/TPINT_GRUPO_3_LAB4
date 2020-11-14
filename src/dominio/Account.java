@@ -9,7 +9,7 @@ public class Account {
     private int accountDni;
     private Date creationDate;
     private int accountypeid;
-    private int cbu;
+    private String cbu;
     private float balance;
     
     
@@ -39,10 +39,10 @@ public class Account {
 	public void setAccountypeid(int accountypeid) {
 		this.accountypeid = accountypeid;
 	}
-	public int getCbu() {
+	public String getCbu() {
 		return cbu;
 	}
-	public void setCbu(int cbu) {
+	public void setCbu(String cbu) {
 		this.cbu = cbu;
 	}
 

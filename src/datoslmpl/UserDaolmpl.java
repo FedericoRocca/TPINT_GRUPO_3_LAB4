@@ -19,7 +19,7 @@ public class UserDaolmpl implements UserDao{
 	
 	private ConnectionDB cn;
 	
-	private static final String longQuery = "SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.nationality, u.birthDate, u.gender, p.description as Phone, p.numberPhone as number FROM Users u LEFT JOIN phones p ON p.userDni = u.dni WHERE u.dni = ";
+	private static final String longQuery = "SELECT u.dni, u.cuil, u.firstname,u.address ,u.lastname,u.userName,u.password,u.cuil,u.city, u.email, u.nationality, u.birthDate, u.gender, u.status, p.description as Phone, p.numberPhone as number FROM Users u LEFT JOIN phones p ON p.userDni = u.dni  WHERE u.dni = ";
 	
 	public UserDaolmpl() {
 		

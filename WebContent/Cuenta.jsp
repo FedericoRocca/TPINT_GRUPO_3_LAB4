@@ -80,7 +80,8 @@
 						<div class="form-row">
 							<div class="form-group col-md-4">
 								<label for="title">DNI</label> 
-								<input class="form-control" name="txtDNI" required="required" type="number" placeholder="Ingrese DNI">           				
+								<input class="form-control" name="txtDNI" required="required" type="number" placeholder="Ingrese DNI" value="${DNI}">    
+								<input type="hidden" name="parameter" value="<%= request.getParameter("p") %>">       				
 							</div>
 							<div class="form-group col-md-1 mt-1">
 								<button type="submit" name="BuscarExistencia" class="btn btn-warning btn-circle mt-4">
@@ -91,27 +92,26 @@
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="title">CBU</label> 
-								<input class="form-control"  name="txtCBU" required="required" type="text" placeholder="NÂº identidad + NÂªSucursal + DÃ­gito identificador + Numero de cuenta + DÃ­gito verificador">
+								<input class="form-control" disabled"${D}" name="txtCBU" value="${CBU}" type="text" placeholder="Nº identidad + NªSucursal + Dígito identificador + Numero de cuenta + Dígito verificador">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-3">
-								<label for="title">Tipo de cuenta</label>
-									<select class="custom-select" name="tipoCta" id="inputGroupSelect02">
+								<label for="title" disabled"${D}">Tipo de cuenta</label>
+									<select class="custom-select" name="tipoCta" id="inputGroupSelect02" disabled"${D}">
 										<option selected>Elija opción</option>
 										<option value="1">Caja de ahorro</option>
 										<option value="2">Cuenta corriente</option>
-										<option value="3">Otro</option>
 									</select>
 							</div>
 							
 							<div class="form-group col-md-3">
-								<label for="title">Saldo inicial ($ - pesos argentinos)</label> 
-								<input class="form-control" name="txtSaldo" type="text" value="10000"placeholder="Saldo inicial">
+								<label for="title" disabled"${D}">Saldo inicial ($ - pesos argentinos)</label> 
+								<input class="form-control" disabled"${D}" name="txtSaldo" type="text" value="10000"placeholder="Saldo inicial">
 							</div>
 						</div>
 		
-						<button type="submit" name="btnGestionarCuenta" class="btn btn-primary mt-2">Dar de <%= request.getParameter("p") %></button>
+						<button type="submit" disabled"${D}" name="btnGestionarCuenta" class="btn btn-primary mt-2">Dar de <%= request.getParameter("p") %></button>
 					</form>
 
 				</div>
@@ -120,28 +120,31 @@
 			</div>
 			<!-- End of Main Content -->
 			<%
-		
-				if(request.getAttribute("estadoGestion")!=null)
+			if(request.getAttribute("estadoGestion")!=null)
 				{
 					boolean estadoM = (Boolean)request.getAttribute("estadoGestion");
 					
 					if (estadoM != false) 
 					{
-						%><script>swal("La cuenta se ha dado de "+ request.getParameter("p") +" correctamente", "", "success");</script><%
+						%><script>alert("La cuenta se ha dado de "+ request.getParameter("p") +" correctamente");</script><%
 					}
 					else
 					{
-						%><script>swal("No se pudo dar de "+ request.getParameter("p") + " a la cuenta debido a un Error", "", "error");</script><%
+						%><script>alert("No se pudo dar de "+ request.getParameter("p") + " a la cuenta debido a un Error");</script><%
 					}
 				}
 			
-			if(request.getAttribute("BuscarExistencia")!=null)
+			if(request.getAttribute("estadoExistencia")!=null)
 			{
 				boolean estadoM = (Boolean)request.getAttribute("estadoExistencia");
 				
-				if (estadoM == false) 
+				if (estadoM == true) 
 				{
-					%><script>swal("El Cliente no existe en la base de datos", "", "success");</script><%
+					%><script>alert("El Cliente NO existe en la base de datos");</script><%
+				}
+				else
+				{
+					%><script>alert("El Cliente existe en la base de datos");</script><%
 				}
 			}
 			%>
