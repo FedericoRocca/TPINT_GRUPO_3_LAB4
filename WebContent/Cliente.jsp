@@ -132,15 +132,15 @@
 						<div class="form-row">
 							<div class="form-group col-md-3">
 								<label for="title">Teléfono 1</label> 
-								<input class="form-control" required="required" type="text" placeholder="Ingrese Teléfono">
+								<input class="form-control" required="required" type="text" placeholder="Ingrese teléfono preponderante" name="textPhone1">
 							</div>
 							<div class="form-group col-md-3">
 								<label for="title">Teléfono 2</label> 
-								<input class="form-control" required="required" type="text" placeholder="Ingrese Teléfono">
+								<input class="form-control" required="required" type="text" placeholder="Ingrese Teléfono secundario" name="textPhone2">
 							</div>
 							<div class="form-group col-md-3">
 								<label for="title">Teléfono 3</label> 
-								<input class="form-control" required="required" type="text" placeholder="Ingrese Teléfono">
+								<input class="form-control" required="required" type="text" placeholder="Ingrese Teléfono adicional" name="textPhone3">
 							</div>
 						</div>
 						<button type="submit" name="btnGuardar" class="btn btn-primary mt-2">Guardar cliente</button>

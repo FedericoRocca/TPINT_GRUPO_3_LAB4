@@ -137,7 +137,7 @@ public class UserDaolmpl implements UserDao{
 			
 			Phone phone = new Phone();
 			
-			sp.setInt(13, phone.getNumber());
+			sp.setLong(13, phone.getNumber());
 			sp.setString(14, phone.getDescription());
 						
 			status = sp.execute();
@@ -179,7 +179,7 @@ public class UserDaolmpl implements UserDao{
 			
 			Phone phone = new Phone();
 			
-			sp.setInt(13, phone.getNumber());
+			sp.setLong(13, phone.getNumber());
 			sp.setString(14, phone.getDescription());
 						
 			status = sp.execute();
