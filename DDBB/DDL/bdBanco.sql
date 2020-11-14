@@ -49,14 +49,6 @@ CREATE TABLE Movement
     FOREIGN KEY(MovementTypeId) REFERENCES MovementType(id)
 );
 
-CREATE TABLE Phones
-(
-	numberPhone	INT 		NOT NULL,
-    description VARCHAR(20) NOT NULL, 	/* teléfono, celular, fax */
-    
-	PRIMARY KEY (numberPhone)
-);
-
 CREATE TABLE Users
 (
 	 dni 		VARCHAR(9) 	NOT NULL,
@@ -71,11 +63,19 @@ CREATE TABLE Users
      address 	VARCHAR(50) NOT NULL,
      city		VARCHAR(45) 	NULL,
      email		VARCHAR(50) NOT NULL,
-     nPhone		INT				NULL,
      status		BIT			NOT NULL,
      
-	 PRIMARY KEY (dni),
-	 FOREIGN KEY(nPhone) REFERENCES Phones(numberPhone)
+	 PRIMARY KEY (dni)
+);
+
+CREATE TABLE Phones
+(
+	numberPhone	INT 		NOT NULL,
+    description VARCHAR(20) NOT NULL, 	/* teléfono, celular, fax */
+    userDni		VARCHAR(9) 	NOT NULL,
+     
+	PRIMARY KEY (numberPhone, userDni),
+    FOREIGN KEY(userDni) REFERENCES Users(dni)
 );
 
 CREATE TABLE Accounts
@@ -158,7 +158,3 @@ CREATE TABLE Cities
     PRIMARY KEY (id),
     FOREIGN KEY (provinceId) REFERENCES Provinces (id)
 );
-
-
-
-

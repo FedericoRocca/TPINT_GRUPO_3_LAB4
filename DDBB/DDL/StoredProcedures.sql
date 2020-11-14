@@ -1,9 +1,12 @@
 USE bdBanco;
 
 -- CUSTOMER --
+USE `bdbanco`;
+DROP procedure IF EXISTS `SP_InsertCustomer`;
+
 DELIMITER $$
-CREATE PROCEDURE SP_InsertCustomer (
--- Variables User --
+USE `bdbanco`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_InsertCustomer`(
 IN _dni 		VARCHAR(9),
 IN _firstName	VARCHAR(45),
 IN _lastName 	VARCHAR(45),
@@ -16,7 +19,6 @@ IN _birthDate	DATETIME,
 IN _address 	VARCHAR(50),
 IN _city		VARCHAR(45),
 IN _email		VARCHAR(50),
--- Variables Phone --
 IN _numberPhone INT,
 IN _description VARCHAR(20)
 )
@@ -30,13 +32,20 @@ BEGIN
 		START TRANSACTION;        		
 			INSERT INTO users (dni, firstName, lastName, userName, password, cuil, gender, nationality, birthDate, address, city, email, status) 
 					VALUES(_dni, _firstName, _lastName, _userName, _password, _cuil, _gender, _nationality, _birthDate, _address, _city, _email, 1 );
-			INSERT INTO phones (numberPhone, description, userDni, status) 
-					VALUES (_numberPhone, _description, dni, 1);
+
+			INSERT INTO phones (numberPhone, description, userDni) 
+					VALUES (_numberPhone, _description, _dni);
+
 			INSERT INTO roles_x_users (dni, roleId, status) 
 					VALUES (_dni, 2, 1);
 		COMMIT WORK;
-END$$
+	END;$$
+
 DELIMITER ;
+
+
+
+
 
 DELIMITER $$
 CREATE PROCEDURE SP_UpdateCustomer (

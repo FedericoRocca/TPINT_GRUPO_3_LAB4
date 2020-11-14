@@ -2,6 +2,7 @@ package datoslmpl;
 
 import java.io.Console;
 import java.sql.CallableStatement;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -120,26 +121,32 @@ public class UserDaolmpl implements UserDao{
 		
 		try 
 		{
-			CallableStatement sp = (CallableStatement) cn.Open().prepareStatement("CALL SP_InsertCustomer(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			CallableStatement sp = cn.Open().prepareCall("CALL SP_InsertCustomer(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			
 			sp.setString(1, user.getDni());
 			sp.setString(2, user.getFirstName());
 			sp.setString(3, user.getLastName());
-			sp.setString(4, user.getPassword());
-			sp.setString(5, user.getCuil());
-			sp.setString(6, user.getGender());
-			sp.setString(7, user.getNacionality());
-			sp.setString(8, user.getBirthDate().toString());
-			sp.setString(9, user.getAddress());
-			sp.setString(10, user.getCity());
-			sp.setString(11, user.getEmail());
-			sp.setBoolean(12, user.isStatus());
+			sp.setString(4, user.getUserName());
+			sp.setString(5, user.getPassword());
+			sp.setString(6, user.getCuil());
+			sp.setString(7, user.getGender());
+			sp.setString(8, user.getNacionality());
+			
+		    java.sql.Date sqlDate = new java.sql.Date(user.getBirthDate().getTime());
+		    System.out.println("utilDate:" + sqlDate);
+		    System.out.println("sqlDate:" + sqlDate);
+			
+			sp.setDate(9, sqlDate);
+			sp.setString(10, user.getAddress());
+			sp.setString(11, user.getCity());
+			sp.setString(12, user.getEmail());
 			
 			//Los teléfonos son un arraylist ahora, hay que recorrer esa lista e insertar uno a uno
 			//Phone phone = new Phone();
 			//sp.setLong(13, phone.getNumber());
 			//sp.setString(14, phone.getDescription());
-						
+			sp.setLong(13, 123456);
+            sp.setString(14, "descripc");
 			status = sp.execute();
 			
 		}
@@ -249,9 +256,8 @@ public class UserDaolmpl implements UserDao{
         Role rol;
         
         String query = "SELECT u.dni, u.firstname, u.lastname, u.username, u.password, u.cuil, u.gender, u.nationality, u.birthdate, u.address, u.city," + 
-                " u.email, u.status, p.description as Phone, p.numberPhone as number , rol.id as rolid, rol.name as rolname, rol.status as rolstatus" + 
+                " u.email, u.status, rol.id as rolid, rol.name as rolname, rol.status as rolstatus" + 
                 " FROM Users u " + 
-                " LEFT JOIN phones p ON p.userDni = u.dni " + 
                 " INNER JOIN roles_x_users rolx ON rolx.dni = u.dni" + 
                 " INNER JOIN roles rol on rol.id = rolx.roleid" + 
                 " WHERE u.username = '" + userName + "' and u.password = '" + password + "';";

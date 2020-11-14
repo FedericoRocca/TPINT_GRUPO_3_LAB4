@@ -83,20 +83,29 @@ public class ServletClientes extends HttpServlet {
 	            newCliente.setBirthDate( formatter.parse( request.getParameter("textFechaNacimiento") ) );
 	            newCliente.setGender( request.getParameter("textGenero") );
 	            
-	            Phone tmpPhonePreponderante = new Phone();
-	            tmpPhonePreponderante.setNumber( Long.parseLong( request.getParameter("textPhone1").toString() ) );
-	            tmpPhonePreponderante.setDescription("Teléfono preponderante");
-	            newCliente.addPhone(tmpPhonePreponderante);
+	            if( request.getParameter("textPhone1") != null && request.getParameter("textPhone1") != "")
+                {
+	                Phone tmpPhonePreponderante = new Phone();
+	                tmpPhonePreponderante.setNumber( Long.parseLong( request.getParameter("textPhone1").toString() ) );
+    	            tmpPhonePreponderante.setDescription("Teléfono primario");
+    	            newCliente.addPhone(tmpPhonePreponderante);
+                }
 	            
-	            Phone tmpPhoneSecundario = new Phone();
-	            tmpPhoneSecundario.setNumber( Long.parseLong( request.getParameter("textPhone2").toString() ) );
-	            tmpPhoneSecundario.setDescription("Teléfono secundario");
-                newCliente.addPhone(tmpPhoneSecundario);
+                if( request.getParameter("textPhone2") != null && request.getParameter("textPhone2") != "")
+	            {
+                    Phone tmpPhoneSecundario = new Phone();
+	                tmpPhoneSecundario.setNumber( Long.parseLong( request.getParameter("textPhone2").toString() ) );
+	                tmpPhoneSecundario.setDescription("Teléfono secundario");
+	                newCliente.addPhone(tmpPhoneSecundario);
+	            }
                 
-                Phone tmpPhoneAdicional = new Phone();
-                tmpPhoneAdicional.setNumber( Long.parseLong( request.getParameter("textPhone3").toString() ) );
-                tmpPhoneAdicional.setDescription("Teléfono adicional");
-                newCliente.addPhone(tmpPhoneAdicional);
+                if( request.getParameter("textPhone3") != null && request.getParameter("textPhone3") != "")
+                {
+                    Phone tmpPhoneAdicional = new Phone();
+                    tmpPhoneAdicional.setNumber( Long.parseLong( request.getParameter("textPhone3").toString() ) );
+                    tmpPhoneAdicional.setDescription("Teléfono adicional");
+                    newCliente.addPhone(tmpPhoneAdicional);
+                }
                 
                 newCliente.setStatus(true);
                 newCliente.setUserName( request.getParameter("textUser") );
