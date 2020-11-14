@@ -135,10 +135,10 @@ public class UserDaolmpl implements UserDao{
 			sp.setString(11, user.getEmail());
 			sp.setBoolean(12, user.isStatus());
 			
-			Phone phone = new Phone();
-			
-			sp.setLong(13, phone.getNumber());
-			sp.setString(14, phone.getDescription());
+			//Los teléfonos son un arraylist ahora, hay que recorrer esa lista e insertar uno a uno
+			//Phone phone = new Phone();
+			//sp.setLong(13, phone.getNumber());
+			//sp.setString(14, phone.getDescription());
 						
 			status = sp.execute();
 			
