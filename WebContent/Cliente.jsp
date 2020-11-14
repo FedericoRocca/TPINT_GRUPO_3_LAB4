@@ -11,6 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+
 <title>Banco UTN - cliente <%= request.getParameter("p") %></title>
 
 <!-- Custom fonts for this template-->
@@ -91,7 +92,7 @@
 						}
 					%>
 					
-					<form method="post" action="ServletClientes" enctype="multipart/form-data">
+					<form method="get" action="ServletClientes" enctype="multipart/form-data">
 						<div class="form-row">
 							<div class="form-group col-md-4">
 								<label for="title">Nombre de usuario</label> 

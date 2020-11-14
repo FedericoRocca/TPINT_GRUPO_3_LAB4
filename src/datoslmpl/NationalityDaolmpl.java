@@ -23,8 +23,8 @@ public class NationalityDaolmpl implements NationalityDao {
 			while(rs.next()) 
 			{
 				Nationality nat = new Nationality();
-				nat.setId(rs.getInt("nationalities.id"));
-				nat.setDescription(rs.getString("nationalities.description"));
+				nat.setId(rs.getInt("id"));
+				nat.setDescription(rs.getString("gentilic"));
 				list.add(nat);
 			}
 		}

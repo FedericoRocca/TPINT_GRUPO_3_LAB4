@@ -40,11 +40,16 @@ public class ServletClientes extends HttpServlet {
     
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-//		boolean status = false;
-		
-		ArrayList<User> users = new ArrayList<>();
+	    ArrayList<User> users = new ArrayList<>();
 		ArrayList<Nationality> nationalities = new ArrayList<>();
+		
+		if(request.getParameter("alta") != null)
+		{
+		        nationalities = (ArrayList<Nationality>) negNatio.getAll();
+		        request.setAttribute("listNat", nationalities);
+		        RequestDispatcher dispatcher = request.getRequestDispatcher("/Cliente.jsp?p=Alta");
+	            dispatcher.forward(request, response);
+		}
 		
 		if(request.getParameter("list") != null) 
 		{		
@@ -54,22 +59,19 @@ public class ServletClientes extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoClientes.jsp");
 			dispatcher.forward(request, response);
 		}
-		
 		//carga nacionalidades
 		if(request.getParameter("listNat") != null) 
 		{
-			nationalities = (ArrayList<Nationality>) negNatio.getAll();
 			
-			request.setAttribute("listNationalities", nationalities);
+			
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/Cliente.jsp?p="+request.getParameter("p"));
 			dispatcher.forward(request, response);
 		}
 		
-		
-		//carga ciudades y provincias (FALTA!!!!)
-		
 		try
         {
+		    System.out.println(request.getParameter("btnGuardar"));
 		    if(request.getParameter("btnGuardar") != null) 
 	        {
 	            //Alta de cliente en tabla de usuarios
