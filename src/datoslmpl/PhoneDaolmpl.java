@@ -17,10 +17,10 @@ public class PhoneDaolmpl implements PhoneDao {
 	}
 	
 	@Override
-	public List<Phone> getAll(int dni) { /*Todos los teléfonos del cliente por dni*/
+	public ArrayList<Phone> getAll(int dni) { /*Todos los teléfonos del cliente por dni*/
 		cn = new ConnectionDB();
 		cn.Open();
-		List<Phone> list = new ArrayList<Phone>();
+		ArrayList<Phone> list = new ArrayList<Phone>();
 		try {
 			ResultSet rs= cn.query("SELECT phones.number, phones.description, users.dni, users.firstName, users.lastName"
 									+ "FROM Phones INNER JOIN Users ON phones.userDni = users.dni"

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sound.midi.Soundbank;
 
+import datoslmpl.UserDaolmpl;
 import dominio.Nationality;
 import dominio.Phone;
 import dominio.User;
@@ -81,22 +82,31 @@ public class ServletClientes extends HttpServlet {
 	            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	            newCliente.setBirthDate( formatter.parse( request.getParameter("textFechaNacimiento") ) );
 	            newCliente.setGender( request.getParameter("textGenero") );
-	            Phone tmpPhone = new Phone();
-	            tmpPhone.setNumber( Long.parseLong( request.getParameter("textPhone1").toString() ) );
-	            tmpPhone.setDescription("Telefono preponderante");
-	            newCliente.setPhone(tmpPhone);
 	            
+	            Phone tmpPhonePreponderante = new Phone();
+	            tmpPhonePreponderante.setNumber( Long.parseLong( request.getParameter("textPhone1").toString() ) );
+	            tmpPhonePreponderante.setDescription("Teléfono preponderante");
+	            newCliente.addPhone(tmpPhonePreponderante);
 	            
-	            System.out.println("mostramos los datos obtenidos:");
-	            System.out.println("getDni: " + newCliente.getDni());
-	            System.out.println("getCuil: " + newCliente.getCuil());
-	            System.out.println("getFirstName: " + newCliente.getFirstName());
-	            System.out.println("getLastName: " + newCliente.getLastName());
-	            System.out.println("getEmail: " + newCliente.getEmail());
-	            System.out.println("getNacionality: " + newCliente.getNacionality());
-	            System.out.println("getBirthDate: " + newCliente.getBirthDate());
-	            System.out.println("getGender: " + newCliente.getGender());
-	            System.out.println("getPhone: " + newCliente.getPhone());
+	            Phone tmpPhoneSecundario = new Phone();
+	            tmpPhoneSecundario.setNumber( Long.parseLong( request.getParameter("textPhone2").toString() ) );
+	            tmpPhoneSecundario.setDescription("Teléfono secundario");
+                newCliente.addPhone(tmpPhoneSecundario);
+                
+                Phone tmpPhoneAdicional = new Phone();
+                tmpPhoneAdicional.setNumber( Long.parseLong( request.getParameter("textPhone3").toString() ) );
+                tmpPhoneAdicional.setDescription("Teléfono adicional");
+                newCliente.addPhone(tmpPhoneAdicional);
+                
+                newCliente.setStatus(true);
+                newCliente.setUserName( request.getParameter("textUser") );
+                newCliente.setPassword(newCliente.getDni().toString() );
+                
+                newCliente.setAddress( request.getParameter("textAddress") );
+                
+                //Recopilamos todos los datos del usuario, lo damos de alta...
+                UserDaolmpl udi = new UserDaolmpl();
+                udi.insert(newCliente);
 
 	        }
         }

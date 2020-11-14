@@ -1,4 +1,5 @@
 package dominio;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class User {
@@ -15,17 +16,18 @@ public class User {
 	private String address;
 	private String city;
 	private String email;
-	private Phone phone;
-	private Role rol;
+	private ArrayList<Phone> phones;
+		private Role rol;
 	private boolean status;
 
 	//Constructors
 	public User() {
 		super();
+		phones = new ArrayList<Phone>();
 	}
 	
 	public User(String dni, String firstName, String lastName, String userName, String password, String cuil,
-			String gender, String nacionality, Date birthDate, String address, String city, String email, Phone phone, boolean status, Role rol) {
+			String gender, String nacionality, Date birthDate, String address, String city, String email, ArrayList<Phone> phones, boolean status, Role rol) {
 		super();
 		this.dni = dni;
 		this.firstName = firstName;
@@ -39,13 +41,13 @@ public class User {
 		this.address = address;
 		this.city = city;
 		this.email = email;
-		this.phone = phone;
+		this.phones = phones;
 		this.status = status;
 		this.rol = rol;
 	}
 	
 	public User(String dni, String firstName, String lastName, String userName, String password, String cuil,
-            String gender, String nacionality, Date birthDate, String address, String city, String email, Phone phone, boolean status) {
+            String gender, String nacionality, Date birthDate, String address, String city, String email, ArrayList<Phone> phones, boolean status) {
         super();
         this.dni = dni;
         this.firstName = firstName;
@@ -59,7 +61,7 @@ public class User {
         this.address = address;
         this.city = city;
         this.email = email;
-        this.phone = phone;
+        this.phones = phones;
         this.status = status;
     }
 
@@ -196,20 +198,24 @@ public class User {
 		this.status = status;
 	}
 
-	public Phone getPhone() {
-		return phone;
+	public ArrayList<Phone> getPhone() {
+		return phones;
 	}
 
-	public void setPhone(Phone phone) {
-		this.phone = phone;
+	public void setPhones(ArrayList<Phone> phones) {
+		this.phones = phones;
 	}
+	
+	public void addPhone(Phone newPhone) {
+	    this.phones.add(newPhone);
+    }
 
 	@Override
 	public String toString() {
 		return "User [dni=" + dni + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName
 				+ ", password=" + password + ", cuil=" + cuil + ", gender=" + gender + ", nacionality=" + nacionality
 				+ ", birthDate=" + birthDate + ", address=" + address + ", city=" + city + ", email=" + email
-				+ ", phone=" + phone + ", status=" + status + "]";
+				+ ", phone=" + phones + ", status=" + status + "]";
 	}
 
 }

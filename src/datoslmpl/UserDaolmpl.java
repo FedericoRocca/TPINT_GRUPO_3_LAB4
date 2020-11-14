@@ -11,6 +11,7 @@ import datos.UserDao;
 import dominio.Phone;
 import dominio.Role;
 import dominio.User;
+import negociolmpl.PhoneNeglmpl;
 
 
 public class UserDaolmpl implements UserDao{
@@ -67,8 +68,7 @@ public class UserDaolmpl implements UserDao{
 		ResultSet rs = null;
 		
 		User user = null;
-		Phone phone = null;
-		
+
 		String query = longQuery +  dni;
 		System.out.println(query);
 		
@@ -93,12 +93,12 @@ public class UserDaolmpl implements UserDao{
 							rs.getString("address"),
 							rs.getString("city"),
 							rs.getString("email"),
-							phone = new Phone(
-									rs.getInt("number"),
-									rs.getString("description")							
-									),			
 							rs.getBoolean("status")
-					);					
+					);
+					ArrayList<Phone> phonesByDni = new ArrayList<Phone>();
+					PhoneDaolmpl pdi = new PhoneDaolmpl();
+					phonesByDni = pdi.getAll(Integer.parseInt(dni));
+					user.setPhones(phonesByDni);
 				}						
 		}
 		catch(Exception e) {
@@ -142,7 +142,6 @@ public class UserDaolmpl implements UserDao{
 						
 			status = sp.execute();
 			
-			System.out.println("Status: " + status);
 		}
 		catch(Exception e){
 			e.printStackTrace();

@@ -83,6 +83,10 @@
 					<form method="get" action="ServletClientes" enctype="multipart/form-data">
 						<div class="form-row">
 							<div class="form-group col-md-4">
+								<label for="title">Nombre de usuario</label> 
+								<input class="form-control" name = "textUser" required="required" type="text" placeholder="Nombre de usuario">           				
+							</div>
+							<div class="form-group col-md-4">
 								<label for="title">DNI</label> 
 								<input class="form-control" name = "textDni" required="required" type="text" placeholder="Ingrese DNI">           				
 							</div>
@@ -127,6 +131,12 @@
 									<option value="2">Masculino</option>
 									<option value="3">Otro</option>
 								</select>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<label for="title">Dirección</label> 
+								<input class="form-control" required="required" type="text" placeholder="Ingrese la dirección" name="textAddress">
 							</div>
 						</div>
 						<div class="form-row">
