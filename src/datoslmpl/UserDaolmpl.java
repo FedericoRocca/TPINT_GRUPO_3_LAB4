@@ -33,7 +33,7 @@ public class UserDaolmpl implements UserDao{
 		ResultSet rs = null;
 		try {	
 //			rs = cn.query("SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.birthdate FROM Users u");
-			rs = cn.query("SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, nats.country, u.birthdate FROM Users u INNER JOIN Roles_x_Users rxu ON rxu.dni = u.dni INNER JOIN Nationalities nats on u.nationality = nats.id WHERE rxu.roleId = 2");
+			rs = cn.query("SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, nats.country, u.birthdate FROM Users u INNER JOIN Roles_x_Users rxu ON rxu.dni = u.dni INNER JOIN Nationalities nats on u.nationality = nats.id WHERE rxu.roleId = 2 and u.status != 0");
 			System.out.println(rs);
 			while(rs.next()) 
 			{
@@ -107,7 +107,6 @@ public class UserDaolmpl implements UserDao{
 
 	@Override
 	public boolean insert(User user) {
-		
 		boolean status = false;
 		
 		cn = new ConnectionDB();
@@ -126,9 +125,6 @@ public class UserDaolmpl implements UserDao{
 			sp.setString(8, user.getNacionality());
 			
 		    java.sql.Date sqlDate = new java.sql.Date(user.getBirthDate().getTime());
-		    System.out.println("utilDate:" + sqlDate);
-		    System.out.println("sqlDate:" + sqlDate);
-			
 			sp.setDate(9, sqlDate);
 			sp.setString(10, user.getAddress());
 			sp.setString(11, user.getCity());
@@ -161,25 +157,23 @@ public class UserDaolmpl implements UserDao{
 		
 		try 
 		{
-			CallableStatement sp = (CallableStatement) cn.Open().prepareCall("CALL SP_UpdateCustomer(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			CallableStatement sp = (CallableStatement) cn.Open().prepareCall("CALL SP_UpdateCustomer(?,?,?,?,?,?,?,?,?)");
 			
 			sp.setString(1, user.getDni());
 			sp.setString(2, user.getFirstName());
 			sp.setString(3, user.getLastName());
-			sp.setString(4, user.getPassword());
+			sp.setString(4, user.getUserName());
 			sp.setString(5, user.getCuil());
 			sp.setString(6, user.getGender());
 			sp.setString(7, user.getNacionality());
-			sp.setString(8, user.getBirthDate().toString());
-			sp.setString(9, user.getAddress());
-			sp.setString(10, user.getCity());
-			sp.setString(11, user.getEmail());
-			sp.setBoolean(12, user.isStatus());
+            java.sql.Date sqlDate = new java.sql.Date(user.getBirthDate().getTime());
+			sp.setDate(8, sqlDate);
+			sp.setString(9, user.getEmail());
 			
 			Phone phone = new Phone();
 			
-			sp.setLong(13, phone.getNumber());
-			sp.setString(14, phone.getDescription());
+			//sp.setLong(13, phone.getNumber());
+			//sp.setString(14, phone.getDescription());
 						
 			status = sp.execute();
 		}

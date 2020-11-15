@@ -214,21 +214,14 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE SP_UpdateCustomer (
 -- Variables User --
-IN _dni 		VARCHAR(9),
 IN _firstName	VARCHAR(45),
 IN _lastName 	VARCHAR(45),
 IN _userName 	VARCHAR(45),
-IN _password 	VARCHAR(45),
 IN _cuil 		VARCHAR(11),
 IN _gender 		VARCHAR(30),
 IN _nationality VARCHAR(35),
 IN _birthDate	DATETIME,
-IN _address 	VARCHAR(50),
-IN _city		VARCHAR(45),
-IN _email		VARCHAR(50),
--- Variables Phone --
-IN _numberPhone INT,
-IN _description VARCHAR(20)
+IN _email		VARCHAR(50)
 )
 BEGIN
 	DECLARE errno INT;
@@ -239,10 +232,16 @@ BEGIN
     END;
 		START TRANSACTION;   
 			UPDATE users 
-				SET dni = _dni, firstName = _firstName, lastName = _lastName, userName = _userName, password = _password, cuil = _cuil, gender= _gender, nationality = _nationality, birthDate = _birthDate, address = _address, city = _city, email = _email
+				SET 
+                firstName = _firstName, 
+                lastName = _lastName, 
+                userName = _userName, 
+                cuil = _cuil, 
+                gender= _gender, 
+                nationality = _nationality, 
+                birthDate = _birthDate, 
+                email = _email
 				WHERE dni = _dni;
-			UPDATE phones
-				SET numberPhone = _numberPhone, description = _description WHERE userDni = _dni;
 		COMMIT WORK;
 END$$
 DELIMITER ;

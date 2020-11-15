@@ -49,6 +49,8 @@ public class ServletClientes extends HttpServlet {
     		User customer = new User();
     		User newCliente = new User();
     		User bajaUser = new User();
+    		User modifUser = new User();
+    		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     		
     		if(request.getParameter("btnBuscar") != null)
             {
@@ -71,6 +73,38 @@ public class ServletClientes extends HttpServlet {
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/DashboardAdmin.jsp");
                     dispatcher.forward(request, response);
                 }
+            }
+    		
+    		if(request.getParameter("btnBuscarModificar") != null)
+            {
+                if( request.getParameter("textDni") != null && request.getParameter("textDni") != "" )
+                {
+                    modifUser.setDni( request.getParameter("textDni") );
+                    modifUser = udi.getUser(modifUser.getDni());
+                    nationalities = (ArrayList<Nationality>) negNatio.getAll();
+                    request.setAttribute("listNat", nationalities);
+                    request.setAttribute("usrBaja", modifUser);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/ModificarCliente.jsp");
+                    dispatcher.forward(request, response);
+                }
+            }
+    		
+    		if(request.getParameter("btnModificarCliente") != null)
+            {
+                    // aca modificamos al cliente
+    		    
+    		        modifUser.setCuil( request.getParameter("textCuil") );
+    		        modifUser.setFirstName( request.getParameter("textNombre") );
+    		        modifUser.setLastName( request.getParameter("textApellido") );
+    		        modifUser.setGender( request.getParameter("textGenero") );
+    		        modifUser.setUserName( request.getParameter("textUsuario") );
+    		        modifUser.setNacionality( request.getParameter("textNacionalidad") );
+    		        modifUser.setEmail( request.getParameter("textEmail") );
+    		        modifUser.setDni( request.getParameter("textDni") );
+    		        modifUser.setBirthDate( formatter.parse( request.getParameter("textFechaNacimiento") ) );
+    		        udi.update(modifUser);
+    		        RequestDispatcher dispatcher = request.getRequestDispatcher("/DashboardAdmin.jsp");
+                    dispatcher.forward(request, response);
             }
     		
     		if(request.getParameter("alta") != null)
@@ -134,7 +168,6 @@ public class ServletClientes extends HttpServlet {
 	            newCliente.setLastName( request.getParameter("textApellido") );
 	            newCliente.setEmail( request.getParameter("textEmail") );
 	            newCliente.setNacionality( request.getParameter("textNacionalidad") );
-	            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	            newCliente.setBirthDate( formatter.parse( request.getParameter("textFechaNacimiento") ) );
 	            newCliente.setGender( request.getParameter("textGenero") );
 	            
