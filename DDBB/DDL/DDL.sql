@@ -91,7 +91,8 @@ CREATE TABLE Accounts
     status			BIT			NOT NULL,
      
 	PRIMARY KEY (accountNumber),
-    FOREIGN KEY(accountDni) REFERENCES Users(dni)
+    FOREIGN KEY(accountDni) REFERENCES Users(dni),
+    FOREIGN KEY(accountTypeId) REFERENCES AccountsType(id)
 );
 
 CREATE TABLE AccountsType
@@ -100,8 +101,7 @@ CREATE TABLE AccountsType
     description VARCHAR(20) NOT NULL,
     status		BIT			NOT NULL,
      
-	PRIMARY KEY (id),
-    FOREIGN KEY(id) REFERENCES Accounts(accountNumber)
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE Accounts_x_movement

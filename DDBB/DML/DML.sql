@@ -1,4 +1,9 @@
 USE bdbanco;
+-- TIPOS DE CUENTAS --
+INSERT INTO accountstype (id, description, status) VALUES (1, "Cuenta corriente", 1);
+INSERT INTO accountstype (id, description, status) VALUES (2, "Caja de ahorro", 1);
+-- INSERT INTO accountstype (id, description, status) VALUES (3, "Cuenta nómina", 1);
+-- INSERT INTO accountstype (id, description, status) VALUES (4, "Cuenta de valores", 1);
 
 -- ROLES --
 INSERT INTO roles (name, status) VALUES ("Administrador", 1);

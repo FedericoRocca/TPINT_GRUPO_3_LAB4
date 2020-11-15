@@ -58,6 +58,12 @@ public class ServletsCuentas extends HttpServlet {
 			String p = request.getParameter("parameter");
 			String thisPage="/Cuenta.jsp?p="+p;
 		
+		// CUENTAS DEL CLIENTE		   
+		if(request.getParameter("listarTiposCuenta") != null) 
+		{
+			
+		}
+			
 		if(request.getParameter("btnGestionarCuenta")!=null)
 		{
 			x.setAccountypeid(Integer.parseInt(request.getParameter("tipoCta")));
