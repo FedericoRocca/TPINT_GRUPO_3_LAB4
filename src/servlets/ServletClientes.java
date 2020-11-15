@@ -42,12 +42,31 @@ public class ServletClientes extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    ArrayList<User> users = new ArrayList<>();
 		ArrayList<Nationality> nationalities = new ArrayList<>();
+		User customer = new User();
 		if(request.getParameter("alta") != null)
 		{
 		        nationalities = (ArrayList<Nationality>) negNatio.getAll();
 		        request.setAttribute("listNat", nationalities);
 		        RequestDispatcher dispatcher = request.getRequestDispatcher("/Cliente.jsp?p=Alta");
 	            dispatcher.forward(request, response);
+		}
+		
+//		if(request.getParameter("modificar") != null)
+//		{
+//		        nationalities = (ArrayList<Nationality>) negNatio.getAll();
+//		        request.setAttribute("listNat", nationalities);
+//		        RequestDispatcher dispatcher = request.getRequestDispatcher("/Cliente.jsp?p=Modificar");
+//	            dispatcher.forward(request, response);
+//		}
+		
+		if(request.getParameter("listarCliente") != null) 
+		{
+//			String dniCustomer = request.getParameter("94565484");
+//			customer = negCustomer.getUser(customer.getDni());
+			customer = negCustomer.getUser("94565484");
+	        request.setAttribute("customer", customer);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/DatosCliente.jsp");
+            dispatcher.forward(request, response);
 		}
 		
 		if(request.getParameter("listar") != null)
@@ -67,14 +86,14 @@ public class ServletClientes extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		//carga nacionalidades
-		if(request.getParameter("listNat") != null) 
-		{
-			
-			
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/Cliente.jsp?p="+request.getParameter("p"));
-			dispatcher.forward(request, response);
-		}
+//		if(request.getParameter("listNat") != null) 
+//		{
+//			
+//			
+//			
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/Cliente.jsp?p="+request.getParameter("p"));
+//			dispatcher.forward(request, response);
+//		}
 		
 		try
         {

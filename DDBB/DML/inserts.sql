@@ -4,7 +4,10 @@ USE bdbanco;
 INSERT INTO roles (name, status) VALUES ("Administrador", 1);
 INSERT INTO roles (name, status) VALUES ("Cliente", 1);
 
--- CUSTOMER --
+-- ROLES_X_USERS  --
+INSERT INTO roles_x_users (dni, roleId, status) VALUES (99999999, 2, 1);
+INSERT INTO roles_x_users (dni, roleId, status) VALUES (99999988, 2, 1);
+INSERT INTO roles_x_users (dni, roleId, status) VALUES (36249161, 2, 1);
 
 -- Usuarios de prueba -- 
 INSERT INTO users (dni, firstName, lastName, userName, password, cuil, gender, nationality, birthDate, address, city, email, status) 
@@ -18,3 +21,7 @@ INSERT INTO users (dni, firstName, lastName, userName, password, cuil, gender, n
 
 select * from accounts;
 select * from users;
+select * from roles;
+
+SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, nats.country, u.birthdate FROM Users u INNER JOIN Roles_x_Users rxu ON rxu.dni = u.dni INNER JOIN Nationalities nats on u.nationality = nats.id WHERE rxu.roleId = 2;
+SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.birthdate FROM Users u
