@@ -28,6 +28,7 @@ CREATE TABLE Loan
 (
 	id					INT AUTO_INCREMENT NOT NULL,
     dni					VARCHAR(9) 		NOT NULL,
+    accountNumber		INT				NOT NULL,
     loanDate 			DATETIME 		NOT NULL,
     amountInt 			DECIMAL(10,2) 	NOT NULL,
     amountReqByCustomer DECIMAL(10,2) 	NOT NULL,
