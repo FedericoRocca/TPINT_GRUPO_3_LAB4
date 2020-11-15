@@ -249,7 +249,7 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE SP_DeleteCustomer (
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_DeleteCustomer`(
 IN _dni VARCHAR(9)
 )
 BEGIN
@@ -260,8 +260,7 @@ BEGIN
 		ROLLBACK;
     END;
 		START TRANSACTION;			
-			UPDATE users u INNER JOIN phones p ON u.dni = p.userDni
-				SET u.status = 0, p.status = 0 WHERE u.dni = _dni && p.userDni = _dni;
+			UPDATE users SET status = 0 WHERE dni = _dni;
 		COMMIT WORK;
 END$$
 DELIMITER ;

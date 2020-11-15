@@ -90,36 +90,36 @@
             					<button type="submit" name="btnBuscar" class="btn btn-warning btn-circle mt-4"><i class="fas fa-search"></i></button>
 							</div>
 						</div>
-						</form>
-						<% if( request.getAttribute("usrBaja") != null ) 
-						{
-						    User usrBaja = new User();
-						    usrBaja = (User)request.getAttribute("usrBaja");
-						    %>
-						    <form method="get" action="ServletClientes" enctype="multipart/form-data">
-								<div class="form-row">
-									<div class="form-group col-md-4">
-										<label for="title">DNI</label> 
-										<input class="form-control" name = "textDni" required type="text" placeholder="Ingrese DNI" maxlength="9" disabled value="<%=usrBaja.getDni() %>">           				
-									</div>
-									<div class="form-group col-md-4">
-										<label for="title">CUIL</label> 
-										<input class="form-control" name = "textCuil" required type="text" placeholder="Ingrese CUIL" maxlength="11" disabled value="<%=usrBaja.getCuil() %>">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="title">Nombre</label> 
-										<input class="form-control" name = "textNombre" required type="text" placeholder="Ingrese Nombre" maxlength="45" disabled value="<%=usrBaja.getFirstName() %>">
-									</div>
-									<div class="form-group col-md-6">
-										<label for="title">Apellido</label> 
-										<input class="form-control" name = "textApellido" required type="text" placeholder="Ingrese Apellido" maxlength="45" disabled value="<%=usrBaja.getLastName() %>">
-									</div>
+					</form>
+					<% if( request.getAttribute("usrBaja") != null ) 
+					{
+					    User usrBaja = new User();
+					    usrBaja = (User)request.getAttribute("usrBaja");
+					    %>
+					    <form method="get" action="ServletClientes" enctype="multipart/form-data">
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<label for="title">DNI</label> 
+									<input class="form-control" name = "textDni" required type="text" placeholder="Ingrese DNI" maxlength="9" readonly value="<%=usrBaja.getDni() %>">           				
 								</div>
-								<input type="submit" name="btnEliminarCliente" class="btn btn-primary mt-2" value="Eliminar cliente">
-							</form> 
-					<%
-						}
-					%>
+								<div class="form-group col-md-4">
+									<label for="title">CUIL</label> 
+									<input class="form-control" name = "textCuil" required type="text" placeholder="Ingrese CUIL" maxlength="11" readonly value="<%=usrBaja.getCuil() %>">
+								</div>
+								<div class="form-group col-md-6">
+									<label for="title">Nombre</label> 
+									<input class="form-control" name = "textNombre" required type="text" placeholder="Ingrese Nombre" maxlength="45" readonly value="<%=usrBaja.getFirstName() %>">
+								</div>
+								<div class="form-group col-md-6">
+									<label for="title">Apellido</label> 
+									<input class="form-control" name = "textApellido" required type="text" placeholder="Ingrese Apellido" maxlength="45" readonly value="<%=usrBaja.getLastName() %>">
+								</div>
+							</div>
+							<input type="submit" name="btnEliminarCliente" class="btn btn-primary mt-2" value="Eliminar cliente">
+						</form> 
+				<%
+					}
+				%>
 
 				</div>
 				<!-- /.container-fluid -->

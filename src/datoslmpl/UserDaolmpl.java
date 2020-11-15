@@ -202,9 +202,9 @@ public class UserDaolmpl implements UserDao{
 				 
 		try 
 		 {
-			CallableStatement sp = (CallableStatement) cn.Open().prepareCall("CALL SP_DeleteCustomer");
-			
+			CallableStatement sp = (CallableStatement) cn.Open().prepareCall("CALL SP_DeleteCustomer(?)");
 			sp.setString(1, dni);
+			status = sp.execute();
 		 }
 		catch(Exception e)
 		{

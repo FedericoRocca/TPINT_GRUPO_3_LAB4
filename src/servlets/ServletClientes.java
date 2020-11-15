@@ -64,10 +64,11 @@ public class ServletClientes extends HttpServlet {
     		    		
     		if(request.getParameter("btnEliminarCliente") != null)
             {
-    		    String ver = request.getParameter("textDni");
                 if( request.getParameter("textDni") != null && request.getParameter("textDni") != "" )
                 {
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/BajaCliente.jsp");
+                    //aca damos de baja al cliente
+                    udi.delete(request.getParameter("textDni"));
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/DashboardAdmin.jsp");
                     dispatcher.forward(request, response);
                 }
             }
