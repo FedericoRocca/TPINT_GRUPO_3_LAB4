@@ -80,6 +80,15 @@ CREATE TABLE Phones
     FOREIGN KEY(userDni) REFERENCES Users(dni)
 );
 
+CREATE TABLE AccountsType
+(
+	id	INT 				NOT NULL,
+    description VARCHAR(20) NOT NULL,
+    status		BIT			NOT NULL,
+     
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE Accounts
 (
 	accountNumber	INT 		NOT NULL,
@@ -93,15 +102,6 @@ CREATE TABLE Accounts
 	PRIMARY KEY (accountNumber),
     FOREIGN KEY(accountDni) REFERENCES Users(dni),
     FOREIGN KEY(accountTypeId) REFERENCES AccountsType(id)
-);
-
-CREATE TABLE AccountsType
-(
-	id	INT 				NOT NULL,
-    description VARCHAR(20) NOT NULL,
-    status		BIT			NOT NULL,
-     
-	PRIMARY KEY (id)
 );
 
 CREATE TABLE Accounts_x_movement
@@ -167,7 +167,6 @@ USE bdBanco;
 
 -- CUSTOMER --
 USE `bdbanco`;
-DROP procedure IF EXISTS `SP_InsertCustomer`;
 
 DELIMITER $$
 USE `bdbanco`$$
