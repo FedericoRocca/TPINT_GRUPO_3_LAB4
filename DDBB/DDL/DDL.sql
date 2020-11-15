@@ -26,14 +26,14 @@ CREATE TABLE LoanState
 
 CREATE TABLE Loan
 (
-	id					INT 			NOT NULL,
+	id					INT AUTO_INCREMENT NOT NULL,
     dni					VARCHAR(9) 		NOT NULL,
     loanDate 			DATETIME 		NOT NULL,
     amountInt 			DECIMAL(10,2) 	NOT NULL,
     amountReqByCustomer DECIMAL(10,2) 	NOT NULL,
     paymentDeadline 	DATETIME 		NOT NULL,
     monthlyFee			DECIMAL(10,2)	NOT NULL,
-    amountOfFees		INT				NOT NULL, /*Cant de cuotas*/
+    amountOfFees		INT				NOT NULL,
 	loanStateId			INT				NOT NULL,
     status				BIT				NOT NULL,
      
@@ -277,4 +277,4 @@ END$$
 DELIMITER ;
 
 
--- ACCOUNTS --
+-- ACCOUNTS --	

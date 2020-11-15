@@ -8,6 +8,11 @@ INSERT INTO accountstype (id, description, status) VALUES (2, "Caja de ahorro", 
 -- ESTADOS DE PRESTASMO --
 INSERT INTO LoanState (state) VALUES ("Pendiente"),("Aceptado"),("Rechazado");
 
+-- PRESTAMOS PENDIENTES --
+INSERT INTO Loan (dni,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("36249161","2020-05-03",1100,1000,"2021-05-03",91.66,12,1,1);
+INSERT INTO Loan (dni,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("36249161","2020-04-03",2200,2000,"2020-12-03",366.66,6,1,1);
+
+
 -- ROLES --
 INSERT INTO roles (name, status) VALUES ("Administrador", 1);
 INSERT INTO roles (name, status) VALUES ("Cliente", 1);
