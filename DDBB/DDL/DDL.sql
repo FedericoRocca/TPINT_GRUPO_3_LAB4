@@ -214,6 +214,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE SP_UpdateCustomer (
 -- Variables User --
+IN _dni 		VARCHAR(9),
 IN _firstName	VARCHAR(45),
 IN _lastName 	VARCHAR(45),
 IN _userName 	VARCHAR(45),
