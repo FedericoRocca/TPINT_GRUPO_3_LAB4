@@ -22,9 +22,11 @@ public class PhoneDaolmpl implements PhoneDao {
 		cn.Open();
 		ArrayList<Phone> list = new ArrayList<Phone>();
 		try {
-			ResultSet rs= cn.query("SELECT phones.number, phones.description, users.dni, users.firstName, users.lastName"
-									+ "FROM Phones INNER JOIN Users ON phones.userDni = users.dni"
-									+ "WHERE phones.status = true && phones.userDni =" + dni);
+		    
+			ResultSet rs= cn.query("SELECT phones.numberPhone, phones.description, users.dni, users.firstName, users.lastName "
+			        + "FROM Phones "
+			        + "INNER JOIN Users ON phones.userDni = users.dni "
+			        + "WHERE phones.userDni =" + dni);
 			while(rs.next()) {
 				Phone phone = new Phone();
 				phone.setNumber(rs.getInt("phones.number"));
