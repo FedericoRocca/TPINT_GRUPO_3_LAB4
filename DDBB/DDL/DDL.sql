@@ -16,17 +16,29 @@ CREATE TABLE Report1
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE LoanState
+(
+	id 		INT AUTO_INCREMENT NOT NULL,
+	state 	VARCHAR(10) 	   NOT NULL, /*Pendiente, Aceptado, Rechazado*/
+	
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE Loan
 (
 	id					INT 			NOT NULL,
-    cuil				VARCHAR(20) 	NOT NULL,
-    loandate 			DATETIME 		NOT NULL,
-    ammountInt 			DECIMAL(10,2) 	NOT NULL,
+    dni					VARCHAR(9) 		NOT NULL,
+    loanDate 			DATETIME 		NOT NULL,
+    amountInt 			DECIMAL(10,2) 	NOT NULL,
     amountReqByCustomer DECIMAL(10,2) 	NOT NULL,
     paymentDeadline 	DATETIME 		NOT NULL,
+    monthlyFee			DECIMAL(10,2)	NOT NULL,
+    amountOfFees		INT				NOT NULL, /*Cant de cuotas*/
+	loanStateId			INT				NOT NULL,
     status				BIT				NOT NULL,
      
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+    FOREIGN KEY(loanStateId) REFERENCES LoanState(id)
 );
 
 CREATE TABLE MovementType

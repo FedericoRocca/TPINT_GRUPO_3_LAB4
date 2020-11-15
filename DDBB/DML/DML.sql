@@ -5,6 +5,9 @@ INSERT INTO accountstype (id, description, status) VALUES (2, "Caja de ahorro", 
 -- INSERT INTO accountstype (id, description, status) VALUES (3, "Cuenta nómina", 1);
 -- INSERT INTO accountstype (id, description, status) VALUES (4, "Cuenta de valores", 1);
 
+-- ESTADOS DE PRESTASMO --
+INSERT INTO LoanState (state) VALUES ("Pendiente"),("Aceptado"),("Rechazado");
+
 -- ROLES --
 INSERT INTO roles (name, status) VALUES ("Administrador", 1);
 INSERT INTO roles (name, status) VALUES ("Cliente", 1);
@@ -271,6 +274,7 @@ INSERT INTO Provinces (description) VALUES('Santa Fé');
 INSERT INTO Provinces (description) VALUES('Santiago del Estero');
 INSERT INTO Provinces (description) VALUES('Tierra del Fuego');
 INSERT INTO Provinces (description) VALUES('Tucumán');
+
 
 -- Registros de ciudades --
 USE bdBanco;
