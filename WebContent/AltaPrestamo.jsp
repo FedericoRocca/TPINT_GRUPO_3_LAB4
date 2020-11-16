@@ -89,7 +89,7 @@
 						<div class="form-row">
 							<div class="form-group col-md-3">
 								<label for="title">Cantidad</label>
-								<input name="txtAmountReqByCustomer" class="form-control" required="required" type="text" placeholder="Ingrese cantidad">        				
+								<input name="txtAmountReqByCustomer" class="form-control" required="required" pattern="[0-9]{1,7}(\.[0-9][0-9]?)?" type="text" placeholder="Ingrese cantidad">        				
 							</div>	
 							<div class="form-group col-md-3">
 								<label>Cuotas</label>
