@@ -1,6 +1,6 @@
 package dominio;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 
 public class Loan {
@@ -8,11 +8,11 @@ public class Loan {
 	private int id;
 	private String dni;
 	private int accountNumber;
-	private Date loanDate;
+	private LocalDate loanDate;
 	private Double amountReqByCustomer;
 	private Double amountInt;
 	private Double monthlyFee;
-	private Date paymentDeadline;
+	private LocalDate paymentDeadline;
 	private int amountOfFees;
 	private LoanState loanState;
 	
@@ -22,8 +22,8 @@ public class Loan {
 	}
 
 	
-	public Loan(int id, String dni, int accountNumber, Date loanDate, Double amountReqByCustomer, Double amountInt,
-			Double monthlyFee, Date paymentDeadline, int amountOfFees, LoanState loanState) {
+	public Loan(int id, String dni, int accountNumber, LocalDate loanDate, Double amountReqByCustomer, Double amountInt,
+			Double monthlyFee, LocalDate paymentDeadline, int amountOfFees, LoanState loanState) {
 		super();
 		this.id = id;
 		this.dni = dni;
@@ -68,12 +68,12 @@ public class Loan {
 	}
 
 
-	public Date getLoanDate() {
+	public LocalDate getLoanDate() {
 		return loanDate;
 	}
 
 
-	public void setLoanDate(Date loanDate) {
+	public void setLoanDate(LocalDate loanDate) {
 		this.loanDate = loanDate;
 	}
 
@@ -108,12 +108,12 @@ public class Loan {
 	}
 
 
-	public Date getPaymentDeadline() {
+	public LocalDate getPaymentDeadline() {
 		return paymentDeadline;
 	}
 
 
-	public void setPaymentDeadline(Date paymentDeadline) {
+	public void setPaymentDeadline(LocalDate paymentDeadline) {
 		this.paymentDeadline = paymentDeadline;
 	}
 

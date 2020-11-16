@@ -94,10 +94,10 @@
 							<div class="form-group col-md-3">
 								<label>Cuotas</label>
 								<select name="comboAmountOfFees" class="custom-select">
-									<option value="1">1</option>
-									<option value="2">3</option>
-									<option value="3">6</option>
-									<option value="4">12</option>
+									<option value="3">3</option>
+									<option value="6">6</option>
+									<option value="12">12</option>
+									<option value="24">24</option>
 								</select>     
 							</div>		
 						</div>

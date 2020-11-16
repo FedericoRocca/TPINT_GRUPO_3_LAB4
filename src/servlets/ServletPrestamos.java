@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -10,8 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.w3c.dom.ls.LSException;
+
 import dominio.Loan;
 import dominio.LoanState;
+import javafx.util.converter.LocalDateStringConverter;
 import negocio.LoanNeg;
 import negociolmpl.LoanNeglmpl;
 import sun.rmi.server.Dispatcher;
@@ -41,7 +46,12 @@ public class ServletPrestamos extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		try {
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			Date todayDate = new Date();
+			
 			if(request.getParameter("btnPedirPrestamo")!=null) {
 				Loan ln = new Loan();
 				
@@ -51,15 +61,33 @@ public class ServletPrestamos extends HttpServlet {
 				ln.setAmountReqByCustomer(Double.parseDouble(request.getParameter("txtAmountReqByCustomer")));
 				ln.setAmountOfFees(Integer.parseInt(request.getParameter("comboAmountOfFees")));
 				ln.setLoanState(new LoanState(1,"Pendiente"));
+				ln.setLoanDate(LocalDate.now());
 				
-				/*ToDo, Fecha actual*/
-				ln.setLoanDate(new java.sql.Date(2020,10,15));
-				
-				/*ToDo, se suma meses segun la cantidad de cuotas más dos*/
-				ln.setPaymentDeadline(new java.sql.Date(2020,10,05));
+				/*Se suma meses segun la cantidad de cuotas más dos*/
+				ln.setPaymentDeadline(ln.getLoanDate().plusMonths(ln.getAmountOfFees() + 2));
 
-				/*Se le agrega un interes del 10% al importe pedido por el cliente*/
-				ln.setAmountInt(ln.getAmountReqByCustomer() * 1.1);
+				/*Se le agrega un interes al importe pedido por el cliente dependiendo de la cantidad de cuotas*/
+				Double interes;
+				switch (ln.getAmountOfFees()) {
+				case 3:
+					interes = 1.05;
+					break;
+				case 6:
+					interes = 1.07;
+					break;
+				case 12:
+					interes = 1.1;
+					break;
+				case 24:
+					interes = 1.2;
+					break;
+
+				default:
+					interes = 1.1;
+					break;
+				}
+				
+				ln.setAmountInt(ln.getAmountReqByCustomer() * interes);
 				
 				/*Se divide el importe con el interes por la cantidad de cuotas*/
 				ln.setMonthlyFee(ln.getAmountInt()/ln.getAmountOfFees());

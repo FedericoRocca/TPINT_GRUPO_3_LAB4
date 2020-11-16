@@ -30,11 +30,11 @@ public class LoanDaolmpl implements LoanDao{
 				loan.setId(rs.getInt("l.id"));
 				loan.setAccountNumber(rs.getInt("l.accountNumber"));
 				loan.setDni(rs.getString("l.dni"));
-				loan.setLoanDate(rs.getDate("l.loanDate"));
+				loan.setLoanDate(rs.getDate("l.loanDate").toLocalDate());
 				loan.setAmountReqByCustomer(rs.getDouble("l.amountReqByCustomer"));
 				loan.setAmountInt(rs.getDouble("l.amountInt"));
 				loan.setMonthlyFee(rs.getDouble("l.monthlyFee"));
-				loan.setPaymentDeadline(rs.getDate("l.paymentDeadline"));
+				loan.setPaymentDeadline(rs.getDate("l.paymentDeadline").toLocalDate());
 				loan.setAmountOfFees(rs.getInt("l.amountOfFees"));
 				
 				LoanState loanState = new LoanState();
