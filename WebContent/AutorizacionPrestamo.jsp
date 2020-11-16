@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="dominio.Loan"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Banco UTN - Autorización de prestamo</title>
+<title>Banco UTN - Autorizaciï¿½n de prestamo</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -21,7 +24,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<!-- INCLUYO EL MENÚ ACÁ -->
+		<!-- INCLUYO EL MENï¿½ ACï¿½ -->
 		<jsp:include page="MenuAdmin.html"></jsp:include> 
 		<!-- End of Sidebar -->
 
@@ -43,7 +46,7 @@
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">André Villalta</span> 
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small">Andrï¿½ Villalta</span> 
 								<img class="img-profile rounded-circle" src="img/profile.png">
 							</a> 
 							<!-- Dropdown - User Information -->
@@ -67,17 +70,25 @@
 				<!-- End of Topbar -->
 
 				<!-- Begin Page Content -->
+				
 				<div class="container-fluid">
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Autorización de prestamos</h6>
+							<h6 class="m-0 font-weight-bold text-primary">Autorizaciï¿½n de prestamos</h6>
 						</div>
+						<%
+							List<Loan> listaLn = new ArrayList<Loan>();
+							if (request.getAttribute("listLoans") != null) {
+								listaLn = (List<Loan>) request.getAttribute("listLoans");
+							}
+						%>
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table table-bordered" id="dataTable" cellspacing="0">
 									<thead>
 										<tr>
 											<th>Cliente</th>
+											<th>Cuenta</th>
 											<th>Fecha</th>
                       						<th>Importe</th>
                       						<th>Prestamo</th>
@@ -85,12 +96,17 @@
 										</tr>
 									</thead>
 									<tbody>
+										<%
+										if(listaLn != null)
+										for(Loan l : listaLn){
+										%>
 										<tr>
-					                      <td>99999999</td>
-					                      <td>21/05/2020</td>
-					                      <td>$50000</td>
-					                      <td>$48000</td>
-					                      <td>12</td>
+					                      <td><%=l.getDni() %></td>
+					                      <td><%=l.getAccountNumber() %></td>
+					                      <td><%=l.getLoanDate() %></td>
+					                      <td><%=l.getAmountInt() %></td>
+					                      <td><%=l.getAmountReqByCustomer() %></td>
+					                      <td><%=l.getAmountOfFees() %></td>
 					                      <td>
 					                      	<a class="text-decoration-none m-2" href="#">
 					                      		<i class="fas fa-check" style="font-size: 25px;"></i>
@@ -100,36 +116,9 @@
 					                      	</a>
 					                      </td>
 					                    </tr>
-					                    <tr>
-											<td>23565565</td>
-											<td>31/01/2020</td>
-											<td>$2500</td>
-											<td>$2000</td>
-											<td>3</td>
-					                      <td>
-					                      	<a class="text-decoration-none m-2" href="#">
-					                      		<i class="fas fa-check" style="font-size: 25px;"></i>
-					                      	</a>
-					                      	<a class="text-decoration-none m-2" href="#">
-					                      		<i class="fas fa-trash" style="font-size: 25px;"></i>
-					                      	</a>
-					                      </td>
-					                    </tr>
-					                    <tr>
-											<td>44444444</td>
-											<td>08/09/2020</td>
-											<td>$900000</td>
-											<td>$850000</td>
-											<td>6</td>
-					                      <td>
-					                      	<a class="text-decoration-none m-2" href="#">
-					                      		<i class="fas fa-check" style="font-size: 25px;"></i>
-					                      	</a>
-					                      	<a class="text-decoration-none m-2" href="#">
-					                      		<i class="fas fa-trash" style="font-size: 25px;"></i>
-					                      	</a>
-					                      </td>
-					                    </tr>
+			                    		<%
+										}
+										%>
 									</tbody>
 								</table>
 							</div>
