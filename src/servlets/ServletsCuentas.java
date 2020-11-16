@@ -44,14 +44,12 @@ public class ServletsCuentas extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		try {
+			request.removeAttribute("logearError");
 			Account x = new Account();
-			DecimalFormat df = new DecimalFormat("0.00");
 			x.setAccountDni(Integer.parseInt(request.getParameter("txtDNI")));
 			request.setAttribute("DNI", request.getParameter("txtDNI"));
-			x.setCbu(request.getParameter("txtCBU"));
-			request.setAttribute("CBU", request.getParameter("txtCBU"));
 			AccountNeg a = new AccountNeg();
 			boolean estado = false;
 			String tipoEstado = "";
@@ -66,48 +64,70 @@ public class ServletsCuentas extends HttpServlet {
 			
 		if(request.getParameter("btnGestionarCuenta")!=null)
 		{
+			x.setCbu(request.getParameter("txtCBU"));
+			request.setAttribute("CBU", request.getParameter("txtCBU"));
 			x.setAccountypeid(Integer.parseInt(request.getParameter("tipoCta")));
 			request.setAttribute("Cuenta", request.getParameter("tipoCta"));
+			x.setBalance(Float.parseFloat(request.getParameter("txtSaldo")));
+			request.setAttribute("Saldo", request.getParameter("txtSaldo"));
 			estado=true;
 			tipoEstado = "estadoGestion";
 						
-				if(p == "Alta")
+				if(p.equals("Alta"))
 				{					
-					estado=  a.InsertarCuenta(x);
+					int cant = a.ObtenerCantCuentas(x);
+					if(cant > 3 || cant < 0)
+					{
+						throw new Exception("El cliente posee más de 3 cuentas");
+					}
+					int ultima = a.ObtenerUltimaCuenta();
+					x.setAccountNumber(ultima+1);
+					estado = a.ValidarCBU(x);
+					if(estado) 
+					{
+						estado= a.InsertarCuenta(x);
+						if(!estado) {
+							throw new Exception("Hubo un problema al crear su cuenta");
+						}
+					}
+					else
+					{
+						throw new Exception("Ya existe una cuenta con ese CBU");
+					}
+					thisPage = "/ListadoCuentas.jsp";
 					a = null;
 				}
-				else if(p == "Baja")
+				else if(p.equals("Baja"))
 				{
 					estado=  a.BajaCuenta(x);
 					a = null;
 				}
-
+			x = null;
 			request.setAttribute(tipoEstado, estado);
-		    RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoCuentas.jsp");
+		    RequestDispatcher dispatcher = request.getRequestDispatcher(thisPage);
 			dispatcher.forward(request, response);
 		}
 		if(request.getParameter("BuscarExistencia")!=null)
 		{
-			estado = false;
+			estado = true;
 			tipoEstado = "estadoExistencia";
 				User u = null;
 				UserNeglmpl un = new UserNeglmpl();
 				u = un.getUser(request.getParameter("txtDNI"));
-				request.setAttribute("D", "d");
 				if (u == null)
 				{
-					estado = false;
-					request.setAttribute("D", "");
+					throw new Exception("No se encontró el usuario en la base de datos");
 				}
-		}
-		
-		request.setAttribute(tipoEstado, estado);
-		RequestDispatcher dispatcher = request.getRequestDispatcher(thisPage);
-		dispatcher.forward(request, response);
+				request.setAttribute("Nombre","NOMBRE: " + u.getFirstName()+" "+u.getLastName());
+				request.setAttribute(tipoEstado, estado);
+				u = null;
+				RequestDispatcher dispatcher = request.getRequestDispatcher(thisPage);
+				dispatcher.forward(request, response);
+		}		
 		}
 		catch(Exception e)
 		{
-			request.setAttribute("Error", e.getMessage());
+			request.setAttribute("logearError", e.getMessage());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/Cuenta.jsp?p="+request.getParameter("parameter"));
 			dispatcher.forward(request, response);
 		}

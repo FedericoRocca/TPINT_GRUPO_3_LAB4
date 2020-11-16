@@ -89,16 +89,23 @@
             					</button>								
 							</div>							
 						</div>
-						<div class="form-row">
+									<%			if(request.getAttribute("estadoExistencia")!=null)
+									{
+										boolean estadoM = (Boolean)request.getAttribute("estadoExistencia");
+										
+										if (estadoM == true) 
+										{
+											%>	<label for="title">${Nombre}</label> 					
+											<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="title">CBU</label> 
-								<input class="form-control" disabled"${D}" name="txtCBU" value="${CBU}" type="text" placeholder="Nº identidad + NªSucursal + Dígito identificador + Numero de cuenta + Dígito verificador">
+								<input class="form-control" maxlength="22" name="txtCBU" value="${CBU}" type="text" placeholder="Nº identidad + NªSucursal + Dígito identificador + Numero de cuenta + Dígito verificador">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-3">
-								<label for="title" disabled"${D}">Tipo de cuenta</label>
-									<select class="custom-select" name="tipoCta" id="inputGroupSelect02" disabled"${D}">
+								<label for="title" >Tipo de cuenta</label>
+									<select class="custom-select" name="tipoCta" id="inputGroupSelect02" >
 										<option selected>Elija opción</option>
 										<option value="1">Caja de ahorro</option>
 										<option value="2">Cuenta corriente</option>
@@ -106,12 +113,16 @@
 							</div>
 							
 							<div class="form-group col-md-3">
-								<label for="title" disabled"${D}">Saldo inicial ($ - pesos argentinos)</label> 
-								<input class="form-control" disabled"${D}" name="txtSaldo" type="text" value="10000"placeholder="Saldo inicial">
+								<label for="title" >Saldo inicial ($ - pesos argentinos)</label> 
+								<input class="form-control"  name="txtSaldo" type="text" value="10000"placeholder="Saldo inicial">
 							</div>
 						</div>
 		
-						<button type="submit" disabled"${D}" name="btnGestionarCuenta" class="btn btn-primary mt-2">Dar de <%= request.getParameter("p") %></button>
+						<button type="submit"  name="btnGestionarCuenta" class="btn btn-primary mt-2">Dar de <%= request.getParameter("p") %></button><%
+										}
+									}
+									%>
+
 					</form>
 
 				</div>
@@ -120,33 +131,10 @@
 			</div>
 			<!-- End of Main Content -->
 			<%
-			if(request.getAttribute("estadoGestion")!=null)
+			if(request.getAttribute("logearError")!=null)
 				{
-					boolean estadoM = (Boolean)request.getAttribute("estadoGestion");
-					
-					if (estadoM != false) 
-					{
-						%><script>alert("La cuenta se ha dado de "+ request.getParameter("p") +" correctamente");</script><%
-					}
-					else
-					{
-						%><script>alert("No se pudo dar de "+ request.getParameter("p") + " a la cuenta debido a un Error");</script><%
-					}
+						%><script>alert("${logearError}");</script><%
 				}
-			
-			if(request.getAttribute("estadoExistencia")!=null)
-			{
-				boolean estadoM = (Boolean)request.getAttribute("estadoExistencia");
-				
-				if (estadoM == true) 
-				{
-					%><script>alert("El Cliente NO existe en la base de datos");</script><%
-				}
-				else
-				{
-					%><script>alert("El Cliente existe en la base de datos");</script><%
-				}
-			}
 			%>
 			<!-- Footer -->
 			<footer class="sticky-footer bg-white">
