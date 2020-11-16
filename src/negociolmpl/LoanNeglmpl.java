@@ -26,4 +26,9 @@ public class LoanNeglmpl implements LoanNeg {
 		return (ArrayList<Loan>) loanDao.getPending();
 	}
 
+	@Override
+	public boolean insert(Loan loan) {
+		return loanDao.insert(loan);
+	}
+
 }

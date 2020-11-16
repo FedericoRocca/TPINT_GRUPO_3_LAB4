@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import datos.LoanDao;
 import dominio.Loan;
 import dominio.LoanState;
@@ -30,9 +31,9 @@ public class LoanDaolmpl implements LoanDao{
 				loan.setAccountNumber(rs.getInt("l.accountNumber"));
 				loan.setDni(rs.getString("l.dni"));
 				loan.setLoanDate(rs.getDate("l.loanDate"));
-				loan.setAmountReqByCustomer(rs.getFloat("l.amountReqByCustomer"));
-				loan.setAmountInt(rs.getFloat("l.amountInt"));
-				loan.setMonthlyFee(rs.getFloat("l.monthlyFee"));
+				loan.setAmountReqByCustomer(rs.getDouble("l.amountReqByCustomer"));
+				loan.setAmountInt(rs.getDouble("l.amountInt"));
+				loan.setMonthlyFee(rs.getDouble("l.monthlyFee"));
 				loan.setPaymentDeadline(rs.getDate("l.paymentDeadline"));
 				loan.setAmountOfFees(rs.getInt("l.amountOfFees"));
 				
@@ -55,7 +56,25 @@ public class LoanDaolmpl implements LoanDao{
 	
 	@Override
 	public boolean insert(Loan loan) {
-		return true;
+		
+		boolean estado = true;
+		
+		cn = new ConnectionDB();
+		cn.Open();
+		
+		try {
+			
+			estado = cn.execute("INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status)"
+								+"VALUES ('"+loan.getDni()+"','"+loan.getAccountNumber()+"','"+loan.getLoanDate()+"','"+loan.getAmountInt()+"','"+loan.getAmountReqByCustomer()+"','"+loan.getPaymentDeadline()+"','"+loan.getAmountOfFees()+"','"+loan.getMonthlyFee()+"','"+loan.getLoanState().getId()+"',1);");	
+		}			
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			cn.close();
+		}
+
+		return estado;
 	}
 	
 	@Override

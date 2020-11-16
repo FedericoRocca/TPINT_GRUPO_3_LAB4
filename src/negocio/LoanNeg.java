@@ -6,4 +6,5 @@ import dominio.Loan;
 public interface LoanNeg {
 
 	public ArrayList<Loan> listPending();
+	public boolean insert(Loan loan);
 }

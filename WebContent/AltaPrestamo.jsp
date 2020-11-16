@@ -8,7 +8,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Banco UTN - Alta prestamo</title>
+<title>Banco UTN - Alta prï¿½stamo</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -21,7 +21,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<!-- INCLUYO EL MENÚ ACÁ -->
+		<!-- INCLUYO EL MENï¿½ ACï¿½ -->
 		<jsp:include page="MenuCliente.html"></jsp:include> 
 		<!-- End of Sidebar -->
 
@@ -43,7 +43,7 @@
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">André Villalta</span> 
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small">Andrï¿½ Villalta</span> 
 								<img class="img-profile rounded-circle" src="img/profile.png">
 							</a> 
 							<!-- Dropdown - User Information -->
@@ -71,28 +71,29 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Pedido de préstamo</h1>
+						<h1 class="h3 mb-0 text-gray-800">Alta de prï¿½stamo</h1>
 					</div>
 					
-					<form method="post" enctype="multipart/form-data">
+					<form method="post" action="ServletPrestamos">
 						<div class="form-row">
 							<div class="form-group col-md-3">
-								<label>Cuenta</label>
-								<select class="custom-select">
-									<option value="1">N° 45678</option>
-									<option value="2">N° 55555</option>
-									<option value="3">N° 11111</option>
-								</select>       				
+								<label>NÂ° de Cuenta</label>
+								
+				<!-------------------ToDo---------------------------------------------------------------------->
+				<!--Cuando se tenga los datos del User en session, completar un dropdown con sus cuentas -->
+				<!----------------------------------------------------------------------------------------->
+				
+								<input name="txtAccountNumber" class="form-control" required="required" type="text" placeholder="Ingrese NÂ° de Cuenta"> 
 							</div>					
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-3">
 								<label for="title">Cantidad</label>
-								<input class="form-control" required="required" type="text" placeholder="Ingrese cantidad">        				
+								<input name="txtAmountReqByCustomer" class="form-control" required="required" type="text" placeholder="Ingrese cantidad">        				
 							</div>	
 							<div class="form-group col-md-3">
 								<label>Cuotas</label>
-								<select class="custom-select">
+								<select name="comboAmountOfFees" class="custom-select">
 									<option value="1">1</option>
 									<option value="2">3</option>
 									<option value="3">6</option>
@@ -101,7 +102,7 @@
 							</div>		
 						</div>
 
-						<button type="submit" class="btn btn-primary mt-2">Pedir</button>
+						<button name="btnPedirPrestamo" type="submit" class="btn btn-primary mt-2">Pedir PrÃ©stamo</button>
 					</form>
 
 				</div>
