@@ -101,9 +101,23 @@
 								</select>     
 							</div>		
 						</div>
-
-						<button name="btnPedirPrestamo" type="submit" class="btn btn-primary mt-2">Pedir Préstamo</button>
-					</form>
+						<div class="form-row">
+							<div class="col-md-2">
+								<button name="btnPedirPrestamo" type="submit" class="btn btn-primary mt-2">Pedir Préstamo</button>						
+							</div>
+	
+							<%
+								if (request.getAttribute("estadoPrestamo") != null) {
+							%>
+							<div class="alert alert-success col-md-3" role="alert">
+								Préstamo agregado con exito!
+							</div>
+	
+							<%
+								}
+							%>						
+						</div>
+					</form>	
 
 				</div>
 				<!-- /.container-fluid -->

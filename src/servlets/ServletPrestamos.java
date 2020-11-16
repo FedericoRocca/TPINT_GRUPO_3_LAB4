@@ -49,9 +49,6 @@ public class ServletPrestamos extends HttpServlet {
 		
 		try {
 			
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			Date todayDate = new Date();
-			
 			if(request.getParameter("btnPedirPrestamo")!=null) {
 				Loan ln = new Loan();
 				
@@ -95,6 +92,7 @@ public class ServletPrestamos extends HttpServlet {
 				
 				boolean estado = true;
 				estado = negLoan.insert(ln);
+				request.setAttribute("estadoPrestamo", estado);
 				
 				RequestDispatcher rd = request.getRequestDispatcher("/AltaPrestamo.jsp");
 				rd.forward(request, response);
