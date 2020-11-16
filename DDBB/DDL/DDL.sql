@@ -31,10 +31,10 @@ CREATE TABLE Loan
     dni					VARCHAR(9) 		NOT NULL,
     accountNumber		INT				NOT NULL,
     loanDate 			DATETIME 		NOT NULL,
-    amountInt 			DOUBLE PRECISION NOT NULL,
-    amountReqByCustomer DOUBLE PRECISION NOT NULL,
+    amountInt 			DECIMAL(10,2) NOT NULL,
+    amountReqByCustomer DECIMAL(10,2) NOT NULL,
     paymentDeadline 	DATETIME 		NOT NULL,
-    monthlyFee			DOUBLE PRECISION NOT NULL,
+    monthlyFee			DECIMAL(10,2) NOT NULL,
     amountOfFees		INT				NOT NULL,
 	loanStateId			INT				NOT NULL,
     status				BIT				NOT NULL,
@@ -277,6 +277,3 @@ BEGIN
 		COMMIT WORK;
 END$$
 DELIMITER ;
-
-
--- ACCOUNTS --	
