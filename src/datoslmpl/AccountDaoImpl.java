@@ -4,11 +4,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import datos.IAccountDao;
+import datos.AccountDao;
 import dominio.Account;
 import dominio.User;
 
-public class AccountDaoImpl implements IAccountDao{
+public class AccountDaoImpl implements AccountDao{
 
 	private ConnectionDB cn;
 	

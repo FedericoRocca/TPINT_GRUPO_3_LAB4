@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import dominio.Account;
 import dominio.User;
 import negocio.AccountNeg;
+import negociolmpl.AccountNegImpl;
 import negociolmpl.UserNeglmpl;
 
 
@@ -50,7 +51,7 @@ public class ServletsCuentas extends HttpServlet {
 			Account x = new Account();
 			x.setAccountDni(Integer.parseInt(request.getParameter("txtDNI")));
 			request.setAttribute("DNI", request.getParameter("txtDNI"));
-			AccountNeg a = new AccountNeg();
+			AccountNeg a = new AccountNegImpl();
 			boolean estado = false;
 			String tipoEstado = "";
 			String p = request.getParameter("parameter");
@@ -78,7 +79,7 @@ public class ServletsCuentas extends HttpServlet {
 					int cant = a.ObtenerCantCuentas(x);
 					if(cant >= 3 || cant < 0)
 					{
-						throw new Exception("El cliente posee 3 o más cuentas");
+						throw new Exception("El cliente posee 3 o mï¿½s cuentas");
 					}
 					int ultima = a.ObtenerUltimaCuenta();
 					x.setAccountNumber(ultima+1);
@@ -116,7 +117,7 @@ public class ServletsCuentas extends HttpServlet {
 				u = un.getUser(request.getParameter("txtDNI"));
 				if (u == null)
 				{
-					throw new Exception("No se encontró el usuario en la base de datos");
+					throw new Exception("No se encontrï¿½ el usuario en la base de datos");
 				}
 				request.setAttribute("Nombre","NOMBRE: " + u.getFirstName()+" "+u.getLastName());
 				if(p.equals("Baja")) {
