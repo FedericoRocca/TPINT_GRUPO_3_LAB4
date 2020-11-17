@@ -1,3 +1,6 @@
+<%@page import="dominio.Account"%>
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -28,8 +31,8 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<!-- INCLUYO EL MENÚ ACÁ -->
-		<jsp:include page="MenuAdmin.html"></jsp:include> 
+		<!-- INCLUYO EL MENÃ ACÃ -->
+		<jsp:include page="MenuCliente.html"></jsp:include> 
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
@@ -50,7 +53,7 @@
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">André Villalta</span> 
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small">AndrÃ© Villalta</span> 
 								<img class="img-profile rounded-circle" src="img/profile.png">
 							</a> 
 							<!-- Dropdown - User Information -->
@@ -81,28 +84,65 @@
 						<h1 class="h3 mb-0 text-gray-800">Nueva transferencia</h1>
 					</div>
 					
+					<%
+					List<Account> listCuent = new ArrayList<Account>();
+					if(request.getAttribute("listCuent") != null)
+					{
+						listCuent = (List<Account>) request.getAttribute("listCuent");
+					}
+					%>
+					
 					<form enctype="multipart/form-data">
 						<div class="form-row">
-							<div class="form-group col-md-3">
+							<div class="form-group col-md-5">
 								<label>Origen</label>
-								<select class="custom-select">
-									<option value="1">N° 45678</option>
-									<option value="2">N° 55555</option>
-									<option value="3">N° 11111</option>
-								</select>       				
-							</div>					
+								<select class="form-control" name="textOrigen">
+   								<option selected>Seleccione...</option>
+   								<%
+   									for(Account n : listCuent)	{
+								%>
+									
+							      	<option value="<%=n.getAccountNumber() %>"><%=n.getAccountNumber() %></option>
+							   	<%
+									} 
+								%>
+							    </select>       				
+							</div>		
+							<div class="form-group col-md-3">
+								
+									<label for="title">Monto Inicial</label>
+									<input class="form-control" required="required" name="txtMontoInicial" type="text" placeholder="14000" disabled>        				
+								     				
+							</div>				
 						</div>
 						<div class="form-row">
-							<div class="form-group col-md-3">
+							<div class="form-group col-md-5">
 								<label for="title">Cantidad</label>
-								<input class="form-control" required="required" type="text" placeholder="Ingrese cantidad">        				
+								<input class="form-control" required="required" name="txtCantidad" type="text" placeholder="Ingrese cantidad">        				
 							</div>		
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-5">
-								<label>Destinatario</label>
-								<input class="form-control" required="required" type="text" placeholder="CBU">  
+
+								<label for="Destinatario">Destinatario</label>
+    								<select class="form-control" name="textDestinatario">
+    								<option selected>Seleccione...</option>
+    								<%
+    									for(Account n : listCuent)	{
+									%>
+										
+								      	<option value="<%=n.getAccountNumber() %>"><%=n.getAccountNumber() %></option>
+								   	<%
+										} 
+									%>
+								    </select>
 							</div>		
+							<div class="form-group col-md-3">
+
+									<label for="title">Monto Final</label>
+									<input class="form-control" required="required" name="txtMontoFinal" type="text" placeholder="19000" disabled>        				
+						
+							</div>	
 						</div>
 
 						<button class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModal">Enviar</button>
@@ -125,8 +165,8 @@
 								      <h5 class="card-title">Cuenta de Origen</h5>
 								        
 								        Numero de cuenta
-								        <input class="form-control" type="text" value="N° 45678" readonly> 
-								        CBU
+								        <input class="form-control" type="text" value="NÂ° 45678" readonly> 
+								        Monto inicial
 								        <input class="form-control" type="text" value="0043746238233" readonly> 
 								      
 								      </div>
@@ -135,19 +175,13 @@
 						             <h5 class="card-title">Cuenta de Destino</h5>
 							            Numero de cuenta
 							            <div class="input-group">		
-								        <input class="form-control" id="inputCta" type="text" value="N° 66890" readonly>
-								        <button class="btn" onclick="RemoveReadOnly('inputCta')"><i class="fas fa-pencil-alt"></i></button>
+								        <input class="form-control" id="inputCta" type="text" value="NÂ° 66890" readonly>
 								        </div>
-								        Monto	
+								        Monto Final
 								        <div class="input-group">			        						 
 								        <input class="form-control" id="inputMonto" type="text" value="1203,89" readonly> 
-								        <button class="btn" onclick="RemoveReadOnly('inputMonto')"><i class="fas fa-pencil-alt"></i></button>
 								        </div>
-								        CBU
-								        <div class="input-group">
-									        <input class="form-control" id="inputCBU" type="text" value="0023689237788" readonly>
-					        				<button class="btn" onclick="RemoveReadOnly('inputCBU')"><i class="fas fa-pencil-alt"></i></button>
-					        			</div>
+
 							        </div>
 								   
 								      
