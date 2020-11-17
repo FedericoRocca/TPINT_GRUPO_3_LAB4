@@ -48,7 +48,7 @@ public class ServletsCuentas extends HttpServlet {
 		try {
 			request.removeAttribute("logearError");
 			Account x = new Account();
-			x.setAccountDni(Integer.parseInt(request.getParameter("txtDNI")));
+			x.setAccountDni(request.getParameter("txtDNI"));
 			request.setAttribute("DNI", request.getParameter("txtDNI"));
 			AccountNeg a = new AccountNeg();
 			boolean estado = false;

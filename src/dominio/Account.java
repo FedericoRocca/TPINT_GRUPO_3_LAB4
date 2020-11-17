@@ -6,7 +6,7 @@ import java.util.Date;
 public class Account {
 	
 	private int accountNumber;
-    private int accountDni;
+    private String accountDni;
     private Date creationDate;
     private int accountypeid;
     private String cbu;
@@ -21,10 +21,10 @@ public class Account {
 	public void setAccountNumber(int accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-	public int getAccountDni() {
+	public String getAccountDni() {
 		return accountDni;
 	}
-	public void setAccountDni(int accountDni) {
+	public void setAccountDni(String accountDni) {
 		this.accountDni = accountDni;
 	}
 	public Date getCreationDate() {
