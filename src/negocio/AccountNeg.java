@@ -1,15 +1,15 @@
 package negocio;
-import datos.AccountDao;
 import java.sql.ResultSet;
+import datoslmpl.AccountDaoImpl;
 import dominio.Account;
 
 public class AccountNeg {
 	
-	private AccountDao ac = new AccountDao();
+	private AccountDaoImpl ac = new AccountDaoImpl();
 	
 	public Boolean InsertarCuenta(Account a){
 		try {
-			ac = new AccountDao();
+			ac = new AccountDaoImpl();
 			ac.CrearCuenta(a);
 			ac = null;
 			return true;
@@ -22,7 +22,7 @@ public class AccountNeg {
 	
 	public Boolean BajaCuenta(Account a){
 		try {
-			ac = new AccountDao();
+			ac = new AccountDaoImpl();
 			ac.DarBaja(a);
 			ac = null;
 			return true;

@@ -76,9 +76,9 @@ public class ServletsCuentas extends HttpServlet {
 				if(p.equals("Alta"))
 				{					
 					int cant = a.ObtenerCantCuentas(x);
-					if(cant > 3 || cant < 0)
+					if(cant >= 3 || cant < 0)
 					{
-						throw new Exception("El cliente posee más de 3 cuentas");
+						throw new Exception("El cliente posee 3 o más cuentas");
 					}
 					int ultima = a.ObtenerUltimaCuenta();
 					x.setAccountNumber(ultima+1);
@@ -119,6 +119,9 @@ public class ServletsCuentas extends HttpServlet {
 					throw new Exception("No se encontró el usuario en la base de datos");
 				}
 				request.setAttribute("Nombre","NOMBRE: " + u.getFirstName()+" "+u.getLastName());
+				if(p.equals("Baja")) {
+					
+				}
 				request.setAttribute(tipoEstado, estado);
 				u = null;
 				RequestDispatcher dispatcher = request.getRequestDispatcher(thisPage);
