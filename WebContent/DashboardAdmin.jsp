@@ -1,15 +1,20 @@
+<%@page import="dominio.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
+	<%
+		User userLogin = new User(); 
+		userLogin = (User)session.getAttribute("userLogin");
+	%>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Banco UTN - Dashboard</title>
+  <title>Banco UTN - Administrador</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -61,7 +66,7 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">André Villalta</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=userLogin.getFirstName()%> <%=userLogin.getLastName() %></span>
                 <img src="https://img.icons8.com/color/48/000000/user-shield.png"/>
               </a>
               <!-- Dropdown - User Information -->

@@ -43,6 +43,16 @@ public class ServletClientes extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    try
         {
+	        User userLogin = new User();
+	        userLogin = (User)request.getSession().getAttribute("userLogin");
+	        if( userLogin == null )
+	        {
+	            RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+	            dispatcher.forward(request, response);
+	        }
+
+	        request.setAttribute("userLogin", userLogin);
+	        
     	    ArrayList<User> users = new ArrayList<>();
     		ArrayList<Nationality> nationalities = new ArrayList<>();
     		UserDaolmpl udi = new UserDaolmpl();

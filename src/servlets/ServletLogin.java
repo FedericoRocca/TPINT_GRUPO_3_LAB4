@@ -61,6 +61,10 @@ public class ServletLogin extends HttpServlet {
 	            
 	            if( user != null )
 	            {
+	                
+	                //Seteamos la session que se va a usar para login/logout
+	                request.getSession().setAttribute("userLogin", user);
+	                
 	                switch (user.getRol().getNameRole())
 	                {
 	                    case "Administrador":
