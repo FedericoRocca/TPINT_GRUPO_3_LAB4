@@ -7,5 +7,5 @@ public interface LoanDao {
 
 	public List<Loan> getPending();
 	public boolean insert(Loan loan);
-	public boolean update(Loan loan);
+	public boolean updateLoanState(int idAccount, int idLoanState);
 }

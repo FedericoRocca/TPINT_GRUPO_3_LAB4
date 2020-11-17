@@ -31,4 +31,8 @@ public class LoanNeglmpl implements LoanNeg {
 		return loanDao.insert(loan);
 	}
 
+	@Override
+	public boolean updateLoanState(int idAccount, int idLoanState) {
+		return loanDao.updateLoanState(idAccount, idLoanState);
+	}
 }
