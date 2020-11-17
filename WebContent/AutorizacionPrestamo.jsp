@@ -75,8 +75,18 @@
 				
 				<div class="container-fluid">
 					<div class="card shadow mb-4">
-						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Autorizaci�n de prestamos</h6>
+						<div class="card-header py-3 form-row">
+							<h6 class="m-0 font-weight-bold text-primary col-md-4">Autorizaci�n de prestamos</h6>
+							<%
+								if (request.getAttribute("estadoPrestamo") != null) {
+							%>
+							<div class="alert alert-success col-md-4" role="alert">
+								Préstamo modificado!
+							</div>
+	
+							<%
+								}
+							%>	
 						</div>
 						<%
 							List<Loan> listaLn = new ArrayList<Loan>();
@@ -89,6 +99,7 @@
 								<table class="table table-bordered" id="dataTable" cellspacing="0">
 									<thead>
 										<tr>
+											<th>ID</th>
 											<th>Cliente</th>
 											<th>Cuenta</th>
 											<th>Fecha</th>
@@ -104,21 +115,27 @@
 										for(Loan l : listaLn){
 										%>
 										<tr>
-					                      <td><%=l.getDni() %></td>
-					                      <td><%=l.getAccountNumber() %></td>
-					                      <td><%=l.getLoanDate() %></td>
-					                      <td><%=l.getAmountInt() %></td>
-					                      <td><%=l.getAmountReqByCustomer() %></td>
-					                      <td><%=l.getAmountOfFees() %></td>
-					                      <td>
-					                      	<a class="text-decoration-none m-2" href="#">
-					                      		<i class="fas fa-check" style="font-size: 25px;"></i>
-					                      	</a>
-					                      	<a class="text-decoration-none m-2" href="#">
-					                      		<i class="fas fa-trash" style="font-size: 25px;"></i>
-					                      	</a>
-					                      </td>
-					                    </tr>
+											<form action="ServletPrestamos" method="post">
+											<td>
+												<%=l.getId() %> 
+												<input type="hidden" name="idAccount" value="<%=l.getId() %>"> 
+											</td>
+											<td><%=l.getDni() %></td>
+											<td><%=l.getAccountNumber() %></td>
+											<td><%=l.getLoanDate() %></td>
+											<td><%=l.getAmountInt() %></td>
+											<td><%=l.getAmountReqByCustomer() %></td>
+											<td><%=l.getAmountOfFees() %></td>
+											<td>
+											<button type="submit" class="btn btn-success" name="btnAceptado">
+											    <i class="fas fa-check"></i>
+											</button>
+											<button type="submit" class="btn btn-danger" name="btnRechazado">
+											    <i class="fas fa-trash"></i>
+											</button>
+											</td>
+											</form>
+										</tr>
 			                    		<%
 										}
 										%>

@@ -24,7 +24,7 @@ public class LoanDaolmpl implements LoanDao{
 		List<Loan> list = new ArrayList<Loan>();
 		try {
 			
-			ResultSet rs = cn.query("SELECT l.id,l.dni,l.accountNumber,l.loanDate,l.amountInt,l.amountReqByCustomer,l.paymentDeadline,l.monthlyFee,l.amountOfFees,l.loanStateId,ls.state FROM loan as l INNER JOIN loanstate as ls on ls.id = l.loanStateId WHERE l.status = 1 AND loanStateId = 1");
+			ResultSet rs = cn.query("SELECT l.id,l.dni,l.accountNumber,l.loanDate,l.amountInt,l.amountReqByCustomer,l.paymentDeadline,l.monthlyFee,l.amountOfFees,l.loanStateId,ls.state FROM loan as l INNER JOIN loanstate as ls on ls.id = l.loanStateId WHERE l.status = 1 AND l.loanStateId = 1");
 			while (rs.next()) {
 				Loan loan = new Loan();
 				loan.setId(rs.getInt("l.id"));
@@ -65,7 +65,7 @@ public class LoanDaolmpl implements LoanDao{
 		try {
 			
 			estado = cn.execute("INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status)"
-								+"VALUES ('"+loan.getDni()+"','"+loan.getAccountNumber()+"','"+loan.getLoanDate()+"','"+loan.getAmountInt()+"','"+loan.getAmountReqByCustomer()+"','"+loan.getPaymentDeadline()+"','"+loan.getAmountOfFees()+"','"+loan.getMonthlyFee()+"','"+loan.getLoanState().getId()+"',1);");	
+								+"VALUES ('"+loan.getDni()+"',"+loan.getAccountNumber()+",'"+loan.getLoanDate()+"',"+loan.getAmountInt()+","+loan.getAmountReqByCustomer()+",'"+loan.getPaymentDeadline()+"',"+loan.getAmountOfFees()+","+loan.getMonthlyFee()+","+loan.getLoanState().getId()+",1);");	
 		}			
 		catch (Exception e) {
 			e.printStackTrace();
@@ -77,8 +77,25 @@ public class LoanDaolmpl implements LoanDao{
 		return estado;
 	}
 	
+
 	@Override
-	public boolean update(Loan loan) {
-		return true;
+	public boolean updateLoanState(int idAccount, int idLoanState) {
+		
+		boolean estado = true;
+		
+		cn = new ConnectionDB();
+		cn.Open();
+		
+		try {
+			estado = cn.execute("UPDATE bdbanco.loan SET loanStateId="+idLoanState+" WHERE id="+idAccount);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			cn.close();
+		}
+		
+		return estado;
 	}
 }

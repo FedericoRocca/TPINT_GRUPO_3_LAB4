@@ -15,6 +15,10 @@ public class AccountNegImpl implements IAccountNeg{
 		this.accountDao = accountDao;
 	}
 	
+	public AccountNegImpl() {
+		
+	}
+	
 	@Override
 	public ArrayList<Account> GetAllbyDni(String dni) {
 		return (ArrayList<Account>) accountDao.getAllbyDni(dni);

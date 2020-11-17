@@ -82,7 +82,7 @@
 				<!-------------------ToDo---------------------------------------------------------------------->
 				<!--Cuando se tenga los datos del User en session, completar un dropdown con sus cuentas -->
 				<!----------------------------------------------------------------------------------------->
-				
+
 								<input name="txtAccountNumber" class="form-control" required="required" type="text" placeholder="Ingrese N° de Cuenta"> 
 							</div>					
 						</div>
