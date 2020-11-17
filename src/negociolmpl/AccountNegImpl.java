@@ -1,17 +1,18 @@
 package negociolmpl;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import datos.IAccountDao;
+import datos.AccountDao;
 import datoslmpl.AccountDaoImpl;
 import dominio.Account;
-import negocio.IAccountNeg;
+import negocio.AccountNeg;
 
-public class AccountNegImpl implements IAccountNeg{
+public class AccountNegImpl implements AccountNeg{
 
-	public IAccountDao accountDao = new AccountDaoImpl();
+	public AccountDao accountDao = new AccountDaoImpl();
 	
-	public AccountNegImpl (IAccountDao accountDao) {
+	public AccountNegImpl (AccountDao accountDao) {
 		this.accountDao = accountDao;
 	}
 	
@@ -30,4 +31,70 @@ public class AccountNegImpl implements IAccountNeg{
 		return (ArrayList<Account>) accountDao.getAll();
 	}
 
+	@Override
+	public Boolean InsertarCuenta(Account a){
+		try {
+			accountDao = new AccountDaoImpl();
+			accountDao.CrearCuenta(a);
+			accountDao = null;
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
+	
+	@Override
+	public Boolean BajaCuenta(Account a){
+		try {
+			accountDao = new AccountDaoImpl();
+			accountDao.DarBaja(a);
+			accountDao = null;
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
+	
+	@Override
+	public int ObtenerCantCuentas(Account a) {
+		try {
+			return accountDao.ObtenerCantCuentas(a);
+		}
+		catch(Exception e)
+		{
+			return 0;
+		}
+	}
+	
+	@Override
+	public int ObtenerUltimaCuenta() {
+		try {
+			return accountDao.ObtenerUltimaCuenta();
+		}
+		catch(Exception e)
+		{
+			return 0;
+		}
+	}
+	
+	@Override
+	public Boolean ValidarCBU(Account a){
+		try {
+			ResultSet rs = null;
+			rs = accountDao.ObtenerCuenta(false, a);
+			accountDao = null;
+			if(!rs.next()) {
+				return true;
+			}
+			return false;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
 }

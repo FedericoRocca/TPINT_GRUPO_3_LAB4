@@ -18,7 +18,7 @@ import dominio.Loan;
 import dominio.LoanState;
 import javafx.util.converter.LocalDateStringConverter;
 import negocio.AccountNeg;
-import negocio.IAccountNeg;
+import negocio.AccountNeg;
 import negocio.LoanNeg;
 import negociolmpl.AccountNegImpl;
 import negociolmpl.LoanNeglmpl;
@@ -29,7 +29,7 @@ public class ServletPrestamos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	LoanNeg negLoan = new LoanNeglmpl();
-	IAccountNeg negAccount = new AccountNegImpl();
+	AccountNeg negAccount = new AccountNegImpl();
 	
     public ServletPrestamos() {
         super();
@@ -116,7 +116,9 @@ public class ServletPrestamos extends HttpServlet {
 				estado = negLoan.updateLoanState(idAccount, 2);
 				request.setAttribute("estadoPrestamo", estado);
 				
-				//Se tienen que generar las cuotas
+				//--------------------------------
+				//Aca se tienen que generar las cuotas
+				//--------------------------------
 				
 				//Se vuelve a cargar la lista
 				request.setAttribute("listLoans", negLoan.listPending());	

@@ -15,6 +15,7 @@ import dominio.Account;
 import dominio.Movement;
 import dominio.User;
 import negocio.AccountNeg;
+import negociolmpl.AccountNegImpl;
 import negociolmpl.UserNeglmpl;
 
 /**
@@ -56,7 +57,7 @@ public class ServletTransferencias extends HttpServlet {
 			//x.setMovementTypeId(movementTypeId);
 			
 
-			AccountNeg a = new AccountNeg();
+			AccountNeg a = new AccountNegImpl();
 			boolean estado = false;
 			String tipoEstado = "";
 			String p = request.getParameter("parameter");
