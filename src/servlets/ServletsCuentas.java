@@ -49,6 +49,8 @@ public class ServletsCuentas extends HttpServlet {
 
 		try {
 			request.removeAttribute("logearError");
+			request.removeAttribute("DadaAlta");
+			request.removeAttribute("DadaBaja");
 			Account x = new Account();
 			x.setAccountDni(request.getParameter("txtDNI"));
 			request.setAttribute("DNI", request.getParameter("txtDNI"));
@@ -96,13 +98,14 @@ public class ServletsCuentas extends HttpServlet {
 					{
 						throw new Exception("Ya existe una cuenta con ese CBU");
 					}
-					thisPage = "/ListadoCuentas.jsp";
+					request.setAttribute("DadaAlta", estado);
 					a = null;
 				}
 				else if(p.equals("Baja"))
 				{
 					x.setAccountNumber(Integer.parseInt(request.getParameter("NroCuentaBaja")));
 					estado=  a.BajaCuenta(x);
+					request.setAttribute("DadaBaja", estado);
 					a = null;
 				}
 			x = null;
@@ -124,6 +127,9 @@ public class ServletsCuentas extends HttpServlet {
 				request.setAttribute("Nombre","NOMBRE: " + u.getFirstName()+" "+u.getLastName());
 				if(p.equals("Baja")) {
 					List<Account> accounts = a.GetAllbyDni(u.getDni());
+					request.setAttribute("CuentaB1","");
+					request.setAttribute("CuentaB2","");
+					request.setAttribute("CuentaB3","");
 					int i = 1;
 					if(!accounts.isEmpty())
 					{
@@ -136,6 +142,7 @@ public class ServletsCuentas extends HttpServlet {
 					{
 						throw new Exception("No existen cuentas para dar de baja");
 					}
+					request.setAttribute("List", accounts);
 				}
 				request.setAttribute(tipoEstado, estado);
 				u = null;

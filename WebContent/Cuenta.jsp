@@ -144,26 +144,38 @@
 									class="custom-select" name="NroCuentaBaja"
 									id="inputGroupSelect03">
 									<option selected>Elija Cuenta</option>
-									<option value="${CuentaB1}">${CuentaB1}</option>
-									<option value="${CuentaB2}">${CuentaB2}</option>
-									<option value="${CuentaB3}">${CuentaB3}</option>
+									<%
+										if (request.getAttribute("CuentaB1").toString().length() > 0) {
+									%>
+									<option value="${CuentaB1}">Nro: ${CuentaB1}</option>
+									<%
+										}
+													if (request.getAttribute("CuentaB2").toString().length() > 0) {
+									%>
+									<option value="${CuentaB2}">Nro: ${CuentaB2}</option>
+									<%
+										}
+													if (request.getAttribute("CuentaB3").toString().length() > 0) {
+									%>
+									<option value="${CuentaB3}">Nro: ${CuentaB3}</option>
+									<%
+										}
+									%>
 								</select>
-									</div>						
 							</div>
-							<%
-								}
-							%>
-							<div class="form-row">
+						</div>
+						<%
+							}
+						%>
+						<div class="form-row">
 							<div class="form-group col-md-3">
-							<button type="submit" name="btnGestionarCuenta"
-								class="btn btn-primary mt-2">
-								Dar de
-								<%=request.getParameter("p")%></button></div></div>
-							<%
-								}
-								}
-							%>
-						
+								<button type="submit" name="btnGestionarCuenta"
+									class="btn btn-primary mt-2">
+									Dar de
+									<%=request.getParameter("p")%></button>
+							</div>
+						</div>
+
 					</form>
 
 				</div>
@@ -172,9 +184,27 @@
 			</div>
 			<!-- End of Main Content -->
 			<%
-				if (request.getAttribute("logearError") != null) {
+				}
+					if (request.getAttribute("logearError") != null) {
 			%><script>
 				alert("${logearError}");
+			</script>
+			<%
+				}
+				}
+			%>
+			<%
+				if (request.getAttribute("DadaBaja") != null) {
+			%><script>
+				alert("Cuenta dada de Baja correctamente");
+			</script>
+			<%
+				}
+			%>
+			<%
+				if (request.getAttribute("DadaAlta") != null) {
+			%><script>
+				alert("Cuenta dada de Alta correctamente");
 			</script>
 			<%
 				}
