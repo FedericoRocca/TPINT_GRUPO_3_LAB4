@@ -1,3 +1,6 @@
+<%@page import="dominio.Account"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -74,16 +77,27 @@
 						<h1 class="h3 mb-0 text-gray-800">Alta de pr�stamo</h1>
 					</div>
 					
+					<%	
+						List<Account> listaAccount = new ArrayList<Account>();
+						if (request.getAttribute("listaAccount") != null) {
+							listaAccount = (List<Account>) request.getAttribute("listaAccount");
+						}
+					%>
+					
 					<form method="post" action="ServletPrestamos">
 						<div class="form-row">
 							<div class="form-group col-md-3">
 								<label>N° de Cuenta</label>
 								
-				<!-------------------ToDo---------------------------------------------------------------------->
-				<!--Cuando se tenga los datos del User en session, completar un dropdown con sus cuentas -->
-				<!----------------------------------------------------------------------------------------->
-
-								<input name="txtAccountNumber" class="form-control" required="required" type="text" placeholder="Ingrese N° de Cuenta"> 
+								<select class="form-control" name=comboAccountNumber>
+									<%
+										for (Account a : listaAccount) {
+									%>
+									<option value="<%=a.getAccountNumber()%>"><%=a.getAccountNumber()%></option>
+									<%
+										}
+									%>
+								</select>
 							</div>					
 						</div>
 						<div class="form-row">

@@ -24,7 +24,7 @@ public class AccountDaoImpl implements AccountDao{
 		try {
 		    
 			ResultSet rs= cn.query("SELECT accounts.accountNumber, accounts.accountDni, accounts.creationDate, accounts.accountTypeId, accounts.cbu, accounts.balance, accounts.status"
-			        + "FROM Accounts");
+			        + "FROM Accounts WHERE accounts.status=1");
 			while(rs.next()) {
 				Account acc = new Account();
 				acc.setAccountNumber(rs.getInt("accounts.accountNumber"));
@@ -34,6 +34,8 @@ public class AccountDaoImpl implements AccountDao{
 				acc.setCbu(rs.getString("accounts.cbu"));
 				acc.setBalance(rs.getFloat("accounts.balance"));
 				acc.setStatus(rs.getBoolean("accounts.status"));
+				
+				list.add(acc);
 			}
 		}
 		catch(Exception e) {

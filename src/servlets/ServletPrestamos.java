@@ -45,7 +45,6 @@ public class ServletPrestamos extends HttpServlet {
 			}
 			
 			if(request.getParameter("insert")!=null) {
-				/*ToDo__Dni de session y traer Array de cuentas*/
 				request.setAttribute("listaAccount", negAccount.GetAllbyDni("36249161")); //Este DNI se tiene que sacar por session.
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaPrestamo.jsp");
 				dispatcher.forward(request, response);
@@ -61,11 +60,10 @@ public class ServletPrestamos extends HttpServlet {
 		try {
 			
 			if(request.getParameter("btnPedirPrestamo")!=null) {
+				
 				Loan ln = new Loan();
-				
-				
 				ln.setDni("36249161"); /*Se trae de session*/
-				ln.setAccountNumber(Integer.parseInt(request.getParameter("txtAccountNumber"))); /*A futuro se levanta de un dropdown*/
+				ln.setAccountNumber(Integer.parseInt(request.getParameter("comboAccountNumber")));
 				ln.setAmountReqByCustomer(Double.parseDouble(request.getParameter("txtAmountReqByCustomer")));
 				ln.setAmountOfFees(Integer.parseInt(request.getParameter("comboAmountOfFees")));
 				ln.setLoanState(new LoanState(1,"Pendiente"));
@@ -104,6 +102,8 @@ public class ServletPrestamos extends HttpServlet {
 				boolean estado = true;
 				estado = negLoan.insert(ln);
 				request.setAttribute("estadoPrestamo", estado);
+				//Se vuelve a cargar el descolgable
+				request.setAttribute("listaAccount", negAccount.GetAllbyDni("36249161")); //Este DNI se tiene que sacar por session.
 				
 				RequestDispatcher rd = request.getRequestDispatcher("/AltaPrestamo.jsp");
 				rd.forward(request, response);	
