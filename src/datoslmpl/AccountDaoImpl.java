@@ -28,7 +28,7 @@ public class AccountDaoImpl implements IAccountDao{
 			while(rs.next()) {
 				Account acc = new Account();
 				acc.setAccountNumber(rs.getInt("accounts.accountNumber"));
-				acc.setAccountDni(rs.getString("accounts.accountDni"));
+				acc.setAccountDni(rs.getInt("accounts.accountDni"));
 				acc.setCreationDate(rs.getDate("accounts.creationDate"));
 				acc.setAccountypeid(rs.getInt("accounts.accountTypeId"));
 				acc.setCbu(rs.getString("accounts.cbu"));
@@ -58,7 +58,7 @@ public class AccountDaoImpl implements IAccountDao{
 			while(rs.next()) {
 				Account acc = new Account();
 				acc.setAccountNumber(rs.getInt("accounts.accountNumber"));
-				acc.setAccountDni(rs.getString("accounts.accountDni"));
+				acc.setAccountDni(rs.getInt("accounts.accountDni"));
 				acc.setCreationDate(rs.getDate("accounts.creationDate"));
 				acc.setAccountypeid(rs.getInt("accounts.accountTypeId"));
 				acc.setCbu(rs.getString("accounts.cbu"));

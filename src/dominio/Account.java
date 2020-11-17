@@ -11,7 +11,7 @@ public class Account {
     private int accountypeid;
     private String cbu;
     private float balance;
-    
+    private Boolean status;
     
     public Account(){}
     
@@ -52,6 +52,14 @@ public class Account {
 
 	public void setBalance(float balance) {
 		this.balance = balance;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 
