@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -65,21 +66,21 @@ public class ServletsCuentas extends HttpServlet {
 			
 		if(request.getParameter("btnGestionarCuenta")!=null)
 		{
-			x.setCbu(request.getParameter("txtCBU"));
-			request.setAttribute("CBU", request.getParameter("txtCBU"));
-			x.setAccountypeid(Integer.parseInt(request.getParameter("tipoCta")));
-			request.setAttribute("Cuenta", request.getParameter("tipoCta"));
-			x.setBalance(Float.parseFloat(request.getParameter("txtSaldo")));
-			request.setAttribute("Saldo", request.getParameter("txtSaldo"));
 			estado=true;
 			tipoEstado = "estadoGestion";
 						
 				if(p.equals("Alta"))
 				{					
+					x.setCbu(request.getParameter("txtCBU"));
+					request.setAttribute("CBU", request.getParameter("txtCBU"));
+					x.setAccountypeid(Integer.parseInt(request.getParameter("tipoCta")));
+					request.setAttribute("Cuenta", request.getParameter("tipoCta"));
+					x.setBalance(Float.parseFloat(request.getParameter("txtSaldo")));
+					request.setAttribute("Saldo", request.getParameter("txtSaldo"));
 					int cant = a.ObtenerCantCuentas(x);
 					if(cant >= 3 || cant < 0)
 					{
-						throw new Exception("El cliente posee 3 o m�s cuentas");
+						throw new Exception("El cliente posee 3 o mas cuentas");
 					}
 					int ultima = a.ObtenerUltimaCuenta();
 					x.setAccountNumber(ultima+1);
@@ -100,6 +101,7 @@ public class ServletsCuentas extends HttpServlet {
 				}
 				else if(p.equals("Baja"))
 				{
+					x.setAccountNumber(Integer.parseInt(request.getParameter("NroCuentaBaja")));
 					estado=  a.BajaCuenta(x);
 					a = null;
 				}
@@ -117,11 +119,23 @@ public class ServletsCuentas extends HttpServlet {
 				u = un.getUser(request.getParameter("txtDNI"));
 				if (u == null)
 				{
-					throw new Exception("No se encontr� el usuario en la base de datos");
+					throw new Exception("No se encuentra el usuario en la base de datos");
 				}
 				request.setAttribute("Nombre","NOMBRE: " + u.getFirstName()+" "+u.getLastName());
 				if(p.equals("Baja")) {
-					
+					List<Account> accounts = a.GetAllbyDni(u.getDni());
+					int i = 1;
+					if(!accounts.isEmpty())
+					{
+						for(Account c: accounts) {					
+							request.setAttribute("CuentaB"+i,c.getAccountNumber());
+							i++;
+						}
+					}
+					else
+					{
+						throw new Exception("No existen cuentas para dar de baja");
+					}
 				}
 				request.setAttribute(tipoEstado, estado);
 				u = null;

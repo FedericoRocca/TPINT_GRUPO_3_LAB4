@@ -52,9 +52,9 @@ public class AccountDaoImpl implements AccountDao{
 		cn.Open();
 		ArrayList<Account> list = new ArrayList<Account>();
 		try {
-		    
-			ResultSet rs= cn.query("SELECT accounts.accountNumber, accounts.accountDni, accounts.creationDate, accounts.accountTypeId, accounts.cbu, accounts.balance, accounts.status"
-			        + "FROM Accounts WHERE accounts.accountDni = " + dni);
+		    String query = "SELECT AccountNumber,accountDni,CreationDate,AccountTypeId,CBU,Balance,Status FROM Accounts";
+		    query += " WHERE Status = 1 AND accountDni = '" + dni+"'";
+			ResultSet rs= cn.query(query);
 			while(rs.next()) {
 				Account acc = new Account();
 				acc.setAccountNumber(rs.getInt("accounts.accountNumber"));
@@ -64,6 +64,7 @@ public class AccountDaoImpl implements AccountDao{
 				acc.setCbu(rs.getString("accounts.cbu"));
 				acc.setBalance(rs.getFloat("accounts.balance"));
 				acc.setStatus(rs.getBoolean("accounts.status"));
+				list.add(acc);
 			}
 		}
 		catch(Exception e) {
@@ -101,7 +102,7 @@ public class AccountDaoImpl implements AccountDao{
 			cn = new ConnectionDB();
 			cn.Open();
 			String query = "Update Accounts Set Status = 0 WHERE ";
-			query += "AccountNumber= " + a.getAccountNumber()+" AND Dni= '"+a.getAccountDni()+"'";
+			query += "AccountNumber= " + a.getAccountNumber()+" AND accountDni= '"+a.getAccountDni()+"'";
 			cn.execute(query);
 			cn.close();
 			cn = null;
