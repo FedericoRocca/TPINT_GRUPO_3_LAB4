@@ -45,16 +45,15 @@ CREATE TABLE Loan
 
 CREATE TABLE MovementType
 (
-	id				INT 		NOT NULL,
+	id		 INT AUTO_INCREMENT NOT NULL,
     descriptions 	VARCHAR(20) NOT NULL,
-    status			BIT			NOT NULL,
      
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE Movement
 (
-	id				INT 			NOT NULL,
+	id			 INT AUTO_INCREMENT NOT NULL,
     movementDate 	DATETIME 		NOT NULL,
     details 		VARCHAR(20) 	NOT NULL,
     amount 			DECIMAL(10,2) 	NOT NULL,
@@ -277,3 +276,6 @@ BEGIN
 		COMMIT WORK;
 END$$
 DELIMITER ;
+
+
+-- ACCOUNTS --	

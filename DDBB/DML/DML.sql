@@ -1,10 +1,12 @@
 USE bdbanco;
+-- TIPOS DE MOVIMIENTOS -- 
+INSERT INTO movementtype (descriptions) VALUES ("Alta de cuenta"),("Alta de prestamo"),("Pago de prestamo"),("Transferencia");
+
 -- TIPOS DE CUENTAS --
 INSERT INTO accountstype (id, description, status) VALUES (1, "Cuenta corriente", 1);
 INSERT INTO accountstype (id, description, status) VALUES (2, "Caja de ahorro", 1);
 -- INSERT INTO accountstype (id, description, status) VALUES (3, "Cuenta nómina", 1);
 -- INSERT INTO accountstype (id, description, status) VALUES (4, "Cuenta de valores", 1);
-select * from accountstype;
 
 -- ESTADOS DE PRESTASMO --
 INSERT INTO LoanState (state) VALUES ("Pendiente"),("Aceptado"),("Rechazado");
@@ -25,6 +27,7 @@ INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('99999988',1
 INSERT INTO users (dni, firstName, lastName, userName, password, cuil, gender, nationality, birthDate, address, city, email, status) 
 	VALUES ("36249161","Federico","Rocca", "usernameLoco", "Password","20362491615","Masculino","Argentina","1991-11-22", "Una calle random", "San Fernando", "frocca17@gmail.com", 1 );
 INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('36249161',1,1);
+
 -- Clientes de prueba --
 INSERT INTO users VALUES ("12345678","nomCliente1","apeCliente1", "userCliente1", "passwordCliente1","12345678901","Masculino","1","1000-11-22", "calleCliente1", "Barrio1", "mail1@gmail.com", 1 );
 INSERT INTO users VALUES ("22345678","nomCliente2","apeCliente2", "userCliente2", "passwordCliente2","22345678901","Masculino","2","2000-11-22", "calleCliente2", "Barrio2", "mail2@gmail.com", 1 );
@@ -47,7 +50,6 @@ INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('82345678',2
 INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('92345678',2,1);
 
 -- ACCOUNTS --
-select * from accounts;
 INSERT INTO Accounts VALUES (1,"12345678","2020-10-22",1,"4009041813520",10000,1);
 INSERT INTO Accounts VALUES (2,"12345678","2020-10-22",1,"4009041813521",10000,1);
 INSERT INTO Accounts VALUES (3,"12345678","2020-10-22",1,"4009041813522",10000,1);
@@ -287,6 +289,7 @@ INSERT INTO Provinces (description) VALUES('Santa Fé');
 INSERT INTO Provinces (description) VALUES('Santiago del Estero');
 INSERT INTO Provinces (description) VALUES('Tierra del Fuego');
 INSERT INTO Provinces (description) VALUES('Tucumán');
+
 
 
 -- Registros de ciudades --
