@@ -1,3 +1,6 @@
+<%@page import="dominio.Account"%>
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -82,14 +85,26 @@
 						<h1 class="h3 mb-0 text-gray-800">Nueva transferencia</h1>
 					</div>
 					
-					<form enctype="multipart/form-data">
+					<form method="post" action="ServletTransferencias">
+					<%
+						ArrayList<Account> listAccount = new ArrayList<Account>();
+						if(request.getAttribute("listAccount") != null)
+						{
+							listAccount = (ArrayList<Account>) request.getAttribute("listAccount");
+						}
+					%>
 						<div class="form-row">
 							<div class="form-group col-md-3">
 								<label>Origen</label>
-								<select class="custom-select">
-									<option value="1">N° 45678</option>
-									<option value="2">N° 55555</option>
-									<option value="3">N° 11111</option>
+								<select class="custom-select" name="textOrigen">
+								<option selected>Seleccione...</option>
+   								<%
+   									for(Account aO : listAccount)	{
+								%>									
+							      	<option value="<%=aO.getAccountNumber() %>"><%=aO.getAccountNumber()%></option>
+							   	<%
+									} 
+								%>
 								</select>       				
 							</div>					
 						</div>
@@ -106,61 +121,21 @@
 							</div>		
 						</div>
 
-						<button class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+						<button class="btn btn-primary mt-2" type="submit" name="btnPedirTransferencia">Enviar</button>
 					
-		
+						<%
+							if (request.getAttribute("estadoTransferencia") != null) {
+						%>
+						<div class="alert alert-success col-md-3" role="alert">
+							Transferencia realizada con exito!
+						</div>
+
+						<%
+							}
+						%>	
+						
 					</form>
-						<!-- Modal -->
-								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								  <div class="modal-dialog" role="document">
-								    <div class="modal-content">
-								      <div class="modal-header">
-								        <h5 class="modal-title" id="exampleModalLabel">Datos de transferencia</h5>
-								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								          <span aria-hidden="true">&times;</span>
-								        </button>
-								      </div>
-								      <div class="modal-body">
-								      <div class="card"> 
-								      <div class="card-body">
-								      <h5 class="card-title">Cuenta de Origen</h5>
-								        
-								        Numero de cuenta
-								        <input class="form-control" type="text" value="N° 45678" readonly> 
-								        CBU
-								        <input class="form-control" type="text" value="0043746238233" readonly> 
-								      
-								      </div>
-					            
-						            <div class="card-body">
-						             <h5 class="card-title">Cuenta de Destino</h5>
-							            Numero de cuenta
-							            <div class="input-group">		
-								        <input class="form-control" id="inputCta" type="text" value="N° 66890" readonly>
-								        <button class="btn" onclick="RemoveReadOnly('inputCta')"><i class="fas fa-pencil-alt"></i></button>
-								        </div>
-								        Monto	
-								        <div class="input-group">			        						 
-								        <input class="form-control" id="inputMonto" type="text" value="1203,89" readonly> 
-								        <button class="btn" onclick="RemoveReadOnly('inputMonto')"><i class="fas fa-pencil-alt"></i></button>
-								        </div>
-								        CBU
-								        <div class="input-group">
-									        <input class="form-control" id="inputCBU" type="text" value="0023689237788" readonly>
-					        				<button class="btn" onclick="RemoveReadOnly('inputCBU')"><i class="fas fa-pencil-alt"></i></button>
-					        			</div>
-							        </div>
-								   
-								      
-								      <div class="modal-footer">
-								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-								        <button type="button" class="btn btn-primary">Transferir</button>
-								       </div>
-								      </div>
-								    </div>
-								  </div>
-								</div>
-							</div>
+				
 				</div>
 				<!-- /.container-fluid -->
 
