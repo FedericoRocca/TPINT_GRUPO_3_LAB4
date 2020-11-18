@@ -52,7 +52,6 @@ public class ServletClientes extends HttpServlet {
 	        }
 
 	        request.setAttribute("userLogin", userLogin);
-	        
     	    ArrayList<User> users = new ArrayList<>();
     		ArrayList<Nationality> nationalities = new ArrayList<>();
     		UserDaolmpl udi = new UserDaolmpl();
@@ -61,6 +60,13 @@ public class ServletClientes extends HttpServlet {
     		User bajaUser = new User();
     		User modifUser = new User();
     		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    		
+    		if(request.getParameter("btnLogout") != null)
+    		{
+    		    userLogin = null;
+    		    RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+                dispatcher.forward(request, response);
+    		}
     		
     		if(request.getParameter("btnBuscar") != null)
             {
