@@ -85,14 +85,14 @@
 					</div>
 					
 					<%
-					List<Account> listCuent = new ArrayList<Account>();
+					ArrayList<Account> listCuent = new ArrayList<Account>();
 					if(request.getAttribute("listCuent") != null)
 					{
-						listCuent = (List<Account>) request.getAttribute("listCuent");
+						listCuent = (ArrayList<Account>) request.getAttribute("listCuent");
 					}
 					%>
 					
-					<form enctype="multipart/form-data">
+					<form method="post" action="ServletTransferencias">
 						<div class="form-row">
 							<div class="form-group col-md-5">
 								<label>Origen</label>
@@ -145,7 +145,7 @@
 							</div>	
 						</div>
 
-						<button class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+						<button class="btn btn-primary mt-2" name="btnGestionarTransferencias" data-toggle="modal" data-target="#exampleModal">Enviar</button>
 					
 		
 					</form>
