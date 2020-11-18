@@ -8,10 +8,6 @@ INSERT INTO accountstype (id, description, status) VALUES (2, "Caja de ahorro", 
 -- ESTADOS DE PRESTASMO --
 INSERT INTO LoanState (state) VALUES ("Pendiente"),("Aceptado"),("Rechazado");
 
--- PRESTAMOS PENDIENTES --
-INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("36249161",9912,"2020-05-03",1100,1000,"2021-05-03",6,91.66,1,1);
-INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("36249161",9923,"2020-04-03",2200,2000,"2020-12-03",12,366.66,1,1);
-
 -- ROLES --
 INSERT INTO roles (name, status) VALUES ("Administrador", 1);
 INSERT INTO roles (name, status) VALUES ("Cliente", 1);
@@ -49,6 +45,18 @@ INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('62345678',2
 INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('72345678',2,1);
 INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('82345678',2,1);
 INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('92345678',2,1);
+
+-- ACCOUNTS --
+INSERT INTO Accounts VALUES (1,"12345678","2020-10-22",1,"4009041813520",10000,1);
+INSERT INTO Accounts VALUES (2,"12345678","2020-10-22",1,"4009041813521",10000,1);
+INSERT INTO Accounts VALUES (3,"12345678","2020-10-22",1,"4009041813522",10000,1);
+INSERT INTO Accounts VALUES (4,"22345678","2020-10-22",1,"4009041813523",10000,1);
+
+-- PRESTAMOS PENDIENTES --
+INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("12345678",1,"2020-05-03",1100,1000,"2021-05-03",6,91.66,1,1);
+INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("12345678",1,"2020-04-03",2200,2000,"2020-12-03",12,366.66,1,1);
+INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("12345678",2,"2020-04-03",11000,10000,"2020-12-03",3,3666.66,1,1);
+INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("22345678",4,"2020-04-03",22000,20000,"2020-12-03",24,916.66,1,1);
 
 -- Registros de nacionalidades --
 INSERT INTO Nationalities(country, gentilic, iso)VALUES('Afganistán','AFGANA','AFG');
