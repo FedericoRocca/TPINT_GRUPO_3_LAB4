@@ -47,14 +47,14 @@ public class MovementDaoImpl implements MovementDao {
 	}
 
 	@Override
-	public boolean insert(Account accountOrigen, Account accountDestino, DecimalFormat monto, String dni) {
+	public boolean insert(Account accountOrigen, DecimalFormat monto) {
 		boolean status = true;
 		
 		cn = new ConnectionDB();
 		cn.Open();
 		
 		String query = "INSERT INTO movement (id, movementDate, details, amount , MovementTypeId , status) VALUES "
-				+ "('"+accountOrigen.getAccountNumber() +"', '"+accountOrigen.getCreationDate()+"', '"+monto+"', '"+accountOrigen.getAccountypeid()+"', '"+dni+"')";
+				+ "('"+accountOrigen.getAccountNumber() +"', '"+accountOrigen.getCreationDate()+"', '"+ "" +"', '"+monto+"', '"+accountOrigen.getAccountypeid()+"', '"+accountOrigen.getStatus()+"')";
 		
 		System.out.println(query);
 		try

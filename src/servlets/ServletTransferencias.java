@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import datoslmpl.MovementDaoImpl;
 import dominio.Account;
 import dominio.Movement;
 import dominio.User;
@@ -47,7 +48,7 @@ public class ServletTransferencias extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			Movement x = new Movement();
+			MovementDaoImpl x = new MovementDaoImpl();
 			DecimalFormat df = new DecimalFormat("0.00");
 			//LocalDate mifecha = LocalDate.Now();
 			
@@ -56,26 +57,34 @@ public class ServletTransferencias extends HttpServlet {
 			//x.setAmount(request.getParameter("txtCantidad"));
 			//x.setMovementTypeId(movementTypeId);
 			
-
-			AccountNeg a = new AccountNegImpl();
 			boolean estado = false;
 			String tipoEstado = "";
 			String p = request.getParameter("parameter");
-			String thisPage="/Cuenta.jsp?p="+p;
+			String thisPage="/AltaTransferencia.jsp?p="+p;
 
 
-			
-
-
-		
-		request.setAttribute(tipoEstado, estado);
-		RequestDispatcher dispatcher = request.getRequestDispatcher(thisPage);
-		dispatcher.forward(request, response);
+			if(request.getParameter("btnGestionarTransferencias")!=null) {
+				
+				estado=true;
+				
+				if(estado) 
+				{
+					
+					if(!estado) {
+						throw new Exception("Hubo un problema al crear su cuenta");
+					}
+				}
+				
+				request.setAttribute(tipoEstado, estado);
+				RequestDispatcher dispatcher = request.getRequestDispatcher(thisPage);
+				dispatcher.forward(request, response);
+			}
+	
 		}
 		catch(Exception e)
 		{
 			request.setAttribute("Error", e.getMessage());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/Cuenta.jsp?p="+request.getParameter("parameter"));
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaTransferencia.jsp?p="+request.getParameter("parameter"));
 			dispatcher.forward(request, response);
 		}
 	}
