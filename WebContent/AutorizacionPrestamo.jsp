@@ -121,10 +121,16 @@
 												<input type="hidden" name="idAccount" value="<%=l.getId() %>"> 
 											</td>
 											<td><%=l.getDni() %></td>
-											<td><%=l.getAccountNumber() %></td>
+											<td>
+												<%=l.getAccountNumber() %>
+												<input type="hidden" name="accountNumber" value="<%=l.getAccountNumber() %>"> 
+											</td>
 											<td><%=l.getLoanDate() %></td>
 											<td><%=l.getAmountInt() %></td>
-											<td><%=l.getAmountReqByCustomer() %></td>
+											<td>
+												<%=l.getAmountReqByCustomer() %>
+												<input type="hidden" name="amountReqByCustomer" value="<%=l.getAmountReqByCustomer() %>">
+											</td>
 											<td><%=l.getAmountOfFees() %></td>
 											<td>
 											<button type="submit" class="btn btn-success" name="btnAceptado">

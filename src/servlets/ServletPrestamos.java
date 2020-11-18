@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.w3c.dom.ls.LSException;
 
+import dominio.Account;
 import dominio.Loan;
 import dominio.LoanState;
 import javafx.util.converter.LocalDateStringConverter;
@@ -45,7 +46,7 @@ public class ServletPrestamos extends HttpServlet {
 			}
 			
 			if(request.getParameter("insert")!=null) {
-				request.setAttribute("listaAccount", negAccount.GetAllbyDni("36249161")); //Este DNI se tiene que sacar por session.
+				request.setAttribute("listaAccount", negAccount.GetAllbyDni("12345678")); //Este DNI se tiene que sacar por session.
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaPrestamo.jsp");
 				dispatcher.forward(request, response);
 			}
@@ -103,7 +104,7 @@ public class ServletPrestamos extends HttpServlet {
 				estado = negLoan.insert(ln);
 				request.setAttribute("estadoPrestamo", estado);
 				//Se vuelve a cargar el descolgable
-				request.setAttribute("listaAccount", negAccount.GetAllbyDni("36249161")); //Este DNI se tiene que sacar por session.
+				request.setAttribute("listaAccount", negAccount.GetAllbyDni("12345678")); //Este DNI se tiene que sacar por session.
 				
 				RequestDispatcher rd = request.getRequestDispatcher("/AltaPrestamo.jsp");
 				rd.forward(request, response);	
@@ -115,6 +116,12 @@ public class ServletPrestamos extends HttpServlet {
 				boolean estado = true;
 				estado = negLoan.updateLoanState(idAccount, 2);
 				request.setAttribute("estadoPrestamo", estado);
+
+				negAccount.updateBalance(Float.parseFloat(request.getParameter("amountReqByCustomer")),Integer.parseInt(request.getParameter("accountNumber")));
+				
+				//--------------------------------
+				//Aca se tienen que generar un movimiento
+				//--------------------------------
 				
 				//--------------------------------
 				//Aca se tienen que generar las cuotas
