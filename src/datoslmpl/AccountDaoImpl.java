@@ -171,4 +171,22 @@ public class AccountDaoImpl implements AccountDao{
 		}
 	}
 
+	@Override
+	public Boolean updateBalance(float x, int accountNumber) {
+		boolean estado = false;
+		try {	
+			cn = new ConnectionDB();
+			cn.Open();
+			estado = cn.execute("Update Accounts Set Balance = balance + ("+ x +") WHERE AccountNumber= " + accountNumber);
+			cn.close();
+			cn = null;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return estado;
+	}
+
 }

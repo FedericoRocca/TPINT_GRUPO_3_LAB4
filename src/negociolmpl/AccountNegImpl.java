@@ -97,4 +97,9 @@ public class AccountNegImpl implements AccountNeg{
 			return false;
 		}
 	}
+
+	@Override
+	public Boolean updateBalance(float x, int accountNumber) {
+		return accountDao.updateBalance(x, accountNumber);
+	}
 }

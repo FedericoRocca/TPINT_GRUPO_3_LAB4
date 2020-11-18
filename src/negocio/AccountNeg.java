@@ -13,4 +13,5 @@ public interface AccountNeg {
 	public int ObtenerCantCuentas(Account a);
 	public int ObtenerUltimaCuenta();
 	public Boolean ValidarCBU(Account a);
+	public Boolean updateBalance(float x, int accountNumber);
 }
