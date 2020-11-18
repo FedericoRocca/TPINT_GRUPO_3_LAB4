@@ -165,15 +165,7 @@ public class ServletClientes extends HttpServlet {
     			RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoClientes.jsp");
     			dispatcher.forward(request, response);
     		}
-    		//carga nacionalidades
-    //		if(request.getParameter("listNat") != null) 
-    //		{
-    //			
-    //			
-    //			
-    //			RequestDispatcher dispatcher = request.getRequestDispatcher("/Cliente.jsp?p="+request.getParameter("p"));
-    //			dispatcher.forward(request, response);
-    //		}
+
 		
 		    if(request.getParameter("btnGuardar") != null) 
 	        {

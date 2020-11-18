@@ -1,6 +1,7 @@
 package negociolmpl;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import datos.MovementDao;
@@ -17,15 +18,17 @@ public class MovementNegImpl implements MovementNeg{
 		this.movementDao = movementDao;
 	}
 	
+	public MovementNegImpl() {
+		
+	}
+	
 	@Override
-	public List<Movement> getAll() {
-		// TODO Auto-generated method stub
-		return movementDao.getAll();
+	public ArrayList<Movement> getAll() {
+		return (ArrayList<Movement>) movementDao.getAll();
 	}
 
 	@Override
 	public boolean insert(Account accountOrigen, DecimalFormat monto) {
-		// TODO Auto-generated method stub
 		return movementDao.insert(accountOrigen, monto);
 	}
 

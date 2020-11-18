@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Banco UTN - Transferencia</title>
+<title>Banco UTN - Transferencia <%=request.getParameter("p")%></title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -81,38 +81,36 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Nueva transferencia</h1>
+						<h1 class="h3 mb-0 text-gray-800"><%= request.getParameter("p") %>Nueva transferencia</h1>
 					</div>
 					
-					<%
-					ArrayList<Account> listCuent = new ArrayList<Account>();
-					if(request.getAttribute("listCuent") != null)
-					{
-						listCuent = (ArrayList<Account>) request.getAttribute("listCuent");
-					}
-					%>
 					
-					<form method="post" action="ServletTransferencias">
+					
+					<form method="get" action="ServletTransferencias" enctype="multipart/form-data">
+					<%
+						ArrayList<Account> listAccount = new ArrayList<Account>();
+						if(request.getAttribute("listAccount") != null)
+						{
+							listAccount = (ArrayList<Account>) request.getAttribute("listAccount");
+						}
+					%>
 						<div class="form-row">
 							<div class="form-group col-md-5">
-								<label>Origen</label>
+								<label for="Origen">Origen</label>
 								<select class="form-control" name="textOrigen">
    								<option selected>Seleccione...</option>
    								<%
-   									for(Account n : listCuent)	{
-								%>
-									
-							      	<option value="<%=n.getAccountNumber() %>"><%=n.getAccountNumber() %></option>
+   									for(Account aO : listAccount)	{
+								%>									
+							      	<option value="<%=aO.getAccountNumber() %>"><%=aO.getAccountNumber()%></option>
 							   	<%
 									} 
 								%>
 							    </select>       				
 							</div>		
-							<div class="form-group col-md-3">
-								
-									<label for="title">Monto Inicial</label>
-									<input class="form-control" required="required" name="txtMontoInicial" type="text" placeholder="14000" disabled>        				
-								     				
+							<div class="form-group col-md-3">								
+								<label for="title">Monto Inicial</label>
+								<input class="form-control" required="required" name="txtMontoInicial" type="text" placeholder="14000" disabled>        											     				
 							</div>				
 						</div>
 						<div class="form-row">
@@ -123,31 +121,26 @@
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-5">
-
 								<label for="Destinatario">Destinatario</label>
     								<select class="form-control" name="textDestinatario">
     								<option selected>Seleccione...</option>
-    								<%
-    									for(Account n : listCuent)	{
-									%>
-										
-								      	<option value="<%=n.getAccountNumber() %>"><%=n.getAccountNumber() %></option>
-								   	<%
-										} 
-									%>
-								    </select>
+    							<%
+   									for(Account aD : listAccount)	{
+								%>						
+							      	<option value="<%=aD.getAccountNumber() %>"><%=aD.getAccountNumber()%></option>
+							   	<%
+									} 
+								%>
+								</select>
 							</div>		
 							<div class="form-group col-md-3">
-
-									<label for="title">Monto Final</label>
-									<input class="form-control" required="required" name="txtMontoFinal" type="text" placeholder="19000" disabled>        				
-						
+								<label for="title">Monto Final</label>
+								<input class="form-control" required="required" name="txtMontoFinal" type="text" placeholder="19000" disabled>        				
 							</div>	
 						</div>
 
 						<button class="btn btn-primary mt-2" name="btnGestionarTransferencias" data-toggle="modal" data-target="#exampleModal">Enviar</button>
-					
-		
+							
 					</form>
 						<!-- Modal -->
 								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

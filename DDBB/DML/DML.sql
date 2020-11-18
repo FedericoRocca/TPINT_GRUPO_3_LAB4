@@ -25,7 +25,6 @@ INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('99999988',1
 INSERT INTO users (dni, firstName, lastName, userName, password, cuil, gender, nationality, birthDate, address, city, email, status) 
 	VALUES ("36249161","Federico","Rocca", "usernameLoco", "Password","20362491615","Masculino","Argentina","1991-11-22", "Una calle random", "San Fernando", "frocca17@gmail.com", 1 );
 INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('36249161',1,1);
-
 -- Clientes de prueba --
 INSERT INTO users VALUES ("12345678","nomCliente1","apeCliente1", "userCliente1", "passwordCliente1","12345678901","Masculino","1","1000-11-22", "calleCliente1", "Barrio1", "mail1@gmail.com", 1 );
 INSERT INTO users VALUES ("22345678","nomCliente2","apeCliente2", "userCliente2", "passwordCliente2","22345678901","Masculino","2","2000-11-22", "calleCliente2", "Barrio2", "mail2@gmail.com", 1 );

@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Date;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,30 +17,58 @@ import dominio.Account;
 import dominio.Movement;
 import dominio.User;
 import negocio.AccountNeg;
+import negocio.MovementNeg;
 import negociolmpl.AccountNegImpl;
+import negociolmpl.MovementNegImpl;
 import negociolmpl.UserNeglmpl;
 
-/**
- * Servlet implementation class ServletTransferencias
- */
+
 @WebServlet("/ServletTransferencias")
 public class ServletTransferencias extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
+	AccountNeg negAccount = new AccountNegImpl();
+	MovementNeg negMove = new MovementNegImpl(null);
+	
     public ServletTransferencias() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		try 
+		{
+			 User userLogin = new User();
+		     userLogin = (User)request.getSession().getAttribute("userLogin");
+		     if( userLogin == null )
+		     {
+		    	 RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+		         dispatcher.forward(request, response);
+		     }
+		    
+		    request.setAttribute("userLogin", userLogin);
+		    			
+			if(request.getParameter("btnLogout") != null)
+    		{
+    		    userLogin = null;
+    		    RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+                dispatcher.forward(request, response);
+    		}
+			
+			Account account = new Account();
+			ArrayList<Account> accounts = new ArrayList<Account>();
+			
+			if(request.getParameter("alta") != null) {
+				accounts = negAccount.GetAllbyDni(userLogin.getDni());
+				request.setAttribute("listAccount", accounts);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaTransferencia.jsp?p=Alta");
+				dispatcher.forward(request, response);
+			}
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -47,46 +76,46 @@ public class ServletTransferencias extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		try {
-			MovementDaoImpl x = new MovementDaoImpl();
-			DecimalFormat df = new DecimalFormat("0.00");
-			//LocalDate mifecha = LocalDate.Now();
-			
-			//x.setMovementDate(mifecha);
-			//x.setDetails(details);
-			//x.setAmount(request.getParameter("txtCantidad"));
-			//x.setMovementTypeId(movementTypeId);
-			
-			boolean estado = false;
-			String tipoEstado = "";
-			String p = request.getParameter("parameter");
-			String thisPage="/AltaTransferencia.jsp?p="+p;
-
-
-			if(request.getParameter("btnGestionarTransferencias")!=null) {
-				
-				estado=true;
-				
-				if(estado) 
-				{
-					
-					if(!estado) {
-						throw new Exception("Hubo un problema al crear su cuenta");
-					}
-				}
-				
-				request.setAttribute(tipoEstado, estado);
-				RequestDispatcher dispatcher = request.getRequestDispatcher(thisPage);
-				dispatcher.forward(request, response);
-			}
-	
-		}
-		catch(Exception e)
-		{
-			request.setAttribute("Error", e.getMessage());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaTransferencia.jsp?p="+request.getParameter("parameter"));
-			dispatcher.forward(request, response);
-		}
+//		try {
+//			MovementDaoImpl x = new MovementDaoImpl();
+//			DecimalFormat df = new DecimalFormat("0.00");
+//			//LocalDate mifecha = LocalDate.Now();
+//			
+//			//x.setMovementDate(mifecha);
+//			//x.setDetails(details);
+//			//x.setAmount(request.getParameter("txtCantidad"));
+//			//x.setMovementTypeId(movementTypeId);
+//			
+//			boolean estado = false;
+//			String tipoEstado = "";
+//			String p = request.getParameter("parameter");
+//			String thisPage="/AltaTransferencia.jsp?p="+p;
+//
+//
+//			if(request.getParameter("btnGestionarTransferencias")!=null) {
+//				
+//				estado=true;
+//				
+//				if(estado) 
+//				{
+//					
+//					if(!estado) {
+//						throw new Exception("Hubo un problema al crear su cuenta");
+//					}
+//				}
+//				
+//				request.setAttribute(tipoEstado, estado);
+//				RequestDispatcher dispatcher = request.getRequestDispatcher(thisPage);
+//				dispatcher.forward(request, response);
+//			}
+//	
+//		}
+//		catch(Exception e)
+//		{
+//			request.setAttribute("Error", e.getMessage());
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaTransferencia.jsp?p="+request.getParameter("parameter"));
+//			dispatcher.forward(request, response);
+//		}
 	}
 
 }
