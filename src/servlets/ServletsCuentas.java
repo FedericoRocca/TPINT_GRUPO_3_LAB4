@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -25,18 +26,13 @@ import negociolmpl.UserNeglmpl;
 @WebServlet("/ServletsCuentas")
 public class ServletsCuentas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
+	AccountNeg negAccount = new AccountNegImpl();  
+
     public ServletsCuentas() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -52,19 +48,15 @@ public class ServletsCuentas extends HttpServlet {
 			request.removeAttribute("DadaAlta");
 			request.removeAttribute("DadaBaja");
 			Account x = new Account();
+			ArrayList<Account> listAccount = new ArrayList<Account>();
 			x.setAccountDni(request.getParameter("txtDNI"));
 			request.setAttribute("DNI", request.getParameter("txtDNI"));
-			AccountNeg a = new AccountNegImpl();
+//			AccountNeg a = new AccountNegImpl();
 			boolean estado = false;
 			String tipoEstado = "";
 			String p = request.getParameter("parameter");
 			String thisPage="/Cuenta.jsp?p="+p;
-		
-		// CUENTAS DEL CLIENTE		   
-		if(request.getParameter("listarTiposCuenta") != null) 
-		{
-			
-		}
+				
 			
 		if(request.getParameter("btnGestionarCuenta")!=null)
 		{
@@ -79,17 +71,17 @@ public class ServletsCuentas extends HttpServlet {
 					request.setAttribute("Cuenta", request.getParameter("tipoCta"));
 					x.setBalance(Float.parseFloat(request.getParameter("txtSaldo")));
 					request.setAttribute("Saldo", request.getParameter("txtSaldo"));
-					int cant = a.ObtenerCantCuentas(x);
+					int cant = negAccount.ObtenerCantCuentas(x);
 					if(cant >= 3 || cant < 0)
 					{
 						throw new Exception("El cliente posee 3 o mas cuentas");
 					}
-					int ultima = a.ObtenerUltimaCuenta();
+					int ultima = negAccount.ObtenerUltimaCuenta();
 					x.setAccountNumber(ultima+1);
-					estado = a.ValidarCBU(x);
+					estado = negAccount.ValidarCBU(x);
 					if(estado) 
 					{
-						estado= a.InsertarCuenta(x);
+						estado= negAccount.InsertarCuenta(x);
 						if(!estado) {
 							throw new Exception("Hubo un problema al crear su cuenta");
 						}
@@ -99,14 +91,14 @@ public class ServletsCuentas extends HttpServlet {
 						throw new Exception("Ya existe una cuenta con ese CBU");
 					}
 					request.setAttribute("DadaAlta", estado);
-					a = null;
+					negAccount = null;
 				}
 				else if(p.equals("Baja"))
 				{
 					x.setAccountNumber(Integer.parseInt(request.getParameter("NroCuentaBaja")));
-					estado=  a.BajaCuenta(x);
+					estado=  negAccount.BajaCuenta(x);
 					request.setAttribute("DadaBaja", estado);
-					a = null;
+					negAccount = null;
 				}
 			x = null;
 			request.setAttribute(tipoEstado, estado);
@@ -126,7 +118,7 @@ public class ServletsCuentas extends HttpServlet {
 				}
 				request.setAttribute("Nombre","NOMBRE: " + u.getFirstName()+" "+u.getLastName());
 				if(p.equals("Baja")) {
-					List<Account> accounts = a.GetAllbyDni(u.getDni());
+					List<Account> accounts = negAccount.GetAllbyDni(u.getDni());
 					request.setAttribute("CuentaB1","");
 					request.setAttribute("CuentaB2","");
 					request.setAttribute("CuentaB3","");
@@ -149,6 +141,13 @@ public class ServletsCuentas extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(thisPage);
 				dispatcher.forward(request, response);
 		}		
+		// CUENTAS DEL CLIENTE		   
+			if(request.getParameter("listarCuentas") != null) {	
+				listAccount = negAccount.GetAll();
+				request.setAttribute("accountList", listAccount);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoCuentas.jsp");
+				dispatcher.forward(request, response);
+			}
 		}
 		catch(Exception e)
 		{

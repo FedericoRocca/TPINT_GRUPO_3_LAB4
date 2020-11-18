@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="dominio.Account"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,23 +75,23 @@
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
-					<!-- Page Heading -->
-					<!-- 					<div -->
-					<!-- 						class="d-sm-flex align-items-center justify-content-between mb-4"> -->
-					<!-- 						<h1 class="h3 mb-0 text-gray-800"></h1> -->
-					<!-- 					</div> -->
-
-					<!-- DataTales Example -->
+					<div class="container-fluid">
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<h6 class="m-0 font-weight-bold text-primary">Listado de cuentas</h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
+							<%								
+								List<Account> listA = null;
+								if(request.getAttribute("accountList") != null){
+									listA = (List<Account>) request.getAttribute("accountList");
+								}
+							%>
 								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 									<thead>
 										<tr>
-											<th>N  de cuenta</th>
+											<th>Nº de cuenta</th>
 											<th>CBU</th>
 											<th>Tipo de cuenta</th>
 											<th>Fecha de alta</th>
@@ -98,19 +100,26 @@
 										</tr>
 									</thead>
 									<tbody>
+									<%
+										if(listA != null)
+											for(Account a : listA) {
+									%>
 										<tr>
-											<td>1111111</td>
-											<td>61616515184</td>
-											<td>Caja de ahorro</td>
-											<td>01/01/2020</td>
-											<td class="text-info">99999999</td>
-											<td>$10000</td>
+											<td><%=a.getAccountNumber()%></td>
+											<td><%=a.getCbu()%></td>
+											<td><%=a.getAccountypeid()%></td>
+											<td><%=a.getCreationDate()%></td>
+											<td class="text-info"><%=a.getAccountDni()%></td>
+											<td><%=a.getBalance()%></td>
 										</tr>
+									<% } %>
 									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
+
+				</div>
 
 				</div>
 				<!-- /.container-fluid -->

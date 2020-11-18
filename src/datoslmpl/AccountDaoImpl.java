@@ -21,9 +21,10 @@ public class AccountDaoImpl implements AccountDao{
 		cn = new ConnectionDB();
 		cn.Open();
 		ArrayList<Account> list = new ArrayList<Account>();
+		ResultSet rs = null;
 		try {
 		    
-			ResultSet rs= cn.query("SELECT accounts.accountNumber, accounts.accountDni, accounts.creationDate, accounts.accountTypeId, accounts.cbu, accounts.balance, accounts.status"
+			rs= cn.query("SELECT accounts.accountNumber, accounts.accountDni, accounts.creationDate, accounts.accountTypeId, accounts.cbu, accounts.balance, accounts.status"
 			        + "FROM Accounts WHERE accounts.status=1");
 			while(rs.next()) {
 				Account acc = new Account();

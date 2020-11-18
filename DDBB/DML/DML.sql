@@ -4,6 +4,7 @@ INSERT INTO accountstype (id, description, status) VALUES (1, "Cuenta corriente"
 INSERT INTO accountstype (id, description, status) VALUES (2, "Caja de ahorro", 1);
 -- INSERT INTO accountstype (id, description, status) VALUES (3, "Cuenta nómina", 1);
 -- INSERT INTO accountstype (id, description, status) VALUES (4, "Cuenta de valores", 1);
+select * from accountstype;
 
 -- ESTADOS DE PRESTASMO --
 INSERT INTO LoanState (state) VALUES ("Pendiente"),("Aceptado"),("Rechazado");
@@ -47,6 +48,7 @@ INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('82345678',2
 INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('92345678',2,1);
 
 -- ACCOUNTS --
+select * from accounts;
 INSERT INTO Accounts VALUES (1,"12345678","2020-10-22",1,"4009041813520",10000,1);
 INSERT INTO Accounts VALUES (2,"12345678","2020-10-22",1,"4009041813521",10000,1);
 INSERT INTO Accounts VALUES (3,"12345678","2020-10-22",1,"4009041813522",10000,1);
