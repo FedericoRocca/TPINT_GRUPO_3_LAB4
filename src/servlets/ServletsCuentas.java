@@ -73,7 +73,10 @@ public class ServletsCuentas extends HttpServlet {
 			ArrayList<Account> listAccount = new ArrayList<Account>();
 			x.setAccountDni(request.getParameter("txtDNI"));
 			request.setAttribute("DNI", request.getParameter("txtDNI"));
-//			AccountNeg a = new AccountNegImpl();
+			if (negAccount == null)
+			{
+				negAccount = new AccountNegImpl();
+			}
 			boolean estado = false;
 			String tipoEstado = "";
 			String p = request.getParameter("parameter");
