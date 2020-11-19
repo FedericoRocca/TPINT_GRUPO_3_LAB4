@@ -43,27 +43,6 @@ CREATE TABLE Loan
     FOREIGN KEY(loanStateId) REFERENCES LoanState(id)
 );
 
-CREATE TABLE MovementType
-(
-	id		 INT AUTO_INCREMENT NOT NULL,
-    descriptions 	VARCHAR(20) NOT NULL,
-     
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE Movement
-(
-	id			 INT AUTO_INCREMENT NOT NULL,
-    movementDate 	DATETIME 		NOT NULL,
-    details 		VARCHAR(20) 	NOT NULL,
-    amount 			DECIMAL(10,2) 	NOT NULL,
-    MovementTypeId	INT 			NOT NULL,
-    status			BIT				NOT NULL,
-     
-	PRIMARY KEY (id),
-    FOREIGN KEY(MovementTypeId) REFERENCES MovementType(id)
-);
-
 CREATE TABLE Users
 (
 	 dni 		VARCHAR(9) 	NOT NULL,
@@ -117,15 +96,27 @@ CREATE TABLE Accounts
     FOREIGN KEY(accountTypeId) REFERENCES AccountsType(id)
 );
 
-CREATE TABLE Accounts_x_movement
+CREATE TABLE MovementType
 (
-	movementId		INT NOT NULL,
-    accountnumber	INT NOT NULL,
-    status			BIT	NOT NULL,
+	id		 INT AUTO_INCREMENT NOT NULL,
+    descriptions 	VARCHAR(20) NOT NULL,
      
-	PRIMARY KEY (movementId,accountnumber),
-    FOREIGN KEY(movementId) REFERENCES Movement(id),
-    FOREIGN KEY(accountnumber) REFERENCES Accounts(accountNumber)
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE Movements
+(
+	id			 	INT AUTO_INCREMENT NOT NULL,
+    accountNumber	INT				NOT NULL,
+    movementDate 	DATETIME 		NOT NULL,
+    detail 		VARCHAR(20) 	NOT NULL,
+    amount 			DECIMAL(10,2) 	NOT NULL,
+    MovementTypeId	INT 			NOT NULL,
+    status			BIT				NOT NULL,
+     
+	PRIMARY KEY (id),
+    FOREIGN KEY(MovementTypeId) REFERENCES MovementType(id),
+    FOREIGN KEY (accountNumber) REFERENCES Accounts(accountNumber)
 );
 
 CREATE TABLE Roles

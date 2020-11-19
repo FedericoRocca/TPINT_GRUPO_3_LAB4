@@ -8,7 +8,9 @@ import java.util.List;
 
 import datos.MovementDao;
 import dominio.Account;
+import dominio.LoanState;
 import dominio.Movement;
+import dominio.MovementType;
 
 
 public class MovementDaoImpl implements MovementDao {
@@ -24,16 +26,23 @@ public class MovementDaoImpl implements MovementDao {
 		ArrayList<Movement> list = new ArrayList<Movement>();
 		try {
 		    
-			ResultSet rs= cn.query("SELECT movement.id, movement.movementDate, movement.details, movement.amount, movement.MovementTypeId, movement.status"
-			        + "FROM movement");
+			ResultSet rs= cn.query("SELECT m.id,m.accountNumber,m.movementDate,m.detail,m.amount,m.MovementTypeId,mt.descriptions,m.status "
+									+ "FROM movements as m INNER JOIN MovementType as mt ON mt.id=m.MovementTypeId WHERE m.status = 1");
 			while(rs.next()) {
 				Movement mov = new Movement();
 				mov.setId(rs.getInt("movement.id"));
-				mov.setMovementDate(rs.getDate("movement.movementDate"));
-				mov.setDetails(rs.getString("movement.details"));
-				mov.setAmount(rs.getFloat("movement.amount"));
-				mov.setMovementTypeId(rs.getInt("movement.MovementTypeId"));
-				mov.setStatus(rs.getBoolean("movement.status"));
+				mov.setAccountNumber(rs.getInt("movement.accountNumber"));
+				mov.setMovementDate(rs.getDate("m.movementDate").toLocalDate());
+				mov.setDetail(rs.getString("m.detail"));
+				mov.setAmount(rs.getFloat("m.amount"));
+				mov.setStatus(rs.getBoolean("m.status"));
+				
+				MovementType mt = new MovementType();
+				mt.setId(rs.getInt("m.MovementTypeId"));
+				mt.setDescription(rs.getString("mt.descriptions"));
+				
+				mov.setMovementType(mt);
+				list.add(mov);
 			}
 		}
 		catch(Exception e) {
@@ -47,16 +56,16 @@ public class MovementDaoImpl implements MovementDao {
 	}
 
 	@Override
-	public boolean insert(Account accountOrigen, DecimalFormat monto) {
+	public boolean insert(Movement movement) {
 		boolean status = true;
 		
 		cn = new ConnectionDB();
 		cn.Open();
 		
-		String query = "INSERT INTO movement (id, movementDate, details, amount , MovementTypeId , status) VALUES "
-				+ "('"+accountOrigen.getAccountNumber() +"', '"+accountOrigen.getCreationDate()+"', '"+ "" +"', '"+monto+"', '"+accountOrigen.getAccountypeid()+"', '"+accountOrigen.getStatus()+"')";
+		String query = "INSERT INTO movements (accountNumber,movementDate,detail,amount,MovementTypeId,status) VALUES"
+			//	+ "VALUES (1,\"2020-05-10\",\"test\",-10000,1,1); "
+				+ "('"+movement.getAccountNumber() +"','"+movement.getMovementDate()+"','"+movement.getDetail()+"',"+movement.getAmount()+","+movement.getMovementType().getId()+",1)";
 		
-		System.out.println(query);
 		try
 		 {
 			status = cn.execute(query);

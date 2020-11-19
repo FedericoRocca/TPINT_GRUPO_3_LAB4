@@ -9,6 +9,5 @@ import dominio.Movement;
 public interface MovementNeg {
 
 	public List<Movement> getAll();
-	
-	public boolean insert(Account accountOrigen,DecimalFormat monto);
+	public boolean insert(Movement movement);
 }

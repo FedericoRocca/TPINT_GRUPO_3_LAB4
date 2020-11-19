@@ -9,7 +9,7 @@ import dominio.Movement;
 public interface MovementDao {
 
 	public List<Movement> getAll();
-	public boolean insert(Account accountOrigen,DecimalFormat monto);
+	public boolean insert(Movement movement);
 
 	
 }
