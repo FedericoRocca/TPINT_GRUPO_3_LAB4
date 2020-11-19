@@ -24,6 +24,7 @@
       function RemoveReadOnly(idInput) {
          $("#"+idInput).removeAttr("readonly");       
       };
+           
    </script>
    
 </head>
@@ -53,18 +54,14 @@
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">AndrÃƒÂ© Villalta</span> 
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small">André Villalta</span> 
 								<img class="img-profile rounded-circle" src="img/profile.png">
 							</a> 
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 								<a class="dropdown-item" href="#"> 
-									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
+									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Mi Perfil
 								</a> 
-								<a class="dropdown-item" href="#"> 
-									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-									Settings
-								</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"> 
 									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -81,11 +78,9 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800"><%= request.getParameter("p") %>Nueva transferencia</h1>
+						<h1 class="h3 mb-0 text-gray-800">Nueva transferencia</h1>
 					</div>
-					
-					
-					
+										
 					<form method="get" action="ServletTransferencias" enctype="multipart/form-data">
 					<%
 						ArrayList<Account> listAccount = new ArrayList<Account>();
@@ -96,46 +91,46 @@
 					%>
 						<div class="form-row">
 							<div class="form-group col-md-5">
-								<label for="Origen">Origen</label>
-								<select class="form-control" name="textOrigen">
-   								<option selected>Seleccione...</option>
+								<label for="Origen">Número de cuenta Origen </label>
+								<select class="form-control" name="textOrigen" id="accountOrigen">
+   								<option value="" disabled selected>Seleccione...</option>
    								<%
    									for(Account aO : listAccount)	{
 								%>									
-							      	<option value="<%=aO.getAccountNumber() %>"><%=aO.getAccountNumber()%></option>
+							      	<option value="<%=aO.getBalance() %>"><%=aO.getAccountNumber()%></option>
 							   	<%
 									} 
 								%>
 							    </select>       				
 							</div>		
 							<div class="form-group col-md-3">								
-								<label for="title">Monto Inicial</label>
-								<input class="form-control" required="required" name="txtMontoInicial" type="text" placeholder="14000" disabled>        											     				
+								<label for="title">Monto actual</label>
+								<input class="form-control" required="required" id="txtMontoInicial" name="txtMontoInicial" type="number" disabled>        											     				
 							</div>				
 						</div>
 						<div class="form-row">
-							<div class="form-group col-md-5">
-								<label for="title">Cantidad</label>
-								<input class="form-control" required="required" name="txtCantidad" type="text" placeholder="Ingrese cantidad">        				
+							<div class="form-group col-md-3">
+								<label for="title">Cantidad que desea transferir</label>
+								<input class="form-control" required="required" name="txtCantidad" type="number" min="1" pattern="[0-9]+" placeholder="Ingrese cantidad en pesos argentinos">        				
 							</div>		
 						</div>
-						<div class="form-row">
+						<div class="form-row" id="divDestino" style="display:none">
 							<div class="form-group col-md-5">
-								<label for="Destinatario">Destinatario</label>
-    								<select class="form-control" name="textDestinatario">
-    								<option selected>Seleccione...</option>
+								<label for="Destinatario">Número de cuenta Destino</label>
+    								<select class="form-control" name="textDestinatario" id="accountDestino">
+    								<option value="selection" disabled selected>Seleccione...</option>
     							<%
    									for(Account aD : listAccount)	{
 								%>						
-							      	<option value="<%=aD.getAccountNumber() %>"><%=aD.getAccountNumber()%></option>
+							      	<option value="<%=aD.getBalance() %>"><%=aD.getAccountNumber()%></option>
 							   	<%
 									} 
 								%>
 								</select>
 							</div>		
 							<div class="form-group col-md-3">
-								<label for="title">Monto Final</label>
-								<input class="form-control" required="required" name="txtMontoFinal" type="text" placeholder="19000" disabled>        				
+								<label for="title">Monto actual</label>
+								<input class="form-control" required="required" id="txtMontoFinal" name="txtMontoFinal" type="number" disabled>        				
 							</div>	
 						</div>
 
@@ -157,7 +152,7 @@
 								      <div class="card-body">
 								      <h5 class="card-title">Cuenta de Origen</h5>
 								        
-								        Numero de cuenta
+								        Número de cuenta
 								        <input class="form-control" type="text" value="NÃ‚Â° 45678" readonly> 
 								        Monto inicial
 								        <input class="form-control" type="text" value="0043746238233" readonly> 
@@ -166,7 +161,7 @@
 					            
 						            <div class="card-body">
 						             <h5 class="card-title">Cuenta de Destino</h5>
-							            Numero de cuenta
+							            Número de cuenta
 							            <div class="input-group">		
 								        <input class="form-control" id="inputCta" type="text" value="NÃ‚Â° 66890" readonly>
 								        </div>
@@ -174,10 +169,7 @@
 								        <div class="input-group">			        						 
 								        <input class="form-control" id="inputMonto" type="text" value="1203,89" readonly> 
 								        </div>
-
-							        </div>
-								   
-								      
+							        </div>								 								      
 								      <div class="modal-footer">
 								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 								        <button type="button" class="btn btn-primary">Transferir</button>
@@ -189,10 +181,8 @@
 							</div>
 				</div>
 				<!-- /.container-fluid -->
-
 			</div>
 			<!-- End of Main Content -->
-
 			<!-- Footer -->
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
@@ -205,9 +195,32 @@
 		</div>
 		<!-- End of Content Wrapper -->
 	</div>
-
 	<!-- End of Page Wrapper -->
+	<script>
+	 var selectO = document.getElementById('accountOrigen');
+	 var selectD = document.getElementById('accountDestino');
+	 var selectedOption = null;	 
+	 selectO.addEventListener('change',
+   		function(){
+   	  	selectedOption = this.options[selectO.selectedIndex];
+   	  	$("#txtMontoInicial").val(selectedOption.value);
+   	 	$("#divDestino").show();
+     });
 
+     selectD.addEventListener('change',
+   		function(){
+    	 if(selectD.selectedIndex == selectO.selectedIndex ){
+    		 alert("¿En serio vas a transferir a tu misma cuenta?");
+    		 $("#divDestino").hide();
+    	 }
+    	 else{
+    		selectedOption = this.options[selectD.selectedIndex];
+    	 	$("#txtMontoFinal").val(selectedOption.value);
+    	 }
+   	 		
+     });
+        
+	</script>
 	<!-- Bootstrap core JavaScript-->
 	<script src="vendor/jquery/jquery.min.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

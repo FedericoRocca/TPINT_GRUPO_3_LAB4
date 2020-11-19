@@ -52,9 +52,10 @@ INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('92345678',2
 -- ACCOUNTS --
 INSERT INTO Accounts VALUES (1,"12345678","2020-10-22",1,"4009041813520",10000,1);
 INSERT INTO Accounts VALUES (2,"12345678","2020-10-22",1,"4009041813521",10000,1);
+UPDATE Accounts SET balance=3000 WHERE accountNumber = 2;
 INSERT INTO Accounts VALUES (3,"12345678","2020-10-22",1,"4009041813522",10000,1);
 INSERT INTO Accounts VALUES (4,"22345678","2020-10-22",1,"4009041813523",10000,1);
-
+select * from accounts;
 -- PRESTAMOS PENDIENTES --
 INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("12345678",1,"2020-05-03",1100,1000,"2021-05-03",6,91.66,1,1);
 INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("12345678",1,"2020-04-03",2200,2000,"2020-12-03",12,366.66,1,1);
