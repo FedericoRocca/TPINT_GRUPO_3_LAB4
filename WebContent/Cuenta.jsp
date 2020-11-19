@@ -168,12 +168,12 @@
 						    <div class="modal-dialog" role="document">
 						      <div class="modal-content">
 						        <div class="modal-header">
-						          <h5 class="modal-title" id="exampleModalLabel">Dar de baja cuenta?</h5>
+						          <h5 class="modal-title" id="exampleModalLabel">Dar de <%=request.getParameter("p")%> cuenta?</h5>
 						          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						            <span aria-hidden="true">×</span>
 						          </button>
 						        </div>
-						        <div class="modal-body">Realmente querés dar de baja la cuenta?</div>
+						        <div class="modal-body">Realmente querés dar de <%=request.getParameter("p")%> la cuenta?</div>
 						        <div class="modal-footer">
 						          <button type="submit" name="btnGestionarCuenta" class="btn btn-primary mt-2">Dar de <%=request.getParameter("p")%></button>
 						        </div>
