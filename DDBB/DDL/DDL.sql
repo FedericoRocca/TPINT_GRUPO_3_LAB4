@@ -43,6 +43,17 @@ CREATE TABLE Loan
     FOREIGN KEY(loanStateId) REFERENCES LoanState(id)
 );
 
+CREATE TABLE Fees_x_Loans
+(
+	idLoan INT NOT NULL,
+    feeNumber INT NOT NULL,
+	paymentDeadline DATETIME NOT NULL,
+    state BIT NOT NULL,
+    
+    PRIMARY KEY(idLoan, feeNumber),
+    FOREIGN KEY (idLoan) REFERENCES Loan(id)
+);
+
 CREATE TABLE Users
 (
 	 dni 		VARCHAR(9) 	NOT NULL,

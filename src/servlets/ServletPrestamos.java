@@ -15,16 +15,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.w3c.dom.ls.LSException;
 
 import dominio.Account;
+import dominio.Fee;
 import dominio.Loan;
 import dominio.LoanState;
 import dominio.Movement;
 import dominio.MovementType;
 import dominio.User;
-//import javafx.util.converter.LocalDateStringConverter;
 import negocio.AccountNeg;
+import negocio.FeeNeg;
 import negocio.LoanNeg;
 import negocio.MovementNeg;
 import negociolmpl.AccountNegImpl;
+import negociolmpl.FeeNeglmpl;
 import negociolmpl.LoanNeglmpl;
 import negociolmpl.MovementNegImpl;
 import sun.rmi.server.Dispatcher;
@@ -36,6 +38,7 @@ public class ServletPrestamos extends HttpServlet {
 	LoanNeg negLoan = new LoanNeglmpl();
 	AccountNeg negAccount = new AccountNegImpl();
 	MovementNeg negMovement = new MovementNegImpl();
+	FeeNeg negFee = new FeeNeglmpl();
 	
     public ServletPrestamos() {
         super();
@@ -56,7 +59,7 @@ public class ServletPrestamos extends HttpServlet {
 				
 				request.setAttribute("listLoans", negLoan.listPending());	
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/AutorizacionPrestamo.jsp");
-				dispatcher.forward(request, response);
+				dispatcher.forward(request, response); /*TODO java.lang.IllegalStateException: Cannot forward after response has been committed*/
 			}
 			
 			if(request.getParameter("insert")!=null) {
@@ -134,11 +137,11 @@ public class ServletPrestamos extends HttpServlet {
 			
 			if(request.getParameter("btnAceptado")!= null) {
 				//Se cambia el estado del Prestamo
-				int idAccount = Integer.parseInt(request.getParameter("idAccount").toString());
+				int idLoan = Integer.parseInt(request.getParameter("idLoan").toString());
 				boolean estado = true;
-				estado = negLoan.updateLoanState(idAccount, 2);
-				request.setAttribute("estadoPrestamo", estado);
+				estado = negLoan.updateLoanState(idLoan, 2);
 
+				//Se modifica el balance de la cuenta
 				negAccount.updateBalance(Float.parseFloat(request.getParameter("amountReqByCustomer")),Integer.parseInt(request.getParameter("accountNumber")));
 				
 				//Se genera el movimiento del Alta de prestamo
@@ -151,21 +154,28 @@ public class ServletPrestamos extends HttpServlet {
 				
 				estado = negMovement.insert(mov);
 				
-				//--------------------------------
-				//Aca se tienen que generar las cuotas
-				//--------------------------------
+				int cantCuotas = Integer.parseInt(request.getParameter("amountOfFees"));
+				//Se generan las cuotas
+				for(int i=1;i<=cantCuotas;i++) {
+					Fee f = new Fee();
+					f.setIdLoan(idLoan);
+					f.setFeeNumber(i);
+					f.setPaymentDeadline(LocalDate.now().plusMonths(i));
+					negFee.insert(f);
+				}
 				
 				//Se vuelve a cargar la lista
-				request.setAttribute("listLoans", negLoan.listPending());	
+				request.setAttribute("listLoans", negLoan.listPending());
+				request.setAttribute("estadoPrestamo", estado);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/AutorizacionPrestamo.jsp");
 				dispatcher.forward(request, response);
 			}
 			
 			if(request.getParameter("btnRechazado")!= null) {
 				//Se cambia el estado del Prestamo
-				int idAccount = Integer.parseInt(request.getParameter("idAccount").toString());
+				int idLoan = Integer.parseInt(request.getParameter("idLoan").toString());
 				boolean estado = true;
-				estado = negLoan.updateLoanState(idAccount, 3);
+				estado = negLoan.updateLoanState(idLoan, 3);
 				request.setAttribute("estadoPrestamo", estado);
 				
 				//Se vuelve a cargar la lista

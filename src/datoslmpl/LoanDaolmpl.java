@@ -79,7 +79,7 @@ public class LoanDaolmpl implements LoanDao{
 	
 
 	@Override
-	public boolean updateLoanState(int idAccount, int idLoanState) {
+	public boolean updateLoanState(int idLoan, int idLoanState) {
 		
 		boolean estado = true;
 		
@@ -87,7 +87,7 @@ public class LoanDaolmpl implements LoanDao{
 		cn.Open();
 		
 		try {
-			estado = cn.execute("UPDATE bdbanco.loan SET loanStateId="+idLoanState+" WHERE id="+idAccount);
+			estado = cn.execute("UPDATE bdbanco.loan SET loanStateId="+idLoanState+" WHERE id="+idLoan);
 		} 
 		catch (Exception e) {
 			e.printStackTrace();

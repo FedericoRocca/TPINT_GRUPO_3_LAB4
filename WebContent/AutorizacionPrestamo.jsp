@@ -58,7 +58,7 @@
 								<img class="img-profile rounded-circle"src="img/profile.png">
 							</a> <!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesión</span> </a>
+								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesiï¿½n</span> </a>
 							</div>
 						</li>
 					</ul>
@@ -112,7 +112,7 @@
 											<form action="ServletPrestamos" method="post">
 											<td>
 												<%=l.getId() %> 
-												<input type="hidden" name="idAccount" value="<%=l.getId() %>"> 
+												<input type="hidden" name="idLoan" value="<%=l.getId() %>"> 
 											</td>
 											<td><%=l.getDni() %></td>
 											<td>
@@ -125,7 +125,10 @@
 												<%=l.getAmountReqByCustomer() %>
 												<input type="hidden" name="amountReqByCustomer" value="<%=l.getAmountReqByCustomer() %>">
 											</td>
-											<td><%=l.getAmountOfFees() %></td>
+											<td>
+												<%=l.getAmountOfFees() %>
+												<input type="hidden" name="amountOfFees" value="<%=l.getAmountOfFees() %>">
+											</td>
 											<td>
 											<button type="submit" class="btn btn-success" name="btnAceptado">
 											    <i class="fas fa-check"></i>

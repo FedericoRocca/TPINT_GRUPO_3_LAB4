@@ -7,5 +7,5 @@ public interface LoanNeg {
 
 	public ArrayList<Loan> listPending();
 	public boolean insert(Loan loan);
-	public boolean updateLoanState(int idAccount, int idLoanState);
+	public boolean updateLoanState(int idLoan, int idLoanState);
 }
