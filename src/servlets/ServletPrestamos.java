@@ -63,7 +63,7 @@ public class ServletPrestamos extends HttpServlet {
 			}
 			
 			if(request.getParameter("insert")!=null) {
-				request.setAttribute("listaAccount", negAccount.GetAllbyDni(userLogin.getDni())); //Este DNI se tiene que sacar por session.
+				request.setAttribute("listaAccount", negAccount.GetAllbyDni(userLogin.getDni()));
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaPrestamo.jsp");
 				dispatcher.forward(request, response);
 			}
@@ -88,7 +88,7 @@ public class ServletPrestamos extends HttpServlet {
 			if(request.getParameter("btnPedirPrestamo")!=null) {
 				
 				Loan ln = new Loan();
-				ln.setDni("36249161"); /*Se trae de session*/
+				ln.setDni(userLogin.getDni()); /*Se trae de session*/
 				ln.setAccountNumber(Integer.parseInt(request.getParameter("comboAccountNumber")));
 				ln.setAmountReqByCustomer(Double.parseDouble(request.getParameter("txtAmountReqByCustomer")));
 				ln.setAmountOfFees(Integer.parseInt(request.getParameter("comboAmountOfFees")));
