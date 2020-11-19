@@ -64,6 +64,7 @@ public class ServletClientes extends HttpServlet {
     		if(request.getParameter("btnLogout") != null)
     		{
     		    userLogin = null;
+    		    request.getSession().removeAttribute("userLogin");
     		    RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
                 dispatcher.forward(request, response);
     		}

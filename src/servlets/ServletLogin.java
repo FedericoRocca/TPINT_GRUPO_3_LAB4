@@ -20,6 +20,7 @@ import negociolmpl.UserNeglmpl;
 @WebServlet("/ServletLogin")
 public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	User userLogin = new User();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,6 +35,20 @@ public class ServletLogin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+	    try
+        {
+	        if(request.getParameter("btnLogout") != null)
+	        {
+	            userLogin = null;
+	            request.getSession().removeAttribute("userLogin");
+	            RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+	            dispatcher.forward(request, response);
+	        }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -43,6 +58,13 @@ public class ServletLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    try
         {
+	        if(request.getParameter("btnLogout") != null)
+	        {
+	            userLogin = null;
+	            request.getSession().removeAttribute("userLogin");
+	            RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+	            dispatcher.forward(request, response);
+	        }
 	        RequestDispatcher dispatcher;
 	        String loginError = "";
 	      //Obtenemos los datos ingresados por el usuario 

@@ -19,6 +19,7 @@ import dominio.Loan;
 import dominio.LoanState;
 import dominio.Movement;
 import dominio.MovementType;
+import dominio.User;
 //import javafx.util.converter.LocalDateStringConverter;
 import negocio.AccountNeg;
 import negocio.LoanNeg;
@@ -42,6 +43,15 @@ public class ServletPrestamos extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+		    
+		    User userLogin = new User();
+		    userLogin = (User)request.getSession().getAttribute("userLogin");
+		    if( userLogin == null )
+		    {
+		        RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+		        dispatcher.forward(request, response);
+		    }
+            
 			if(request.getParameter("listar")!=null) {
 				
 				request.setAttribute("listLoans", negLoan.listPending());	
@@ -63,6 +73,14 @@ public class ServletPrestamos extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
+		    
+		    User userLogin = new User();
+		    userLogin = (User)request.getSession().getAttribute("userLogin");
+		    if( userLogin == null )
+		    {
+		        RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+		        dispatcher.forward(request, response);
+		    }
 			
 			if(request.getParameter("btnPedirPrestamo")!=null) {
 				

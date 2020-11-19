@@ -1,3 +1,4 @@
+<%@page import="dominio.User"%>
 <%@page import="dominio.Account"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -5,13 +6,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%
+    User userLogin = new User(); 
+    userLogin = (User)session.getAttribute("userLogin");
+%>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Banco UTN - Alta prï¿½stamo</title>
+<title>Banco UTN - Alta préstamo</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -46,7 +51,7 @@
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">Andrï¿½ Villalta</span> 
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=userLogin.getFirstName()%> <%=userLogin.getLastName() %></span> 
 								<img class="img-profile rounded-circle" src="img/profile.png">
 							</a> 
 							<!-- Dropdown - User Information -->
@@ -59,7 +64,7 @@
 									Settings
 								</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"> 
+								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesión</span> </a> 
 									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 									Logout
 								</a>
@@ -74,7 +79,7 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Alta de prï¿½stamo</h1>
+						<h1 class="h3 mb-0 text-gray-800">Alta de préstamo</h1>
 					</div>
 					
 					<%	
