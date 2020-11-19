@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="dominio.User"%>
 <%@page import="dominio.Account"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
+<%
+    User userLogin = new User(); 
+    userLogin = (User)session.getAttribute("userLogin");
+%>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
@@ -54,7 +59,7 @@
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-								<span class="mr-2 d-none d-lg-inline text-gray-600 small">André Villalta</span> 
+								<span class="mr-2 d-none d-lg-inline text-gray-600 small">${userLogin.getFirstName()} ${userLogin.getLastName()}</span> 
 								<img class="img-profile rounded-circle" src="img/profile.png">
 							</a> <!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -65,9 +70,7 @@
 									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings
 								</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"> 
-									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout									
-								</a>
+								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesión</span> </a>
 							</div></li>
 					</ul>
 				</nav>
