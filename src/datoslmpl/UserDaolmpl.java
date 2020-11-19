@@ -170,10 +170,7 @@ public class UserDaolmpl implements UserDao{
 			sp.setDate(8, sqlDate);
 			sp.setString(9, user.getEmail());
 			
-			Phone phone = new Phone();
 			
-			//sp.setLong(13, phone.getNumber());
-			//sp.setString(14, phone.getDescription());
 						
 			status = sp.execute();
 		}

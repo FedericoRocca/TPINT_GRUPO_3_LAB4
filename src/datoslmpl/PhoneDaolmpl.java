@@ -23,19 +23,16 @@ public class PhoneDaolmpl implements PhoneDao {
 		ArrayList<Phone> list = new ArrayList<Phone>();
 		try {
 		    
-			ResultSet rs= cn.query("SELECT phones.numberPhone, phones.description, users.dni, users.firstName, users.lastName "
-			        + "FROM Phones "
-			        + "INNER JOIN Users ON phones.userDni = users.dni "
-			        + "WHERE phones.userDni =" + dni);
+			ResultSet rs= cn.query("SELECT phones.numberPhone, phones.description\r\n" + 
+			        "FROM Phones \r\n" + 
+			        "INNER JOIN Users ON phones.userDni = users.dni \r\n" + 
+			        "WHERE phones.userDni = '" + dni + "'");
 			while(rs.next()) {
 				Phone phone = new Phone();
-				phone.setNumber(rs.getInt("phones.number"));
+				phone.setNumber(rs.getLong("phones.numberPhone"));
 				phone.setDescription(rs.getString("phones.description"));
 				
-				User user = new User();
-				user.setDni(rs.getString("users.dni"));
-				user.setFirstName(rs.getString("users.firstName"));
-				user.setLastName(rs.getString("users.lastName"));
+				list.add(phone);
 			}
 		}
 		catch(Exception e) {
@@ -121,5 +118,27 @@ public class PhoneDaolmpl implements PhoneDao {
 		}
 		return status;
 	}
+
+    public void updatePhoneForDNI(String dni, ArrayList<Phone> phone)
+    {
+        try
+        {
+            for (Phone phone2 : phone)
+            {
+                cn = new ConnectionDB();
+                cn.Open();
+                String query = "UPDATE phones SET numberPhone = '" + phone2.getNumber() + "' WHERE (description = '" + phone2.getDescription() + "') and (userDni = '" + dni + "');";
+                cn.execute(query);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally 
+        {
+            cn.close();
+        }
+    }
 	
 }

@@ -17,7 +17,7 @@ public class User {
 	private String city;
 	private String email;
 	private ArrayList<Phone> phones;
-		private Role rol;
+	private Role rol;
 	private boolean status;
 
 	//Constructors

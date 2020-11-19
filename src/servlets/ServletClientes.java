@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sound.midi.Soundbank;
 
+import datoslmpl.PhoneDaolmpl;
 import datoslmpl.UserDaolmpl;
 import dominio.Nationality;
 import dominio.Phone;
@@ -55,6 +56,7 @@ public class ServletClientes extends HttpServlet {
     	    ArrayList<User> users = new ArrayList<>();
     		ArrayList<Nationality> nationalities = new ArrayList<>();
     		UserDaolmpl udi = new UserDaolmpl();
+    		PhoneDaolmpl pdi = new PhoneDaolmpl();
     		User customer = new User();
     		User newCliente = new User();
     		User bajaUser = new User();
@@ -119,6 +121,31 @@ public class ServletClientes extends HttpServlet {
     		        modifUser.setEmail( request.getParameter("textEmail") );
     		        modifUser.setDni( request.getParameter("textDni") );
     		        modifUser.setBirthDate( formatter.parse( request.getParameter("textFechaNacimiento") ) );
+    		        
+    		        if( request.getParameter("textPhone1") != null )
+    		        {
+    		            Phone tmpPhone = new Phone();
+    		            tmpPhone.setNumber(Long.parseLong(request.getParameter("textPhone1").toString()));
+    		            tmpPhone.setDescription("Teléfono primario");
+    		            modifUser.addPhone(tmpPhone);
+    		        }
+    		        
+    		        if( request.getParameter("textPhone2") != null )
+                    {
+    		            Phone tmpPhone = new Phone();
+                        tmpPhone.setNumber(Long.parseLong(request.getParameter("textPhone2").toString()));
+                        tmpPhone.setDescription("Teléfono secundario");
+                        modifUser.addPhone(tmpPhone);
+                    }
+    		        
+    		        if( request.getParameter("textPhone3") != null )
+                    {
+    		            Phone tmpPhone = new Phone();
+                        tmpPhone.setNumber(Long.parseLong(request.getParameter("textPhone3").toString()));
+                        tmpPhone.setDescription("Teléfono adicional");
+                        modifUser.addPhone(tmpPhone);
+                    }
+    		        pdi.updatePhoneForDNI(modifUser.getDni(), modifUser.getPhone());
     		        udi.update(modifUser);
     		        RequestDispatcher dispatcher = request.getRequestDispatcher("/DashboardAdmin.jsp");
                     dispatcher.forward(request, response);

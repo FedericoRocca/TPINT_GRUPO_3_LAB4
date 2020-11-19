@@ -1,3 +1,5 @@
+<%@page import="dominio.Phone"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="dominio.User"%>
 <%@page import="dominio.Nationality"%>
 <%@page import="java.util.ArrayList" %>
@@ -157,6 +159,20 @@
 									<label for="title">E-Mail</label> 
 									<input class="form-control" name = "textEmail" required type="text" placeholder="Ingrese E-Mail" maxlength="45" value="<%=usrBaja.getEmail() %>">
 								</div>
+							</div>
+							<div class="form-row">
+							<%
+								int c = 0;
+								for( Phone phone : usrBaja.getPhone() )
+								{
+								    c++;
+								    %><div class="form-group col-md-3">
+										<label for="title">Teléfono <%=phone.getDescription() %></label> 
+										<input class="form-control" required type="text" placeholder="Ingrese" name="textPhone<%=c%>" maxlength="10" value="<%=phone.getNumber() %>">
+									</div><%
+								}
+							%>
+								
 							</div>
 							<input type="submit" name="btnModificarCliente" class="btn btn-primary mt-2" value="Modificar cliente">
 						</form> 
