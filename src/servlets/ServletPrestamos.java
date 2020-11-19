@@ -63,7 +63,7 @@ public class ServletPrestamos extends HttpServlet {
 			}
 			
 			if(request.getParameter("insert")!=null) {
-				request.setAttribute("listaAccount", negAccount.GetAllbyDni("12345678")); //Este DNI se tiene que sacar por session.
+				request.setAttribute("listaAccount", negAccount.GetAllbyDni(userLogin.getDni())); //Este DNI se tiene que sacar por session.
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaPrestamo.jsp");
 				dispatcher.forward(request, response);
 			}
@@ -129,7 +129,7 @@ public class ServletPrestamos extends HttpServlet {
 				estado = negLoan.insert(ln);
 				request.setAttribute("estadoPrestamo", estado);
 				//Se vuelve a cargar el descolgable
-				request.setAttribute("listaAccount", negAccount.GetAllbyDni("12345678")); //Este DNI se tiene que sacar por session.
+				request.setAttribute("listaAccount", negAccount.GetAllbyDni(userLogin.getDni())); //Este DNI se tiene que sacar por session.
 				
 				RequestDispatcher rd = request.getRequestDispatcher("/AltaPrestamo.jsp");
 				rd.forward(request, response);	
