@@ -162,10 +162,28 @@
 						%>
 						<div class="form-row">
 							<div class="form-group col-md-3">
-								<button type="submit" name="btnGestionarCuenta"
-									class="btn btn-primary mt-2">
-									Dar de
-									<%=request.getParameter("p")%></button>
+								
+								
+						  <div class="modal fade" id="modalAltaUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						    <div class="modal-dialog" role="document">
+						      <div class="modal-content">
+						        <div class="modal-header">
+						          <h5 class="modal-title" id="exampleModalLabel">Dar de baja cuenta?</h5>
+						          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						            <span aria-hidden="true">×</span>
+						          </button>
+						        </div>
+						        <div class="modal-body">Realmente querés dar de baja la cuenta?</div>
+						        <div class="modal-footer">
+						          <button type="submit" name="btnGestionarCuenta" class="btn btn-primary mt-2">Dar de <%=request.getParameter("p")%></button>
+						        </div>
+						      </div>
+						    </div>
+						  </div>
+						  <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#modalAltaUsuario">
+			                  Dar de <%=request.getParameter("p")%>
+			                </a>
+			                
 							</div>
 						</div>
 
