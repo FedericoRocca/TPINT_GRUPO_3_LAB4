@@ -109,7 +109,7 @@
 						<div class="form-row">
 							<div class="form-group col-md-3">
 								<label for="title">Cantidad que desea transferir</label>
-								<input class="form-control" required="required" name="txtCantidad" type="number" min="1" pattern="[0-9]+" placeholder="Ingrese cantidad en pesos argentinos">        				
+								<input class="form-control" required="required" name="txtCantidad" id="textAmountToTransfer" type="number" min="1" pattern="[0-9]+" placeholder="Ingrese cantidad en pesos argentinos">        				
 							</div>		
 						</div>
 						<div class="form-row" id="divDestino" style="display:none">
@@ -132,7 +132,7 @@
 							</div>	
 						</div>
 
-						<button class="btn btn-primary mt-2" name="btnGestionarTransferencias" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+						<input type="button" class="btn btn-primary mt-2" name="btnGestionarTransferencias" data-toggle="modal" value="Enviar" data-target="#exampleModal" onclick="mostrarTransferencia()">
 							
 					</form>
 						<!-- Modal -->
@@ -148,24 +148,22 @@
 								      <div class="modal-body">
 								      <div class="card"> 
 								      <div class="card-body">
-								      <h5 class="card-title">Cuenta de Origen</h5>
-								        
-								        Número de cuenta
-								        <input class="form-control" type="text" value="NÃ‚Â° 45678" readonly> 
-								        Monto inicial
-								        <input class="form-control" type="text" value="0043746238233" readonly> 
-								      
+								      	<h5 class="card-title">Cuenta de Origen</h5>								        
+								        	Número de cuenta
+								        	<input class="form-control" type="text" id="inputCtaOrigen" readonly> 
+								        	Saldo
+								        	<input class="form-control" type="text" id="inputMontoOrigen" readonly> 								      
 								      </div>
 					            
 						            <div class="card-body">
 						             <h5 class="card-title">Cuenta de Destino</h5>
 							            Número de cuenta
 							            <div class="input-group">		
-								        <input class="form-control" id="inputCta" type="text" value="NÃ‚Â° 66890" readonly>
+								        <input class="form-control" id="inputCtaDestino" type="text" readonly>
 								        </div>
-								        Monto Final
+								        Saldo
 								        <div class="input-group">			        						 
-								        <input class="form-control" id="inputMonto" type="text" value="1203,89" readonly> 
+								        <input class="form-control" id="inputMontoDestino" type="text" readonly> 
 								        </div>
 							        </div>								 								      
 								      <div class="modal-footer">
@@ -195,29 +193,59 @@
 	</div>
 	<!-- End of Page Wrapper -->
 	<script>
+	
 	 var selectO = document.getElementById('accountOrigen');
 	 var selectD = document.getElementById('accountDestino');
+		 		
 	 var selectedOption = null;	 
+	 var selectedOptionTextO = null;
+	 var selectedOptionTextD = null;
+	 
 	 selectO.addEventListener('change',
    		function(){
    	  	selectedOption = this.options[selectO.selectedIndex];
-   	  	$("#txtMontoInicial").val(selectedOption.value);
+   	 	selectedOptionTextO = this.options[selectO.selectedIndex].text;
+   	  	$("#txtMontoInicial").val(selectedOption.value);  	  	
+   	 	
+   	  	var cuentaOrigen = $("txtMontoInicial").val(selectedOption.text);  	 	
+   	  	console.log("1era Cuenta: " + selectedOptionTextO);
    	 	$("#divDestino").show();
      });
 
      selectD.addEventListener('change',
    		function(){
     	 if(selectD.selectedIndex == selectO.selectedIndex ){
-    		 alert("¿En serio vas a transferir a tu misma cuenta?");
+    		 alert(" En serio vas a transferir a tu misma cuenta?");
     		 $("#divDestino").hide();
     	 }
     	 else{
     		selectedOption = this.options[selectD.selectedIndex];
+    		selectedOptionTextD = this.options[selectD.selectedIndex].text;
+    		console.log("2da Cuenta: " + selectedOptionTextD);
     	 	$("#txtMontoFinal").val(selectedOption.value);
-    	 }
-   	 		
+    	 }   	 		
      });
-        
+	
+     	function mostrarTransferencia(){
+		$('#exampleModal').modal('show');			
+		var montoTransferencia = $('#textAmountToTransfer').val();
+		
+ 		var montoOrigen = $('#txtMontoInicial').val();
+ 		var saldoOrigen = parseFloat(montoOrigen) - parseFloat(montoTransferencia);
+ 		var montoDestino = $('#txtMontoFinal').val();
+ 		var saldoDestino = parseFloat(montoDestino) + parseFloat(montoTransferencia);
+ 		
+//  		console.log("montoOrigen: " + montoOrigen);
+//  		console.log("saldo Actual 1era cuenta: " + saldo);
+//  		console.log("Monto a transferir:" + montoTransferencia);	
+//  		console.log("montoDestino:" + montoActual);s
+		$('#inputCtaOrigen').val(selectedOptionTextO);
+ 		$('#inputMontoOrigen').val(saldoOrigen); //SALDO ACTUAL DE LA PRIMERA CUENTA
+ 		
+ 		$('#inputCtaDestino').val(selectedOptionTextD);
+ 		$('#inputMontoDestino').val(saldoDestino); // MONTO ACUMULADO DE LA SEGUNDA CUENTA
+
+ 	};   
 	</script>
 	<!-- Bootstrap core JavaScript-->
 	<script src="vendor/jquery/jquery.min.js"></script>
