@@ -28,39 +28,67 @@ INSERT INTO users (dni, firstName, lastName, userName, password, cuil, gender, n
 	VALUES ("36249161","Federico","Rocca", "usernameLoco", "Password","20362491615","Masculino","Argentina","1991-11-22", "Una calle random", "San Fernando", "frocca17@gmail.com", 1 );
 INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('36249161',1,1);
 
+-- Teléfonos de prueba - Administradores --
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('1560480807',"Teléfono primario",'36249161');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('48069420',"Teléfono secundario",'36249161');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('1560069420',"Teléfono adicional",'36249161');
+
 -- Clientes de prueba --
-INSERT INTO users VALUES ("12345678","nomCliente1","apeCliente1", "userCliente1", "passwordCliente1","12345678901","Masculino","1","1000-11-22", "calleCliente1", "Barrio1", "mail1@gmail.com", 1 );
-INSERT INTO users VALUES ("22345678","nomCliente2","apeCliente2", "userCliente2", "passwordCliente2","22345678901","Masculino","2","2000-11-22", "calleCliente2", "Barrio2", "mail2@gmail.com", 1 );
-INSERT INTO users VALUES ("32345678","nomCliente3","apeCliente3", "userCliente3", "passwordCliente3","32345678901","Masculino","3","3000-11-22", "calleCliente3", "Barrio3", "mail3@gmail.com", 1 );
-INSERT INTO users VALUES ("42345678","nomCliente4","apeCliente4", "userCliente4", "passwordCliente4","42345678901","Masculino","4","4000-11-22", "calleCliente4", "Barrio4", "mail4@gmail.com", 1 );
-INSERT INTO users VALUES ("52345678","nomCliente5","apeCliente5", "userCliente5", "passwordCliente5","52345678901","Masculino","5","5000-11-22", "calleCliente5", "Barrio5", "mail5@gmail.com", 1 );
-INSERT INTO users VALUES ("62345678","nomCliente6","apeCliente6", "userCliente6", "passwordCliente6","62345678901","Masculino","6","6000-11-22", "calleCliente6", "Barrio6", "mail6@gmail.com", 1 );
-INSERT INTO users VALUES ("72345678","nomCliente7","apeCliente7", "userCliente7", "passwordCliente7","72345678901","Masculino","7","7000-11-22", "calleCliente7", "Barrio7", "mail7@gmail.com", 1 );
-INSERT INTO users VALUES ("82345678","nomCliente8","apeCliente8", "userCliente8", "passwordCliente8","82345678901","Masculino","8","8000-11-22", "calleCliente8", "Barrio8", "mail8@gmail.com", 1 );
-INSERT INTO users VALUES ("92345678","nomCliente9","apeCliente9", "userCliente9", "passwordCliente9","92345678901","Masculino","9","9000-11-22", "calleCliente9", "Barrio9", "mail9@gmail.com", 1 );
+INSERT INTO users VALUES ("56019014","Mariano","Barba Vergara", "mabave", "mabave","12345678901","Masculino","1","1000-11-22", "calleCliente1", "Barrio1", "mail1@gmail.com", 1 );
+INSERT INTO users VALUES ("27624826","Ezequiel","Barbero", "ezba", "ezba","22345678901","Masculino","2","2000-11-22", "calleCliente2", "Barrio2", "mail2@gmail.com", 1 );
+INSERT INTO users VALUES ("13610299","Miguel Angel","Mena", "mianme", "mianme","32345678901","Masculino","3","3000-11-22", "calleCliente3", "Barrio3", "mail3@gmail.com", 1 );
+INSERT INTO users VALUES ("24589024","Rodolfo","Castellano", "roca", "roca","42345678901","Masculino","4","4000-11-22", "calleCliente4", "Barrio4", "mail4@gmail.com", 1 );
+INSERT INTO users VALUES ("67313998","Xabier","Bustamante", "xabu", "xabu","52345678901","Masculino","5","5000-11-22", "calleCliente5", "Barrio5", "mail5@gmail.com", 1 );
+INSERT INTO users VALUES ("51607531","Carmen","Santos", "casa", "casa","62345678901","Masculino","6","6000-11-22", "calleCliente6", "Barrio6", "mail6@gmail.com", 1 );
+INSERT INTO users VALUES ("10983478","Juana","Chico", "juch", "juch","72345678901","Masculino","7","7000-11-22", "calleCliente7", "Barrio7", "mail7@gmail.com", 1 );
+INSERT INTO users VALUES ("31329898","Mercedes","Andujar", "mean", "mean","82345678901","Masculino","8","8000-11-22", "calleCliente8", "Barrio8", "mail8@gmail.com", 1 );
+INSERT INTO users VALUES ("61641739","Andrea","Ordoñez", "anor", "anor","92345678901","Masculino","9","9000-11-22", "calleCliente9", "Barrio9", "mail9@gmail.com", 1 );
 
-INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('12345678',2,1);
-INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('22345678',2,1);
-INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('32345678',2,1);
-INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('42345678',2,1);
-INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('52345678',2,1);
-INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('62345678',2,1);
-INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('72345678',2,1);
-INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('82345678',2,1);
-INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('92345678',2,1);
+-- Teléfonos de prueba - Clientes --
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('1570405527',"Teléfono primario",'56019014');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('1561036509',"Teléfono primario",'27624826');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('1594521917',"Teléfono primario",'13610299');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('1545204533',"Teléfono primario",'24589024');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('1557584882',"Teléfono primario",'67313998');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('1537579470',"Teléfono primario",'51607531');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('1534259946',"Teléfono primario",'10983478');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('1561616214',"Teléfono primario",'31329898');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('1581696487',"Teléfono primario",'61641739');
 
--- ACCOUNTS --
-INSERT INTO Accounts VALUES (1,"12345678","2020-10-22",1,"4009041813520",10000,1);
-INSERT INTO Accounts VALUES (2,"12345678","2020-10-22",1,"4009041813521",10000,1);
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('46567281',"Teléfono secundario",'56019014');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('44740639',"Teléfono secundario",'27624826');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('42615889',"Teléfono secundario",'13610299');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('43957901',"Teléfono secundario",'24589024');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('41436009',"Teléfono secundario",'67313998');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('46390430',"Teléfono secundario",'51607531');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('46049783',"Teléfono secundario",'10983478');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('49159170',"Teléfono secundario",'31329898');
+INSERT INTO bdbanco.phones (`numberPhone`,`description`,`userDni`) VALUES ('48568343',"Teléfono secundario",'61641739');
+
+-- Roles necesarios para login de usuarios --
+
+INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('56019014',2,1);
+INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('27624826',2,1);
+INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('13610299',2,1);
+INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('24589024',2,1);
+INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('67313998',2,1);
+INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('51607531',2,1);
+INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('10983478',2,1);
+INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('31329898',2,1);
+INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('61641739',2,1);
+
+-- Cuentas de prueba --
+INSERT INTO Accounts VALUES (1,"56019014","2020-10-22",1,"4009041813520",10000,1);
+INSERT INTO Accounts VALUES (2,"56019014","2020-10-22",1,"4009041813521",10000,1);
 UPDATE Accounts SET balance=3000 WHERE accountNumber = 2;
-INSERT INTO Accounts VALUES (3,"12345678","2020-10-22",1,"4009041813522",10000,1);
-INSERT INTO Accounts VALUES (4,"22345678","2020-10-22",1,"4009041813523",10000,1);
-select * from accounts;
+INSERT INTO Accounts VALUES (3,"56019014","2020-10-22",1,"4009041813522",10000,1);
+INSERT INTO Accounts VALUES (4,"67313998","2020-10-22",1,"4009041813523",10000,1);
+
 -- PRESTAMOS PENDIENTES --
-INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("12345678",1,"2020-05-03",1100,1000,"2021-05-03",6,91.66,1,1);
-INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("12345678",1,"2020-04-03",2200,2000,"2020-12-03",12,366.66,1,1);
-INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("12345678",2,"2020-04-03",11000,10000,"2020-12-03",3,3666.66,1,1);
-INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("22345678",4,"2020-04-03",22000,20000,"2020-12-03",24,916.66,1,1);
+INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("56019014",1,"2020-05-03",1100,1000,"2021-05-03",6,91.66,1,1);
+INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("56019014",1,"2020-04-03",2200,2000,"2020-12-03",12,366.66,1,1);
+INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("56019014",2,"2020-04-03",11000,10000,"2020-12-03",3,3666.66,1,1);
+INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("67313998",4,"2020-04-03",22000,20000,"2020-12-03",24,916.66,1,1);
 
 -- Registros de nacionalidades --
 INSERT INTO Nationalities(country, gentilic, iso)VALUES('Afganistán','AFGANA','AFG');
