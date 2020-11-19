@@ -112,7 +112,26 @@
 									<input class="form-control" name = "textApellido" required type="text" placeholder="Ingrese Apellido" maxlength="45" readonly value="<%=usrBaja.getLastName() %>">
 								</div>
 							</div>
-							<input type="submit" name="btnEliminarCliente" class="btn btn-primary mt-2" value="Eliminar cliente">
+							
+							<div class="modal fade" id="modalAltaUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						    <div class="modal-dialog" role="document">
+						      <div class="modal-content">
+						        <div class="modal-header">
+						          <h5 class="modal-title" id="exampleModalLabel">Eliminar cliente?</h5>
+						          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						            <span aria-hidden="true">×</span>
+						          </button>
+						        </div>
+						        <div class="modal-body">Realmente querés eliminar el cliente?</div>
+						        <div class="modal-footer">
+						          <input type="submit" name="btnEliminarCliente" class="btn btn-primary mt-2" value="Eliminar cliente">
+						        </div>
+						      </div>
+						    </div>
+						  </div>
+						  <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#modalAltaUsuario">
+			                  Eliminar cliente
+			                </a>
 						</form> 
 				<%
 					}

@@ -183,7 +183,7 @@
 						            <span aria-hidden="true">×</span>
 						          </button>
 						        </div>
-						        <div class="modal-body">Realmente querés crear el usuario?</div>
+						        <div class="modal-body">Realmente querés crear el cliente?</div>
 						        <div class="modal-footer">
 						          <input type="submit" name="btnGuardar" class="btn btn-primary mt-2" value="Guardar cliente">
 						        </div>

@@ -174,7 +174,27 @@
 							%>
 								
 							</div>
-							<input type="submit" name="btnModificarCliente" class="btn btn-primary mt-2" value="Modificar cliente">
+							
+							<div class="modal fade" id="modalAltaUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						    <div class="modal-dialog" role="document">
+						      <div class="modal-content">
+						        <div class="modal-header">
+						          <h5 class="modal-title" id="exampleModalLabel">Crear cliente?</h5>
+						          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						            <span aria-hidden="true">×</span>
+						          </button>
+						        </div>
+						        <div class="modal-body">Realmente querés modificar el cliente?</div>
+						        <div class="modal-footer">
+						          <input type="submit" name="btnModificarCliente" class="btn btn-primary mt-2" value="Modificar cliente">
+						        </div>
+						      </div>
+						    </div>
+						  </div>
+						  <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#modalAltaUsuario">
+			                  Modificar cliente
+			                </a>
+			                
 						</form> 
 				<%
 					}
