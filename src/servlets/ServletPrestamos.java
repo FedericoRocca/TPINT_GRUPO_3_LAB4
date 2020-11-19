@@ -17,11 +17,15 @@ import org.w3c.dom.ls.LSException;
 import dominio.Account;
 import dominio.Loan;
 import dominio.LoanState;
+import dominio.Movement;
+import dominio.MovementType;
 //import javafx.util.converter.LocalDateStringConverter;
 import negocio.AccountNeg;
 import negocio.LoanNeg;
+import negocio.MovementNeg;
 import negociolmpl.AccountNegImpl;
 import negociolmpl.LoanNeglmpl;
+import negociolmpl.MovementNegImpl;
 import sun.rmi.server.Dispatcher;
 
 @WebServlet("/ServletPrestamos")
@@ -30,6 +34,7 @@ public class ServletPrestamos extends HttpServlet {
 
 	LoanNeg negLoan = new LoanNeglmpl();
 	AccountNeg negAccount = new AccountNegImpl();
+	MovementNeg negMovement = new MovementNegImpl();
 	
     public ServletPrestamos() {
         super();
@@ -118,9 +123,15 @@ public class ServletPrestamos extends HttpServlet {
 
 				negAccount.updateBalance(Float.parseFloat(request.getParameter("amountReqByCustomer")),Integer.parseInt(request.getParameter("accountNumber")));
 				
-				//--------------------------------
-				//Aca se tienen que generar un movimiento
-				//--------------------------------
+				//Se genera el movimiento del Alta de prestamo
+				Movement mov = new Movement();
+				mov.setAccountNumber(Integer.parseInt(request.getParameter("accountNumber")));
+				mov.setAmount(Float.parseFloat(request.getParameter("amountReqByCustomer")));
+				mov.setDetail("Alta de un prestamo");
+				mov.setMovementDate(LocalDate.now());
+				mov.setMovementType(new MovementType(2,"Alta de prestamo"));
+				
+				estado = negMovement.insert(mov);
 				
 				//--------------------------------
 				//Aca se tienen que generar las cuotas

@@ -1,58 +1,82 @@
 package dominio;
 
-import java.text.DecimalFormat;
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public class Movement {
 
 	private int id;
-	private Date movementDate;
-	private String details;
+	private int accountNumber;
+	private LocalDate movementDate;
+	private String detail;
 	private Float amount;
-	private int MovementTypeId;
+	private MovementType movementType;
 	private boolean status;
 	
-	public Movement() {}
-	
+	public Movement() {
+		
+	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getMovementDate() {
+
+	public int getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(int accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public LocalDate getMovementDate() {
 		return movementDate;
 	}
-	public void setMovementDate(Date movementDate) {
+
+	public void setMovementDate(LocalDate movementDate) {
 		this.movementDate = movementDate;
 	}
-	public String getDetails() {
-		return details;
+
+	public String getDetail() {
+		return detail;
 	}
-	public void setDetails(String details) {
-		this.details = details;
+
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
+
 	public Float getAmount() {
 		return amount;
 	}
+
 	public void setAmount(Float amount) {
 		this.amount = amount;
 	}
-	public int getMovementTypeId() {
-		return MovementTypeId;
+
+	public MovementType getMovementType() {
+		return movementType;
 	}
-	public void setMovementTypeId(int movementTypeId) {
-		MovementTypeId = movementTypeId;
+
+	public void setMovementType(MovementType movementType) {
+		this.movementType = movementType;
 	}
+
 	public boolean isStatus() {
 		return status;
 	}
+
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
 
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Movement [id=" + id + ", accountNumber=" + accountNumber + ", movementDate=" + movementDate
+				+ ", detail=" + detail + ", amount=" + amount + ", movementType=" + movementType + ", status=" + status
+				+ "]";
+	}
 }

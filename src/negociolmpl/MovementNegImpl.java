@@ -28,8 +28,8 @@ public class MovementNegImpl implements MovementNeg{
 	}
 
 	@Override
-	public boolean insert(Account accountOrigen, DecimalFormat monto) {
-		return movementDao.insert(accountOrigen, monto);
+	public boolean insert(Movement movement) {
+		return movementDao.insert(movement);
 	}
 
 }
