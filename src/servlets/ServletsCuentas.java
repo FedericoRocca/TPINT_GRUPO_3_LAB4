@@ -35,6 +35,20 @@ public class ServletsCuentas extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+	    try
+        {
+	        User userLogin = new User();
+	        userLogin = (User)request.getSession().getAttribute("userLogin");
+	        if( userLogin == null )
+	        {
+	            RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+	            dispatcher.forward(request, response);
+	        }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -44,6 +58,14 @@ public class ServletsCuentas extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		try {
+		    User userLogin = new User();
+		    userLogin = (User)request.getSession().getAttribute("userLogin");
+		    if( userLogin == null )
+		    {
+		        RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+		        dispatcher.forward(request, response);
+		    }
+		    
 			request.removeAttribute("logearError");
 			request.removeAttribute("DadaAlta");
 			request.removeAttribute("DadaBaja");

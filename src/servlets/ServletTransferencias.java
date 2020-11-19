@@ -87,7 +87,13 @@ public class ServletTransferencias extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	try {
 			
-		
+	    User userLogin = new User();
+	    userLogin = (User)request.getSession().getAttribute("userLogin");
+	    if( userLogin == null )
+	    {
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+	        dispatcher.forward(request, response);
+	    }
 			
 
 		} 
