@@ -180,8 +180,7 @@ public class ServletsCuentas extends HttpServlet {
 			}
 		} catch (Exception e) {
 			request.setAttribute("logearError", e.getMessage());
-			RequestDispatcher dispatcher = request
-					.getRequestDispatcher("/Cuenta.jsp?p=" + request.getParameter("parameter"));
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/Cuenta.jsp?p=" + request.getParameter("parameter"));
 			dispatcher.forward(request, response);
 		}
 	}

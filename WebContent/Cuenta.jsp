@@ -195,14 +195,14 @@
 			</div>
 			<!-- End of Main Content -->
 			<%
-				}
+				}	}
 					if (request.getAttribute("logearError") != null) {
 			%><script>
 				alert("${logearError}");
 			</script>
 			<%
 				}
-				}
+			
 			%>
 			<%
 				if (request.getAttribute("DadaBaja") != null) {
