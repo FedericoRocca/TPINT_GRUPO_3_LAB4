@@ -15,4 +15,5 @@ public interface AccountDao {
 	public int ObtenerUltimaCuenta();
 	public ResultSet ObtenerCuenta(boolean todas, Account a);
 	public Boolean updateBalance(float x, int accountNumber);
+	public Boolean updateBalanceTransferenciaOrigen(float x, int accountNumerOrigen);
 }

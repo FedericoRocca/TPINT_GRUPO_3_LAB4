@@ -87,7 +87,7 @@ public class ServletTransferencias extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	try {
 			
-	    User userLogin = new User();
+	   User userLogin = new User();
 	    userLogin = (User)request.getSession().getAttribute("userLogin");
 	    if( userLogin == null )
 	    {
@@ -95,7 +95,22 @@ public class ServletTransferencias extends HttpServlet {
 	        dispatcher.forward(request, response);
 	    }
 			
-
+	    Account account = new Account();
+		if(request.getParameter("updateCuentas")!=null) {
+			
+			account.setBalance(Float.parseFloat( request.getParameter("txtOrigenModal")));
+	        account.setAccountNumber(Integer.parseInt(request.getParameter("txtCtaOrigen")));
+	        							
+		    negAccount.updateBalanceTransferenciaOrigen(account.getBalance(),account.getAccountNumber()); 
+		    
+		    account.setBalance(Float.parseFloat( request.getParameter("txtDestinoModal")));
+		    account.setAccountNumber(Integer.parseInt(request.getParameter("txtCtaDestino")));
+		    		    
+		    negAccount.updateBalanceTransferenciaOrigen(account.getBalance(),account.getAccountNumber()); 
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaTransferencia.jsp");
+			dispatcher.forward(request, response);
+		}
+	    
 		} 
 		catch (Exception e) {
 			e.printStackTrace();

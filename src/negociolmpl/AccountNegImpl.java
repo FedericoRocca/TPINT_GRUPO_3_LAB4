@@ -102,4 +102,8 @@ public class AccountNegImpl implements AccountNeg{
 	public Boolean updateBalance(float x, int accountNumber) {
 		return accountDao.updateBalance(x, accountNumber);
 	}
+	
+	public Boolean updateBalanceTransferenciaOrigen(float x, int accountNumerOrigen) {
+		return accountDao.updateBalanceTransferenciaOrigen(x, accountNumerOrigen);
+	}
 }

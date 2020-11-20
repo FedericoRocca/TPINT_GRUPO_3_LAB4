@@ -206,4 +206,21 @@ public class AccountDaoImpl implements AccountDao {
 
 		return estado;
 	}
+	
+	@Override
+	public Boolean updateBalanceTransferenciaOrigen(float x, int accountNumberOrigen) {
+		boolean estado = false;
+		try {
+			cn = new ConnectionDB();
+			cn.Open();
+			estado = cn.execute(
+					"Update Accounts Set Balance = " + x + " WHERE AccountNumber= " + accountNumberOrigen);
+			cn.close();
+			cn = null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return estado;
+	}
 }
