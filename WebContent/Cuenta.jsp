@@ -112,8 +112,8 @@
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="title">CBU</label> <input class="form-control"
-									maxlength="22" name="txtCBU" value="${CBU}" type="text" pattern="[0-9]+"
-									placeholder="Nº identidad + NªSucursal + Dígito identificador + Numero de cuenta + Dígito verificador">
+									maxlength="22" name="txtCBU" required="required" value="${CBU}" type="text" pattern="\d*"
+									placeholder="Nº identidad + Nª Sucursal + Dígito identificador + Numero de cuenta + Dígito verificador">
 							</div>
 						</div>
 						<div class="form-row">
