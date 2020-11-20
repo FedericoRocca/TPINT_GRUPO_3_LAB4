@@ -54,7 +54,8 @@ public class ServletReportes extends HttpServlet {
                 ArrayList<RepBalancesMayores> reportResult = new ArrayList<RepBalancesMayores>();
                 ReportesNegImpl rpbmn = new ReportesNegImpl();
                 reportResult = rpbmn.executeReport( Float.parseFloat(request.getParameter("inputBalance").toString()) );
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/ReporteMayoresBalances.jsp");
+                request.setAttribute("reportResult", reportResult);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/ReporteCuentasMayoresBalances.jsp");
                 dispatcher.forward(request, response);
             }
             
