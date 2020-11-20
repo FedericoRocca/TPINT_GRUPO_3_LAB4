@@ -37,7 +37,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<!-- INCLUYO EL MENÃ ACÃ -->
+		<!-- INCLUYO EL MENÃƒÂš ACÃƒÂ -->
 		<jsp:include page="MenuCliente.html"></jsp:include> 
 		<!-- End of Sidebar -->
 
@@ -64,7 +64,7 @@
 							</a> 
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesi�n</span> </a>
+								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesión</span> </a>
 							</div>
 						</li>
 					</ul>
@@ -89,7 +89,7 @@
 					%>
 						<div class="form-row">
 							<div class="form-group col-md-5">
-								<label for="Origen">N�mero de cuenta Origen </label>
+								<label for="Origen">Número de cuenta Origen </label>
 								<select class="form-control" name="textOrigen" id="accountOrigen">
    								<option value="" disabled selected>Seleccione...</option>
    								<%
@@ -114,7 +114,7 @@
 						</div>
 						<div class="form-row" id="divDestino" style="display:none">
 							<div class="form-group col-md-5">
-								<label for="Destinatario">N�mero de cuenta Destino</label>
+								<label for="Destinatario">Número de cuenta Destino</label>
     								<select class="form-control" name="textDestinatario" id="accountDestino">
     								<option value="selection" disabled selected>Seleccione...</option>
     							<%
@@ -149,26 +149,26 @@
 								      <div class="card"> 
 								      <div class="card-body">
 								      	<h5 class="card-title">Cuenta de Origen</h5>								        
-								        	N�mero de cuenta
-								        	<input class="form-control" type="text" id="inputCtaOrigen" readonly> 
+								        	Número de cuenta
+								        	<input class="form-control" type="text" name="txtCtaOrigen" id="inputCtaOrigen" readonly> 
 								        	Saldo
-								        	<input class="form-control" type="text" id="inputMontoOrigen" readonly> 								      
+								        	<input class="form-control" type="text"  name="txtOrigenModal" id="inputMontoOrigen" readonly> 								      
 								      </div>
 					            
 						            <div class="card-body">
 						             <h5 class="card-title">Cuenta de Destino</h5>
-							            N�mero de cuenta
+							            Número de cuenta
 							            <div class="input-group">		
-								        <input class="form-control" id="inputCtaDestino" type="text" readonly>
+								        <input class="form-control" name="txtCtaDestino" id="inputCtaDestino" type="text" readonly>
 								        </div>
 								        Saldo
 								        <div class="input-group">			        						 
-								        <input class="form-control" id="inputMontoDestino" type="text" readonly> 
+								        <input class="form-control" name="txtDestinoModal" id="inputMontoDestino" type="text" readonly> 
 								        </div>
 							        </div>								 								      
 								      <div class="modal-footer">
 								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-								        <button type="button" class="btn btn-primary">Transferir</button>
+								        <button type="submit" name="updateCuentas" class="btn btn-primary">Transferir</button>
 								       </div>
 								      </div>
 								    </div>
