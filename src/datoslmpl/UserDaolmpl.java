@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import datos.UserDao;
 import dominio.Nationality;
@@ -166,7 +167,7 @@ public class UserDaolmpl implements UserDao{
 		
 		try 
 		{
-			CallableStatement sp = (CallableStatement) cn.Open().prepareCall("CALL SP_UpdateCustomer(?,?,?,?,?,?,?,?,?)");
+			CallableStatement sp = (CallableStatement) cn.Open().prepareCall("CALL SP_UpdateCustomer(?,?,?,?,?,?,?,?,?,?)");
 			
 			sp.setString(1, user.getDni());
 			sp.setString(2, user.getFirstName());
@@ -178,9 +179,8 @@ public class UserDaolmpl implements UserDao{
             java.sql.Date sqlDate = new java.sql.Date(user.getBirthDate().getTime());
 			sp.setDate(8, sqlDate);
 			sp.setString(9, user.getEmail());
+			sp.setString(10, user.getPassword());
 			
-			
-						
 			status = sp.execute();
 		}
 		catch(Exception e) 

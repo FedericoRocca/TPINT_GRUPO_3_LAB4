@@ -237,7 +237,8 @@ IN _cuil 		VARCHAR(11),
 IN _gender 		VARCHAR(30),
 IN _nationality VARCHAR(35),
 IN _birthDate	DATETIME,
-IN _email		VARCHAR(50)
+IN _email		VARCHAR(50),
+in _password    VARCHAR(45)
 )
 BEGIN
 	DECLARE errno INT;
@@ -256,7 +257,8 @@ BEGIN
                 gender= _gender, 
                 nationality = _nationality, 
                 birthDate = _birthDate, 
-                email = _email
+                email = _email,
+                password = _password
 				WHERE dni = _dni;
 		COMMIT WORK;
 END$$

@@ -27,12 +27,6 @@
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-<script type="text/javascript">
-	function BuscarExistencia(){
-		alert("El DNI ya está registrado enla base de datos");
-	}
-</script>
-
 </head>
 <body id="page-top">
 	<div id="wrapper">
@@ -90,37 +84,49 @@
 							</div>
 						</div>
 					</form>
-					<% if( request.getAttribute("usrBaja") != null ) 
+					<% if( request.getAttribute("usrModif") != null ) 
 					{
-					    User usrBaja = new User();
-					    usrBaja = (User)request.getAttribute("usrBaja");
+					    User usrModif = new User();
+					    usrModif = (User)request.getAttribute("usrModif");
 					    %>
 					    <form method="get" action="ServletClientes" enctype="multipart/form-data">
 							<div class="form-row">
 								<div class="form-group col-md-4">
 									<label for="title">DNI</label> 
-									<input class="form-control" name = "textDni" required type="text" placeholder="Ingrese DNI" maxlength="9" readonly value="<%=usrBaja.getDni() %>">           				
+									<input class="form-control" name = "textDni" required type="text" placeholder="Ingrese DNI" maxlength="9" readonly value="<%=usrModif.getDni() %>">           				
 								</div>
 								<div class="form-group col-md-4">
 									<label for="title">CUIL</label> 
-									<input class="form-control" name = "textCuil" required type="text" placeholder="Ingrese CUIL" maxlength="11" value="<%=usrBaja.getCuil() %>">
+									<input class="form-control" name = "textCuil" required type="text" placeholder="Ingrese CUIL" maxlength="11" value="<%=usrModif.getCuil() %>">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="title">Nombre</label> 
-									<input class="form-control" name = "textNombre" required type="text" placeholder="Ingrese Nombre" maxlength="45" value="<%=usrBaja.getFirstName() %>">
+									<input class="form-control" name = "textNombre" required type="text" placeholder="Ingrese Nombre" maxlength="45" value="<%=usrModif.getFirstName() %>">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="title">Apellido</label> 
-									<input class="form-control" name = "textApellido" required type="text" placeholder="Ingrese Apellido" maxlength="45" value="<%=usrBaja.getLastName() %>">
+									<input class="form-control" name = "textApellido" required type="text" placeholder="Ingrese Apellido" maxlength="45" value="<%=usrModif.getLastName() %>">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="title">Usuario</label> 
-									<input class="form-control" name = "textUsuario" required type="text" placeholder="Ingrese Apellido" maxlength="45" value="<%=usrBaja.getUserName() %>">
+									<input class="form-control" name = "textUsuario" required type="text" placeholder="Ingrese Usuario" maxlength="45" value="<%=usrModif.getUserName() %>" readonly>
 								</div>
+								
+								<div class="form-group col-md-6">
+									<label for="title">Contraseña</label> 
+									<input class="form-control" name = "password" required type="password" placeholder="Ingrese contraseña" maxlength="45" value="">
+									<label for="title">Repetir contraseña</label> 
+									<input class="form-control" name = "passwordRepeat" required type="password" placeholder="Repita contraseña" maxlength="45" value="">
+								</div>
+								
+								<div class="form-group col-md-6">
+									<div class="badge badge-warning">${passwordsNotMatch}</div>									
+								</div>
+								
 								<div class="form-group col-md-2">
 									<label for="title">Género</label>
 										<select class="custom-select" id="inputGroupSelect02" name="textGenero" required>
-											<option selected><%=usrBaja.getGender()%></option>
+											<option selected><%=usrModif.getGender()%></option>
 											<option value="1">Femenino</option>
 											<option value="2">Masculino</option>
 											<option value="3">Otro</option>
@@ -137,7 +143,7 @@
 								<div class="form-group col-md-3">
     							<label for="Nationality">Nacionalidad</label>
     								<select class="form-control" name="textNacionalidad">
-    								<option selected value="<%=usrBaja.getNation().getId()%>"><%=usrBaja.getNation().getDescription()%></option>
+    								<option selected value="<%=usrModif.getNation().getId()%>"><%=usrModif.getNation().getDescription()%></option>
     								<%
     									for(Nationality n : listNat)	{
 									%>
@@ -153,17 +159,17 @@
 								
 								<div class="form-group col-md-3">
 									<label for="title">Fecha de Nacimiento</label>
-									<input class="form-control" required="required" required name = "textFechaNacimiento" type="date" value="<%=usrBaja.getBirthDate() %>">
+									<input class="form-control" required="required" required name = "textFechaNacimiento" type="date" value="<%=usrModif.getBirthDate() %>">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="title">E-Mail</label> 
-									<input class="form-control" name = "textEmail" required type="text" placeholder="Ingrese E-Mail" maxlength="45" value="<%=usrBaja.getEmail() %>">
+									<input class="form-control" name = "textEmail" required type="text" placeholder="Ingrese E-Mail" maxlength="45" value="<%=usrModif.getEmail() %>">
 								</div>
 							</div>
 							<div class="form-row">
 							<%
 								int c = 0;
-								for( Phone phone : usrBaja.getPhone() )
+								for( Phone phone : usrModif.getPhone() )
 								{
 								    c++;
 								    %><div class="form-group col-md-3">

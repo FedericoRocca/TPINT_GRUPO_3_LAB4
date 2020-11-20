@@ -102,7 +102,7 @@ public class ServletClientes extends HttpServlet {
                     modifUser = udi.getUser(modifUser.getDni());
                     nationalities = (ArrayList<Nationality>) negNatio.getAll();
                     request.setAttribute("listNat", nationalities);
-                    request.setAttribute("usrBaja", modifUser);
+                    request.setAttribute("usrModif", modifUser);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/ModificarCliente.jsp");
                     dispatcher.forward(request, response);
                 }
@@ -110,8 +110,15 @@ public class ServletClientes extends HttpServlet {
     		
     		if(request.getParameter("btnModificarCliente") != null)
             {
-                    // aca modificamos al cliente
-    		    
+                    if( request.getParameter("password") != request.getParameter("passwordRepeat") )
+                    {
+                        String passwordsNotMatch = "Las contraseñas no coinciden, por favor ingresarlas nuevamente";
+                        request.setAttribute("passwordsNotMatch", passwordsNotMatch);
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("/ModificarCliente.jsp");
+                        dispatcher.forward(request, response);
+                    }
+                    
+                    modifUser.setPassword(request.getParameter("password"));
     		        modifUser.setCuil( request.getParameter("textCuil") );
     		        modifUser.setFirstName( request.getParameter("textNombre") );
     		        modifUser.setLastName( request.getParameter("textApellido") );
@@ -169,9 +176,6 @@ public class ServletClientes extends HttpServlet {
     		
     		if(request.getParameter("listarCliente") != null) 
     		{
-    //			String dniCustomer = request.getParameter("94565484");
-    //			customer = negCustomer.getUser(customer.getDni());
-    //			customer = negCustomer.getUser("94565484");
     		    nationalities = (ArrayList<Nationality>) negNatio.getAll();
                 request.setAttribute("listNat", nationalities);
     			customer = negCustomer.getUser(userLogin.getDni());
