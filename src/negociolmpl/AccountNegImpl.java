@@ -1,11 +1,15 @@
 package negociolmpl;
 
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import datos.AccountDao;
 import datoslmpl.AccountDaoImpl;
+import datoslmpl.MovementDaoImpl;
 import dominio.Account;
+import dominio.Movement;
+import dominio.MovementType;
 import negocio.AccountNeg;
 
 public class AccountNegImpl implements AccountNeg{
@@ -23,7 +27,6 @@ public class AccountNegImpl implements AccountNeg{
 	@Override
 	public ArrayList<Account> GetAllbyDni(String dni) {
 		return (ArrayList<Account>) accountDao.getAllbyDni(dni);
-		
 	}
 
 	@Override
@@ -36,12 +39,38 @@ public class AccountNegImpl implements AccountNeg{
 		try {
 			accountDao = new AccountDaoImpl();
 			accountDao.CrearCuenta(a);
+			CrearMovimiento(a);
 			accountDao = null;
 			return true;
 		}
 		catch(Exception e)
 		{
 			return false;
+		}
+	}
+	
+	void CrearMovimiento(Account a) {
+		try {
+			MovementNegImpl mv = new MovementNegImpl();
+			Movement m = new Movement();
+			MovementType mt = new MovementType();
+			mt.setId(1);
+			mt.setDescription("Alta Cuenta");
+			LocalDate date = LocalDate.now();
+			m.setAccountNumber(a.getAccountNumber());
+			m.setAmount(a.getBalance());
+			m.setDetail("Alta Cuenta");
+			m.setMovementDate(date);
+			m.setStatus(true);
+			m.setMovementType(mt);
+			
+			boolean estado = mv.insert(m);
+			mt = null;
+			mv = null;
+			m = null;
+		}
+		catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	
