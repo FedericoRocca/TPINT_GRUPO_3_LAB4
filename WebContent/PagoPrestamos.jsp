@@ -86,9 +86,11 @@
 							
 							<select class="form-control" name=comboAccountNumber id="comboAccountNumber" autofocus>
 								<%
+								int accs=0;
 									for (Account a : listaAccount) {
+									    accs++;
 								%>
-								<option value="<%=a.getBalance()%>"><%=a.getAccountNumber()%></option>
+								<option <% if(accs==0){%>selected<%} %> value="<%=a.getBalance()%>"><%=a.getAccountNumber()%></option>
 								<%
 									}
 								%>
@@ -126,7 +128,7 @@
 										%>
 										<tr>
 											<!-- <form action="ServletPrestamos" method="post">  -->
-											<form action="ServletCuotas" method="post">
+											<form action="ServletCuotas" method="post" onsubmit="setAccount()">
 												<td>
 													<%=c.getIdLoan() %> 
 													<input type="hidden" name="idLoan" value="<%=c.getIdLoan() %>">
@@ -142,6 +144,7 @@
 													<%=c.getAmount() %>
 													<input type="hidden" name="feeAmount" id="feeAmount" value="<%=c.getAmount()%>">
 												</td>
+												<input type="hidden" name="debitAccount" id="debitAccount">
 												<td>
 													<button type="submit" class="btn btn-success" name="btnPagar">
 													    <i class="fas fa-check"></i>
@@ -207,7 +210,17 @@
      </script>
      
      <script>
-		document.getElementById("demo").innerHTML = "Hello JavaScript!";
+     		//Función js que ejecuta únicamente cuando se submitea el form
+	     function setAccount() {
+	    	 	//Obtenemos el elemento html del combobox de cuentas
+		      	var e = document.getElementById("comboAccountNumber");
+	    	 	
+	    	 	//De ese combobox, obtenemos el value del selected usando el index
+		      	var selectedAccount = e.options[e.selectedIndex].text;
+	    	 	
+	    	 	//Este value, que es el nro de cuenta, se lo seteamos al input "debitAccount", que es un hidden que viaja en el form
+		      	document.getElementById("debitAccount").value = selectedAccount;
+	    	}
 	</script>
 </body>
 </html>

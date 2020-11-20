@@ -76,8 +76,9 @@ public class ServletCuotas extends HttpServlet {
 				
 				
 				//ACTUALIZAR EL BALANCE DE LA CUENTA
-				//negAccount.updateBalance(Float.parseFloat(request.getParameter("feeAmount"))*-1,Integer.parseInt(request.getParameter()));
-				
+			//	negAccount.updateBalance(Float.parseFloat(request.getParameter("feeAmount"))*-1,Integer.parseInt(request.getParameter()));
+				//String pruebaDeCuenta = request.getParameter("debitAccount");
+			    
 				//ACTUALIZAR EL STATE DE LA CUOTA A 1
 				Fee f = new Fee();
 				f.setFeeNumber(Integer.parseInt(request.getParameter("feeNumber")));
