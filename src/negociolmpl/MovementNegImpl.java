@@ -26,6 +26,11 @@ public class MovementNegImpl implements MovementNeg{
 	public ArrayList<Movement> getAll() {
 		return (ArrayList<Movement>) movementDao.getAll();
 	}
+	
+	@Override
+	public ArrayList<Movement> GetAllbyAccount(int accountNumber) {
+		return (ArrayList<Movement>) movementDao.getAllByAccount(accountNumber);
+	}
 
 	@Override
 	public boolean insert(Movement movement) {

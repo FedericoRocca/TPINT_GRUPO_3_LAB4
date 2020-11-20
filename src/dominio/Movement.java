@@ -72,6 +72,10 @@ public class Movement {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	
+	public String MovementTypeDesc(){
+		return this.movementType.getDescription();
+	}
 
 	@Override
 	public String toString() {

@@ -14,11 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dominio.Account;
+import dominio.Movement;
 import dominio.User;
 import negocio.AccountNeg;
 import negociolmpl.AccountNegImpl;
+import negociolmpl.MovementNegImpl;
 import negociolmpl.UserNeglmpl;
-
 
 /**
  * Servlet implementation class ServletsCuentas
@@ -26,46 +27,53 @@ import negociolmpl.UserNeglmpl;
 @WebServlet("/ServletsCuentas")
 public class ServletsCuentas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	AccountNeg negAccount = new AccountNegImpl();  
 
-    public ServletsCuentas() {
-        super();
-    }
+	AccountNeg negAccount = new AccountNegImpl();
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ServletsCuentas() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	    try
-        {
-	        User userLogin = new User();
-	        userLogin = (User)request.getSession().getAttribute("userLogin");
-	        if( userLogin == null )
-	        {
-	            RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
-	            dispatcher.forward(request, response);
-	        }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+		try {
+			User userLogin = new User();
+			userLogin = (User) request.getSession().getAttribute("userLogin");
+			if (userLogin == null) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+				dispatcher.forward(request, response);
+			}
+
+			// CUENTAS DEL CLIENTE
+			if (request.getParameter("listarCuentas") != null) {
+				ArrayList<Account> listAccount = negAccount.GetAll();
+				request.setAttribute("accountList", listAccount);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoCuentas.jsp");
+				dispatcher.forward(request, response);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		try {
-		    User userLogin = new User();
-		    userLogin = (User)request.getSession().getAttribute("userLogin");
-		    if( userLogin == null )
-		    {
-		        RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
-		        dispatcher.forward(request, response);
-		    }
-		    
+			User userLogin = new User();
+			userLogin = (User) request.getSession().getAttribute("userLogin");
+			if (userLogin == null) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+				dispatcher.forward(request, response);
+			}
+
 			request.removeAttribute("logearError");
 			request.removeAttribute("DadaAlta");
 			request.removeAttribute("DadaBaja");
@@ -73,23 +81,19 @@ public class ServletsCuentas extends HttpServlet {
 			ArrayList<Account> listAccount = new ArrayList<Account>();
 			x.setAccountDni(request.getParameter("txtDNI"));
 			request.setAttribute("DNI", request.getParameter("txtDNI"));
-			if (negAccount == null)
-			{
+			if (negAccount == null) {
 				negAccount = new AccountNegImpl();
 			}
 			boolean estado = false;
 			String tipoEstado = "";
 			String p = request.getParameter("parameter");
-			String thisPage="/Cuenta.jsp?p="+p;
-				
-			
-		if(request.getParameter("btnGestionarCuenta")!=null)
-		{
-			estado=true;
-			tipoEstado = "estadoGestion";
-						
-				if(p.equals("Alta"))
-				{					
+			String thisPage = "/Cuenta.jsp?p=" + p;
+
+			if (request.getParameter("btnGestionarCuenta") != null) {
+				estado = true;
+				tipoEstado = "estadoGestion";
+
+				if (p.equals("Alta")) {
 					x.setCbu(request.getParameter("txtCBU"));
 					request.setAttribute("CBU", request.getParameter("txtCBU"));
 					x.setAccountypeid(Integer.parseInt(request.getParameter("tipoCta")));
@@ -97,66 +101,55 @@ public class ServletsCuentas extends HttpServlet {
 					x.setBalance(Float.parseFloat(request.getParameter("txtSaldo")));
 					request.setAttribute("Saldo", request.getParameter("txtSaldo"));
 					int cant = negAccount.ObtenerCantCuentas(x);
-					if(cant >= 3 || cant < 0)
-					{
+					if (cant >= 3 || cant < 0) {
 						throw new Exception("El cliente posee 3 o mas cuentas");
 					}
 					int ultima = negAccount.ObtenerUltimaCuenta();
-					x.setAccountNumber(ultima+1);
+					x.setAccountNumber(ultima + 1);
 					estado = negAccount.ValidarCBU(x);
-					if(estado) 
-					{
-						estado= negAccount.InsertarCuenta(x);
-						if(!estado) {
+					if (estado) {
+						estado = negAccount.InsertarCuenta(x);
+						if (!estado) {
 							throw new Exception("Hubo un problema al crear su cuenta");
 						}
-					}
-					else
-					{
+					} else {
 						throw new Exception("Ya existe una cuenta con ese CBU");
 					}
 					request.setAttribute("DadaAlta", estado);
 					negAccount = null;
-				}
-				else if(p.equals("Baja"))
-				{
+				} else if (p.equals("Baja")) {
 					x.setAccountNumber(Integer.parseInt(request.getParameter("NroCuentaBaja")));
-					estado=  negAccount.BajaCuenta(x);
+					estado = negAccount.BajaCuenta(x);
 					request.setAttribute("DadaBaja", estado);
 					negAccount = null;
 				}
-			x = null;
-			request.setAttribute(tipoEstado, estado);
-		    RequestDispatcher dispatcher = request.getRequestDispatcher(thisPage);
-			dispatcher.forward(request, response);
-		}
-		if(request.getParameter("BuscarExistencia")!=null)
-		{
-			estado = true;
-			tipoEstado = "estadoExistencia";
+				x = null;
+				request.setAttribute(tipoEstado, estado);
+				RequestDispatcher dispatcher = request.getRequestDispatcher(thisPage);
+				dispatcher.forward(request, response);
+			}
+			if (request.getParameter("BuscarExistencia") != null) {
+				estado = true;
+				tipoEstado = "estadoExistencia";
 				User u = null;
 				UserNeglmpl un = new UserNeglmpl();
 				u = un.getUser(request.getParameter("txtDNI"));
-				if (u == null)
-				{
+				if (u == null) {
 					throw new Exception("No se encuentra el usuario en la base de datos");
 				}
-				request.setAttribute("Nombre","NOMBRE: " + u.getFirstName()+" "+u.getLastName());
-				if(p.equals("Baja")) {
+				request.setAttribute("Nombre", "NOMBRE: " + u.getFirstName() + " " + u.getLastName());
+				if (p.equals("Baja")) {
 					List<Account> accounts = negAccount.GetAllbyDni(u.getDni());
-					request.setAttribute("CuentaB1","");
-					request.setAttribute("CuentaB2","");
-					request.setAttribute("CuentaB3","");
+					request.setAttribute("CuentaB1", "");
+					request.setAttribute("CuentaB2", "");
+					request.setAttribute("CuentaB3", "");
 					int i = 1;
-					if(!accounts.isEmpty())
-					{
-						for(Account c: accounts) {					
-							request.setAttribute("CuentaB"+i,c.getAccountNumber());
+					if (!accounts.isEmpty()) {
+						for (Account c : accounts) {
+							request.setAttribute("CuentaB" + i, c.getAccountNumber());
 							i++;
 						}
-					}
-					else
-					{
+					} else {
 						throw new Exception("No existen cuentas para dar de baja");
 					}
 					request.setAttribute("List", accounts);
@@ -165,22 +158,20 @@ public class ServletsCuentas extends HttpServlet {
 				u = null;
 				RequestDispatcher dispatcher = request.getRequestDispatcher(thisPage);
 				dispatcher.forward(request, response);
-		}		
-		// CUENTAS DEL CLIENTE		   
-			if(request.getParameter("listarCuentas") != null) {	
-				listAccount = negAccount.GetAll();
-				request.setAttribute("accountList", listAccount);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoCuentas.jsp");
+			}
+			if(request.getParameter("btnListarCuentaE") != null) {	
+				String parameter = request.getParameter("btnListarCuentaE");
+				request.setAttribute("btnListarCuentaE", null);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/ServletCuentasDet?Listarcuentanumero="+parameter);
+				request.removeAttribute("btnListarCuentaE");
 				dispatcher.forward(request, response);
 			}
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			request.setAttribute("logearError", e.getMessage());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/Cuenta.jsp?p="+request.getParameter("parameter"));
+			RequestDispatcher dispatcher = request
+					.getRequestDispatcher("/Cuenta.jsp?p=" + request.getParameter("parameter"));
 			dispatcher.forward(request, response);
 		}
 	}
 
 }
- 

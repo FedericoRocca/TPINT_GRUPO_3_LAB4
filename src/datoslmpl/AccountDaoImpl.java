@@ -27,19 +27,17 @@ public class AccountDaoImpl implements AccountDao {
 		ArrayList<Account> list = new ArrayList<Account>();
 		ResultSet rs = null;
 		try {
-
-			rs = cn.query(
-					"SELECT accounts.accountNumber, accounts.accountDni, accounts.creationDate, accounts.accountTypeId, accounts.cbu, accounts.balance, accounts.status"
-							+ "FROM Accounts WHERE accounts.status=1");
+			String query = "select a.accountNumber,a.accountDni,a.creationDate,a.accountTypeId,a.cbu,a.status,Sum(m.amount) as balance from accounts a inner join movements m on a.accountNumber = m.accountNumber Where a.status = 1 group by a.accountNumber";
+			rs = cn.query(query);
 			while (rs.next()) {
 				Account acc = new Account();
-				acc.setAccountNumber(rs.getInt("accounts.accountNumber"));
-				acc.setAccountDni(rs.getString("accounts.accountDni"));
-				acc.setCreationDate(rs.getDate("accounts.creationDate"));
-				acc.setAccountypeid(rs.getInt("accounts.accountTypeId"));
-				acc.setCbu(rs.getString("accounts.cbu"));
-				acc.setBalance(rs.getFloat("accounts.balance"));
-				acc.setStatus(rs.getBoolean("accounts.status"));
+				acc.setAccountNumber(rs.getInt("accountNumber"));
+				acc.setAccountDni(rs.getString("accountDni"));
+				acc.setCreationDate(rs.getDate("creationDate"));
+				acc.setAccountypeid(rs.getInt("accountTypeId"));
+				acc.setCbu(rs.getString("cbu"));
+				acc.setBalance(rs.getFloat("balance"));
+				acc.setStatus(rs.getBoolean("status"));
 
 				list.add(acc);
 			}

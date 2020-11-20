@@ -54,6 +54,44 @@ public class MovementDaoImpl implements MovementDao {
 		
 		return list;
 	}
+	
+	@Override
+	public ArrayList<Movement> getAllByAccount(int accountNumber) {
+		cn = new ConnectionDB();
+		cn.Open();
+		ArrayList<Movement> list = new ArrayList<Movement>();
+		try {
+		    String query = "SELECT m.id,m.accountNumber,m.movementDate,m.detail,m.amount,m.MovementTypeId,mt.descriptions,m.status";
+		    query += " FROM movements as m INNER JOIN MovementType as mt ON mt.id=m.MovementTypeId WHERE m.status = 1";
+		    query += " AND accountNumber = "+ accountNumber;
+		    query += " ORDER BY m.movementDate desc";
+			ResultSet rs= cn.query(query);
+			while(rs.next()) {
+				Movement mov = new Movement();
+				mov.setId(rs.getInt("m.id"));
+				mov.setAccountNumber(rs.getInt("m.accountNumber"));
+				mov.setMovementDate(rs.getDate("m.movementDate").toLocalDate());
+				mov.setDetail(rs.getString("m.detail"));
+				mov.setAmount(rs.getFloat("m.amount"));
+				mov.setStatus(rs.getBoolean("m.status"));
+				
+				MovementType mt = new MovementType();
+				mt.setId(rs.getInt("m.MovementTypeId"));
+				mt.setDescription(rs.getString("mt.descriptions"));
+				
+				mov.setMovementType(mt);
+				list.add(mov);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			cn.close();
+		}
+		
+		return list;
+	}
 
 	@Override
 	public boolean insert(Movement movement) {

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="dominio.User"%>
-<%@page import="dominio.Account"%>
+<%@page import="dominio.Movement"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Banco UTN - Lista de cuentas</title>
+<title>Banco UTN - Detalle Cuenta</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -78,46 +78,39 @@
 
 				<!-- Begin Page Content -->
 				<form class="needs-validation" method="post"
-						action="ServletsCuentas"> 
+						action="ServletCuentasDet"> 
 				<div class="container-fluid">
 					<div class="container-fluid">
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Listado de cuentas</h6>
+							<h6 class="m-0 font-weight-bold text-primary">Detalle de Cuenta Nº: ${Cuentanumero}</h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
 							<%								
-								List<Account> listA = null;
-								if(request.getAttribute("accountList") != null){
-									listA = (List<Account>) request.getAttribute("accountList");
+								List<Movement> listA = null;
+								if(request.getAttribute("listmovement") != null){
+									listA = (List<Movement>) request.getAttribute("listmovement");
 								}
 							%>
 								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 									<thead>
 										<tr>
-											<th>Nº de cuenta</th>
-											<th>CBU</th>
-											<th>Tipo de cuenta</th>
-											<th>Fecha de alta</th>
-											<th class="text-info">DNI</th>
-											<th>Saldo</th>
-											<th></th>
+											<th>Fecha</th>
+											<th>Descripción</th>
+											<th>Importe</th>
+
 										</tr>
 									</thead>
 									<tbody>
 									<%
 										if(listA != null)
-											for(Account a : listA) {
+											for(Movement m : listA) {
 									%>
 										<tr>
-											<td><%=a.getAccountNumber()%></td>
-											<td><%=a.getCbu()%></td>
-											<td><%=a.getAccountypeid()%></td>
-											<td><%=a.getCreationDate()%></td>
-											<td class="text-info"><%=a.getAccountDni()%></td>
-											<td><%=a.getBalance()%></td>
-											<td><button type="submit" value=<%=a.getAccountNumber()%> name="btnListarCuentaE" class="btn btn-primary mt-2">Listar</button></td>
+											<td><%=m.getMovementDate()%></td>
+											<td><%=m.MovementTypeDesc()%></td>
+											<td><%=m.getAmount()%></td>
 										</tr>
 									<% } %>
 									</tbody>
