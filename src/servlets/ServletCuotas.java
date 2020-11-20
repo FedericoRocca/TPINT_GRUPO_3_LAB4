@@ -64,6 +64,7 @@ public class ServletCuotas extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	   
 		String dniUserLogin = null;
+		boolean estado = false;
 		try {
 		    
 		    User userLogin = new User();
@@ -76,6 +77,15 @@ public class ServletCuotas extends HttpServlet {
             dniUserLogin = userLogin.getDni();
 		    
 			if(request.getParameter("btnPagar")!=null) {
+				
+				//Se verifica que el usuario haya seleccionado una cuenta
+				if(request.getParameter("debitAccount").contentEquals("Seleccione...")) {
+					request.setAttribute("selecCuenta", true);
+					request.setAttribute("listaAccount", negAccount.GetAllbyDni(dniUserLogin));
+					request.setAttribute("listaCuotas", negFee.getPendingFees(dniUserLogin));
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/PagoPrestamos.jsp");
+					dispatcher.forward(request, response);	
+				}
 				
 				//Se verifica que la cuenta tenga un balance suficiente para hacer el pago
 				Account acc = negAccount.obtenerCuenta(Integer.parseInt(request.getParameter("debitAccount")));
@@ -98,9 +108,10 @@ public class ServletCuotas extends HttpServlet {
 				mov.setDetail("Pago de la cuota N� " + (request.getParameter("feeNumber").toString()) +" del pr�stamo N� " + (request.getParameter("idLoan")).toString());
 				mov.setMovementDate(LocalDate.now());
 				mov.setMovementType(new MovementType(3,"Pago de prestamo"));
-				negMovement.insert(mov);
+				estado = negMovement.insert(mov);
 				
 				//Se vuelve a listar las cuentas y cuotas
+				request.setAttribute("estadoCuota", estado);
 				request.setAttribute("listaAccount", negAccount.GetAllbyDni(userLogin.getDni()));
 				request.setAttribute("listaCuotas", negFee.getPendingFees(userLogin.getDni()));
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/PagoPrestamos.jsp");

@@ -85,6 +85,7 @@
 							<label>Seleccione desde que cuenta va a pagar.</label>
 							
 							<select class="form-control" name=comboAccountNumber id="comboAccountNumber" autofocus>
+								<option value="" selected disabled>Seleccione...</option>
 								<%
 								int accs=0;
 									for (Account a : listaAccount) {
@@ -114,6 +115,15 @@
 							%>
 										<div class="alert alert-danger col-md-3" role="alert">
 											Saldo insuficiente!
+										</div>
+							<%
+								}
+							%>					
+							<%
+								if (request.getAttribute("selecCuenta") != null) {
+							%>
+										<div class="alert alert-danger col-md-3" role="alert">
+											Seleccione una cuenta!
 										</div>
 							<%
 								}
