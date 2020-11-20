@@ -68,7 +68,6 @@ public class ServletCuotas extends HttpServlet {
 				f.setIdLoan(Integer.parseInt(request.getParameter("idLoan")));
 				negFee.update(f);
 				
-				
 				//REGISTRAR EL MOVIMIENTO
 				Movement mov = new Movement();
 				mov.setAccountNumber(Integer.parseInt(request.getParameter()));

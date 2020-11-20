@@ -83,7 +83,7 @@
 							<div class="form-group col-md-3">
 								<label>N° de Cuenta</label>
 								
-								<select class="form-control" name=comboAccountNumber>
+								<select class="form-control" name=comboAccountNumber required="required">
 									<%
 										for (Account a : listaAccount) {
 									%>
