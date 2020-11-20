@@ -99,7 +99,16 @@
 						<div class="form-group col-md-3 ml-3">
 							<label>Balance</label>
 							<input class="form-control" name="txtBalance" id="txtBalance" type="number" disabled></input>
-						</div>				
+						</div>
+							<%
+								if (request.getAttribute("estadoCuota") != null) {
+							%>
+										<div class="alert alert-success col-md-3" role="alert">
+											PrÃ©stamo agregado con exito!
+										</div>
+							<%
+								}
+							%>					
 					</div>
 					
 					<%	
@@ -144,7 +153,7 @@
 													<%=c.getAmount() %>
 													<input type="hidden" name="feeAmount" id="feeAmount" value="<%=c.getAmount()%>">
 												</td>
-												<input type="hidden" name="debitAccount" id="debitAccount">
+												<input type="hidden" name="debitAccount" id="debitAccount" class="debitAccount">
 												<td>
 													<button type="submit" class="btn btn-success" name="btnPagar">
 													    <i class="fas fa-check"></i>
@@ -200,17 +209,19 @@
 	<script>
 		var selectO = document.getElementById('comboAccountNumber');
 		var selectedValue = null;	 
-		var selectedText = null;
+		
+		//var selectedText = null;
+		//document.getElementById("").value = selectO.options[selectO.selectedIndex].text;
+		//selectedText = this.options[selectO.selectedIndex].text;
 		
 		selectO.addEventListener('change', function(){
 			selectedValue = this.options[selectO.selectedIndex];
-			selectedText = this.options[selectO.selectedIndex].text;
 			$("#txtBalance").val(selectedValue.value);
 	     });
      </script>
      
      <script>
-     		//Función js que ejecuta únicamente cuando se submitea el form
+     		//Funciï¿½n js que ejecuta ï¿½nicamente cuando se submitea el form
 	     function setAccount() {
 	    	 	//Obtenemos el elemento html del combobox de cuentas
 		      	var e = document.getElementById("comboAccountNumber");
@@ -218,8 +229,11 @@
 	    	 	//De ese combobox, obtenemos el value del selected usando el index
 		      	var selectedAccount = e.options[e.selectedIndex].text;
 	    	 	
-	    	 	//Este value, que es el nro de cuenta, se lo seteamos al input "debitAccount", que es un hidden que viaja en el form
-		      	document.getElementById("debitAccount").value = selectedAccount;
+	    	 	//Se recorren todos los hidden input por el nombre de clase y se modifica el valor
+		      	var x = document.getElementsByClassName("debitAccount");
+		        for(i=0; i<x.length; i++){
+		         x[i].value = selectedAccount;
+		        }
 	    	}
 	</script>
 </body>

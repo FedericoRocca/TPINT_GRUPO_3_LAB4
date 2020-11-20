@@ -105,7 +105,7 @@ public class AccountDaoImpl implements AccountDao {
 			Movement m = new Movement();
 			MovementType mt = new MovementType();
 			mt.setId(1);
-			mt.setDescription("Crédito");
+			mt.setDescription("Crï¿½dito");
 			LocalDate date = LocalDate.now();
 			m.setAccountNumber(a.getAccountNumber());
 			m.setAmount(a.getBalance());
@@ -206,5 +206,4 @@ public class AccountDaoImpl implements AccountDao {
 
 		return estado;
 	}
-
 }

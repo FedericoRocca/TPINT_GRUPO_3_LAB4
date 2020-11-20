@@ -101,13 +101,12 @@ public class MovementDaoImpl implements MovementDao {
 		cn.Open();
 		
 		String query = "INSERT INTO movements (accountNumber,movementDate,detail,amount,MovementTypeId,status) VALUES"
-			//	+ "VALUES (1,\"2020-05-10\",\"test\",-10000,1,1); "
 				+ "('"+movement.getAccountNumber() +"','"+movement.getMovementDate()+"','"+movement.getDetail()+"',"+movement.getAmount()+","+movement.getMovementType().getId()+",1)";
 		
 		try
-		 {
+		{
 			status = cn.execute(query);
-		 }
+		}
 		catch(Exception e)
 		{
 			e.printStackTrace();

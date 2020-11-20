@@ -47,6 +47,7 @@ public class ServletCuotas extends HttpServlet {
                 dispatcher.forward(request, response);
             }
             
+            /*Se listan las cuentas y cuotas*/
 			request.setAttribute("listaAccount", negAccount.GetAllbyDni(userLogin.getDni()));
 			request.setAttribute("listaCuotas", negFee.getPendingFees(userLogin.getDni()));
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/PagoPrestamos.jsp");
@@ -72,33 +73,31 @@ public class ServletCuotas extends HttpServlet {
 		    
 			if(request.getParameter("btnPagar")!=null) {
 				
-				//VERIFICAR QUE LA CUENTA TENGA UN BALANCE SUFICIENTE PARA REALIZAR EL PAGO
+				//Se verifica que la cuenta tenga un balance suficiente para hacer el pago
 				
-				
-				//ACTUALIZAR EL BALANCE DE LA CUENTA
-			//	negAccount.updateBalance(Float.parseFloat(request.getParameter("feeAmount"))*-1,Integer.parseInt(request.getParameter()));
-				//String pruebaDeCuenta = request.getParameter("debitAccount");
+				//Se actualiza el balance de la cuenta
+				negAccount.updateBalance(Float.parseFloat(request.getParameter("feeAmount"))*-1,Integer.parseInt(request.getParameter("debitAccount")));
 			    
-				//ACTUALIZAR EL STATE DE LA CUOTA A 1
+				//Se marca la cuota como paga, state = 1
 				Fee f = new Fee();
 				f.setFeeNumber(Integer.parseInt(request.getParameter("feeNumber")));
 				f.setIdLoan(Integer.parseInt(request.getParameter("idLoan")));
 				negFee.update(f);
 				
-				//REGISTRAR EL MOVIMIENTO
+				//Se registra el movimiento
 				Movement mov = new Movement();
-				//mov.setAccountNumber(Integer.parseInt(request.getParameter()));
+				mov.setAccountNumber(Integer.parseInt(request.getParameter("debitAccount")));
 				mov.setAmount(Float.parseFloat(request.getParameter("feeAmount"))*-1);
-				mov.setDetail("Pago de la cuota N° " + (request.getParameter("idLoan").toString()) +"del préstamo N° " + (request.getParameter("feeNumber")).toString());
+				mov.setDetail("Pago de la cuota Nï¿½ " + (request.getParameter("feeNumber").toString()) +" del prï¿½stamo Nï¿½ " + (request.getParameter("idLoan")).toString());
 				mov.setMovementDate(LocalDate.now());
 				mov.setMovementType(new MovementType(3,"Pago de prestamo"));
 				negMovement.insert(mov);
 				
-				//VOLVER A LISTAR LAS CUOTAS
-				request.setAttribute("listaCuotas", negFee.getPendingFees("22345678"));	//Este DNI se tiene que sacar por session.
+				//Se vuelve a listar las cuentas y cuotas
+				request.setAttribute("listaAccount", negAccount.GetAllbyDni(userLogin.getDni()));
+				request.setAttribute("listaCuotas", negFee.getPendingFees(userLogin.getDni()));
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/PagoPrestamos.jsp");
-				dispatcher.forward(request, response);
-				
+				dispatcher.forward(request, response);	
 			}
 		} 
 		catch (Exception e) {

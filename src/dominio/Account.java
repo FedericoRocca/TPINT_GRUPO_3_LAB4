@@ -61,10 +61,4 @@ public class Account {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
-
-
-
-
-
-	
 }
