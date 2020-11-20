@@ -3,6 +3,8 @@ package dominio;
 import java.text.DecimalFormat;
 import java.util.Date;
 
+import exceptions.BalanceNegativoException;
+
 public class Account {
 	
 	private int accountNumber;
@@ -50,8 +52,11 @@ public class Account {
 		return balance;
 	}
 
-	public void setBalance(float balance) {
-		this.balance = balance;
+	public void setBalance(float balance) throws BalanceNegativoException {
+		if(balance < 0)
+			throw new BalanceNegativoException();
+		else
+			this.balance = balance;
 	}
 
 	public Boolean getStatus() {
