@@ -33,18 +33,6 @@ public class ServletCuentasDet  extends HttpServlet  {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
 				dispatcher.forward(request, response);
 			}
-
-			//DETALLE DE CUENTA
-			if (request.getParameter("Listarcuentanumero") != null) {
-				MovementNegImpl negMovement = new MovementNegImpl();
-				int account = Integer.parseInt(request.getParameter("Listarcuentanumero"));
-				ArrayList<Movement> listmovement = negMovement.GetAllbyAccount(account);
-				request.setAttribute("movementlist", listmovement);
-				request.setAttribute("Cuentanumero", account);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/DetalleCuenta.jsp");
-				dispatcher.forward(request, response);
-			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -54,15 +42,24 @@ public class ServletCuentasDet  extends HttpServlet  {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {		
 		//DETALLE DE CUENTA
-		if (request.getParameter("Listarcuentanumero") != null) {
-			MovementNegImpl negMovement = new MovementNegImpl();
-			int account = Integer.parseInt(request.getParameter("Listarcuentanumero"));
-			ArrayList<Movement> listmovement = negMovement.GetAllbyAccount(account);
-			request.setAttribute("listmovement", listmovement);
-			request.setAttribute("Cuentanumero", account);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/DetalleCuenta.jsp");
-			dispatcher.forward(request, response);
+		try {
+			if (request.getParameter("Listarcuentanumero") != null) {
+				MovementNegImpl negMovement = new MovementNegImpl();
+				int account = Integer.parseInt(request.getParameter("Listarcuentanumero"));
+				ArrayList<Movement> listmovement = negMovement.GetAllbyAccount(account);
+				float saldofinal = negMovement.obtenerSaldo(account);
+				request.setAttribute("listmovement", listmovement);
+				request.setAttribute("Cuentanumero", account);
+				request.setAttribute("Saldo", saldofinal);
+				negMovement = null;
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/DetalleCuenta.jsp");
+				dispatcher.forward(request, response);
+			}
 		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 

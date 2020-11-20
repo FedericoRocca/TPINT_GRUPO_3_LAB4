@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="dominio.User"%>
-<%@page import="dominio.Movement"%>
+<%@page import="dominio.RepBalancesMayores"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,26 +12,21 @@
 %>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Banco UTN - Detalle Cuenta</title>
+<title>Banco UTN - Reporte de cuentas con mayores balances</title>
 
 <!-- Custom fonts for this template-->
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
-	type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-<!-- Styles for the datatables-->
-<link href="vendor/datatables/dataTables.bootstrap4.min.css"
-	rel="stylesheet">
+<!-- Styles for the datatables -->
+<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 <body id="page-top">
@@ -55,64 +50,62 @@
 
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
-						<div class="topbar-divider d-none d-sm-block"></div>
+						<div class="topbar-divider d-none d-sm-block"> </div>
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
 								<span class="mr-2 d-none d-lg-inline text-gray-600 small">${userLogin.getFirstName()} ${userLogin.getLastName()}</span> 
-								<img class="img-profile rounded-circle" src="img/profile.png">
+								<img class="img-profile rounded-circle"src="img/profile.png">
 							</a> <!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="#"> 
-									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
-								</a> 
-								<a class="dropdown-item" href="#"> 
-									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings
-								</a>
-								<div class="dropdown-divider"></div>
 								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesión</span> </a>
-							</div></li>
+							</div>
+						</li>
 					</ul>
 				</nav>
 				<!-- End of Topbar -->
-
+					
 				<!-- Begin Page Content -->
-				<form class="needs-validation" method="post"
-						action="ServletCuentasDet"> 
 				<div class="container-fluid">
-					<div class="container-fluid">
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Detalle de Cuenta Nº: ${Cuentanumero} - Saldo: ${Saldo}</h6>
-						</div>
+							<h6 class="m-0 font-weight-bold text-primary">Reporte de cuentas con mayor balance</h6>
+						</div>					
 						<div class="card-body">
 							<div class="table-responsive">
-							<%								
-								List<Movement> listA = null;
-								if(request.getAttribute("listmovement") != null){
-									listA = (List<Movement>) request.getAttribute("listmovement");
+							
+							<%
+								ArrayList<RepBalancesMayores> reportResult = new ArrayList<RepBalancesMayores>();
+								
+								if (request.getAttribute("reportResult") != null){
+								    reportResult = (ArrayList<RepBalancesMayores>) request.getAttribute("reportResult");
 								}
-							%>
-								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+							%>	
+								<table class="table table-bordered" id="dataTable" cellspacing="0">				
 									<thead>
 										<tr>
-											<th>Fecha</th>
-											<th>Descripción</th>
-											<th>Importe</th>
-
+											<th>Nombre</th>
+											<th>Apellido</th>
+                      						<th>DNI</th>
+                      						<th>Cuenta</th>
+                      						<th>CBU</th>
+                      						<th>Balance</th>
 										</tr>
 									</thead>
 									<tbody>
-									<%
-										if(listA != null)
-											for(Movement m : listA) {
-									%>
+									
+									<% 
+									if(reportResult != null)
+									for (RepBalancesMayores results : reportResult ) { %>							
 										<tr>
-											<td><%=m.getMovementDate()%></td>
-											<td><%=m.MovementTypeDesc()%></td>
-											<td><%=m.getAmount()%></td>
-										</tr>
-									<% } %>
+					                      <td><%=results.getFirstName()%></td>
+					                      <td><%=results.getLastName()%></td>
+					                      <td><%=results.getDni()%></td>
+					                      <td><%=results.getAccountNumber()%></td>
+					                      <td><%=results.getCbu()%></td>
+					                      <td><%=results.getBalance()%></td>
+					                    </tr>
+					                <% } %>
 									</tbody>
 								</table>
 							</div>
@@ -120,10 +113,8 @@
 					</div>
 
 				</div>
-
-				</div>
 				<!-- /.container-fluid -->
-			</form>
+
 			</div>
 			<!-- End of Main Content -->
 
@@ -143,6 +134,7 @@
 	<!-- End of Page Wrapper -->
 
 	<!-- Bootstrap core JavaScript-->
+	
 	<script src="vendor/jquery/jquery.min.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

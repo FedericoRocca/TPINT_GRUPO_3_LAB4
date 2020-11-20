@@ -4,10 +4,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import datos.RepBalancesMayoresDao;
+import datos.ReportesDao;
 import dominio.RepBalancesMayores;
 
-public class RepBalancesMayoresDaoImpl  implements RepBalancesMayoresDao
+public class ReportesDaoImpl  implements ReportesDao
 {
 
     private ConnectionDB cn;

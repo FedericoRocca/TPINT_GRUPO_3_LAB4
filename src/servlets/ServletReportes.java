@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dominio.RepBalancesMayores;
 import dominio.User;
-import negociolmpl.RepBalancesMayoresNegImpl;
+import negociolmpl.ReportesNegImpl;
 
 /**
  * Servlet implementation class ServletReportes
@@ -52,9 +52,10 @@ public class ServletReportes extends HttpServlet {
             if( request.getParameter("btnBalanceMayorA") != null )
             {
                 ArrayList<RepBalancesMayores> reportResult = new ArrayList<RepBalancesMayores>();
-                RepBalancesMayoresNegImpl rpbmn = new RepBalancesMayoresNegImpl();
+                ReportesNegImpl rpbmn = new ReportesNegImpl();
                 reportResult = rpbmn.executeReport( Float.parseFloat(request.getParameter("inputBalance").toString()) );
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/ReporteMayoresBalances.jsp");
+                request.setAttribute("reportResult", reportResult);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/ReporteCuentasMayoresBalances.jsp");
                 dispatcher.forward(request, response);
             }
             
