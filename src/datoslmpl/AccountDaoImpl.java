@@ -105,7 +105,7 @@ public class AccountDaoImpl implements AccountDao {
 			Movement m = new Movement();
 			MovementType mt = new MovementType();
 			mt.setId(1);
-			mt.setDescription("Crédito");
+			mt.setDescription("CrÃ©dito");
 			LocalDate date = LocalDate.now();
 			m.setAccountNumber(a.getAccountNumber());
 			m.setAmount(a.getBalance());
@@ -198,6 +198,24 @@ public class AccountDaoImpl implements AccountDao {
 			cn.Open();
 			estado = cn.execute(
 					"Update Accounts Set Balance = balance + (" + x + ") WHERE AccountNumber= " + accountNumber);
+			cn.close();
+			cn = null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return estado;
+	}
+	
+	
+	@Override
+	public Boolean updateBalanceTransferenciaOrigen(float x, int accountNumberOrigen) {
+		boolean estado = false;
+		try {
+			cn = new ConnectionDB();
+			cn.Open();
+			estado = cn.execute(
+					"Update Accounts Set Balance = " + x + " WHERE AccountNumber= " + accountNumberOrigen);
 			cn.close();
 			cn = null;
 		} catch (Exception e) {
