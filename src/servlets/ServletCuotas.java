@@ -39,9 +39,16 @@ public class ServletCuotas extends HttpServlet {
 
 
 		try {
-			
-			request.setAttribute("listaAccount", negAccount.GetAllbyDni("22345678")); //Este DNI se tiene que sacar por session.
-			request.setAttribute("listaCuotas", negFee.getPendingFees("22345678"));	//Este DNI se tiene que sacar por session.
+		    User userLogin = new User();
+            userLogin = (User)request.getSession().getAttribute("userLogin");
+            if( userLogin == null )
+            {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+                dispatcher.forward(request, response);
+            }
+            
+			request.setAttribute("listaAccount", negAccount.GetAllbyDni(userLogin.getDni()));
+			request.setAttribute("listaCuotas", negFee.getPendingFees(userLogin.getDni()));
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/PagoPrestamos.jsp");
 			dispatcher.forward(request, response);
 		} 
@@ -54,13 +61,22 @@ public class ServletCuotas extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	   
 		try {
+		    
+		    User userLogin = new User();
+            userLogin = (User)request.getSession().getAttribute("userLogin");
+            if( userLogin == null )
+            {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
+                dispatcher.forward(request, response);
+            }
+		    
 			if(request.getParameter("btnPagar")!=null) {
 				
 				//VERIFICAR QUE LA CUENTA TENGA UN BALANCE SUFICIENTE PARA REALIZAR EL PAGO
 				
 				
 				//ACTUALIZAR EL BALANCE DE LA CUENTA
-				negAccount.updateBalance(Float.parseFloat(request.getParameter("feeAmount"))*-1,Integer.parseInt(request.getParameter()));
+				//negAccount.updateBalance(Float.parseFloat(request.getParameter("feeAmount"))*-1,Integer.parseInt(request.getParameter()));
 				
 				//ACTUALIZAR EL STATE DE LA CUOTA A 1
 				Fee f = new Fee();
@@ -70,9 +86,9 @@ public class ServletCuotas extends HttpServlet {
 				
 				//REGISTRAR EL MOVIMIENTO
 				Movement mov = new Movement();
-				mov.setAccountNumber(Integer.parseInt(request.getParameter()));
+				//mov.setAccountNumber(Integer.parseInt(request.getParameter()));
 				mov.setAmount(Float.parseFloat(request.getParameter("feeAmount"))*-1);
-				mov.setDetail("Pago de la cuota NÂ° " + (request.getParameter("idLoan").toString()) +"del prÃ©stamo NÂ° " + (request.getParameter("feeNumber")).toString());
+				mov.setDetail("Pago de la cuota N° " + (request.getParameter("idLoan").toString()) +"del préstamo N° " + (request.getParameter("feeNumber")).toString());
 				mov.setMovementDate(LocalDate.now());
 				mov.setMovementType(new MovementType(3,"Pago de prestamo"));
 				negMovement.insert(mov);

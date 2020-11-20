@@ -125,7 +125,8 @@
 										for(Fee c : listaCuotas){
 										%>
 										<tr>
-											<form action="ServletPrestamos" method="post">
+											<!-- <form action="ServletPrestamos" method="post">  -->
+											<form action="ServletCuotas" method="post">
 												<td>
 													<%=c.getIdLoan() %> 
 													<input type="hidden" name="idLoan" value="<%=c.getIdLoan() %>">
@@ -204,5 +205,9 @@
 			$("#txtBalance").val(selectedValue.value);
 	     });
      </script>
+     
+     <script>
+		document.getElementById("demo").innerHTML = "Hello JavaScript!";
+	</script>
 </body>
 </html>
