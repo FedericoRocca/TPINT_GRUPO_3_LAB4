@@ -64,7 +64,7 @@
 							</a> 
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesión</span> </a>
+								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesion</span> </a>
 							</div>
 						</li>
 					</ul>
@@ -89,7 +89,7 @@
 					%>
 						<div class="form-row">
 							<div class="form-group col-md-5">
-								<label for="Origen">Número de cuenta Origen </label>
+								<label for="Origen">N�mero de cuenta Origen </label>
 								<select class="form-control" name="textOrigen" id="accountOrigen">
    								<option value="" disabled selected>Seleccione...</option>
    								<%
@@ -149,7 +149,7 @@
 								      <div class="card"> 
 								      <div class="card-body">
 								      	<h5 class="card-title">Cuenta de Origen</h5>								        
-								        	Número de cuenta
+								        	Numero de cuenta
 								        	<input class="form-control" type="text" name="txtCtaOrigen" id="inputCtaOrigen" readonly> 
 								        	Saldo
 								        	<input class="form-control" type="text"  name="txtOrigenModal" id="inputMontoOrigen" readonly> 								      
@@ -157,7 +157,7 @@
 					            
 						            <div class="card-body">
 						             <h5 class="card-title">Cuenta de Destino</h5>
-							            Número de cuenta
+							            Numero de cuenta
 							            <div class="input-group">		
 								        <input class="form-control" name="txtCtaDestino" id="inputCtaDestino" type="text" readonly>
 								        </div>

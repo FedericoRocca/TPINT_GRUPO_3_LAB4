@@ -113,7 +113,7 @@
 										<tr>
 											<td><%=a.getAccountNumber()%></td>
 											<td><%=a.getCbu()%></td>
-											<td><%=a.getAccountypeid()%></td>
+											<td><%=a.getAccountypeDesc()%></td>
 											<td><%=a.getCreationDate()%></td>
 											<td class="text-info"><%=a.getAccountDni()%></td>
 											<td><%=a.getBalance()%></td>
