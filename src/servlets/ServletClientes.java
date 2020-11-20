@@ -62,6 +62,7 @@ public class ServletClientes extends HttpServlet {
     		User bajaUser = new User();
     		User modifUser = new User();
     		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    		String passwordsNotMatch = "";
     		
     		if(request.getParameter("btnLogout") != null)
     		{
@@ -110,52 +111,60 @@ public class ServletClientes extends HttpServlet {
     		
     		if(request.getParameter("btnModificarCliente") != null)
             {
-                    if( request.getParameter("password") != request.getParameter("passwordRepeat") )
+    		        String pass = request.getParameter("password");
+    		        String repeatedPass = request.getParameter("passwordRepeat"); 
+    		    
+                    if( pass.equals(repeatedPass) == false )
                     {
-                        String passwordsNotMatch = "Las contraseñas no coinciden, por favor ingresarlas nuevamente";
+                        passwordsNotMatch = "No se pudo actualizar la información del usuario, las contraseñas no coincidieron";
                         request.setAttribute("passwordsNotMatch", passwordsNotMatch);
                         RequestDispatcher dispatcher = request.getRequestDispatcher("/ModificarCliente.jsp");
                         dispatcher.forward(request, response);
                     }
+                    else
+                    {
+                        passwordsNotMatch = null;
+                        request.setAttribute("passwordsNotMatch", passwordsNotMatch);
+                        modifUser.setPassword(request.getParameter("password"));
+                        modifUser.setCuil( request.getParameter("textCuil") );
+                        modifUser.setFirstName( request.getParameter("textNombre") );
+                        modifUser.setLastName( request.getParameter("textApellido") );
+                        modifUser.setGender( request.getParameter("textGenero") );
+                        modifUser.setUserName( request.getParameter("textUsuario") );
+                        modifUser.setNacionality( request.getParameter("textNacionalidad") );
+                        modifUser.setEmail( request.getParameter("textEmail") );
+                        modifUser.setDni( request.getParameter("textDni") );
+                        modifUser.setBirthDate( formatter.parse( request.getParameter("textFechaNacimiento") ) );
+                        
+                        if( request.getParameter("textPhone1") != null )
+                        {
+                            Phone tmpPhone = new Phone();
+                            tmpPhone.setNumber(Long.parseLong(request.getParameter("textPhone1").toString()));
+                            tmpPhone.setDescription("Teléfono primario");
+                            modifUser.addPhone(tmpPhone);
+                        }
+                        
+                        if( request.getParameter("textPhone2") != null )
+                        {
+                            Phone tmpPhone = new Phone();
+                            tmpPhone.setNumber(Long.parseLong(request.getParameter("textPhone2").toString()));
+                            tmpPhone.setDescription("Teléfono secundario");
+                            modifUser.addPhone(tmpPhone);
+                        }
+                        
+                        if( request.getParameter("textPhone3") != null )
+                        {
+                            Phone tmpPhone = new Phone();
+                            tmpPhone.setNumber(Long.parseLong(request.getParameter("textPhone3").toString()));
+                            tmpPhone.setDescription("Teléfono adicional");
+                            modifUser.addPhone(tmpPhone);
+                        }
+                        pdi.updatePhoneForDNI(modifUser.getDni(), modifUser.getPhone());
+                        udi.update(modifUser);
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("/DashboardAdmin.jsp");
+                        dispatcher.forward(request, response);
+                    }
                     
-                    modifUser.setPassword(request.getParameter("password"));
-    		        modifUser.setCuil( request.getParameter("textCuil") );
-    		        modifUser.setFirstName( request.getParameter("textNombre") );
-    		        modifUser.setLastName( request.getParameter("textApellido") );
-    		        modifUser.setGender( request.getParameter("textGenero") );
-    		        modifUser.setUserName( request.getParameter("textUsuario") );
-    		        modifUser.setNacionality( request.getParameter("textNacionalidad") );
-    		        modifUser.setEmail( request.getParameter("textEmail") );
-    		        modifUser.setDni( request.getParameter("textDni") );
-    		        modifUser.setBirthDate( formatter.parse( request.getParameter("textFechaNacimiento") ) );
-    		        
-    		        if( request.getParameter("textPhone1") != null )
-    		        {
-    		            Phone tmpPhone = new Phone();
-    		            tmpPhone.setNumber(Long.parseLong(request.getParameter("textPhone1").toString()));
-    		            tmpPhone.setDescription("Teléfono primario");
-    		            modifUser.addPhone(tmpPhone);
-    		        }
-    		        
-    		        if( request.getParameter("textPhone2") != null )
-                    {
-    		            Phone tmpPhone = new Phone();
-                        tmpPhone.setNumber(Long.parseLong(request.getParameter("textPhone2").toString()));
-                        tmpPhone.setDescription("Teléfono secundario");
-                        modifUser.addPhone(tmpPhone);
-                    }
-    		        
-    		        if( request.getParameter("textPhone3") != null )
-                    {
-    		            Phone tmpPhone = new Phone();
-                        tmpPhone.setNumber(Long.parseLong(request.getParameter("textPhone3").toString()));
-                        tmpPhone.setDescription("Teléfono adicional");
-                        modifUser.addPhone(tmpPhone);
-                    }
-    		        pdi.updatePhoneForDNI(modifUser.getDni(), modifUser.getPhone());
-    		        udi.update(modifUser);
-    		        RequestDispatcher dispatcher = request.getRequestDispatcher("/DashboardAdmin.jsp");
-                    dispatcher.forward(request, response);
             }
     		
     		if(request.getParameter("alta") != null)

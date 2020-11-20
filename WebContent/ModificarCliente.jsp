@@ -84,6 +84,11 @@
 							</div>
 						</div>
 					</form>
+					
+					<div class="form-group col-md-6">
+						<div class="badge badge-warning">${passwordsNotMatch}</div>									
+					</div>
+								
 					<% if( request.getAttribute("usrModif") != null ) 
 					{
 					    User usrModif = new User();
@@ -114,13 +119,9 @@
 								
 								<div class="form-group col-md-6">
 									<label for="title">Contraseña</label> 
-									<input class="form-control" name = "password" required type="password" placeholder="Ingrese contraseña" maxlength="45" value="">
+									<input class="form-control" name = "password" required type="password" placeholder="Ingrese contraseña" maxlength="45" value="<%=usrModif.getPassword() %>">
 									<label for="title">Repetir contraseña</label> 
-									<input class="form-control" name = "passwordRepeat" required type="password" placeholder="Repita contraseña" maxlength="45" value="">
-								</div>
-								
-								<div class="form-group col-md-6">
-									<div class="badge badge-warning">${passwordsNotMatch}</div>									
+									<input class="form-control" name = "passwordRepeat" required type="password" placeholder="Repita contraseña" maxlength="45" value="<%=usrModif.getPassword()%>">
 								</div>
 								
 								<div class="form-group col-md-2">
