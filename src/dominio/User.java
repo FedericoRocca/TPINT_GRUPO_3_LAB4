@@ -4,7 +4,22 @@ import java.util.Date;
 
 public class User {
 	
-	private String dni;
+	public Nationality getNation()
+    {
+        return nation;
+    }
+
+    public void setNation(Nationality nation)
+    {
+        this.nation = nation;
+    }
+
+    public ArrayList<Phone> getPhones()
+    {
+        return phones;
+    }
+
+    private String dni;
 	private String firstName;
 	private String lastName;
 	private String userName;
@@ -12,6 +27,7 @@ public class User {
 	private String cuil;
 	private String gender; /*era de tipo Character*/
 	private String nacionality;
+	private Nationality nation;
 	private Date birthDate;
 	private String address;
 	private String city;
@@ -66,7 +82,7 @@ public class User {
     }
 
 	   public User(String dni, String firstName, String lastName, String userName, String password, String cuil,
-            String gender, String nacionality, Date birthDate, String address, String city, String email, boolean status) {
+            String gender, Nationality nation, Date birthDate, String address, String city, String email, boolean status) {
         super();
         this.dni = dni;
         this.firstName = firstName;
@@ -81,6 +97,7 @@ public class User {
         this.city = city;
         this.email = email;
         this.status = status;
+        this.nation = nation;
     }
 
 	    public User(String dni, String firstName, String lastName, String userName, String password, String cuil,
@@ -101,6 +118,25 @@ public class User {
 	        this.status = status;
 	        this.rol = rol;
 	    }
+	    
+	    public User(String dni, String firstName, String lastName, String userName, String password, String cuil,
+                String gender, Nationality nation, Date birthDate, String address, String city, String email, boolean status, Role rol) {
+            super();
+            this.dni = dni;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.userName = userName;
+            this.password = password;
+            this.cuil = cuil;
+            this.gender = gender;
+            this.nation = nation;
+            this.birthDate = birthDate;
+            this.address = address;
+            this.city = city;
+            this.email = email;
+            this.status = status;
+            this.rol = rol;
+        }
 
     /**
      * @return the rol

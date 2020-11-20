@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import datos.UserDao;
+import dominio.Nationality;
 import dominio.Phone;
 import dominio.Role;
 import dominio.User;
@@ -19,7 +20,11 @@ public class UserDaolmpl implements UserDao{
 	
 	private ConnectionDB cn;
 	
-	private static final String longQuery = "SELECT u.dni, u.cuil, u.firstname,u.address ,u.lastname,u.userName,u.password,u.cuil,u.city, u.email, u.nationality, u.birthDate, u.gender, u.status, p.description as Phone, p.numberPhone as number FROM Users u LEFT JOIN phones p ON p.userDni = u.dni  WHERE u.dni = ";
+	private static final String longQuery = "SELECT u.dni, u.cuil, u.firstname,u.address ,u.lastname,u.userName,u.password,u.cuil,u.city, u.email, u.nationality, "
+	        + "u.birthDate, u.gender, u.status, p.description as Phone, p.numberPhone as number "
+	        + "FROM Users u "
+	        + "LEFT JOIN phones p ON p.userDni = u.dni "
+	        + "WHERE u.dni = ";
 	
 	public UserDaolmpl() {
 		
@@ -32,9 +37,7 @@ public class UserDaolmpl implements UserDao{
 		ArrayList<User> list = new ArrayList<>();
 		ResultSet rs = null;
 		try {	
-//			rs = cn.query("SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, u.birthdate FROM Users u");
 			rs = cn.query("SELECT u.dni, u.cuil, u.firstname, u.lastname, u.email, nats.country, u.birthdate FROM Users u INNER JOIN Roles_x_Users rxu ON rxu.dni = u.dni INNER JOIN Nationalities nats on u.nationality = nats.id WHERE rxu.roleId = 2 and u.status != 0");
-			System.out.println(rs);
 			while(rs.next()) 
 			{
 				User user = new User();
@@ -60,10 +63,15 @@ public class UserDaolmpl implements UserDao{
 	@Override
 	public User getUser(String dni) {
 		ResultSet rs = null;
-		
+		Nationality nationality = null;
 		User user = null;
 
-		String query = longQuery +  dni;
+		String query = "SELECT u.dni, u.cuil, u.firstname,u.address ,u.lastname,u.userName,u.password,u.cuil,u.city, u.email, nats.id as 'idCountry', "
+		        + "nats.gentilic, u.birthDate, u.gender, u.status, p.description as Phone, p.numberPhone as number "
+		        + "FROM Users u "
+		        + "LEFT JOIN phones p ON p.userDni = u.dni "
+		        + "INNER JOIN nationalities nats on u.nationality = nats.id "
+		        + "WHERE u.dni = '" +  dni + "';";
 		System.out.println(query);
 		
 		try 
@@ -82,7 +90,8 @@ public class UserDaolmpl implements UserDao{
 							rs.getString("password"),
 							rs.getString("cuil"),
 							rs.getString("gender"),
-							rs.getString("nationality"),
+							nationality = new Nationality(rs.getInt("idCountry"),
+                                    rs.getString("gentilic")),
 							rs.getDate("birthDate"),
 							rs.getString("address"),
 							rs.getString("city"),
@@ -237,14 +246,16 @@ public class UserDaolmpl implements UserDao{
     {
         ResultSet rs = null;
         User user = null;
+        Nationality nationality = null;
         Role rol;
         
-        String query = "SELECT u.dni, u.firstname, u.lastname, u.username, u.password, u.cuil, u.gender, u.nationality, u.birthdate, u.address, u.city," + 
-                " u.email, u.status, rol.id as rolid, rol.name as rolname, rol.status as rolstatus" + 
-                " FROM Users u " + 
-                " INNER JOIN roles_x_users rolx ON rolx.dni = u.dni" + 
-                " INNER JOIN roles rol on rol.id = rolx.roleid" + 
-                " WHERE u.username = '" + userName + "' and u.password = '" + password + "';";
+        String query = "SELECT u.dni, u.firstname, u.lastname, u.username, u.password, u.cuil, u.gender, nats.id as 'idCountry', "
+                + "nats.gentilic, u.birthdate, u.address, u.city, u.email, u.status, rol.id as rolid, rol.name as rolname, rol.status as rolstatus "
+                + "FROM Users u "
+                + "INNER JOIN roles_x_users rolx ON rolx.dni = u.dni "
+                + "INNER JOIN roles rol on rol.id = rolx.roleid "
+                + "INNER JOIN nationalities nats on u.nationality = nats.id "
+                + "WHERE u.username = '" + userName + "' and u.password = '" + password + "';";
         
         try 
         {
@@ -263,7 +274,8 @@ public class UserDaolmpl implements UserDao{
                             rs.getString("password"),
                             rs.getString("cuil"),
                             rs.getString("gender"),
-                            rs.getString("nationality"),
+                            nationality = new Nationality(rs.getInt("idCountry"),
+                                    rs.getString("gentilic")),
                             rs.getDate("birthDate"),
                             rs.getString("address"),
                             rs.getString("city"),

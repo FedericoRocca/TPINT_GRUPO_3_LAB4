@@ -66,7 +66,7 @@
 				<div class="container-fluid">
 					<!-- Page Heading -->
 					<div class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Reportes</h1>
+						<h1 class="h3 mb-0 text-gray-800">Listados</h1>
 					</div>
 					
 					<form method="get" action="ServletListados" enctype="multipart/form-data">

@@ -171,7 +171,10 @@ public class ServletClientes extends HttpServlet {
     		{
     //			String dniCustomer = request.getParameter("94565484");
     //			customer = negCustomer.getUser(customer.getDni());
-    			customer = negCustomer.getUser("94565484");
+    //			customer = negCustomer.getUser("94565484");
+    		    nationalities = (ArrayList<Nationality>) negNatio.getAll();
+                request.setAttribute("listNat", nationalities);
+    			customer = negCustomer.getUser(userLogin.getDni());
     	        request.setAttribute("customer", customer);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/DatosCliente.jsp");
                 dispatcher.forward(request, response);

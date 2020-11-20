@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="dominio.User" %>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="dominio.User" %>
+<%@page import="dominio.Nationality"%>
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,7 +83,6 @@
 					<!-- Navs -->
 					<nav class="nav nav-borders">
                      	<a class="nav-link active ml-0" href="ServletClientes?listarCliente=1">Datos</a>
-                     	<a class="nav-link" href="#">Billetera</a>
                     </nav>
 					<!-- Content Row -->
 					<div class="row">
@@ -89,84 +91,111 @@
 							<!-- Account details card-->
 							<div class="card mb-4">
 								<div class="card-header">Detalles de cuenta</div>
+								<form method="get" action="ServletClientes?dataUpdate=1">
 								<div class="card-body">
-<!-- 									<form method="get"> -->
-										
-										<%
-											User customer = null;
-											if(request.getAttribute("customer") != null)
-											{
-												customer = (User) request.getAttribute("customer");	
-											}
-										%>
-										<%
-											if (customer != null) {
-										%>
-										
-										<h4><%=customer.getFirstName()%>  <%customer.getLastName();%></h4>
+										<h4><%=userLogin.getFirstName()%>  <%userLogin.getLastName();%></h4>
 										
 										<div class="form-row">
 											<!-- Form Group (organization name)-->
 											<div class="form-group col-md-6">
 												<label class="small mb-1" for="user">Tu usuario</label> 
-												<input class="form-control" id="user" type="text" name = "readUser" value="<%=customer.getUserName() %>" readonly>
-											</div>
-											<!-- Form Group (location)-->
-											<div class="form-group col-md-6">
-												<label class="small mb-1" for="password">Tu contraseña</label>
-												<input class="form-control" id="password" type="text" name = "readPassword" value="<%=customer.getPassword()%>" readonly>
+												<input class="form-control" id="user" type="text" name= "readUser" value="<%=userLogin.getUserName() %>" readonly>
 											</div>
 										</div>
+										
+										<div class="form-row">
+											<div class="form-group col-md-6">
+												<label class="small mb-1" for="password">Tu contraseña</label>
+												<input class="form-control" id="password" type="password" name= "readPassword" value="">
+											</div>
+											<div class="form-group col-md-6">
+												<label class="small mb-1" for="password">Repetí tu contraseña</label>
+												<input class="form-control" id="password" type="password" name= "repeatReadPassword" value="">
+											</div>
+										</div>
+										
+										<div class="form-row">
+											<div class="form-group col-md-6">
+												<div class="badge badge-warning">${passwordError}</div>
+											</div>
+										</div>
+										
 										<!-- Form Row        -->
 										<div class="form-row">
 											<!-- Form Group (organization name)-->
 											<div class="form-group col-md-6">
 												<label class="small mb-1" for="dni">Tu DNI</label>
-												<input class="form-control" id="dni" type="text" name = "readDni" value="<%=customer.getDni()%>" readonly>
+												<input class="form-control" id="dni" type="text" name = "readDni" value="<%=userLogin.getDni()%>" readonly>
 											</div>
 											<!-- Form Group (location)-->
 											<div class="form-group col-md-6">
 												<label class="small mb-1" for="cuil">Tu CUIL</label>
-												<input class="form-control" id="cuil" type="text" name = "readCbu" value="<%=customer.getCuil()%>" readonly >
+												<input class="form-control" id="cuil" type="text" name = "readCbu" value="<%=userLogin.getCuil()%>" readonly >
 											</div>
 										</div>
 										<div class="form-row">			
 											<div class="form-group col-md-3">
 												<label class="small mb-1" for="gender">Género</label>
-												<input class="form-control" id="gender" type="text" name = "readGender" value="<%=customer.getGender()%>" readonly>
+												<select class="custom-select" id="inputGroupSelect02" name="textGenero" required>
+													<option selected><%=userLogin.getGender()%></option>
+													<option value="1">Femenino</option>
+													<option value="2">Masculino</option>
+													<option value="3">Otro</option>
+												</select>
+												
 											</div>											
+											
+											<%
+												List<Nationality> listNat = new ArrayList<Nationality>();
+												if(request.getAttribute("listNat") != null)
+												{
+													listNat = (List<Nationality>) request.getAttribute("listNat");
+												}
+											%>
 											<div class="form-group col-md-3">
-												<label class="small mb-1" for="nat">Nacionalidad</label>
-												<input class="form-control" id="nat" type="text" name = "readNationality" value="<%=customer.getNacionality() %>" readonly >
+			    							<label for="Nationality">Nacionalidad</label>
+			    								<select class="form-control" name="textNacionalidad">
+			    								<option selected value="<%=userLogin.getNation().getId()%>"><%=userLogin.getNation().getDescription()%></option>
+			    								<%
+			    									for(Nationality n : listNat)	{
+												%>
+													
+											      	<option value="<%=n.getId()%>"><%=n.getDescription()%></option>
+											   	<%
+													} 
+												%>
+											    </select>
 											</div>
+
 											<div class="form-group col-md-3">
 												<label class="small mb-1" for="nac">Fecha de Nacimiento</label>
-												<input class="form-control" id="nac" type="text" name = "readBirthDate" value="<%=customer.getBirthDate()%>" readonly >
+												<input class="form-control" id="nac" type="text" name = "readBirthDate" value="<%=userLogin.getBirthDate()%>" >
+											</div>
+											</div>
+											<div class="form-group">
+												<label class="small mb-1" for="address">Tu Dirección</label> 
+												<input class="form-control" id="address" type="text" name = "readAddress" value="<%=userLogin.getAddress()%>">
+											</div>
+											<!-- Form Group (email address)-->
+											<div class="form-group">
+												<label class="small mb-1" for="email">Tu Email</label> 
+												<input class="form-control" id="email" type="email" name = "readEmail" value="<%=userLogin.getEmail()%>">
+											</div>
+											<!-- Form Row-->
+											<div class="form-row">
+												<!-- Form Group (phone number)-->
+												<div class="form-group col-md-3">
+													<label class="small mb-1" for="phone">esto hay que hacerlo de cero...</label> 
+													<input class="form-control" id="phone" type="text" name = "readphone" readonly>
+												</div>
+											</div>
+											<div class="form-row">
+												<div class="form-group col-md-3">
+													<input class="btn btn-primary mt-2" type="submit" name="btnModificardatos" value="Modificar datos">
+												</div>
 											</div>
 										</div>
-										<div class="form-group">
-											<label class="small mb-1" for="address">Tu Dirección</label> 
-											<input class="form-control" id="address" type="text" name = "readAddress" value="<%=customer.getAddress()%>" readonly>
-										</div>
-										<!-- Form Group (email address)-->
-										<div class="form-group">
-											<label class="small mb-1" for="email">Tu Email</label> 
-											<input class="form-control" id="email" type="email" name = "readEmail" value="<%=customer.getEmail()%>" readonly>
-										</div>
-										<!-- Form Row-->
-										<div class="form-row">
-											<!-- Form Group (phone number)-->
-											<div class="form-group col-md-3">
-												<label class="small mb-1" for="phone">Teléfono</label> 
-												<input class="form-control" id="phone" type="text" name = "readphone" readonly>
-											</div>
-											<!-- Form Group (birthday)-->
-											</div>
-										</div>
-										<%
-											}
-										%>
-<!-- 									</form> -->
+ 									</form>
 								</div>
 							</div>
 						</div>

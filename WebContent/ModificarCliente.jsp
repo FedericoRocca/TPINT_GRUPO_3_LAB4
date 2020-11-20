@@ -137,7 +137,7 @@
 								<div class="form-group col-md-3">
     							<label for="Nationality">Nacionalidad</label>
     								<select class="form-control" name="textNacionalidad">
-    								<option selected><%=usrBaja.getNacionality()%></option>
+    								<option selected value="<%=usrBaja.getNation().getId()%>"><%=usrBaja.getNation().getDescription()%></option>
     								<%
     									for(Nationality n : listNat)	{
 									%>
