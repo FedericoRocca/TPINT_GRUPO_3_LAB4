@@ -2,14 +2,15 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="dominio.Account"%>
 <%@page import="dominio.User"%>
-
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
 <%
-    User userLogin = new User(); 
-    userLogin = (User)session.getAttribute("userLogin");
-%>	
+	User userLogin = new User();
+	userLogin = (User) session.getAttribute("userLogin");
+%>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
@@ -57,14 +58,17 @@
 						<li class="nav-item dropdown no-arrow"><a
 							class="nav-link dropdown-toggle" href="#" id="userDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> <span class="mr-2 d-none d-lg-inline text-gray-600 small">${userLogin.getFirstName()} ${userLogin.getLastName()}</span>
-							 <img class="img-profile rounded-circle"
-								src="img/profile.png">
+							aria-expanded="false"> <span
+								class="mr-2 d-none d-lg-inline text-gray-600 small">${userLogin.getFirstName()}
+									${userLogin.getLastName()}</span> <img
+								class="img-profile rounded-circle" src="img/profile.png">
 						</a> <!-- Dropdown - User Information -->
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 								aria-labelledby="userDropdown">
-								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesión</span> </a>
+								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i
+									class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar
+										sesión</span> </a>
 							</div></li>
 					</ul>
 				</nav>
@@ -138,19 +142,15 @@
 									id="inputGroupSelect03">
 									<option selected>Elija Cuenta</option>
 									<%
-										if (request.getAttribute("CuentaB1").toString().length() > 0) {
+										List<Account> listA = null;
+													if (request.getAttribute("listaccount") != null) {
+														listA = (List<Account>) request.getAttribute("listaccount");
+													}
+													if (listA != null)
+														for (Account a : listA) {
 									%>
-									<option value="${CuentaB1}">Nro: ${CuentaB1}</option>
-									<%
-										}
-													if (request.getAttribute("CuentaB2").toString().length() > 0) {
-									%>
-									<option value="${CuentaB2}">Nro: ${CuentaB2}</option>
-									<%
-										}
-													if (request.getAttribute("CuentaB3").toString().length() > 0) {
-									%>
-									<option value="${CuentaB3}">Nro: ${CuentaB3}</option>
+									<option value="<%=a.getAccountNumber()%>">Nro:
+										<%=a.getAccountNumber()%></option>
 									<%
 										}
 									%>
@@ -162,28 +162,42 @@
 						%>
 						<div class="form-row">
 							<div class="form-group col-md-3">
-								
-								
-						  <div class="modal fade" id="modalAltaUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						    <div class="modal-dialog" role="document">
-						      <div class="modal-content">
-						        <div class="modal-header">
-						          <h5 class="modal-title" id="exampleModalLabel">Dar de <%=request.getParameter("p")%> cuenta?</h5>
-						          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						            <span aria-hidden="true">×</span>
-						          </button>
-						        </div>
-						        <div class="modal-body">Realmente querés dar de <%=request.getParameter("p")%> la cuenta?</div>
-						        <div class="modal-footer">
-						          <button type="submit" name="btnGestionarCuenta" class="btn btn-primary mt-2">Dar de <%=request.getParameter("p")%></button>
-						        </div>
-						      </div>
-						    </div>
-						  </div>
-						  <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#modalAltaUsuario">
-			                  Dar de <%=request.getParameter("p")%>
-			                </a>
-			                
+
+
+								<div class="modal fade" id="modalAltaUsuario" tabindex="-1"
+									role="dialog" aria-labelledby="exampleModalLabel"
+									aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">
+													Dar de
+													<%=request.getParameter("p")%>
+													cuenta?
+												</h5>
+												<button class="close" type="button" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												Realmente querés dar de
+												<%=request.getParameter("p")%>
+												la cuenta?
+											</div>
+											<div class="modal-footer">
+												<button type="submit" name="btnGestionarCuenta"
+													class="btn btn-primary mt-2">
+													Dar de
+													<%=request.getParameter("p")%></button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<a class="btn btn-primary" href="#" data-toggle="modal"
+									data-target="#modalAltaUsuario"> Dar de <%=request.getParameter("p")%>
+								</a>
+
 							</div>
 						</div>
 
@@ -195,14 +209,14 @@
 			</div>
 			<!-- End of Main Content -->
 			<%
-				}	}
-					if (request.getAttribute("logearError") != null) {
+				}
+				}
+				if (request.getAttribute("logearError") != null) {
 			%><script>
 				alert("${logearError}");
 			</script>
 			<%
 				}
-			
 			%>
 			<%
 				if (request.getAttribute("DadaBaja") != null) {

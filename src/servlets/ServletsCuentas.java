@@ -149,18 +149,10 @@ public class ServletsCuentas extends HttpServlet {
 					request.setAttribute("Nombre", "NOMBRE: " + u.getFirstName() + " " + u.getLastName());
 					if (p.equals("Baja")) {
 						List<Account> accounts = negAccount.GetAllbyDni(u.getDni());
-						request.setAttribute("CuentaB1", "");
-						request.setAttribute("CuentaB2", "");
-						request.setAttribute("CuentaB3", "");
-						int i = 1;
-						if (!accounts.isEmpty()) {
-							for (Account c : accounts) {
-								request.setAttribute("CuentaB" + i, c.getAccountNumber());
-								i++;
-							}
-						} else {
+						if (accounts.isEmpty()) {
 							throw new Exception("No existen cuentas para dar de baja");
 						}
+						request.setAttribute("listaccount",accounts);
 						request.setAttribute("List", accounts);
 					}
 					request.setAttribute(tipoEstado, estado);
