@@ -1,8 +1,11 @@
 package negociolmpl;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import datos.ReportesDao;
 import datoslmpl.ReportesDaoImpl;
+import dominio.LisCantidadClientesPaises;
 import dominio.RepBalancesMayores;
 import negocio.ReportesNeg;
 
@@ -24,6 +27,12 @@ public class ReportesNegImpl implements ReportesNeg
     public ArrayList<RepBalancesMayores> executeReport(float valueBalance)
     {
             return (ArrayList<RepBalancesMayores>)repBalancesDao.executeReport(valueBalance); 
+    }
+
+    @Override
+    public ArrayList<LisCantidadClientesPaises> executeReport()
+    {
+        return (ArrayList<LisCantidadClientesPaises>)repBalancesDao.executeReport(); 
     }
     
 }
