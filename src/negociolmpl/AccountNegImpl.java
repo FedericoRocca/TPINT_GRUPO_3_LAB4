@@ -106,4 +106,9 @@ public class AccountNegImpl implements AccountNeg{
 	public Boolean updateBalanceTransferenciaOrigen(float x, int accountNumerOrigen) {
 		return accountDao.updateBalanceTransferenciaOrigen(x, accountNumerOrigen);
 	}
+
+	@Override
+	public Account obtenerCuenta(int accountNumber) {
+		return accountDao.obtenerCuenta(accountNumber);
+	}
 }

@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dominio.Account;
 import dominio.Fee;
 import dominio.Movement;
 import dominio.MovementType;
 import dominio.User;
+import exceptions.BalanceNegativoException;
 import negocio.AccountNeg;
 import negocio.FeeNeg;
 import negocio.MovementNeg;
@@ -61,6 +63,7 @@ public class ServletCuotas extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	   
+		String dniUserLogin = null;
 		try {
 		    
 		    User userLogin = new User();
@@ -70,10 +73,14 @@ public class ServletCuotas extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
                 dispatcher.forward(request, response);
             }
+            dniUserLogin = userLogin.getDni();
 		    
 			if(request.getParameter("btnPagar")!=null) {
 				
 				//Se verifica que la cuenta tenga un balance suficiente para hacer el pago
+				Account acc = negAccount.obtenerCuenta(Integer.parseInt(request.getParameter("debitAccount")));
+				//Si se quiere ingresar un balance negativo se catchea
+				acc.setBalance(acc.getBalance() - (Float.parseFloat(request.getParameter("feeAmount"))));
 				
 				//Se actualiza el balance de la cuenta
 				negAccount.updateBalance(Float.parseFloat(request.getParameter("feeAmount"))*-1,Integer.parseInt(request.getParameter("debitAccount")));
@@ -100,6 +107,13 @@ public class ServletCuotas extends HttpServlet {
 				dispatcher.forward(request, response);	
 			}
 		} 
+		catch (BalanceNegativoException e) {
+			request.setAttribute("saldoNegativo", true);
+			request.setAttribute("listaAccount", negAccount.GetAllbyDni(dniUserLogin));
+			request.setAttribute("listaCuotas", negFee.getPendingFees(dniUserLogin));
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/PagoPrestamos.jsp");
+			dispatcher.forward(request, response);	
+		}
 		catch (Exception e) {
 			e.printStackTrace();
 		} 

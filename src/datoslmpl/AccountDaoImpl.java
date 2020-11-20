@@ -223,4 +223,32 @@ public class AccountDaoImpl implements AccountDao {
 
 		return estado;
 	}
+
+	@Override
+	public Account obtenerCuenta(int accountNumber) {
+		Account acc = new Account();
+		try {
+			cn = new ConnectionDB();
+			cn.Open();
+			ResultSet rs = cn.query("Select accountNumber,accountDni,creationDate,accountTypeId,cbu,balance,status from Accounts where status = 1 AND AccountNumber = "+accountNumber); 
+
+			if(rs.next()) {
+				acc.setAccountNumber(rs.getInt("accountNumber"));
+				acc.setAccountDni(rs.getString("accountDni"));
+				acc.setCreationDate(rs.getDate("creationDate"));
+				acc.setAccountypeid(rs.getInt("accountTypeId"));
+				acc.setCbu(rs.getString("cbu"));
+				acc.setBalance(rs.getFloat("balance"));
+				acc.setStatus(rs.getBoolean("status"));
+			} 
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			cn.close();
+		}
+		
+		return acc;
+	}
 }

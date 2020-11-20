@@ -108,6 +108,15 @@
 										</div>
 							<%
 								}
+							%>	
+							<%
+								if (request.getAttribute("saldoNegativo") != null) {
+							%>
+										<div class="alert alert-danger col-md-3" role="alert">
+											Saldo insuficiente!
+										</div>
+							<%
+								}
 							%>					
 					</div>
 					
