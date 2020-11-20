@@ -90,7 +90,6 @@ public class AccountDaoImpl implements AccountDao {
 			cn.execute(query);
 			cn.close();
 			cn = null;
-			CrearMovimiento(a);
 			
 		}
 		catch(Exception e)
@@ -99,32 +98,6 @@ public class AccountDaoImpl implements AccountDao {
 		}
 	}
 	
-	void CrearMovimiento(Account a) {
-		try {
-			MovementDaoImpl mv = new MovementDaoImpl();
-			Movement m = new Movement();
-			MovementType mt = new MovementType();
-			mt.setId(1);
-			mt.setDescription("Cr�dito");
-			LocalDate date = LocalDate.now();
-			m.setAccountNumber(a.getAccountNumber());
-			m.setAmount(a.getBalance());
-			m.setDetail("Alta Cuenta");
-			m.setMovementDate(date);
-			m.setStatus(true);
-			m.setMovementType(mt);
-			
-			boolean estado = mv.insert(m);
-			mt = null;
-			mv = null;
-			m = null;
-			m = null;
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-
-	}
 
 	@Override
 	public void DarBaja(Account a) {

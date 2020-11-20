@@ -12,5 +12,6 @@ public interface MovementDao {
 	public List<Movement> getAll();
 	public boolean insert(Movement movement);
 	public ArrayList<Movement> getAllByAccount(int accountNumber);
+	public float obtenerSaldo(int accountNumber);
 	
 }

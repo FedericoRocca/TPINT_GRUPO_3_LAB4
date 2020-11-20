@@ -12,4 +12,5 @@ public interface MovementNeg {
 	public List<Movement> getAll();
 	public boolean insert(Movement movement);
 	public ArrayList<Movement> GetAllbyAccount(int accountNumber);
+	public float obtenerSaldo(int accountNumber);
 }
