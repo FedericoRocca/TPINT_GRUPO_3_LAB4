@@ -120,7 +120,7 @@ CREATE TABLE Movements
 	id			 	INT AUTO_INCREMENT NOT NULL,
     accountNumber	INT				NOT NULL,
     movementDate 	DATETIME 		NOT NULL,
-    detail 		VARCHAR(20) 	NOT NULL,
+    detail 		VARCHAR(60) 	NOT NULL,
     amount 			DECIMAL(10,2) 	NOT NULL,
     MovementTypeId	INT 			NOT NULL,
     status			BIT				NOT NULL,

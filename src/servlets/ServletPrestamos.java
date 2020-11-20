@@ -88,7 +88,7 @@ public class ServletPrestamos extends HttpServlet {
 			if(request.getParameter("btnPedirPrestamo")!=null) {
 				
 				Loan ln = new Loan();
-				ln.setDni(userLogin.getDni()); /*Se trae de session*/
+				ln.setDni(userLogin.getDni());
 				ln.setAccountNumber(Integer.parseInt(request.getParameter("comboAccountNumber")));
 				ln.setAmountReqByCustomer(Double.parseDouble(request.getParameter("txtAmountReqByCustomer")));
 				ln.setAmountOfFees(Integer.parseInt(request.getParameter("comboAmountOfFees")));
@@ -129,7 +129,7 @@ public class ServletPrestamos extends HttpServlet {
 				estado = negLoan.insert(ln);
 				request.setAttribute("estadoPrestamo", estado);
 				//Se vuelve a cargar el descolgable
-				request.setAttribute("listaAccount", negAccount.GetAllbyDni(userLogin.getDni())); //Este DNI se tiene que sacar por session.
+				request.setAttribute("listaAccount", negAccount.GetAllbyDni(userLogin.getDni()));
 				
 				RequestDispatcher rd = request.getRequestDispatcher("/AltaPrestamo.jsp");
 				rd.forward(request, response);	

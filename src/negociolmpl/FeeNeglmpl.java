@@ -1,5 +1,6 @@
 package negociolmpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import datos.FeeDao;
@@ -16,8 +17,8 @@ public class FeeNeglmpl implements FeeNeg {
 	private FeeDao feeDao = new FeeDaolmpl();
 
 	@Override
-	public List<Fee> getPendingFees(String dni) {
-		return feeDao.getPendingFees(dni);
+	public ArrayList<Fee> getPendingFees(String dni) {
+		return (ArrayList<Fee>) feeDao.getPendingFees(dni);
 	}
 
 	@Override
