@@ -286,7 +286,10 @@ public class UserDaolmpl implements UserDao{
                                            rs.getBoolean("rolstatus"))
                             
                     );
-                            
+                    ArrayList<Phone> phonesByDni = new ArrayList<Phone>();
+                    PhoneDaolmpl pdi = new PhoneDaolmpl();
+                    phonesByDni = pdi.getAll(Integer.parseInt(user.getDni()));
+                    user.setPhones(phonesByDni);
                 }  
             }                     
         }

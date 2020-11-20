@@ -1,4 +1,5 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="dominio.Phone" %>
 <%@page import="dominio.User" %>
 <%@page import="dominio.Nationality"%>
 <%@page import="java.util.ArrayList" %>
@@ -103,23 +104,6 @@
 											</div>
 										</div>
 										
-										<div class="form-row">
-											<div class="form-group col-md-6">
-												<label class="small mb-1" for="password">Tu contraseña</label>
-												<input class="form-control" id="password" type="password" name= "readPassword" value="">
-											</div>
-											<div class="form-group col-md-6">
-												<label class="small mb-1" for="password">Repetí tu contraseña</label>
-												<input class="form-control" id="password" type="password" name= "repeatReadPassword" value="">
-											</div>
-										</div>
-										
-										<div class="form-row">
-											<div class="form-group col-md-6">
-												<div class="badge badge-warning">${passwordError}</div>
-											</div>
-										</div>
-										
 										<!-- Form Row        -->
 										<div class="form-row">
 											<!-- Form Group (organization name)-->
@@ -136,63 +120,49 @@
 										<div class="form-row">			
 											<div class="form-group col-md-3">
 												<label class="small mb-1" for="gender">Género</label>
-												<select class="custom-select" id="inputGroupSelect02" name="textGenero" required>
+												<select class="custom-select" id="inputGroupSelect02" name="textGenero" disabled>
 													<option selected><%=userLogin.getGender()%></option>
-													<option value="1">Femenino</option>
-													<option value="2">Masculino</option>
-													<option value="3">Otro</option>
 												</select>
 												
 											</div>											
-											
-											<%
-												List<Nationality> listNat = new ArrayList<Nationality>();
-												if(request.getAttribute("listNat") != null)
-												{
-													listNat = (List<Nationality>) request.getAttribute("listNat");
-												}
-											%>
+
 											<div class="form-group col-md-3">
 			    							<label for="Nationality">Nacionalidad</label>
-			    								<select class="form-control" name="textNacionalidad">
+			    								<select class="form-control" name="textNacionalidad" disabled>
 			    								<option selected value="<%=userLogin.getNation().getId()%>"><%=userLogin.getNation().getDescription()%></option>
-			    								<%
-			    									for(Nationality n : listNat)	{
-												%>
-													
-											      	<option value="<%=n.getId()%>"><%=n.getDescription()%></option>
-											   	<%
-													} 
-												%>
 											    </select>
 											</div>
 
 											<div class="form-group col-md-3">
 												<label class="small mb-1" for="nac">Fecha de Nacimiento</label>
-												<input class="form-control" id="nac" type="text" name = "readBirthDate" value="<%=userLogin.getBirthDate()%>" >
+												<input class="form-control" id="nac" type="text" name = "readBirthDate" value="<%=userLogin.getBirthDate()%>" readonly>
 											</div>
 											</div>
 											<div class="form-group">
 												<label class="small mb-1" for="address">Tu Dirección</label> 
-												<input class="form-control" id="address" type="text" name = "readAddress" value="<%=userLogin.getAddress()%>">
+												<input class="form-control" id="address" type="text" name = "readAddress" value="<%=userLogin.getAddress()%>" readonly>
 											</div>
 											<!-- Form Group (email address)-->
 											<div class="form-group">
 												<label class="small mb-1" for="email">Tu Email</label> 
-												<input class="form-control" id="email" type="email" name = "readEmail" value="<%=userLogin.getEmail()%>">
+												<input class="form-control" id="email" type="email" name = "readEmail" value="<%=userLogin.getEmail()%>" readonly>
 											</div>
 											<!-- Form Row-->
 											<div class="form-row">
-												<!-- Form Group (phone number)-->
-												<div class="form-group col-md-3">
-													<label class="small mb-1" for="phone">esto hay que hacerlo de cero...</label> 
-													<input class="form-control" id="phone" type="text" name = "readphone" readonly>
-												</div>
-											</div>
-											<div class="form-row">
-												<div class="form-group col-md-3">
-													<input class="btn btn-primary mt-2" type="submit" name="btnModificardatos" value="Modificar datos">
-												</div>
+											
+											<%
+												int c = 0;
+												for( Phone phone : userLogin.getPhone() )
+												{
+												    c++;
+												    %><div class="form-group col-md-3">
+														<label for="title"><%=phone.getDescription() %></label> 
+														<input class="form-control" required type="text" placeholder="Ingrese" name="textPhone<%=c%>" 
+														maxlength="10" value="<%=phone.getNumber() %>" readonly>
+													</div><%
+												}
+											%>
+											
 											</div>
 										</div>
  									</form>
