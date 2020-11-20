@@ -8,6 +8,6 @@ public class BalanceNegativoException extends RuntimeException {
 
 	@Override
 	public String getMessage() {
-		return "El saldo no puede ser negativo";
+		return "El saldo no puede ser negativo.";
 	}
 }

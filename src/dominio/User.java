@@ -1,6 +1,9 @@
 package dominio;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
+
+import exceptions.TelefonosIgualesException;
 
 public class User {
 	
@@ -238,7 +241,14 @@ public class User {
 		return phones;
 	}
 
-	public void setPhones(ArrayList<Phone> phones) {
+	public void setPhones(ArrayList<Phone> phones) throws TelefonosIgualesException {
+		 for (int i = 0; i < phones.size(); i++) {
+		     for (int j = i + 1 ; j < phones.size(); j++) {
+		          if (phones.get(i).getNumber() == phones.get(j).getNumber()) {
+		                   throw new TelefonosIgualesException();
+		          }
+		     }
+		 }
 		this.phones = phones;
 	}
 	
