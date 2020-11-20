@@ -114,18 +114,18 @@ public class ServletsCuentas extends HttpServlet {
 						int ultima = negAccount.ObtenerUltimaCuenta();
 						x.setAccountNumber(ultima + 1);
 						estado = negAccount.ValidarCBU(x);
+						if (!estado) {
+							throw new Exception("Ya existe una cuenta con ese CBU");							
+						}
 						// INSERTAR
-						if (estado) {
-							estado = negAccount.InsertarCuenta(x);
-							if (!estado) {
-								throw new Exception("Hubo un problema al crear su cuenta");
-							}
-						} else {
-							throw new Exception("Ya existe una cuenta con ese CBU");
+						estado = negAccount.InsertarCuenta(x);
+						if (!estado) {
+							throw new Exception("Hubo un problema al crear su cuenta");
 						}
 						request.setAttribute("DadaAlta", estado);
 						negAccount = null;
 					} else if (p.equals("Baja")) {
+						//BAJA CUENTA
 						x.setAccountNumber(Integer.parseInt(request.getParameter("NroCuentaBaja")));
 						estado = negAccount.BajaCuenta(x);
 						request.setAttribute("DadaBaja", estado);
