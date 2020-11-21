@@ -232,27 +232,37 @@
     	 	$("#txtMontoFinal").val(selectedOption.value);
     	 }   	 		
      });
-	
-     	function mostrarTransferencia(){
-		$('#exampleModal').modal('show');			
-		var montoTransferencia = $('#textAmountToTransfer').val();
-		
-		$('#montooo').val(parseFloat(montoTransferencia));
-		
- 		var montoOrigen = $('#txtMontoInicial').val();
- 		var saldoOrigen = parseFloat(montoOrigen) - parseFloat(montoTransferencia);
- 		var montoDestino = $('#txtMontoFinal').val();
- 		var saldoDestino = parseFloat(montoDestino) + parseFloat(montoTransferencia);
- 		
-//  		console.log("montoOrigen: " + montoOrigen);
-//  		console.log("saldo Actual 1era cuenta: " + saldo);
-//  		console.log("Monto a transferir:" + montoTransferencia);	
-//  		console.log("montoDestino:" + montoActual);s
-		$('#inputCtaOrigen').val(selectedOptionTextO);
- 		$('#inputMontoOrigen').val(saldoOrigen); //SALDO ACTUAL DE LA PRIMERA CUENTA
- 		
- 		$('#inputCtaDestino').val(selectedOptionTextD);
- 		$('#inputMontoDestino').val(saldoDestino); // MONTO ACUMULADO DE LA SEGUNDA CUENTA
+     
+    	
+			function mostrarTransferencia(){       		
+     			var montoOrigen = $('#txtMontoInicial').val();
+     			var montoTransferencia = $('#textAmountToTransfer').val();	
+     		      		    		
+     			$('#exampleModal').modal('hide');			
+     			    			
+    			$('#montooo').val(parseFloat(montoTransferencia));
+    			   		    			
+     			var saldoOrigen = parseFloat(montoOrigen) - parseFloat(montoTransferencia);
+     			var montoDestino = $('#txtMontoFinal').val();
+     			var saldoDestino = parseFloat(montoDestino) + parseFloat(montoTransferencia);
+     		
+     			if(saldoOrigen <= montoTransferencia){
+     				
+     				alert("No tenés en tu cuenta el monto suficiente que deseas transferir");
+     				window.location.href = "ServletTransferencias?alta=1";
+      				$('#exampleModal').modal('hide');   			
+     			}
+//      			$('#exampleModal').modal('show');
+//      		console.log("montoOrigen: " + montoOrigen);
+//      		console.log("saldo Actual 1era cuenta: " + saldo);
+//      		console.log("Monto a transferir:" + montoTransferencia);	
+//      		console.log("montoDestino:" + montoActual);
+    			$('#inputCtaOrigen').val(selectedOptionTextO);
+     			$('#inputMontoOrigen').val(saldoOrigen); //SALDO ACTUAL DE LA PRIMERA CUENTA
+     		
+     			$('#inputCtaDestino').val(selectedOptionTextD);
+     			$('#inputMontoDestino').val(saldoDestino); // MONTO ACUMULADO DE LA SEGUNDA CUENTA
+     		
 
  	};   
 	</script>
