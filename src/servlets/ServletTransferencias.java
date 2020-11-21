@@ -32,12 +32,9 @@ public class ServletTransferencias extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	AccountNeg negAccount = new AccountNegImpl();
-<<<<<<< HEAD
+
 	MovementNeg negMove = new MovementNegImpl();
-=======
-	MovementNeg negMovement = new MovementNegImpl();
->>>>>>> 446d09bea51014a3d233c3b7fb519b4d80a91850
-	
+
     public ServletTransferencias() {
         super();
         // TODO Auto-generated constructor stub
@@ -86,9 +83,7 @@ public class ServletTransferencias extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	try {
 			
@@ -114,7 +109,7 @@ public class ServletTransferencias extends HttpServlet {
 			mov.setDetail("Transferencia a cuenta propia");
 			mov.setMovementDate(LocalDate.now());
 			mov.setMovementType(new MovementType(4,"Transferencia"));
-			negMovement.insert(mov);
+			negMove.insert(mov);
 			
 			//Se genera el movimiento de transferencia negativo
 			Movement mov2 = new Movement();
@@ -123,7 +118,7 @@ public class ServletTransferencias extends HttpServlet {
 			mov2.setDetail("Transferencia a cuenta propia");
 			mov2.setMovementDate(LocalDate.now());
 			mov2.setMovementType(new MovementType(4,"Transferencia"));
-			negMovement.insert(mov2);
+			negMove.insert(mov2);
 			
 			//Se modifica el balance de las dos cuentas
 			account.setBalance(Float.parseFloat( request.getParameter("txtOrigenModal")));
