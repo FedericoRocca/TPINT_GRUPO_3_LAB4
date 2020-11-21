@@ -16,14 +16,18 @@ import javax.sound.midi.Soundbank;
 
 import datoslmpl.PhoneDaolmpl;
 import datoslmpl.UserDaolmpl;
+import dominio.City;
 import dominio.Nationality;
 import dominio.Phone;
+import dominio.Province;
 import dominio.User;
 import negocio.NationalityNeg;
 import negocio.PhoneNeg;
 import negocio.UserNeg;
+import negociolmpl.CityNeglmpl;
 import negociolmpl.NationalityNeglmpl;
 import negociolmpl.PhoneNeglmpl;
+import negociolmpl.ProvinceNeglmpl;
 import negociolmpl.UserNeglmpl;
 import sun.font.Script;
 
@@ -63,6 +67,10 @@ public class ServletClientes extends HttpServlet {
     		User modifUser = new User();
     		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     		String passwordsNotMatch = "";
+    		ArrayList<Province> provinces = new ArrayList<>();
+    		ProvinceNeglmpl provinceNeglmpl = new ProvinceNeglmpl();
+    		ArrayList<City> cits = new ArrayList<>();
+    		CityNeglmpl cityNeglmpl = new CityNeglmpl();
     		
     		if(request.getParameter("btnLogout") != null)
     		{
@@ -169,10 +177,12 @@ public class ServletClientes extends HttpServlet {
     		
     		if(request.getParameter("alta") != null)
     		{
-    		        nationalities = (ArrayList<Nationality>) negNatio.getAll();
-    		        request.setAttribute("listNat", nationalities);
-    		        RequestDispatcher dispatcher = request.getRequestDispatcher("/Cliente.jsp?p=Alta");
-    	            dispatcher.forward(request, response);
+		        provinces = provinceNeglmpl.getAll();
+		        nationalities = (ArrayList<Nationality>) negNatio.getAll();
+		        request.setAttribute("listNat", nationalities);
+		        request.setAttribute("listProvs", provinces);
+		        RequestDispatcher dispatcher = request.getRequestDispatcher("/Cliente.jsp?p=Alta");
+	            dispatcher.forward(request, response);
     		}
     		
     //		if(request.getParameter("modificar") != null)
@@ -220,6 +230,8 @@ public class ServletClientes extends HttpServlet {
 	            newCliente.setLastName( request.getParameter("textApellido") );
 	            newCliente.setEmail( request.getParameter("textEmail") );
 	            newCliente.setNacionality( request.getParameter("textNacionalidad") );
+	            newCliente.setProvince(new Province(Integer.parseInt(request.getParameter("textProvincias")), ""));;
+	            newCliente.setCity( request.getParameter("textCiudad") );
 	            newCliente.setBirthDate( formatter.parse( request.getParameter("textFechaNacimiento") ) );
 	            newCliente.setGender( request.getParameter("textGenero") );
 	            

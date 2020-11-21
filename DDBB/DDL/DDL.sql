@@ -199,7 +199,8 @@ IN _address 	VARCHAR(50),
 IN _city		VARCHAR(45),
 IN _email		VARCHAR(50),
 IN _numberPhone INT,
-IN _description VARCHAR(20)
+IN _description VARCHAR(20),
+IN _province	VARCHAR(45)
 )
 BEGIN
 	DECLARE errno INT;
@@ -209,8 +210,8 @@ BEGIN
 		ROLLBACK;
     END;
 		START TRANSACTION;        		
-			INSERT INTO users (dni, firstName, lastName, userName, password, cuil, gender, nationality, birthDate, address, city, email, status) 
-					VALUES(_dni, _firstName, _lastName, _userName, _password, _cuil, _gender, _nationality, _birthDate, _address, _city, _email, 1 );
+			INSERT INTO users (dni, firstName, lastName, userName, password, cuil, gender, nationality, birthDate, address, city, email, status, province) 
+					VALUES(_dni, _firstName, _lastName, _userName, _password, _cuil, _gender, _nationality, _birthDate, _address, _city, _email, 1, _province );
 
 			INSERT INTO phones (numberPhone, description, userDni) 
 					VALUES (_numberPhone, _description, _dni);

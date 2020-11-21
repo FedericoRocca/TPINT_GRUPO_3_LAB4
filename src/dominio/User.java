@@ -4,19 +4,14 @@ import java.util.Date;
 
 public class User {
 	
-	public Nationality getNation()
+    public Province getProvince()
     {
-        return nation;
+        return province;
     }
 
-    public void setNation(Nationality nation)
+    public void setProvince(Province province)
     {
-        this.nation = nation;
-    }
-
-    public ArrayList<Phone> getPhones()
-    {
-        return phones;
+        this.province = province;
     }
 
     private String dni;
@@ -35,8 +30,33 @@ public class User {
 	private ArrayList<Phone> phones;
 	private Role rol;
 	private boolean status;
+	private Province province;
 
-	//Constructors
+	public User(String dni, String firstName, String lastName, String userName, String password, String cuil,
+            String gender, String nacionality, Nationality nation, Date birthDate, String address, String city,
+            String email, ArrayList<Phone> phones, Role rol, boolean status, Province province)
+    {
+        super();
+        this.dni = dni;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+        this.cuil = cuil;
+        this.gender = gender;
+        this.nacionality = nacionality;
+        this.nation = nation;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.city = city;
+        this.email = email;
+        this.phones = phones;
+        this.rol = rol;
+        this.status = status;
+        this.province = province;
+    }
+
+    //Constructors
 	public User() {
 		super();
 		phones = new ArrayList<Phone>();
@@ -91,7 +111,6 @@ public class User {
         this.password = password;
         this.cuil = cuil;
         this.gender = gender;
-        this.nacionality = nacionality;
         this.birthDate = birthDate;
         this.address = address;
         this.city = city;
@@ -137,6 +156,21 @@ public class User {
             this.status = status;
             this.rol = rol;
         }
+	    
+	    public Nationality getNation()
+	    {
+	        return nation;
+	    }
+
+	    public void setNation(Nationality nation)
+	    {
+	        this.nation = nation;
+	    }
+
+	    public ArrayList<Phone> getPhones()
+	    {
+	        return phones;
+	    }
 
     /**
      * @return the rol

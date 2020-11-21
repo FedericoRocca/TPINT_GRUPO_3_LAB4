@@ -123,30 +123,24 @@ public class UserDaolmpl implements UserDao{
 		
 		try 
 		{
-			CallableStatement sp = cn.Open().prepareCall("CALL SP_InsertCustomer(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-			
-			sp.setString(1, user.getDni());
-			sp.setString(2, user.getFirstName());
-			sp.setString(3, user.getLastName());
-			sp.setString(4, user.getUserName());
-			sp.setString(5, user.getPassword());
-			sp.setString(6, user.getCuil());
-			sp.setString(7, user.getGender());
-			sp.setString(8, user.getNacionality());
-			
+		    
+		    
 		    java.sql.Date sqlDate = new java.sql.Date(user.getBirthDate().getTime());
-			sp.setDate(9, sqlDate);
-			sp.setString(10, user.getAddress());
-			sp.setString(11, user.getCity());
-			sp.setString(12, user.getEmail());
-			
-			//Los teléfonos son un arraylist ahora, hay que recorrer esa lista e insertar uno a uno
-			//Phone phone = new Phone();
-			//sp.setLong(13, phone.getNumber());
-			//sp.setString(14, phone.getDescription());
-			sp.setLong(13, 123456);
-            sp.setString(14, "descripc");
-			status = sp.execute();
+	        cn = new ConnectionDB();
+	        cn.Open();
+	        String insert = "INSERT INTO Users (dni,firstName,lastName,userName,password,cuil,gender,nationality,birthDate,address,city,email,status) "
+	                + "VALUES ('" + user.getDni() + "', '" + user.getFirstName() + "', '" + user.getLastName() + "', '" + user.getUserName() + 
+	                "' ,'" + user.getPassword() + "' ,'" + user.getCuil() + "' ,'" + user.getGender() + "' ,'" + user.getNacionality() + "' ,'" 
+	                + sqlDate + "' ,'" + user.getAddress() + "' ,'" + user.getCity() + "' ,'" + user.getEmail() + "' ,1);";
+	        status = cn.execute(insert);  
+	        
+	        for (Phone p : user.getPhone())
+            {
+	            ConnectionDB cnp = new ConnectionDB();
+	            cnp.Open();
+	            String insertp = "INSERT INTO phones (numberPhone, description, userDni) VALUES ('" + p.getNumber() + "', '" + p.getDescription() + "', '" + user.getDni() + "');";
+	            cnp.execute(insertp);  
+            }
 			
 		}
 		catch(Exception e){

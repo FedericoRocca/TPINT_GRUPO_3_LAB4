@@ -1,5 +1,7 @@
 <%@page import="dominio.User"%>
 <%@page import="dominio.Nationality"%>
+<%@page import="dominio.Province"%>
+<%@page import="dominio.City"%>
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
@@ -95,11 +97,6 @@
 								<label for="title">DNI</label> 
 								<input class="form-control" name = "textDni" required type="text" placeholder="Ingrese DNI" maxlength="9">           				
 							</div>
-							<div class="form-group col-md-2 mt-1">
-								<button type="button" onclick="BuscarExistencia()" class="btn btn-warning btn-circle mt-4">
-                					<i class="fas fa-search"></i>
-            					</button>								
-							</div>
 							<div class="form-group col-md-4">
 								<label for="title">CUIL</label> 
 								<input class="form-control" name = "textCuil" required type="text" placeholder="Ingrese CUIL" maxlength="11">
@@ -125,9 +122,11 @@
 <!--  								<input class="form-control" required name = "textNacionalidad" type="text" placeholder="Ingrese Nacionalidad"> -->
 <!--  							</div> 
 							 -->
-							<div class="form-group col-md-3">
+							 </div>
+							 <div class="form-row">
+							 	<div class="form-group col-md-3">
     							<label for="Nationality">Nacionalidad</label>
-    								<select class="form-control" name="textNacionalidad">
+    								<select class="form-control" name="textNacionalidad" required>
     								<option selected>Seleccione...</option>
     								<%
     									for(Nationality n : listNat)	{
@@ -138,6 +137,40 @@
 										} 
 									%>
 								    </select>
+							</div>
+							
+							<%
+								List<Province> listProvs = new ArrayList<Province>();
+								if(request.getAttribute("listProvs") != null)
+								{
+								    listProvs = (List<Province>) request.getAttribute("listProvs");
+								}
+							%>
+							<div class="form-group col-md-3">
+    							<label for="Nationality">Provincia</label>
+    								<select class="form-control" name="textProvincias" required>
+    								<option selected>Seleccione...</option>
+    								<%
+    									for(Province prov : listProvs)	{
+									%>
+										
+								      	<option value="<%=prov.getId()%>"><%=prov.getDescription()%></option>
+								   	<%
+										} 
+									%>
+								    </select>
+							</div>
+							
+							<%
+								List<City> listCits = new ArrayList<City>();
+								if(request.getAttribute("listCits") != null)
+								{
+								    listCits = (List<City>) request.getAttribute("listCits");
+								}
+							%>
+							<div class="form-group col-md-3">
+								<label for="title">Ciudad</label> 
+								<input class="form-control" name = "textCiudad" required type="text" placeholder="Ingrese ciudad" maxlength="45"> 
 							</div>
 							<div class="form-group col-md-3">
 								<label for="title">Fecha de Nacimiento</label>

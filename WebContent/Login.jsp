@@ -55,7 +55,7 @@
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="#">¿Olvidaste tu contraseña? Acercarse a administración</a>
+                    <a class="small">¿Olvidaste tu contraseña? Acercarse a administración</a>
                   </div>
                 </div>
               </div>
