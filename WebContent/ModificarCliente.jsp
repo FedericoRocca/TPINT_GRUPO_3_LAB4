@@ -128,10 +128,10 @@
 								<div class="form-group col-md-2">
 									<label for="title">Género</label>
 										<select class="custom-select" id="inputGroupSelect02" name="textGenero" required>
-											<option selected><%=usrModif.getGender()%></option>
-											<option value="1">Femenino</option>
-											<option value="2">Masculino</option>
-											<option value="3">Otro</option>
+											<option value="" selected><%=usrModif.getGender()%></option>
+											<option >Femenino</option>
+											<option >Masculino</option>
+											<option >Otro</option>
 										</select>
 									</div>
 

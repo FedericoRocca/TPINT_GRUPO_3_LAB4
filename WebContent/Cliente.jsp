@@ -117,17 +117,12 @@
 								<label for="title">Correo electrónico</label> 
 								<input type="email" class="form-control" name="textEmail" id="email" placeholder="tu@correo.com" required maxlength="50">
 							</div>
-<!--  							<div class="form-group col-md-3"> -->
-<!--  								<label for="title">Nacionalidad</label>  -->
-<!--  								<input class="form-control" required name = "textNacionalidad" type="text" placeholder="Ingrese Nacionalidad"> -->
-<!--  							</div> 
-							 -->
 							 </div>
 							 <div class="form-row">
 							 	<div class="form-group col-md-3">
     							<label for="Nationality">Nacionalidad</label>
     								<select class="form-control" name="textNacionalidad" required>
-    								<option selected>Seleccione...</option>
+    								<option value="" selected>Seleccione...</option>
     								<%
     									for(Nationality n : listNat)	{
 									%>
@@ -149,7 +144,7 @@
 							<div class="form-group col-md-3">
     							<label for="Nationality">Provincia</label>
     								<select class="form-control" name="textProvincias" required>
-    								<option selected>Seleccione...</option>
+    								<option value="" selected>Seleccione...</option>
     								<%
     									for(Province prov : listProvs)	{
 									%>
@@ -172,10 +167,9 @@
 							<div class="form-group col-md-2">
 							<label for="title">Género</label>
 								<select class="custom-select" id="inputGroupSelect02" name="textGenero" required>
-									<option selected>Elija opción</option>
-									<option value="1">Femenino</option>
-									<option value="2">Masculino</option>
-									<option value="3">Otro</option>
+									<option >Femenino</option>
+									<option >Masculino</option>
+									<option >Otro</option>
 								</select>
 							</div>
 						</div>
