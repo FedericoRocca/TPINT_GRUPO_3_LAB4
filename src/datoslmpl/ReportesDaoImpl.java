@@ -6,7 +6,9 @@ import java.util.List;
 
 import datos.ReportesDao;
 import dominio.LisCantidadClientesPaises;
+import dominio.Loan;
 import dominio.RepBalancesMayores;
+import dominio.RepIngresosInteres;
 
 public class ReportesDaoImpl  implements ReportesDao
 {
@@ -80,5 +82,38 @@ public class ReportesDaoImpl  implements ReportesDao
         }
         return aux;
     }
+
+	@Override
+	public RepIngresosInteres executeReport(RepIngresosInteres r) {
+		ArrayList<Loan> ls = new ArrayList<Loan>();
+        try
+        {
+            cn = new ConnectionDB();
+            cn.Open();
+            ResultSet rSet = cn.query("SELECT amountInt,amountReqByCustomer FROM loan WHERE loanStateId = 2 AND paymentDeadline "
+            		+"BETWEEN CAST('"+r.getFromDate()+"' AS DATETIME) "
+            		+"AND CAST('"+r.getToDate()+"' AS DATETIME)");
+            while(rSet.next())
+            {
+        		Loan l = new Loan();
+        		
+        		l.setAmountInt(rSet.getDouble("amountInt"));
+        		l.setAmountReqByCustomer(rSet.getDouble("amountReqByCustomer"));
+        		
+        		ls.add(l);
+            }
+            
+            r.setLoans(ls);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            cn.close();
+        }
+        return r;
+	}
     
 }

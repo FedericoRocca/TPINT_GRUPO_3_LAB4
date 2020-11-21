@@ -7,6 +7,7 @@ import datos.ReportesDao;
 import datoslmpl.ReportesDaoImpl;
 import dominio.LisCantidadClientesPaises;
 import dominio.RepBalancesMayores;
+import dominio.RepIngresosInteres;
 import negocio.ReportesNeg;
 
 public class ReportesNegImpl implements ReportesNeg
@@ -34,5 +35,11 @@ public class ReportesNegImpl implements ReportesNeg
     {
         return (ArrayList<LisCantidadClientesPaises>)repBalancesDao.executeReport(); 
     }
+
+	@Override
+	public RepIngresosInteres executeReport(RepIngresosInteres r) 
+	{
+		return repBalancesDao.executeReport(r);
+	}
     
 }
