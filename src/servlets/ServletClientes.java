@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sound.midi.Soundbank;
 
 import datoslmpl.PhoneDaolmpl;
+import datoslmpl.RoleDaolmpl;
 import datoslmpl.UserDaolmpl;
 import dominio.City;
 import dominio.Nationality;
@@ -273,6 +274,14 @@ public class ServletClientes extends HttpServlet {
                 
                 //Recopilamos todos los datos del usuario, lo damos de alta...
                 udi.insert(newCliente);
+                for (Phone phone : newCliente.getPhone())
+                {
+                    PhoneDaolmpl pDaolmpl = new PhoneDaolmpl();
+                    pDaolmpl.insert(phone, newCliente.getDni());
+                }
+                
+                RoleDaolmpl rDaolmpl = new RoleDaolmpl();
+                rDaolmpl.insert(newCliente.getRol(), newCliente.getDni());
                 
                 request.setAttribute("userList", users);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/DashboardAdmin.jsp");

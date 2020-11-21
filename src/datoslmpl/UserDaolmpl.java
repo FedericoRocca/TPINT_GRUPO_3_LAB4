@@ -134,20 +134,6 @@ public class UserDaolmpl implements UserDao{
 	                "' ,'" + user.getPassword() + "' ,'" + user.getCuil() + "' ,'" + user.getGender() + "' ,'" + user.getNacionality() + "' ,'" 
 	                + sqlDate + "' ,'" + user.getAddress() + "' ,'" + user.getCity() + "' ,'" + user.getEmail() + "' ,1, " + user.getProvince().getId() + ");";
 	        status = cn.execute(insert);  
-	        
-	        for (Phone p : user.getPhone())
-            {
-	            ConnectionDB cnp = new ConnectionDB();
-	            cnp.Open();
-	            String insertp = "INSERT INTO phones (numberPhone, description, userDni) VALUES ('" + p.getNumber() + "', '" + p.getDescription() + "', '" + user.getDni() + "');";
-	            cnp.execute(insertp);  
-            }
-	        
-	        ConnectionDB cnr = new ConnectionDB();
-            cnr.Open();
-            String insertr = "INSERT INTO roles_x_users (dni, roleId, status) VALUES ('" + user.getDni() + "', 2, 1);";
-            status = cnr.execute(insertr);  
-			
 		}
 		catch(Exception e){
 			e.printStackTrace();

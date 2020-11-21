@@ -46,14 +46,14 @@ public class PhoneDaolmpl implements PhoneDao {
 	}
 
 	@Override
-	public boolean insert(Phone phone, int dni) {
+	public boolean insert(Phone phone, String dni) {
 		
 		boolean status = true;
 		
 		cn = new ConnectionDB();
 		cn.Open();
 		
-		String query = "INSERT INTO Phones (number, description, userDni, status) VALUES "
+		String query = "INSERT INTO Phones (numberPhone, description, userDni) VALUES "
 						+ "('"+phone.getNumber()+"', '"+phone.getDescription()+"', '"+dni+"')";
 		System.out.println(query);
 		try
