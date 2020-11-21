@@ -225,8 +225,8 @@
    	 	$("#divDestino").show();
      });
 	
-     	function mostrarTransferencia(){
-		$('#exampleModal').modal('show');			
+     	function mostrarTransferencia(){			
+		$('#exampleModal').modal('hide');
 		var montoTransferencia = $('#textAmountToTransferTer').val();
 		
  		var montoOrigen = $('#txtMontoInicial').val();
@@ -234,7 +234,13 @@
  		var montoDestino = $('#txtMontoFinal').val();
  		
  		var cbuDestino = $('#accountDestino').val();
-
+		
+ 		if(montoOrigen <= montoTransferencia){
+ 			alert("No tenés en tu cuenta el monto suficiente que deseas transferir");
+			window.location.href = "DashboardCliente.jsp";
+			$('#exampleModal').modal('hide');
+ 		}
+ 		
 		$('#txtCtaOrigenModal').val(selectedOptionTextO);
  		$('#txtOrigenModal').val(saldoOrigen); //SALDO ACTUAL DE LA PRIMERA CUENTA
  		
@@ -242,7 +248,7 @@
  		
  		$('#txtCbuModal').val(cbuDestino);
  		$('#txtDestinoModal').val(montoDestino); //SALDO ACTUAL DE LA SEGUNDA CUENTA
-
+		
  	};   
 	</script>
 	<!-- Bootstrap core JavaScript-->

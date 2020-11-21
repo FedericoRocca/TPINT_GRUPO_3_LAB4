@@ -126,6 +126,17 @@ public class AccountNegImpl implements AccountNeg{
 			return false;
 		}
 	}
+	
+	@Override
+	public Boolean ValidarCBUxString(String cbu){
+		try {
+			return accountDao.ValidarCBUxString(cbu);
+		}
+		catch(Exception e)
+		{
+			return false;
+		}		
+	}
 
 	@Override
 	public Boolean updateBalance(float x, int accountNumber) {

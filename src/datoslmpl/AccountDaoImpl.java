@@ -269,4 +269,28 @@ public class AccountDaoImpl implements AccountDao {
 		
 		return acc.getAccountNumber();
 	}
+	
+	@Override
+	public boolean ValidarCBUxString(String cbu) {
+		Account acc = new Account();
+		try {
+			cn = new ConnectionDB();
+			cn.Open();
+			ResultSet rs = cn.query("Select cbu, status from Accounts where status = 1 AND cbu = "+ cbu); 
+
+			if(rs.next()) {
+				acc.setCbu(rs.getString(cbu));
+				return true;
+			} 
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+			
+		}
+		finally {
+			cn.close();
+		}
+		return false;
+	}
 }

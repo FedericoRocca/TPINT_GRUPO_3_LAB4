@@ -12,10 +12,11 @@ public interface AccountNeg {
 	public Boolean BajaCuenta(Account a);
 	public int ObtenerCantCuentas(Account a);
 	public int ObtenerUltimaCuenta();
-	public Boolean ValidarCBU(Account a);
+	public Boolean ValidarCBU(Account a);	
 	public Boolean updateBalance(float x, int accountNumber);
 	public Boolean updateBalanceTransferenciaOrigen(float x, int accountNumerOrigen);
 	public Boolean updateBalanceTransferenciaTercero(float x, String cbu);
 	public Account obtenerCuenta(int accountNumber);
 	public int obtenerNumeroCuenta(String cbu);
+	public Boolean ValidarCBUxString(String cbu);
 }

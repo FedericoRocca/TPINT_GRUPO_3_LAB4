@@ -249,7 +249,7 @@
      			if(saldoOrigen <= montoTransferencia){
      				
      				alert("No tenés en tu cuenta el monto suficiente que deseas transferir");
-     				window.location.href = "ServletTransferencias?alta=1";
+     				window.location.href = "DashboardCliente.jsp";
       				$('#exampleModal').modal('hide');   			
      			}
 //      			$('#exampleModal').modal('show');

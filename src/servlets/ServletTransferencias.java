@@ -142,6 +142,12 @@ public class ServletTransferencias extends HttpServlet {
 			int cuentaOrigen = Integer.parseInt(request.getParameter("txtCtaOrigenModal"));
 			String cbu = request.getParameter("txtCbuModal");			
 			
+			if(negAccount.ValidarCBUxString(cbu) != true) {
+//				response.sendRedirect("/DashboardCliente.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/DashboardCliente.jsp");
+				dispatcher.forward(request, response);
+			}
+			
 			account.setAccountNumber(cuentaOrigen);
 	        account.setBalance(Float.parseFloat( request.getParameter("txtOrigenModal")));	
 	        	      	        	      	        	        
