@@ -12,6 +12,7 @@ import java.util.Set;
 import datos.UserDao;
 import dominio.Nationality;
 import dominio.Phone;
+import dominio.Province;
 import dominio.Role;
 import dominio.User;
 import negociolmpl.PhoneNeglmpl;
@@ -67,12 +68,13 @@ public class UserDaolmpl implements UserDao{
 		Nationality nationality = null;
 		User user = null;
 
-		String query = "SELECT u.dni, u.cuil, u.firstname,u.address ,u.lastname,u.userName,u.password,u.cuil,u.city, u.email, nats.id as 'idCountry', "
-		        + "nats.gentilic, u.birthDate, u.gender, u.status, p.description as Phone, p.numberPhone as number "
+		String query = "SELECT u.dni, u.cuil, u.firstname,u.address ,u.lastname,u.userName,u.password,u.cuil,u.city, u.email, nats.id as 'idCountry', nats.gentilic, "
+		        + "u.birthDate, u.gender, u.status, p.description as Phone, p.numberPhone as number, provs.id as 'idProvince', provs.description as 'ProvinceName' "
 		        + "FROM Users u "
 		        + "LEFT JOIN phones p ON p.userDni = u.dni "
 		        + "INNER JOIN nationalities nats on u.nationality = nats.id "
-		        + "WHERE u.dni = '" +  dni + "';";
+		        + "INNER JOIN provinces provs on u.idprovince = provs.id "
+		        + "WHERE u.dni = '" + dni + "';";
 		System.out.println(query);
 		
 		try 
@@ -97,7 +99,8 @@ public class UserDaolmpl implements UserDao{
 							rs.getString("address"),
 							rs.getString("city"),
 							rs.getString("email"),
-							rs.getBoolean("status")
+							rs.getBoolean("status"),
+							new Province(rs.getInt("idProvince"), rs.getString("ProvinceName"))
 					);
 					ArrayList<Phone> phonesByDni = new ArrayList<Phone>();
 					PhoneDaolmpl pdi = new PhoneDaolmpl();

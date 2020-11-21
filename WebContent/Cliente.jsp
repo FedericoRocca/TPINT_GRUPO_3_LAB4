@@ -160,14 +160,7 @@
 									%>
 								    </select>
 							</div>
-							
-							<%
-								List<City> listCits = new ArrayList<City>();
-								if(request.getAttribute("listCits") != null)
-								{
-								    listCits = (List<City>) request.getAttribute("listCits");
-								}
-							%>
+
 							<div class="form-group col-md-3">
 								<label for="title">Ciudad</label> 
 								<input class="form-control" name = "textCiudad" required type="text" placeholder="Ingrese ciudad" maxlength="45"> 

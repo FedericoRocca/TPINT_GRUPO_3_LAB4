@@ -160,7 +160,28 @@ public class User {
             this.rol = rol;
         }
 	    
-	    public Nationality getNation()
+	    public User(String dni, String firstName, String lastName, String userName, String password, String cuil,
+                String gender, Nationality nation, Date birthDate, String address, String city, String email,
+                boolean status, Province province)
+        {
+            super();
+            this.dni = dni;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.userName = userName;
+            this.password = password;
+            this.cuil = cuil;
+            this.gender = gender;
+            this.nation = nation;
+            this.birthDate = birthDate;
+            this.address = address;
+            this.city = city;
+            this.email = email;
+            this.status = status;
+            this.province = province;
+        }
+
+        public Nationality getNation()
 	    {
 	        return nation;
 	    }

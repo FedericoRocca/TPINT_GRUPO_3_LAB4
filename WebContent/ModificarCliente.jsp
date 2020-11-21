@@ -1,4 +1,5 @@
 <%@page import="dominio.Phone"%>
+<%@page import="dominio.Province"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="dominio.User"%>
 <%@page import="dominio.Nationality"%>
@@ -119,7 +120,7 @@
 								
 								<div class="form-group col-md-6">
 									<label for="title">Contraseña</label> 
-									<input class="form-control" name = "password" required type="password" placeholder="Ingrese contraseña" maxlength="45" value="<%=usrModif.getPassword() %>">
+									<input class="form-control" name = "password" required type="password" placeholder="Ingrese contraseña" maxlength="45" value="<%=usrModif.getPassword()%>">
 									<label for="title">Repetir contraseña</label> 
 									<input class="form-control" name = "passwordRepeat" required type="password" placeholder="Repita contraseña" maxlength="45" value="<%=usrModif.getPassword()%>">
 								</div>
@@ -156,7 +157,32 @@
 								    </select>
 								</div>
 								
-								
+								<%
+								List<Province> listProvs = new ArrayList<Province>();
+								if(request.getAttribute("listProvs") != null)
+								{
+								    listProvs = (List<Province>) request.getAttribute("listProvs");
+								}
+								%>
+								<div class="form-group col-md-3">
+	    							<label for="Nationality">Provincia</label>
+	    								<select class="form-control" name="textProvincias" required>
+	    								<option selected value="<%=usrModif.getProvince().getId()%>"><%=usrModif.getProvince().getDescription()%></option>
+	    								<%
+	    									for(Province prov : listProvs)	{
+										%>
+											
+									      	<option value="<%=prov.getId()%>"><%=prov.getDescription()%></option>
+									   	<%
+											} 
+										%>
+									    </select>
+								</div>
+	
+								<div class="form-group col-md-3">
+									<label for="title">Ciudad</label> 
+									<input class="form-control" name = "textCiudad" required type="text" placeholder="Ingrese ciudad" maxlength="45" value="<%=usrModif.getCity() %>"> 
+								</div>
 								
 								<div class="form-group col-md-3">
 									<label for="title">Fecha de Nacimiento</label>

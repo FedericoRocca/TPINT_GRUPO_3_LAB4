@@ -54,6 +54,13 @@ CREATE TABLE Fees_x_Loans
     FOREIGN KEY (idLoan) REFERENCES Loan(id)
 );
 
+CREATE TABLE Provinces
+(
+	id 			INT 	AUTO_INCREMENT 	NOT NULL,
+    description VARCHAR(50)				NOT NULL,
+    PRIMARY KEY (id)	
+);
+
 CREATE TABLE Users
 (
 	 dni 		VARCHAR(9) 	NOT NULL,
@@ -69,8 +76,10 @@ CREATE TABLE Users
      city		VARCHAR(45) 	NULL,
      email		VARCHAR(50) NOT NULL,
      status		BIT			NOT NULL,
+     idProvince	INT			NOT NULL,
      
-	 PRIMARY KEY (dni)
+	 PRIMARY KEY (dni),
+     FOREIGN KEY(idProvince) REFERENCES Provinces(id)
 );
 
 CREATE TABLE Phones
@@ -157,13 +166,6 @@ CREATE TABLE Nationalities
     iso			VARCHAR(3)				NULL,
      
 	PRIMARY KEY (id)
-);
-
-CREATE TABLE Provinces
-(
-	id 			INT 	AUTO_INCREMENT 	NOT NULL,
-    description VARCHAR(50)				NOT NULL,
-    PRIMARY KEY (id)	
 );
 
 CREATE TABLE Cities

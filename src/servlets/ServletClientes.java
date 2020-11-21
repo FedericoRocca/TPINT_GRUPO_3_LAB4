@@ -107,6 +107,9 @@ public class ServletClientes extends HttpServlet {
             {
                 if( request.getParameter("textDni") != null && request.getParameter("textDni") != "" )
                 {
+                    
+                    provinces = provinceNeglmpl.getAll();
+                    request.setAttribute("listProvs", provinces);
                     modifUser.setDni( request.getParameter("textDni") );
                     modifUser = udi.getUser(modifUser.getDni());
                     nationalities = (ArrayList<Nationality>) negNatio.getAll();
@@ -140,6 +143,9 @@ public class ServletClientes extends HttpServlet {
                         modifUser.setGender( request.getParameter("textGenero") );
                         modifUser.setUserName( request.getParameter("textUsuario") );
                         modifUser.setNacionality( request.getParameter("textNacionalidad") );
+                        modifUser.setProvince( 
+                                new Province(Integer.parseInt(request.getParameter("textProvincias")),"")
+                                );
                         modifUser.setEmail( request.getParameter("textEmail") );
                         modifUser.setDni( request.getParameter("textDni") );
                         modifUser.setBirthDate( formatter.parse( request.getParameter("textFechaNacimiento") ) );
