@@ -16,7 +16,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Banco UTN - Transferencia <%=request.getParameter("p")%></title>
+<title>Banco UTN - Transferencia</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

@@ -19,7 +19,7 @@
 <meta name="author" content="">
 
 
-<title>Banco UTN - cliente <%= request.getParameter("p") %></title>
+<title>Banco UTN - Alta cliente</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

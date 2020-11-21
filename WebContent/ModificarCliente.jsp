@@ -1,6 +1,5 @@
 <%@page import="dominio.Phone"%>
 <%@page import="dominio.Province"%>
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="dominio.User"%>
 <%@page import="dominio.Nationality"%>
 <%@page import="java.util.ArrayList" %>
@@ -20,7 +19,7 @@
 <meta name="author" content="">
 
 
-<title>Banco UTN - cliente <%= request.getParameter("p") %></title>
+<title>Banco UTN - Modificar cliente</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

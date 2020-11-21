@@ -1,4 +1,3 @@
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="dominio.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -15,7 +14,7 @@
 <meta name="author" content="">
 
 
-<title>Banco UTN - cliente <%= request.getParameter("p") %></title>
+<title>Banco UTN - Reportes admin</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
