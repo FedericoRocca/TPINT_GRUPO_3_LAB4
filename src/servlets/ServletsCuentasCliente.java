@@ -47,6 +47,9 @@ public class ServletsCuentasCliente extends HttpServlet {
 
 			// CUENTAS DEL CLIENTE
 			if (request.getParameter("listarCuentas") != null) {
+				if (negAccount == null) {
+					negAccount = new AccountNegImpl();
+				}
 				ArrayList<Account> listAccount = negAccount.GetAllbyDni(userLogin.getDni());
 				request.setAttribute("accountList", listAccount);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/ListadoCuentasCliente.jsp");

@@ -27,7 +27,7 @@ public class AccountDaoImpl implements AccountDao {
 		ArrayList<Account> list = new ArrayList<Account>();
 		ResultSet rs = null;
 		try {
-			String query = "select a.accountNumber,a.accountDni,a.creationDate,a.accountTypeId,a.cbu,a.status,Sum(m.amount) as balance from accounts a inner join movements m on a.accountNumber = m.accountNumber Where a.status = 1 group by a.accountNumber";
+			String query = "select a.accountNumber,a.accountDni,a.creationDate,a.accountTypeId,at.description,a.cbu,a.status,Sum(m.amount) as balance from accounts a inner join movements m on a.accountNumber = m.accountNumber inner join accountstype at on a.accountTypeId = at.id Where a.status = 1 group by a.accountNumber";
 			rs = cn.query(query);
 			while (rs.next()) {
 				Account acc = new Account();
@@ -35,6 +35,7 @@ public class AccountDaoImpl implements AccountDao {
 				acc.setAccountDni(rs.getString("accountDni"));
 				acc.setCreationDate(rs.getDate("creationDate"));
 				acc.setAccountypeid(rs.getInt("accountTypeId"));
+				acc.setAccountypeDesc(rs.getString("description"));
 				acc.setCbu(rs.getString("cbu"));
 				acc.setBalance(rs.getFloat("balance"));
 				acc.setStatus(rs.getBoolean("status"));
@@ -56,18 +57,19 @@ public class AccountDaoImpl implements AccountDao {
 		cn.Open();
 		ArrayList<Account> list = new ArrayList<Account>();
 		try {
-			String query = "SELECT AccountNumber,accountDni,CreationDate,AccountTypeId,CBU,Balance,Status FROM Accounts";
-			query += " WHERE Status = 1 AND accountDni = '" + dni + "'";
+			String query = "select a.accountNumber,a.accountDni,a.creationDate,a.accountTypeId,at.description,a.cbu,a.status,Sum(m.amount) as balance from accounts a inner join movements m on a.accountNumber = m.accountNumber inner join accountstype at on a.accountTypeId = at.id Where a.status = 1 ";
+			query += " AND a.accountDni = '" + dni + "' group by a.accountNumber";
 			ResultSet rs = cn.query(query);
 			while (rs.next()) {
 				Account acc = new Account();
-				acc.setAccountNumber(rs.getInt("accounts.accountNumber"));
-				acc.setAccountDni(rs.getString("accounts.accountDni"));
-				acc.setCreationDate(rs.getDate("accounts.creationDate"));
-				acc.setAccountypeid(rs.getInt("accounts.accountTypeId"));
-				acc.setCbu(rs.getString("accounts.cbu"));
-				acc.setBalance(rs.getFloat("accounts.balance"));
-				acc.setStatus(rs.getBoolean("accounts.status"));
+				acc.setAccountNumber(rs.getInt("accountNumber"));
+				acc.setAccountDni(rs.getString("accountDni"));
+				acc.setCreationDate(rs.getDate("creationDate"));
+				acc.setAccountypeid(rs.getInt("accountTypeId"));
+				acc.setAccountypeDesc(rs.getString("description"));
+				acc.setCbu(rs.getString("cbu"));
+				acc.setBalance(rs.getFloat("balance"));
+				acc.setStatus(rs.getBoolean("status"));
 				list.add(acc);
 			}
 		} catch (Exception e) {

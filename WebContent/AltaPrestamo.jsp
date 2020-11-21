@@ -16,7 +16,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Banco UTN - Alta pr�stamo</title>
+<title>Banco UTN - Alta prestamo</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -56,7 +56,7 @@
 							</a> 
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesi�n</span> </a>
+								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesion</span> </a>
 							</div>
 						</li>
 					</ul>
@@ -68,7 +68,7 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Alta de pr�stamo</h1>
+						<h1 class="h3 mb-0 text-gray-800">Alta de prestamo</h1>
 					</div>
 					
 					<%	
@@ -81,7 +81,7 @@
 					<form method="post" action="ServletPrestamos">
 						<div class="form-row">
 							<div class="form-group col-md-3">
-								<label>N° de Cuenta</label>
+								<label>N� de Cuenta</label>
 								
 								<select class="form-control" name=comboAccountNumber required="required">
 									<%
@@ -111,14 +111,14 @@
 						</div>
 						<div class="form-row">
 							<div class="col-md-2">
-								<button name="btnPedirPrestamo" type="submit" class="btn btn-primary mt-2">Pedir Préstamo</button>						
+								<button name="btnPedirPrestamo" type="submit" class="btn btn-primary mt-2">Pedir Prestamo</button>						
 							</div>
 	
 							<%
 								if (request.getAttribute("estadoPrestamo") != null) {
 							%>
 							<div class="alert alert-success col-md-3" role="alert">
-								Préstamo agregado con exito!
+								Prestamo agregado con exito!
 							</div>
 	
 							<%

@@ -58,7 +58,7 @@
 							</a> 
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesi�n</span> </a>
+								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesion</span> </a>
 							</div>
 						</li>
 					</ul>
@@ -69,7 +69,7 @@
 				<div class="container-fluid">
 					<!-- Page Heading -->
 					<div class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Pago de préstamos</h1>
+						<h1 class="h3 mb-0 text-gray-800">Pago de prestamos</h1>
 					</div>
 					
 					<%	
@@ -105,7 +105,7 @@
 								if (request.getAttribute("estadoCuota") != null) {
 							%>
 										<div class="alert alert-success col-md-3" role="alert">
-											Préstamo agregado con exito!
+											Prestamo agregado con exito!
 										</div>
 							<%
 								}
@@ -142,8 +142,8 @@
 								<table class="table table-bordered" id="dataTable" cellspacing="0">
 									<thead>
 										<tr>
-											<th>N° Prestamo</th>
-											<th>N° Cuota</th>
+											<th>N� Prestamo</th>
+											<th>N� Cuota</th>
 											<th>Vencimiento</th>
 											<th>Importe</th>
 	                   						<th> </th>

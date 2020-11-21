@@ -16,7 +16,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Banco UTN - Autorizaci�n de prestamo</title>
+<title>Banco UTN - Autorizacion de prestamo</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -58,7 +58,7 @@
 								<img class="img-profile rounded-circle"src="img/profile.png">
 							</a> <!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesi�n</span> </a>
+								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesion</span> </a>
 							</div>
 						</li>
 					</ul>
@@ -70,12 +70,12 @@
 				<div class="container-fluid">
 					<div class="card shadow mb-4">
 						<div class="card-header py-3 form-row">
-							<h6 class="m-0 font-weight-bold text-primary col-md-4">Autorizaci�n de prestamos</h6>
+							<h6 class="m-0 font-weight-bold text-primary col-md-4">Autorizacion de prestamos</h6>
 							<%
 								if (request.getAttribute("estadoPrestamo") != null) {
 							%>
 							<div class="alert alert-success col-md-4" role="alert">
-								Préstamo modificado!
+								Prestamo modificado!
 							</div>
 	
 							<%

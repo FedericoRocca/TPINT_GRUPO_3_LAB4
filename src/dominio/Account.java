@@ -11,6 +11,7 @@ public class Account {
     private String accountDni;
     private Date creationDate;
     private int accountypeid;
+    private String AccountypeDesc;
     private String cbu;
     private float balance;
     private Boolean status;
@@ -65,5 +66,13 @@ public class Account {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	public String getAccountypeDesc() {
+		return AccountypeDesc;
+	}
+
+	public void setAccountypeDesc(String accountypeDesc) {
+		AccountypeDesc = accountypeDesc;
 	}
 }
