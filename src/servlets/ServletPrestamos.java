@@ -154,8 +154,8 @@ public class ServletPrestamos extends HttpServlet {
 				
 				estado = negMovement.insert(mov);
 				
-				int cantCuotas = Integer.parseInt(request.getParameter("amountOfFees"));
 				//Se generan las cuotas
+				int cantCuotas = Integer.parseInt(request.getParameter("amountOfFees"));
 				for(int i=1;i<=cantCuotas;i++) {
 					Fee f = new Fee();
 					f.setIdLoan(idLoan);

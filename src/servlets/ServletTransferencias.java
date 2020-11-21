@@ -18,6 +18,7 @@ import dominio.Account;
 import dominio.Loan;
 import dominio.LoanState;
 import dominio.Movement;
+import dominio.MovementType;
 import dominio.User;
 import negocio.AccountNeg;
 import negocio.MovementNeg;
@@ -31,7 +32,7 @@ public class ServletTransferencias extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	AccountNeg negAccount = new AccountNegImpl();
-	MovementNeg negMove = new MovementNegImpl(null);
+	MovementNeg negMovement = new MovementNegImpl();
 	
     public ServletTransferencias() {
         super();
@@ -98,6 +99,29 @@ public class ServletTransferencias extends HttpServlet {
 	    Account account = new Account();
 		if(request.getParameter("updateCuentas")!=null) {
 			
+			//Se calcula el monto de la transferencia
+			//Float monto = (Float.parseFloat(request.getParameter("montooo"))-Float.parseFloat( request.getParameter("txtOrigenModal")))/2;
+		    
+			//Se genera el movimiento de transferencia positivo
+		    		    
+			Movement mov = new Movement();
+			mov.setAccountNumber(Integer.parseInt(request.getParameter("txtCtaDestino")));
+			mov.setAmount(Float.parseFloat(request.getParameter("montooo")));
+			mov.setDetail("Transferencia a cuenta propia");
+			mov.setMovementDate(LocalDate.now());
+			mov.setMovementType(new MovementType(4,"Transferencia"));
+			negMovement.insert(mov);
+			
+			//Se genera el movimiento de transferencia negativo
+			Movement mov2 = new Movement();
+			mov2.setAccountNumber(Integer.parseInt(request.getParameter("txtCtaOrigen")));
+			mov2.setAmount(Float.parseFloat(request.getParameter("montooo"))*-1);
+			mov2.setDetail("Transferencia a cuenta propia");
+			mov2.setMovementDate(LocalDate.now());
+			mov2.setMovementType(new MovementType(4,"Transferencia"));
+			negMovement.insert(mov2);
+			
+			//Se modifica el balance de las dos cuentas
 			account.setBalance(Float.parseFloat( request.getParameter("txtOrigenModal")));
 	        account.setAccountNumber(Integer.parseInt(request.getParameter("txtCtaOrigen")));
 	        							
@@ -106,7 +130,9 @@ public class ServletTransferencias extends HttpServlet {
 		    account.setBalance(Float.parseFloat( request.getParameter("txtDestinoModal")));
 		    account.setAccountNumber(Integer.parseInt(request.getParameter("txtCtaDestino")));
 		    		    
-		    negAccount.updateBalanceTransferenciaOrigen(account.getBalance(),account.getAccountNumber()); 
+		    negAccount.updateBalanceTransferenciaOrigen(account.getBalance(),account.getAccountNumber());
+		    
+		    
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaTransferencia.jsp");
 			dispatcher.forward(request, response);
 		}
