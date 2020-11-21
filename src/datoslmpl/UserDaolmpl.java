@@ -131,10 +131,10 @@ public class UserDaolmpl implements UserDao{
 		    java.sql.Date sqlDate = new java.sql.Date(user.getBirthDate().getTime());
 	        cn = new ConnectionDB();
 	        cn.Open();
-	        String insert = "INSERT INTO Users (dni,firstName,lastName,userName,password,cuil,gender,nationality,birthDate,address,city,email,status) "
+	        String insert = "INSERT INTO Users (dni,firstName,lastName,userName,password,cuil,gender,nationality,birthDate,address,city,email,status,idProvince) "
 	                + "VALUES ('" + user.getDni() + "', '" + user.getFirstName() + "', '" + user.getLastName() + "', '" + user.getUserName() + 
 	                "' ,'" + user.getPassword() + "' ,'" + user.getCuil() + "' ,'" + user.getGender() + "' ,'" + user.getNacionality() + "' ,'" 
-	                + sqlDate + "' ,'" + user.getAddress() + "' ,'" + user.getCity() + "' ,'" + user.getEmail() + "' ,1);";
+	                + sqlDate + "' ,'" + user.getAddress() + "' ,'" + user.getCity() + "' ,'" + user.getEmail() + "' ,1, " + user.getProvince().getId() + ");";
 	        status = cn.execute(insert);  
 	        
 	        for (Phone p : user.getPhone())
