@@ -139,6 +139,7 @@ public class ServletPrestamos extends HttpServlet {
 				//Se cambia el estado del Prestamo
 				int idLoan = Integer.parseInt(request.getParameter("idLoan").toString());
 				boolean estado = true;
+				
 				estado = negLoan.updateLoanState(idLoan, 2);
 
 				//Se modifica el balance de la cuenta

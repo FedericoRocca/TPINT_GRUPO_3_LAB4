@@ -18,6 +18,7 @@ import dominio.Account;
 import dominio.Loan;
 import dominio.LoanState;
 import dominio.Movement;
+import dominio.MovementType;
 import dominio.User;
 import negocio.AccountNeg;
 import negocio.MovementNeg;
@@ -31,7 +32,7 @@ public class ServletTransferencias extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	AccountNeg negAccount = new AccountNegImpl();
-	MovementNeg negMove = new MovementNegImpl(null);
+	MovementNeg negMove = new MovementNegImpl();
 	
     public ServletTransferencias() {
         super();
@@ -112,19 +113,32 @@ public class ServletTransferencias extends HttpServlet {
 		}
 		
 		if(request.getParameter("btnPedirTransferencia")!=null) {
+						
+			float monto = Float.parseFloat(request.getParameter("textAmountToTransferTerModal"));
+			int cuentaOrigen = Integer.parseInt(request.getParameter("txtCtaOrigenModal"));
+			String cbu = request.getParameter("txtCbuModal");			
 			
-			account.setBalance(Float.parseFloat( request.getParameter("txtCantidad")));
-	        account.setCbu(request.getParameter("txtCbu"));
-	        							
-	        
-	        
-		    negAccount.updateBalanceTransferenciaTercero(account.getBalance(),account.getCbu()); 
+			account.setAccountNumber(cuentaOrigen);
+	        account.setBalance(Float.parseFloat( request.getParameter("txtOrigenModal")));	
+	        	      	        	      	        	        
+	        negAccount.updateBalanceTransferenciaOrigen(account.getBalance(), cuentaOrigen); 
+                	        
+	        account.setCbu(cbu);
+			account.setBalance(Float.parseFloat( request.getParameter("txtDestinoModal")));
+		    		    		    
+		    negAccount.updateBalanceTransferenciaTercero(account.getBalance() + monto, cbu); 
 		    
-		   // account.setBalance(Float.parseFloat( request.getParameter("txtDestinoModal")));
-		   // account.setCbu(request.getParameter("txtCbu"));
-		    		    
-		   //  negAccount.updateBalanceTransferenciaTercero(account.getBalance(),account.getCbu()); 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaTransferencia.jsp");
+		    Movement mov = new Movement();
+		    mov.setAccountNumber(cuentaOrigen);
+		    mov.setMovementDate(LocalDate.now());
+		    mov.setDetail("Transferencia");
+		    mov.setAmount(monto);
+		    mov.setMovementType(new MovementType(4,"Transferencia"));
+		    mov.setStatus(true);
+		    		  		    
+		    negMove.insert(mov);
+	        	       	        
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaTransferencia.jsp");
 			dispatcher.forward(request, response);
 		}
 	    

@@ -79,7 +79,7 @@
 						<h1 class="h3 mb-0 text-gray-800">Nueva transferencia</h1>
 					</div>
 					
-					<form method="post" action="ServletTransferencias">
+					<form method="get" action="ServletTransferencias">
 					<%
 						ArrayList<Account> listAccount = new ArrayList<Account>();
 						if(request.getAttribute("listAccount") != null)
@@ -95,7 +95,7 @@
    								<%
    									for(Account aO : listAccount)	{
 								%>									
-							      	<option value="<%=aO.getAccountNumber() %>"><%=aO.getAccountNumber()%></option>
+							      	<option value="<%=aO.getBalance() %>"><%=aO.getAccountNumber()%></option>
 							   	<%
 									} 
 								%>
@@ -105,27 +105,22 @@
 							</div>	
 							
 							<div class="form-group col-md-3">								
-							<label for="title">Monto actual</label>
-							<input class="form-control" required="required" id="txtMontoInicial" name="txtMontoInicial" type="number" disabled>        											     				
+								<label for="title">Monto actual</label>
+								<input class="form-control" required="required" id="txtMontoInicial" name="txtMontoInicial" type="number" disabled>        											     				
 							</div>	
 											
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-3">
 								<label for="title">Cantidad</label>
-								<input class="form-control" required="required" name="txtCantidad" id="textAmountToTransferTer" type="text" placeholder="Ingrese cantidad">        				
+								<input class="form-control" required="required" name="textAmountToTransferTer" id="textAmountToTransferTer" type="text" placeholder="Ingrese cantidad">        				
 							</div>		
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-5">
 								<label>Destinatario</label>
 								<input class="form-control" required="required"  name="textDestinatario" id="accountDestino"  type="text" placeholder="CBU">  
-							</div>	
-							
-							<div class="form-group col-md-3">
-								<label for="title">Monto actual</label>
-								<input class="form-control" required="required" id="txtMontoFinal" name="txtMontoFinal" type="number" disabled>        				
-							</div>	
+							</div>														
 						</div>
 
 						<button class="btn btn-primary mt-2" type="button" data-toggle="modal" value="Enviar" data-target="#exampleModal" onclick="mostrarTransferencia()">Enviar</button>
@@ -161,20 +156,20 @@
 								      <div class="card-body">
 								      	<h5 class="card-title">Cuenta de Origen</h5>								        
 								        	Numero de cuenta
-								        	<input class="form-control" type="text" name="txtCtaOrigen" id="inputCtaOrigen" readonly> 
+								        	<input class="form-control" type="text" name="txtCtaOrigenModal" id="txtCtaOrigenModal" readonly> 
 								        	Saldo
-								        	<input class="form-control" type="text"  name="txtOrigenModal" id="inputMontoOrigen" readonly> 								      
-								      </div>
-					            
+								        	<input class="form-control" type="text"  name="txtOrigenModal" id="txtOrigenModal" readonly>
+								        	Monto a Transferir
+								        	<input class="form-control" type="text"  name="textAmountToTransferTerModal" id="textAmountToTransferTerModal" readonly>  								      
+								      </div>					            	
 						            <div class="card-body">
 						             <h5 class="card-title">Cuenta de Destino</h5>
 							            Numero de CBU
 							            <div class="input-group">		
-								        <input class="form-control" name="txtCtaDestino" id="inputCtaDestino" type="text" readonly>
+								        <input class="form-control" name="txtCbuModal" id="txtCbuModal" type="text" readonly>
 								        </div>
-								        Saldo
-								        <div class="input-group">			        						 
-								        <input class="form-control" name="txtDestinoModal" id="inputMontoDestino" type="text" readonly> 
+								        <div class="input-group" style="display: none">			        						 
+								        <input class="form-control" name="txtDestinoModal" id="txtDestinoModal" type="text" readonly> 
 								        </div>
 							        </div>								 								      
 								      <div class="modal-footer">
@@ -213,35 +208,21 @@
 <script>
 	
 	 var selectO = document.getElementById('accountOrigen');
-	 var selectD = document.getElementById('accountDestino');
 		 		
 	 var selectedOption = null;	 
 	 var selectedOptionTextO = null;
-	 var selectedOptionTextD = null;
+// 	 var selectedOptionTextD = null;
 	 
 	 selectO.addEventListener('change',
    		function(){
+		 
    	  	selectedOption = this.options[selectO.selectedIndex];
-   	 	selectedOptionTextO = this.options[selectO.selectedIndex].text;
-   	  	$("#txtMontoInicial").val(selectedOption.value);  	  	
-   	 	
+   	 	selectedOptionTextO = this.options[selectO.selectedIndex].text; 
+   	  	var montoDeTuCuenta= $("#txtMontoInicial").val(selectedOption.value);  	  	
+  	
    	  	var cuentaOrigen = $("txtMontoInicial").val(selectedOption.text);  	 	
    	  	console.log("1era Cuenta: " + selectedOptionTextO);
    	 	$("#divDestino").show();
-     });
-
-     selectD.addEventListener('change',
-   		function(){
-    	 if(selectD.selectedIndex == selectO.selectedIndex ){
-    		 alert(" En serio vas a transferir a tu misma cuenta?");
-    		 $("#divDestino").hide();
-    	 }
-    	 else{
-    		selectedOption = this.options[selectD.selectedIndex];
-    		selectedOptionTextD = this.options[selectD.selectedIndex].text;
-    		console.log("2da Cuenta: " + selectedOptionTextD);
-    	 	$("#txtMontoFinal").val(selectedOption.value);
-    	 }   	 		
      });
 	
      	function mostrarTransferencia(){
@@ -251,17 +232,16 @@
  		var montoOrigen = $('#txtMontoInicial').val();
  		var saldoOrigen = parseFloat(montoOrigen) - parseFloat(montoTransferencia);
  		var montoDestino = $('#txtMontoFinal').val();
- 		var saldoDestino = parseFloat(montoDestino) + parseFloat(montoTransferencia);
  		
-//  		console.log("montoOrigen: " + montoOrigen);
-//  		console.log("saldo Actual 1era cuenta: " + saldo);
-//  		console.log("Monto a transferir:" + montoTransferencia);	
-//  		console.log("montoDestino:" + montoActual);s
-		$('#inputCtaOrigen').val(selectedOptionTextO);
- 		$('#inputMontoOrigen').val(saldoOrigen); //SALDO ACTUAL DE LA PRIMERA CUENTA
+ 		var cbuDestino = $('#accountDestino').val();
+
+		$('#txtCtaOrigenModal').val(selectedOptionTextO);
+ 		$('#txtOrigenModal').val(saldoOrigen); //SALDO ACTUAL DE LA PRIMERA CUENTA
  		
- 		$('#inputCtaDestino').val(selectedOptionTextD);
- 		$('#inputMontoDestino').val(saldoDestino); // MONTO ACUMULADO DE LA SEGUNDA CUENTA
+ 		$('#textAmountToTransferTerModal').val(montoTransferencia);
+ 		
+ 		$('#txtCbuModal').val(cbuDestino);
+ 		$('#txtDestinoModal').val(montoDestino); //SALDO ACTUAL DE LA SEGUNDA CUENTA
 
  	};   
 	</script>

@@ -109,12 +109,18 @@ INSERT INTO Accounts VALUES (2,"56019014","2020-10-22",1,"4009041813521",10000,1
 UPDATE Accounts SET balance=3000 WHERE accountNumber = 2;
 INSERT INTO Accounts VALUES (3,"56019014","2020-10-22",1,"4009041813522",10000,1);
 INSERT INTO Accounts VALUES (4,"67313998","2020-10-22",1,"4009041813523",10000,1);
+select * from accounts;
 
 -- PRESTAMOS PENDIENTES --
 INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("56019014",1,"2020-05-03",1100,1000,"2021-05-03",6,91.66,1,1);
 INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("56019014",1,"2020-04-03",2200,2000,"2020-12-03",12,366.66,1,1);
 INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("56019014",2,"2020-04-03",11000,10000,"2020-12-03",3,3666.66,1,1);
 INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("67313998",4,"2020-04-03",22000,20000,"2020-12-03",24,916.66,1,1);
+
+-- MOVIMIENTOS --
+INSERT INTO movements (id,accountNumber,movementDate,detail,amount,MovementTypeId,status) VALUES (2, 2,"2020-11-20","Transferencia", 10000, 4, 1);
+INSERT INTO movements (id,accountNumber,movementDate,detail,amount,MovementTypeId,status) VALUES (2, 2,"2020-11-20","Transferencia", 10000, 4, 1);
+select * from movements;
 
 -- Registros de nacionalidades --
 INSERT INTO Nationalities(country, gentilic, iso)VALUES('Afganistán','AFGANA','AFG');
