@@ -28,7 +28,7 @@ public class AccountNegImpl implements AccountNeg{
 	public ArrayList<Account> GetAllbyDni(String dni) {
 		return (ArrayList<Account>) accountDao.getAllbyDni(dni);
 	}
-
+	
 	@Override
 	public ArrayList<Account> GetAll() {
 		return (ArrayList<Account>) accountDao.getAll();
@@ -132,8 +132,14 @@ public class AccountNegImpl implements AccountNeg{
 		return accountDao.updateBalance(x, accountNumber);
 	}
 	
+	@Override
 	public Boolean updateBalanceTransferenciaOrigen(float x, int accountNumerOrigen) {
 		return accountDao.updateBalanceTransferenciaOrigen(x, accountNumerOrigen);
+	}
+	
+	@Override
+	public Boolean updateBalanceTransferenciaTercero(float x, String cbu) {
+		return accountDao.updateBalanceTransferenciaTercero(x, cbu);
 	}
 
 	@Override

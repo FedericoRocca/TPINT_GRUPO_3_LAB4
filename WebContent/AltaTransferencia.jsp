@@ -146,6 +146,9 @@
 								        </button>
 								      </div>
 								      <div class="modal-body">
+								      <form method="post" action="ServletTransferencias">
+								      
+								      
 								      <div class="card"> 
 								      <div class="card-body">
 								      	<h5 class="card-title">Cuenta de Origen</h5>								        
@@ -171,8 +174,11 @@
 								        <button type="submit" name="updateCuentas" class="btn btn-primary">Transferir</button>
 								       </div>
 								      </div>
+								      </form>
 								    </div>
+								   
 								  </div>
+								  
 								</div>
 							</div>
 				</div>

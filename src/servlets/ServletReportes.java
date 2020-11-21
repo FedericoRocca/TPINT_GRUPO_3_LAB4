@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -10,28 +11,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dominio.Loan;
 import dominio.RepBalancesMayores;
+import dominio.RepIngresosInteres;
 import dominio.User;
 import negociolmpl.ReportesNegImpl;
 
-/**
- * Servlet implementation class ServletReportes
- */
+
 @WebServlet("/ServletReportes")
 public class ServletReportes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ServletReportes() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    ReportesNegImpl rpbmn = new ReportesNegImpl();
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
         {
@@ -52,7 +48,6 @@ public class ServletReportes extends HttpServlet {
             if( request.getParameter("btnBalanceMayorA") != null )
             {
                 ArrayList<RepBalancesMayores> reportResult = new ArrayList<RepBalancesMayores>();
-                ReportesNegImpl rpbmn = new ReportesNegImpl();
                 reportResult = rpbmn.executeReport( Float.parseFloat(request.getParameter("inputBalance").toString()) );
                 request.setAttribute("reportResult", reportResult);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/ReporteCuentasMayoresBalances.jsp");
@@ -67,9 +62,7 @@ public class ServletReportes extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    try
         {
@@ -87,12 +80,33 @@ public class ServletReportes extends HttpServlet {
                 dispatcher.forward(request, response);
             }
             
+            if(request.getParameter("btnRepIngresosInteres")!=null) 
+            {
+            	RepIngresosInteres r = new RepIngresosInteres();
+            	RepIngresosInteres raux = new RepIngresosInteres();
+            	
+            	r.setFromDate(LocalDate.parse(request.getParameter("fromDate")));
+            	r.setToDate(LocalDate.parse(request.getParameter("toDate")));
+            	
+            	raux = rpbmn.executeReport(r);
+            	
+            	float total = 0;
+            	
+            	for(Loan l : raux.getLoans()) {
+            		total += l.getAmountInt() - l.getAmountReqByCustomer();
+            	}
+            	
+            	raux.setBalance(total);
+            	
+                request.setAttribute("reportResult", raux);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/ReporteIngresosInteres.jsp");
+                dispatcher.forward(request, response);
+            }
+            
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-		doGet(request, response);
 	}
-
 }
