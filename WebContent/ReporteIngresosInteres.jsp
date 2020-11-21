@@ -16,7 +16,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Banco UTN - Reporte de Ingresos por interes</title>
+<title>Banco UTN - Reporte proyeccion de ingresos por interes</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

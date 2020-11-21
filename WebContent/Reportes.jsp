@@ -84,13 +84,31 @@
 					<form method="post" action="ServletReportes" class="card">
 						<div class="form-row">
 							<div class="form-group col-md-4">
-								<label for="title">Importe de interes total</label> 
-								<input class="form-control" name= "fromDate" required type="date">           				
-								<input class="form-control" name= "toDate" required type="date">           				
+								<label for="title">Proyeccion de ingresos por interes</label>
 							</div>
+						</div>
+						<div class="form-row">	 
+							<div class="form-group col-md-2">
+								<label>Desde</label>
+								<input class="form-control" name= "fromDate" required type="date">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Hasta</label> 
+								<input class="form-control" name= "toDate" required type="date">    				
+							</div>          				
 							<div class="form-group col-md-2 mt-1">
             					<button type="submit" name="btnRepIngresosInteres" class="btn btn-warning btn-circle mt-4"><i class="fas fa-arrow-right"></i></button>
 							</div>
+						</div>
+							<%
+								if (request.getAttribute("fechas") != null) {
+							%>
+										<div class="alert alert-danger col-md-3" role="alert">
+											La primer fecha debe ser menor que la segunda!
+										</div>
+							<%
+								}
+							%>
 						</div>
 					</form>
 				</div>

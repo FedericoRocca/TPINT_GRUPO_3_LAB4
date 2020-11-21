@@ -88,6 +88,12 @@ public class ServletReportes extends HttpServlet {
             	r.setFromDate(LocalDate.parse(request.getParameter("fromDate")));
             	r.setToDate(LocalDate.parse(request.getParameter("toDate")));
             	
+            	if(r.getFromDate().isAfter(r.getToDate())) {
+                    request.setAttribute("fechas", true);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/Reportes.jsp");
+                    dispatcher.forward(request, response);
+            	}
+            	
             	raux = rpbmn.executeReport(r);
             	
             	float total = 0;
