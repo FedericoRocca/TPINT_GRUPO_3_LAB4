@@ -99,7 +99,7 @@ public class ServletClientes extends HttpServlet {
                 {
                     //aca damos de baja al cliente
                     udi.delete(request.getParameter("textDni"));
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/DashboardAdmin.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/ServletDashboardAdmin");
                     dispatcher.forward(request, response);
                 }
             }
@@ -177,7 +177,7 @@ public class ServletClientes extends HttpServlet {
                         }
                         pdi.updatePhoneForDNI(modifUser.getDni(), modifUser.getPhone());
                         udi.update(modifUser);
-                        RequestDispatcher dispatcher = request.getRequestDispatcher("/DashboardAdmin.jsp");
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("/ServletDashboardAdmin");
                         dispatcher.forward(request, response);
                     }
                     
@@ -284,7 +284,7 @@ public class ServletClientes extends HttpServlet {
                 rDaolmpl.insert(newCliente.getRol(), newCliente.getDni());
                 
                 request.setAttribute("userList", users);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/DashboardAdmin.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/ServletDashboardAdmin");
                 dispatcher.forward(request, response);
 	        }
         }
