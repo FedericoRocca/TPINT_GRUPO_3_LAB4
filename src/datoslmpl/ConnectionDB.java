@@ -10,7 +10,7 @@ public class ConnectionDB {
 
 	private String host = "jdbc:mysql://localhost:3306/";
 	private String user = "root";
-	private String pass = "root";
+	private String pass = "";
 //	private String dbName = "bdbanco??profileSQL=true&useSSL=false";
 	private String dbName = "bdbanco";
 	private String bd = "?serverTimezone=UTC";
@@ -21,7 +21,7 @@ public class ConnectionDB {
 	{
 		try
 		{
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			this.connection = DriverManager.getConnection(host+dbName+bd, user, pass);
 		}
 		catch(Exception e)

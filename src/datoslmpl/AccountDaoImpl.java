@@ -51,6 +51,8 @@ public class AccountDaoImpl implements AccountDao {
 		return list;
 	}
 
+
+	
 	@Override
 	public List<Account> getAllbyDni(String dni) {
 		cn = new ConnectionDB();
@@ -199,6 +201,25 @@ public class AccountDaoImpl implements AccountDao {
 		return estado;
 	}
 
+	@Override
+	public Boolean updateBalanceTransferenciaTercero(float x,String cbu) {
+		
+		boolean estado = false;
+		try {
+			cn = new ConnectionDB();
+			cn.Open();
+			estado = cn.execute(
+					"Update Accounts Set Balance = " + x + " WHERE cbu = " + cbu);
+			cn.close();
+			cn = null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return estado;
+		
+	}
+	
 	@Override
 	public Account obtenerCuenta(int accountNumber) {
 		Account acc = new Account();

@@ -110,6 +110,23 @@ public class ServletTransferencias extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaTransferencia.jsp");
 			dispatcher.forward(request, response);
 		}
+		
+		if(request.getParameter("btnPedirTransferencia")!=null) {
+			
+			account.setBalance(Float.parseFloat( request.getParameter("txtCantidad")));
+	        account.setCbu(request.getParameter("txtCbu"));
+	        							
+	        
+	        
+		    negAccount.updateBalanceTransferenciaTercero(account.getBalance(),account.getCbu()); 
+		    
+		   // account.setBalance(Float.parseFloat( request.getParameter("txtDestinoModal")));
+		   // account.setCbu(request.getParameter("txtCbu"));
+		    		    
+		   //  negAccount.updateBalanceTransferenciaTercero(account.getBalance(),account.getCbu()); 
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaTransferencia.jsp");
+			dispatcher.forward(request, response);
+		}
 	    
 		} 
 		catch (Exception e) {
