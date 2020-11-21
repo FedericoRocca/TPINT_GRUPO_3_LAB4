@@ -1,4 +1,5 @@
 <%@page import="dominio.User"%>
+<%@page import="dominio.DashboardCliente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -7,6 +8,13 @@
 <%
     User userLogin = new User(); 
     userLogin = (User)session.getAttribute("userLogin");
+    
+    DashboardCliente data = new DashboardCliente();
+	if( request.getAttribute("dashboardClienteData") != null )
+	{
+	    data = (DashboardCliente)request.getAttribute("dashboardClienteData");		  
+	}
+    
 %>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -86,32 +94,12 @@
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-6 col-md-4 mb-5">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Últimos gastos</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$10 000</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-6 col-md-4 mb-5">
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Saldo</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$200 000</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Saldo Total</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">$<%=data.getSaldoTotal()%></div>
                     </div>
                   </div>
                 </div>
@@ -127,7 +115,7 @@
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Transferencias</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">13</div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><%=data.getCantidadTransferencias() %></div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
@@ -151,7 +139,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Autorizaciones aprobadas</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><%=data.getAutorizacionesAprobadas() %></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>

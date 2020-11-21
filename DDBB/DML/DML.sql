@@ -40,7 +40,7 @@ INSERT INTO Provinces (description) VALUES('Santa Fé');
 INSERT INTO Provinces (description) VALUES('Santiago del Estero');
 INSERT INTO Provinces (description) VALUES('Tierra del Fuego');
 INSERT INTO Provinces (description) VALUES('Tucumán');
-
+select * from users;
 -- Administradores de prueba -- 
 INSERT INTO users (dni, firstName, lastName, userName, password, cuil, gender, nationality, birthDate, address, city, email, status, idProvince) 
 	VALUES (99999999,"André","Villalta", "andre007", "007","23999999991","Masculino","1","1992-11-05", "calle 123", "Don Torcuato", "andre@gmail.com",1 ,1);
@@ -106,16 +106,13 @@ INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('61641739',2
 -- Cuentas de prueba --
 INSERT INTO Accounts VALUES (1,"56019014","2020-10-22",1,"4009041813520",10000,1);
 INSERT INTO Accounts VALUES (2,"56019014","2020-10-22",1,"4009041813521",10000,1);
+UPDATE Accounts SET balance=3000 WHERE accountNumber = 2;
 INSERT INTO Accounts VALUES (3,"56019014","2020-10-22",1,"4009041813522",10000,1);
 INSERT INTO Accounts VALUES (4,"67313998","2020-10-22",1,"4009041813523",10000,1);
 select * from accounts;
-
--- Movimiento de cuentas de prueba --
-
-INSERT INTO movements (accountNumber,movementDate,detail,amount,MovementTypeId,status) VALUES (1,"2020-05-20","Alta cuenta",10000,4,1);
-INSERT INTO movements (accountNumber,movementDate,detail,amount,MovementTypeId,status) VALUES (2,"2020-05-20","Alta cuenta",10000,4,1);
-INSERT INTO movements (accountNumber,movementDate,detail,amount,MovementTypeId,status) VALUES (3,"2020-05-20","Alta cuenta",10000,4,1);
-INSERT INTO movements (accountNumber,movementDate,detail,amount,MovementTypeId,status) VALUES (4,"2020-05-20","Alta cuenta",10000,4,1);
+-- select sum(balance) as 'totalBalance' from accounts where accountDni = "56019014";
+-- select count(*) as 'cantidad' from movements inner join accounts on accounts.accountNumber = movements.accountNumber where MovementTypeId = 4 && accounts.accountDni = "56019014";
+-- select count(*) as 'cantidad' from loan where loanStateId = 2 && dni = "56019014";
 
 -- PRESTAMOS PENDIENTES --
 INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("56019014",1,"2020-05-03",1100,1000,"2021-05-03",6,91.66,1,1);
