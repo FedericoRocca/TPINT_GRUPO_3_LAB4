@@ -106,9 +106,15 @@ INSERT INTO bdbanco.roles_x_users (`dni`,`roleId`,`status`) VALUES ('61641739',2
 -- Cuentas de prueba --
 INSERT INTO Accounts VALUES (1,"56019014","2020-10-22",1,"4009041813520",10000,1);
 INSERT INTO Accounts VALUES (2,"56019014","2020-10-22",1,"4009041813521",10000,1);
-UPDATE Accounts SET balance=3000 WHERE accountNumber = 2;
 INSERT INTO Accounts VALUES (3,"56019014","2020-10-22",1,"4009041813522",10000,1);
 INSERT INTO Accounts VALUES (4,"67313998","2020-10-22",1,"4009041813523",10000,1);
+
+-- Movimiento de cuentas de prueba --
+
+INSERT INTO movements (accountNumber,movementDate,detail,amount,MovementTypeId,status) VALUES (1,"2020-05-20","Alta cuenta",10000,4,1);
+INSERT INTO movements (accountNumber,movementDate,detail,amount,MovementTypeId,status) VALUES (2,"2020-05-20","Alta cuenta",10000,4,1);
+INSERT INTO movements (accountNumber,movementDate,detail,amount,MovementTypeId,status) VALUES (3,"2020-05-20","Alta cuenta",10000,4,1);
+INSERT INTO movements (accountNumber,movementDate,detail,amount,MovementTypeId,status) VALUES (4,"2020-05-20","Alta cuenta",10000,4,1);
 
 -- PRESTAMOS PENDIENTES --
 INSERT INTO Loan (dni,accountNumber,loanDate,amountInt,amountReqByCustomer,paymentDeadline,amountOfFees,monthlyFee,loanStateId,status) VALUES ("56019014",1,"2020-05-03",1100,1000,"2021-05-03",6,91.66,1,1);
