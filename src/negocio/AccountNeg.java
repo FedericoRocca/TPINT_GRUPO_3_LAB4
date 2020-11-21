@@ -17,4 +17,5 @@ public interface AccountNeg {
 	public Boolean updateBalanceTransferenciaOrigen(float x, int accountNumerOrigen);
 	public Boolean updateBalanceTransferenciaTercero(float x, String cbu);
 	public Account obtenerCuenta(int accountNumber);
+	public int obtenerNumeroCuenta(String cbu);
 }

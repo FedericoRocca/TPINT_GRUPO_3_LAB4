@@ -64,7 +64,7 @@
 							</a> 
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesión</span> </a>
+								<a class="collapse-item" href="ServletLogin?btnLogout=1"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span>Cerrar sesiï¿½n</span> </a>
 							</div>
 						</li>
 					</ul>
@@ -168,7 +168,7 @@
 							            <div class="input-group">		
 								        <input class="form-control" name="txtCbuModal" id="txtCbuModal" type="text" readonly>
 								        </div>
-								        <div class="input-group" style="display: none">			        						 
+								        <div class="input-group">			        						 
 								        <input class="form-control" name="txtDestinoModal" id="txtDestinoModal" type="text" readonly> 
 								        </div>
 							        </div>								 								      

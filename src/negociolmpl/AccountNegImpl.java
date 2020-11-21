@@ -146,4 +146,9 @@ public class AccountNegImpl implements AccountNeg{
 	public Account obtenerCuenta(int accountNumber) {
 		return accountDao.obtenerCuenta(accountNumber);
 	}
+
+	@Override
+	public int obtenerNumeroCuenta(String cbu) {
+		return accountDao.obtenerNumeroCuenta(cbu);
+	}
 }

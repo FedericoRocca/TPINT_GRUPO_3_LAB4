@@ -209,7 +209,7 @@ public class AccountDaoImpl implements AccountDao {
 			cn = new ConnectionDB();
 			cn.Open();
 			estado = cn.execute(
-					"Update Accounts Set Balance = " + x + " WHERE cbu = " + cbu);
+					"Update Accounts Set Balance = balance + (" + x + ") WHERE cbu = " + cbu);
 			cn.close();
 			cn = null;
 		} catch (Exception e) {
@@ -246,5 +246,27 @@ public class AccountDaoImpl implements AccountDao {
 		}
 		
 		return acc;
+	}
+
+	@Override
+	public int obtenerNumeroCuenta(String cbu) {
+		Account acc = new Account();
+		try {
+			cn = new ConnectionDB();
+			cn.Open();
+			ResultSet rs = cn.query("Select accountNumber,cbu,status from Accounts where status = 1 AND cbu = "+cbu); 
+
+			if(rs.next()) {
+				acc.setAccountNumber(rs.getInt("accountNumber"));
+			} 
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			cn.close();
+		}
+		
+		return acc.getAccountNumber();
 	}
 }

@@ -148,18 +148,25 @@ public class ServletTransferencias extends HttpServlet {
 	        negAccount.updateBalanceTransferenciaOrigen(account.getBalance(), cuentaOrigen); 
                 	        
 	        account.setCbu(cbu);
-			account.setBalance(Float.parseFloat( request.getParameter("txtDestinoModal")));
+			//account.setBalance(Float.parseFloat( request.getParameter("txtDestinoModal")));
 		    		    		    
-		    negAccount.updateBalanceTransferenciaTercero(account.getBalance() + monto, cbu); 
+		    negAccount.updateBalanceTransferenciaTercero(monto, cbu); 
 		    
 		    Movement mov = new Movement();
 		    mov.setAccountNumber(cuentaOrigen);
 		    mov.setMovementDate(LocalDate.now());
 		    mov.setDetail("Transferencia");
+		    mov.setAmount(monto*-1);
+		    mov.setMovementType(new MovementType(4,"Transferencia"));
+		    mov.setStatus(true);		    
+		    negMove.insert(mov);
+		    
+		    mov.setAccountNumber(negAccount.obtenerNumeroCuenta(cbu));
+		    mov.setMovementDate(LocalDate.now());
+		    mov.setDetail("Transferencia");
 		    mov.setAmount(monto);
 		    mov.setMovementType(new MovementType(4,"Transferencia"));
-		    mov.setStatus(true);
-		    		  		    
+		    mov.setStatus(true);		    
 		    negMove.insert(mov);
 	        	       	        
 	        RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaTransferencia.jsp");
