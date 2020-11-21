@@ -200,7 +200,7 @@
 								{
 								    c++;
 								    %><div class="form-group col-md-3">
-										<label for="title">Teléfono <%=phone.getDescription() %></label> 
+										<label for="title"><%=phone.getDescription() %></label> 
 										<input class="form-control" required type="text" placeholder="Ingrese" name="textPhone<%=c%>" maxlength="10" value="<%=phone.getNumber() %>">
 									</div><%
 								}

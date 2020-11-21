@@ -143,6 +143,7 @@ public class ServletClientes extends HttpServlet {
                         modifUser.setGender( request.getParameter("textGenero") );
                         modifUser.setUserName( request.getParameter("textUsuario") );
                         modifUser.setNacionality( request.getParameter("textNacionalidad") );
+                        modifUser.setCity(request.getParameter("textCiudad"));
                         modifUser.setProvince( 
                                 new Province(Integer.parseInt(request.getParameter("textProvincias")),"")
                                 );

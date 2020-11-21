@@ -164,7 +164,7 @@ public class UserDaolmpl implements UserDao{
 		
 		try 
 		{
-			CallableStatement sp = (CallableStatement) cn.Open().prepareCall("CALL SP_UpdateCustomer(?,?,?,?,?,?,?,?,?,?)");
+			CallableStatement sp = (CallableStatement) cn.Open().prepareCall("CALL SP_UpdateCustomer(?,?,?,?,?,?,?,?,?,?,?,?)");
 			
 			sp.setString(1, user.getDni());
 			sp.setString(2, user.getFirstName());
@@ -177,6 +177,8 @@ public class UserDaolmpl implements UserDao{
 			sp.setDate(8, sqlDate);
 			sp.setString(9, user.getEmail());
 			sp.setString(10, user.getPassword());
+			sp.setInt(11, user.getProvince().getId());
+			sp.setString(12, user.getCity());
 			
 			status = sp.execute();
 		}
