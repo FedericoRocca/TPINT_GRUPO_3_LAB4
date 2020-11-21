@@ -90,7 +90,8 @@ public class ServletLogin extends HttpServlet {
 	                switch (user.getRol().getNameRole())
 	                {
 	                    case "Administrador":
-	                            dispatcher = request.getRequestDispatcher("/DashboardAdmin.jsp");
+	                            //dispatcher = request.getRequestDispatcher("/DashboardAdmin.jsp");
+	                            dispatcher = request.getRequestDispatcher("/ServletDashboardAdmin");
 	                            dispatcher.forward(request, response);
 	                        break;
 	                        

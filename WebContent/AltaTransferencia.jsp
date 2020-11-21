@@ -89,7 +89,7 @@
 					%>
 						<div class="form-row">
 							<div class="form-group col-md-5">
-								<label for="Origen">Nºmero de cuenta Origen </label>
+								<label for="Origen">Nï¿½mero de cuenta Origen </label>
 								<select class="form-control" name="textOrigen" id="accountOrigen">
    								<option value="" disabled selected>Seleccione...</option>
    								<%
@@ -148,7 +148,8 @@
 								      <div class="modal-body">
 								      <form method="post" action="ServletTransferencias">
 								      
-								      
+      								<input id="montooo" name="montooo" type="hidden">  
+      								 
 								      <div class="card"> 
 								      <div class="card-body">
 								      	<h5 class="card-title">Cuenta de Origen</h5>								        
@@ -235,6 +236,8 @@
      	function mostrarTransferencia(){
 		$('#exampleModal').modal('show');			
 		var montoTransferencia = $('#textAmountToTransfer').val();
+		
+		$('#montooo').val(parseFloat(montoTransferencia));
 		
  		var montoOrigen = $('#txtMontoInicial').val();
  		var saldoOrigen = parseFloat(montoOrigen) - parseFloat(montoTransferencia);

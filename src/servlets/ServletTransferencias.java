@@ -32,7 +32,11 @@ public class ServletTransferencias extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	AccountNeg negAccount = new AccountNegImpl();
+<<<<<<< HEAD
 	MovementNeg negMove = new MovementNegImpl();
+=======
+	MovementNeg negMovement = new MovementNegImpl();
+>>>>>>> 446d09bea51014a3d233c3b7fb519b4d80a91850
 	
     public ServletTransferencias() {
         super();
@@ -99,6 +103,29 @@ public class ServletTransferencias extends HttpServlet {
 	    Account account = new Account();
 		if(request.getParameter("updateCuentas")!=null) {
 			
+			//Se calcula el monto de la transferencia
+			//Float monto = (Float.parseFloat(request.getParameter("montooo"))-Float.parseFloat( request.getParameter("txtOrigenModal")))/2;
+		    
+			//Se genera el movimiento de transferencia positivo
+		    		    
+			Movement mov = new Movement();
+			mov.setAccountNumber(Integer.parseInt(request.getParameter("txtCtaDestino")));
+			mov.setAmount(Float.parseFloat(request.getParameter("montooo")));
+			mov.setDetail("Transferencia a cuenta propia");
+			mov.setMovementDate(LocalDate.now());
+			mov.setMovementType(new MovementType(4,"Transferencia"));
+			negMovement.insert(mov);
+			
+			//Se genera el movimiento de transferencia negativo
+			Movement mov2 = new Movement();
+			mov2.setAccountNumber(Integer.parseInt(request.getParameter("txtCtaOrigen")));
+			mov2.setAmount(Float.parseFloat(request.getParameter("montooo"))*-1);
+			mov2.setDetail("Transferencia a cuenta propia");
+			mov2.setMovementDate(LocalDate.now());
+			mov2.setMovementType(new MovementType(4,"Transferencia"));
+			negMovement.insert(mov2);
+			
+			//Se modifica el balance de las dos cuentas
 			account.setBalance(Float.parseFloat( request.getParameter("txtOrigenModal")));
 	        account.setAccountNumber(Integer.parseInt(request.getParameter("txtCtaOrigen")));
 	        							
@@ -107,7 +134,9 @@ public class ServletTransferencias extends HttpServlet {
 		    account.setBalance(Float.parseFloat( request.getParameter("txtDestinoModal")));
 		    account.setAccountNumber(Integer.parseInt(request.getParameter("txtCtaDestino")));
 		    		    
-		    negAccount.updateBalanceTransferenciaOrigen(account.getBalance(),account.getAccountNumber()); 
+		    negAccount.updateBalanceTransferenciaOrigen(account.getBalance(),account.getAccountNumber());
+		    
+		    
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/AltaTransferencia.jsp");
 			dispatcher.forward(request, response);
 		}

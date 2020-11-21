@@ -21,7 +21,7 @@ public class PhoneNeglmpl implements PhoneNeg {
 	}
 
 	@Override
-	public boolean insert(Phone phone, int dni) {
+	public boolean insert(Phone phone, String dni) {
 		return phoneDao.insert(phone, dni);
 	}
 
