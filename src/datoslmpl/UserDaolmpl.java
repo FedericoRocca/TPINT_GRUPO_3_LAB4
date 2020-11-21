@@ -142,6 +142,11 @@ public class UserDaolmpl implements UserDao{
 	            String insertp = "INSERT INTO phones (numberPhone, description, userDni) VALUES ('" + p.getNumber() + "', '" + p.getDescription() + "', '" + user.getDni() + "');";
 	            cnp.execute(insertp);  
             }
+	        
+	        ConnectionDB cnr = new ConnectionDB();
+            cnr.Open();
+            String insertr = "INSERT INTO roles_x_users (dni, roleId, status) VALUES ('" + user.getDni() + "', 2, 1);";
+            status = cnr.execute(insertr);  
 			
 		}
 		catch(Exception e){
