@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import dominio.Loan;
 import dominio.RepBalancesMayores;
 import dominio.RepIngresosInteres;
+import dominio.RepMovimientosDelDia;
 import dominio.User;
 import negociolmpl.ReportesNegImpl;
 
@@ -108,6 +109,18 @@ public class ServletReportes extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/ReporteIngresosInteres.jsp");
                 dispatcher.forward(request, response);
             }
+            
+            if( request.getParameter("btnReportePorDia") != null)
+            {
+                LocalDate date = LocalDate.parse(request.getParameter("fechaReportePorDia"));
+                ArrayList<RepMovimientosDelDia> movimientosDelDia = new ArrayList<>();
+                ReportesNegImpl repNeg = new ReportesNegImpl();
+                movimientosDelDia = repNeg.executeReport(date);
+                request.setAttribute("reportResult", movimientosDelDia);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/ReporteMovimientosDelDia.jsp");
+                dispatcher.forward(request, response);
+            }
+            
             
         }
         catch (Exception e)

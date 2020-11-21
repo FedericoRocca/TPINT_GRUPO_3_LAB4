@@ -1,6 +1,7 @@
 package datoslmpl;
 
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import dominio.LisCantidadClientesPaises;
 import dominio.Loan;
 import dominio.RepBalancesMayores;
 import dominio.RepIngresosInteres;
+import dominio.RepMovimientosDelDia;
 
 public class ReportesDaoImpl  implements ReportesDao
 {
@@ -115,5 +117,38 @@ public class ReportesDaoImpl  implements ReportesDao
         }
         return r;
 	}
+
+    @Override
+    public ArrayList<RepMovimientosDelDia> executeReport(LocalDate date)
+    {
+        ArrayList<RepMovimientosDelDia> aux = new ArrayList<>();
+        try
+        {
+            cn = new ConnectionDB();
+            cn.Open();
+            ResultSet rSet = cn.query("select accountNumber, movementDate, detail, amount, mot.descriptions from movements "
+                                    + "INNER JOIN movementtype mot on movements.MovementTypeId = mot.id "
+                                    + "where movementDate = '" + date + "';");
+            while(rSet.next())
+            {
+                RepMovimientosDelDia tmp = new RepMovimientosDelDia();
+                tmp.setAccount( rSet.getInt("accountNumber") );
+                tmp.setMovementDate( rSet.getDate("movementDate").toLocalDate() );
+                tmp.setDetail( rSet.getString("detail") );
+                tmp.setAmount( rSet.getFloat("amount") );
+                tmp.setMovementType( rSet.getString("descriptions") );
+                aux.add(tmp);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            cn.close();
+        }
+        return aux;
+    }
     
 }

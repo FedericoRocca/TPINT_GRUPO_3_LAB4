@@ -110,6 +110,23 @@
 								}
 							%>
 					</form>
+					
+					<form method="post" action="ServletReportes" class="card">
+						<div class="form-row">
+							<div class="form-group col-md-4">
+								<label for="title">Movimientos en el día</label>
+							</div>
+						</div>
+						<div class="form-row">	 
+							<div class="form-group col-md-2">
+								<label>Fecha</label>
+								<input class="form-control" name= "fechaReportePorDia" required type="date">
+							</div>
+							<div class="form-group col-md-2 mt-1">
+            					<button type="submit" name="btnReportePorDia" class="btn btn-warning btn-circle mt-4"><i class="fas fa-arrow-right"></i></button>
+							</div>
+						</div>
+					</form>
 				</div>
 				<!-- /.container-fluid -->
 			</div>

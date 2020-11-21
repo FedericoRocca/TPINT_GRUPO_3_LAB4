@@ -1,5 +1,6 @@
 package negociolmpl;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import datoslmpl.ReportesDaoImpl;
 import dominio.LisCantidadClientesPaises;
 import dominio.RepBalancesMayores;
 import dominio.RepIngresosInteres;
+import dominio.RepMovimientosDelDia;
 import negocio.ReportesNeg;
 
 public class ReportesNegImpl implements ReportesNeg
@@ -41,5 +43,11 @@ public class ReportesNegImpl implements ReportesNeg
 	{
 		return repBalancesDao.executeReport(r);
 	}
+
+    @Override
+    public ArrayList<RepMovimientosDelDia> executeReport(LocalDate date)
+    {
+        return repBalancesDao.executeReport(date);
+    }
     
 }
