@@ -96,7 +96,8 @@ public class ServletLogin extends HttpServlet {
 	                        break;
 	                        
 	                    case "Cliente":
-	                            dispatcher = request.getRequestDispatcher("/DashboardCliente.jsp");
+	                            //dispatcher = request.getRequestDispatcher("/DashboardCliente.jsp");
+	                        dispatcher = request.getRequestDispatcher("/ServletDashboardCliente");
 	                            dispatcher.forward(request, response);
 	                        break;
 	                    
